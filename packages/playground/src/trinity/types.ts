@@ -1,6 +1,8 @@
-export interface IConstructable<T = any> {
-  new (...args: any[]): T
+export interface Constructor<Instance = any> {
+  new (...args: any[]): Instance
 }
+
+export type Factory<Instance = any> = () => Instance
 
 export type ReactorComponentProps = {}
 

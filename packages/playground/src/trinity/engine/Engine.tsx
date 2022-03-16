@@ -1,8 +1,7 @@
-import { useRef, useEffect, createContext, FC } from "react"
+import { useRef, useEffect, FC } from "react"
 import * as THREE from "three"
 import { useConst } from "../util/useConst"
-
-const SceneObjectContext = createContext<THREE.Object3D>(null!)
+import { ParentContext } from "./useParent"
 
 export const Engine: FC = ({ children }) => {
   const canvas = useRef<HTMLCanvasElement>(null!)
@@ -14,6 +13,13 @@ export const Engine: FC = ({ children }) => {
     /* Renderer */
     const renderer = new THREE.WebGLRenderer({ canvas: el })
     renderer.setSize(el.clientWidth, el.clientHeight)
+
+    /* Three Devtools */
+    const devtools = (window as any).__THREE_DEVTOOLS__
+    if (typeof devtools !== "undefined") {
+      devtools.dispatchEvent(new CustomEvent("observe", { detail: scene }))
+      devtools.dispatchEvent(new CustomEvent("observe", { detail: renderer }))
+    }
 
     /* Camera */
     const camera = new THREE.PerspectiveCamera(75, el.clientWidth / el.clientHeight, 0.1, 1000)
@@ -49,7 +55,7 @@ export const Engine: FC = ({ children }) => {
 
   return (
     <canvas ref={canvas}>
-      <SceneObjectContext.Provider value={scene}>{children}</SceneObjectContext.Provider>
+      <ParentContext.Provider value={scene}>{children}</ParentContext.Provider>
     </canvas>
   )
 }

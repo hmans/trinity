@@ -1,11 +1,11 @@
 import * as THREE from "three"
 import { makeComponent } from "./makeComponent"
-import { IConstructable, ReactorComponent } from "../types"
+import { Constructor, ReactorComponent } from "../types"
 
 type THREE = typeof THREE
 
 type Reactor = {
-  [K in keyof THREE]: THREE[K] extends IConstructable
+  [K in keyof THREE]: THREE[K] extends Constructor
     ? ReactorComponent<InstanceType<THREE[K]>>
     : undefined
 }
@@ -21,7 +21,7 @@ export const Reactor = new Proxy<Reactor>({} as Reactor, {
     /* Create and memoize a wrapper component for the specified property. */
     if (!cache[name]) {
       /* Try and find a constructor within the THREE namespace. */
-      const constructor = THREE[name as keyof THREE] as IConstructable
+      const constructor = THREE[name as keyof THREE] as Constructor
 
       /* If nothing could be found, bail. */
       if (!constructor) return undefined
