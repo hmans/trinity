@@ -12,12 +12,14 @@ export const makeComponent = <Instance extends object>(
 ): ReactorComponent<Instance> => {
   /* Create a component that wraps the requested constructible instance */
   const Component = forwardRef<Instance, ReactorComponentProps<Instance>>(
-    ({ children, attach, ...props }, ref) => {
+    ({ children, attach, args, ...props }, ref) => {
       /* Get the current parent. */
       const parent = useParent() as StringIndexable
 
       /* Create the instance of our THREE object. */
-      const instance = useManagedThreeObject(() => new constructor())
+      const instance = useManagedThreeObject(
+        () => new constructor(...(Array.isArray(args) ? args : Array(args)))
+      )
 
       /* Apply forwarded ref */
       applyRef(ref, instance)

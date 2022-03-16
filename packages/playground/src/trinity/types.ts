@@ -6,13 +6,13 @@ export type StringIndexable = {
   [key: string]: any
 }
 
-export type Factory<Instance = any> = () => Instance
+export type Factory<T = any> = () => T
 
-export type ReactorComponentProps<Instance> = MainProps<Instance> &
+export type ReactorComponentProps<T> = MainProps<T> &
   AttachProp &
   ChildrenProp &
-  ConstructorArgsProps<Instance> &
-  ObjectProp<Instance>
+  ConstructorArgsProps<T> &
+  ObjectProp<T>
 
 type MainProps<T> = Omit<
   {
@@ -35,7 +35,7 @@ type SetScalarArgumentType<T, K extends keyof T> = T[K] extends {
   ? Argument | T[K]
   : T[K]
 
-type HiddenProps = "children" | "attach"
+type HiddenProps = "children" | "attach" | "args"
 
 type ChildrenProp = { children?: React.ReactNode | (() => JSX.Element) }
 
@@ -60,5 +60,5 @@ type ObjectProp<T> = {
 /** Some extra props we will be accepting on our wrapper component. */
 type ConstructorArgsProps<T> = {
   /** Arguments passed to the wrapped THREE class' constructor. */
-  args?: T extends new (...args: any) => any ? ConstructorParameters<T> : any
+  args?: T extends new (...args: infer V) => T ? V : never
 }

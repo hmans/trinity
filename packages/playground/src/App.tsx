@@ -13,7 +13,7 @@ function Thingy() {
 
   return (
     <T.Mesh ref={mesh} position={[1, 2, 3]}>
-      <T.BoxGeometry />
+      <T.BoxGeometry args={[1, 2, 3]} />
       <T.MeshStandardMaterial color="red" />
     </T.Mesh>
   )
