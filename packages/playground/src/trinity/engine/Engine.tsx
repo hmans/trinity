@@ -1,6 +1,6 @@
 import { useRef, useEffect, createContext, FC } from "react"
 import * as THREE from "three"
-import { useConst } from "./util/useConst"
+import { useConst } from "../util/useConst"
 
 const SceneObjectContext = createContext<THREE.Object3D>(null!)
 

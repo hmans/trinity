@@ -1,4 +1,4 @@
-import { Engine } from "./trinity/Engine"
+import { Engine } from "./trinity/engine/Engine"
 import T from "./trinity"
 
 function Thingy() {

@@ -1,5 +1,4 @@
-import { FC, forwardRef } from "react"
-import { IConstructable, ReactorComponent, ReactorComponentProps } from "./types"
+import { ReactorComponent } from "../types"
 
 export const makeComponent = <T extends object>(
   fn: new (...args: any) => T,
