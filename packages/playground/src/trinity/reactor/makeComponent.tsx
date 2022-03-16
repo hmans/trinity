@@ -47,14 +47,14 @@ export const makeComponent = <Instance extends object>(
         }
 
         /* If the instance has an "attach" property, attach it to the parent */
-        if (attach && attach in parent) {
-          if (parent[attach] !== undefined) {
+        if (attach) {
+          if (attach in parent) {
             parent[attach] = instance
 
             return () => void (parent[attach!] = undefined)
           } else {
             console.error(
-              `Property "${attach}" does not exist on parent "${instance.constructor.name}"`
+              `Property "${attach}" does not exist on parent "${parent.constructor.name}"`
             )
           }
         }
