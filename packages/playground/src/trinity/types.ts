@@ -1,5 +1,3 @@
-import { ForwardRefExoticComponent, PropsWithoutRef, ReactElement, RefAttributes } from "react"
-
 export interface Constructor<Instance = any> {
   new (...args: any[]): Instance
 }
@@ -39,15 +37,15 @@ type SetScalarArgumentType<T, K extends keyof T> = T[K] extends {
 
 type HiddenProps = "children" | "attach"
 
-type ChildrenProp = { children?: ReactElement | ReactElement[] }
+type ChildrenProp = { children?: React.ReactElement | React.ReactElement[] }
 
 type AttachProp = {
   /** Attach the object to the parent property specified here. */
   attach?: string
 }
 
-export type ReactorComponent<Instance> = ForwardRefExoticComponent<
-  PropsWithoutRef<ReactorComponentProps<Instance>> & RefAttributes<Instance>
+export type ReactorComponent<Instance> = React.ForwardRefExoticComponent<
+  React.PropsWithoutRef<ReactorComponentProps<Instance>> & React.RefAttributes<Instance>
 >
 
 /**
