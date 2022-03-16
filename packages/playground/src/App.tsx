@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { Mesh } from "three"
+import { DodecahedronGeometry, Mesh } from "three"
 import T from "./trinity"
 import { Engine } from "./trinity/engine/Engine"
 import { useAnimationFrame } from "./trinity/engine/useAnimationFrame"
@@ -13,8 +13,8 @@ function Thingy() {
 
   return (
     <T.Mesh ref={mesh}>
-      <T.MeshStandardMaterial />
       <T.DodecahedronGeometry />
+      <T.MeshStandardMaterial color="red" />
     </T.Mesh>
   )
 }
@@ -22,6 +22,7 @@ function Thingy() {
 function App() {
   return (
     <Engine>
+      <T.DirectionalLight color="white" intensity={0.8} />
       <Thingy />
     </Engine>
   )
