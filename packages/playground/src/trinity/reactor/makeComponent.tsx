@@ -24,9 +24,7 @@ export const makeComponent = <Instance extends object>(
     useEffect(() => {
       if (!(instance instanceof Object3D)) return
       parent.add(instance)
-      return () => {
-        parent.remove(instance)
-      }
+      return () => void parent.remove(instance)
     }, [parent, instance])
 
     /* Attach to parent attributes */
@@ -45,6 +43,8 @@ export const makeComponent = <Instance extends object>(
       if (attach && attach in parent) {
         if ((parent as any)[attach] !== undefined) {
           ;(parent as any)[attach] = instance
+
+          return () => void ((parent as any)[attach] = undefined)
         } else {
           console.error(
             `Property "${attach}" does not exist on parent "${instance.constructor.name}"`
