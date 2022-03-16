@@ -51,7 +51,7 @@ export const makeComponent = <Instance extends object>(
           if (parent[attach] !== undefined) {
             parent[attach] = instance
 
-            return () => void (parent[attach] = undefined)
+            return () => void (parent[attach!] = undefined)
           } else {
             console.error(
               `Property "${attach}" does not exist on parent "${instance.constructor.name}"`

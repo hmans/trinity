@@ -37,7 +37,7 @@ type SetScalarArgumentType<T, K extends keyof T> = T[K] extends {
 
 type HiddenProps = "children" | "attach"
 
-type ChildrenProp = { children?: React.ReactElement | React.ReactElement[] }
+type ChildrenProp = { children?: React.ReactNode | (() => JSX.Element) }
 
 type AttachProp = {
   /** Attach the object to the parent property specified here. */
