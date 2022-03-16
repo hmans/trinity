@@ -20,16 +20,18 @@ export const makeComponent = <Instance extends object>(
     /* Apply forwarded ref */
     applyRef(ref, instance)
 
-    /* Mount object */
+    /* Mount scene object to parent */
+    useEffect(() => {
+      if (!(instance instanceof Object3D)) return
+      parent.add(instance)
+      return () => {
+        parent.remove(instance)
+      }
+    }, [parent, instance])
+
+    /* Attach to parent attributes */
     useEffect(() => {
       switch (true) {
-        case instance instanceof Object3D:
-          parent.add(instance)
-
-          return () => {
-            parent.remove(instance)
-          }
-
         case instance instanceof Material:
           if (!(parent instanceof Mesh)) return
 

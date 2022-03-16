@@ -1,6 +1,7 @@
 import { useRef, useEffect, FC } from "react"
 import * as THREE from "three"
 import { useConst } from "../util/useConst"
+import { useAnimationFrame } from "./useAnimationFrame"
 import { ParentContext } from "./useParent"
 
 export const Engine: FC = ({ children }) => {
