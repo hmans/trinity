@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { AmbientLight } from "three";
 
 function WeirdlyMonolithicThreeApp() {
   const canvas = useRef<HTMLCanvasElement>(null!);
