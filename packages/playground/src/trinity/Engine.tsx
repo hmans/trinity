@@ -1,10 +1,10 @@
-import { useRef, useEffect, createContext } from "react"
+import { useRef, useEffect, createContext, FC } from "react"
 import * as THREE from "three"
 import { useConst } from "./util/useConst"
 
 const SceneObjectContext = createContext<THREE.Object3D>(null!)
 
-export function Engine() {
+export const Engine: FC = ({ children }) => {
   const canvas = useRef<HTMLCanvasElement>(null!)
   const scene = useConst(() => new THREE.Scene())
 
@@ -49,7 +49,7 @@ export function Engine() {
 
   return (
     <canvas ref={canvas}>
-      <SceneObjectContext.Provider value={scene}></SceneObjectContext.Provider>
+      <SceneObjectContext.Provider value={scene}>{children}</SceneObjectContext.Provider>
     </canvas>
   )
 }

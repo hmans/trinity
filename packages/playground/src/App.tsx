@@ -1,7 +1,21 @@
-import { Engine } from "./trinity/Engine";
+import { Engine } from "./trinity/Engine"
+import T from "./trinity"
 
-function App() {
-  return <Engine />;
+function Thingy() {
+  return (
+    <T.Mesh>
+      <T.MeshStandardMaterial />
+      <T.DodecahedronGeometry />
+    </T.Mesh>
+  )
 }
 
-export default App;
+function App() {
+  return (
+    <Engine>
+      <Thingy />
+    </Engine>
+  )
+}
+
+export default App
