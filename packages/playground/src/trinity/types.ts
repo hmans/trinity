@@ -14,12 +14,11 @@ export type ReactorComponentProps<T> = MainProps<T> &
   ConstructorArgsProps<T> &
   ObjectProp<T>
 
-type MainProps<T> = Omit<
-  {
-    [K in keyof T]?: SetArgumentType<T, K> | SetScalarArgumentType<T, K>
-  },
-  HiddenProps
->
+type MainProps<T> = Omit<ConvenienceProps<T>, "children" | "attach" | "args">
+
+type ConvenienceProps<T> = {
+  [K in keyof T]?: SetArgumentType<T, K> | SetScalarArgumentType<T, K>
+}
 
 type SetArgumentType<T, K extends keyof T> = T[K] extends {
   set: (...args: infer Arguments) => any
@@ -34,8 +33,6 @@ type SetScalarArgumentType<T, K extends keyof T> = T[K] extends {
 }
   ? Argument | T[K]
   : T[K]
-
-type HiddenProps = "children" | "attach" | "args"
 
 type ChildrenProp = { children?: React.ReactNode | (() => JSX.Element) }
 
