@@ -12,7 +12,7 @@ function Thingy() {
   })
 
   return (
-    <T.Mesh ref={mesh}>
+    <T.Mesh ref={mesh} position={[1, 2, 3]}>
       <T.DodecahedronGeometry />
       <T.MeshStandardMaterial color="red" />
     </T.Mesh>

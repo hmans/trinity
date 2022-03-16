@@ -23,8 +23,12 @@ type MainProps<T> = Omit<
   HiddenProps
 >
 
-type SetArgumentType<T, K extends keyof T> = T[K] extends { set: (...args: infer V) => any }
-  ? V | T[K]
+type SetArgumentType<T, K extends keyof T> = T[K] extends {
+  set: (...args: infer A) => any
+}
+  ? A extends [any]
+    ? A[0] | T[K]
+    : A | T[K]
   : T[K]
 
 type SetScalarArgumentType<T, K extends keyof T> = T[K] extends {
