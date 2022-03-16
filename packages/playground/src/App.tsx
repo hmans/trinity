@@ -1,7 +1,7 @@
-import { Engine } from "./trinity/engine/Engine"
-import T from "./trinity"
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import { Mesh } from "three"
+import T from "./trinity"
+import { Engine } from "./trinity/engine/Engine"
 import { useAnimationFrame } from "./trinity/engine/useAnimationFrame"
 
 function Thingy() {
