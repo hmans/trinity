@@ -1,5 +1,5 @@
 import { forwardRef, useEffect } from "react"
-import { Material, Object3D, BufferGeometry, Mesh } from "three"
+import { Material, Object3D, BufferGeometry, Mesh, Fog } from "three"
 import { ParentContext, useParent } from "../engine/useParent"
 import { Constructor, ReactorComponent } from "../types"
 import { applyRef } from "../util/applyRef"
@@ -10,7 +10,7 @@ export const makeComponent = <Instance extends object>(
   displayName: string
 ): ReactorComponent<Instance> => {
   /* Create a component that wraps the requested constructible instance */
-  const Component = forwardRef<Instance>(({ children }, ref) => {
+  const Component = forwardRef<Instance, { attach: string }>(({ children, attach }, ref) => {
     /* Get the current parent. */
     const parent = useParent()
 
@@ -31,26 +31,27 @@ export const makeComponent = <Instance extends object>(
 
     /* Attach to parent attributes */
     useEffect(() => {
-      switch (true) {
-        case instance instanceof Material:
-          if (!(parent instanceof Mesh)) return
+      if (!instance) return
 
-          parent.material = instance
-
-          return () => {
-            parent.material = null
-          }
-
-        case instance instanceof BufferGeometry:
-          if (!(parent instanceof Mesh)) return
-
-          parent.geometry = instance
-
-          return () => {
-            parent.geometry = null
-          }
+      /* For specific types, set a default attach property */
+      if (!attach) {
+        if (instance instanceof Material) attach = "material"
+        else if (instance instanceof BufferGeometry) attach = "geometry"
+        else if (instance instanceof Fog) attach = "fog"
       }
-    }, [instance, parent])
+
+      /* If the instance has an "attach" property, attach it to the parent */
+      /* TODO: improve types here */
+      if (attach && attach in parent) {
+        if ((parent as any)[attach] !== undefined) {
+          ;(parent as any)[attach] = instance
+        } else {
+          console.error(
+            `Property "${attach}" does not exist on parent "${instance.constructor.name}"`
+          )
+        }
+      }
+    }, [instance, attach])
 
     return <ParentContext.Provider value={instance}>{children}</ParentContext.Provider>
   })
