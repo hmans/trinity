@@ -1,6 +1,7 @@
 {
-  "name": "trinity",
-  "version": "0.0.1",
+  "name": "@hmans/trinity",
+  "private": false,
+  "version": "0.1.0",
   "description": "Trinity.",
   "main": "dist/trinity.cjs.js",
   "license": "MIT",
