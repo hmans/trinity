@@ -1,5 +1,5 @@
 import * as THREE from "three"
-import { Constructor } from "../util/type"
+import { Constructor } from "../lib/type"
 import { makeComponent } from "./makeComponent"
 import { ReactorComponent } from "./types"
 

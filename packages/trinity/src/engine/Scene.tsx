@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { useConst } from "../util/useConst"
+import { useConst } from "../lib/useConst"
 import { useTicker } from "./Ticker"
 import * as THREE from "three"
 import { useRenderer } from "./Renderer"

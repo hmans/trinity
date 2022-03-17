@@ -2,10 +2,10 @@ import React, { forwardRef, useEffect } from "react"
 import { Material, Object3D, BufferGeometry, Mesh, Fog } from "three"
 import { ParentContext, useParent } from "../engine/useParent"
 import { ReactorComponent, ReactorComponentProps } from "./types"
-import { applyProps } from "../util/applyProps"
-import { applyRef } from "../util/applyRef"
+import { applyProps } from "../lib/applyProps"
+import { applyRef } from "../lib/applyRef"
 import { useManagedThreeObject } from "./useManagedThreeObject"
-import { Constructor, StringIndexable } from "../util/type"
+import { Constructor, StringIndexable } from "../lib/type"
 
 export const makeComponent = <
   TConstructor extends Constructor<any>,
