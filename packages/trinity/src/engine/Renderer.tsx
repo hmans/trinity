@@ -1,7 +1,7 @@
 import React, { createContext, FC, useContext, useEffect, useRef, useState } from "react"
 import * as THREE from "three"
 
-const RendererContext = createContext<THREE.Renderer>(null!)
+const RendererContext = createContext<THREE.WebGLRenderer>(null!)
 
 export const Renderer: FC = ({ children }) => {
   const canvas = useRef<HTMLCanvasElement>(null!)
