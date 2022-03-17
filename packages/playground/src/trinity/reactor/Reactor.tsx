@@ -6,9 +6,7 @@ import { ReactorComponent } from "./types"
 type THREE = typeof THREE
 
 type Reactor = {
-  [K in keyof THREE]: THREE[K] extends Constructor
-    ? ReactorComponent<THREE[K], InstanceType<THREE[K]>>
-    : undefined
+  [K in keyof THREE]: THREE[K] extends Constructor ? ReactorComponent<THREE[K]> : undefined
 }
 
 const cache = {} as Record<string, ReactorComponent<any, any>>

@@ -10,9 +10,9 @@ import { Constructor, StringIndexable } from "../util/type"
 export const makeComponent = <Instance extends object, TConstructor extends Constructor<Instance>>(
   constructor: TConstructor,
   displayName: string
-): ReactorComponent<Instance> => {
+): ReactorComponent<TConstructor> => {
   /* Create a component that wraps the requested constructible instance */
-  const Component = forwardRef<Instance, ReactorComponentProps<TConstructor, Instance>>(
+  const Component = forwardRef<Instance, ReactorComponentProps<TConstructor>>(
     ({ children, attach, args, ...props }, ref) => {
       /* Get the current parent. */
       const parent = useParent() as StringIndexable
