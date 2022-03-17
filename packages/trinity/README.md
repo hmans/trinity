@@ -1,0 +1,6 @@
+# Trinity
+
+### TODO:
+
+- [ ] Ticker
+- [ ] Events
