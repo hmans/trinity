@@ -1,4 +1,4 @@
-import { forwardRef, useEffect } from "react"
+import React, { forwardRef, useEffect } from "react"
 import { Material, Object3D, BufferGeometry, Mesh, Fog } from "three"
 import { ParentContext, useParent } from "../engine/useParent"
 import { ReactorComponent, ReactorComponentProps } from "./types"
