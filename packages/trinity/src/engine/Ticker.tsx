@@ -11,6 +11,7 @@ class TickerImpl {
   timeScale = 1
   fixedStep = 1 / 60
   maxDelta = 1
+  lastTime = performance.now()
 
   private callbacks: Map<TickerStage, TickerCallback[]> = new Map()
   private acc: number = 0
@@ -26,7 +27,12 @@ class TickerImpl {
     callbacks.splice(pos, 1)
   }
 
-  tick(frameDelta: number) {
+  tick() {
+    /* Calculate frame delta */
+    const now = performance.now()
+    const frameDelta = (now - this.lastTime) / 1000
+    this.lastTime = now
+
     /* Clamp the deltatime to prevent situations where thousands of frames are executed after
     the user returns from another tab. */
     const dt = Math.max(0, this.maxDelta ? Math.min(frameDelta, this.maxDelta) : frameDelta)
@@ -60,13 +66,10 @@ export const Ticker: FC<{ timeScale?: number }> = ({ children, timeScale = 1 }) 
 
   useLayoutEffect(() => {
     ticker.timeScale = timeScale
-
-    return () => {
-      ticker.timeScale = 1
-    }
+    return () => void (ticker.timeScale = 1)
   }, [ticker, timeScale])
 
-  useAnimationFrame(() => ticker.tick(1 / 60))
+  useAnimationFrame(() => ticker.tick())
 
   return <TickerContext.Provider value={ticker}>{children}</TickerContext.Provider>
 }

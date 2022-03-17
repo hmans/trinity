@@ -2,5 +2,5 @@
 
 ### TODO:
 
-- [ ] Ticker
+- [x] Ticker
 - [ ] Events
