@@ -7,11 +7,11 @@ type THREE = typeof THREE
 
 type Reactor = {
   [K in keyof THREE]: THREE[K] extends Constructor
-    ? ReactorComponent<InstanceType<THREE[K]>>
+    ? ReactorComponent<THREE[K], InstanceType<THREE[K]>>
     : undefined
 }
 
-const cache = {} as Record<string, ReactorComponent<any>>
+const cache = {} as Record<string, ReactorComponent<any, any>>
 
 /**
  * The Trinity Reactor. For every class exposed by THREE, this object contains a

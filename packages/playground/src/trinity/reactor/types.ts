@@ -1,7 +1,17 @@
-export type ReactorComponentProps<T> = MainProps<T> &
+import { Constructor } from "three"
+
+export type ReactorComponent<
+  TConstructor extends Constructor<Instance>,
+  Instance
+> = React.ForwardRefExoticComponent<
+  React.PropsWithoutRef<ReactorComponentProps<TConstructor, Instance>> &
+    React.RefAttributes<Instance>
+>
+
+export type ReactorComponentProps<TConstructor extends Constructor<T>, T> = MainProps<T> &
   AttachProp &
   ChildrenProp &
-  ConstructorArgsProps<T> &
+  ConstructorArgsProps<TConstructor> &
   ObjectProp<T>
 
 type MainProps<T> = Omit<ConvenienceProps<T>, "children" | "attach" | "args">
@@ -31,10 +41,6 @@ type AttachProp = {
   attach?: string
 }
 
-export type ReactorComponent<Instance> = React.ForwardRefExoticComponent<
-  React.PropsWithoutRef<ReactorComponentProps<Instance>> & React.RefAttributes<Instance>
->
-
 /**
  * Our wrapper components allow the user to pass an already instantiated object, or it will create a new
  * instance of the class it wraps around.
@@ -45,7 +51,7 @@ type ObjectProp<T> = {
 }
 
 /** Some extra props we will be accepting on our wrapper component. */
-type ConstructorArgsProps<T> = {
+type ConstructorArgsProps<TConstructor> = {
   /** Arguments passed to the wrapped THREE class' constructor. */
-  args?: T extends new (...args: infer V) => T ? V : never
+  args?: TConstructor extends new (...args: infer V) => any ? V : never
 }
