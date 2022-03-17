@@ -15,7 +15,7 @@ const ecs = createECS<Entity>()
 
 export const Bubbles = () => {
   return (
-    <Scene>
+    <>
       <T.AmbientLight intensity={0.4} />
       <T.DirectionalLight intensity={0.6} position={[10, 10, 10]} />
 
@@ -31,6 +31,6 @@ export const Bubbles = () => {
           </ecs.Component>
         )}
       </ecs.Collection>
-    </Scene>
+    </>
   )
 }
