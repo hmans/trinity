@@ -8,5 +8,16 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7"
+  },
+  "peerDependencies": {
+    "react": ">=17.0",
+    "three": "^0.138.3"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+    ]
   }
 }
