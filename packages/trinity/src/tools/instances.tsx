@@ -5,6 +5,7 @@ import mergeRefs from "react-merge-refs"
 import { Group, InstancedMesh, Object3D } from "three"
 import { useTicker } from "../engine/Ticker"
 import T from ".."
+import { ReactorComponentProps } from "../reactor/types"
 
 type InstanceEntity = {
   instance: {
@@ -19,7 +20,7 @@ export const makeInstanceComponents = () => {
 
   /* This component renders the InstancedMesh itself and continuously updates it
      from the data in the ECS. */
-  const Root: FC<InstancedMeshProps & { countStep?: number }> = ({
+  const Root: FC<ReactorComponentProps<typeof InstancedMesh> & { countStep?: number }> = ({
     children,
     countStep = 1000,
     ...props
@@ -55,25 +56,27 @@ export const makeInstanceComponents = () => {
 
   /* The Instance component will create a new ECS entity storing a reference
      to a three.js scene object. */
-  const Instance = forwardRef<Group, GroupProps>(({ children, ...groupProps }, ref) => {
-    const group = useRef<Group>(null!)
+  const Instance = forwardRef<Group, ReactorComponentProps<typeof Group>>(
+    ({ children, ...groupProps }, ref) => {
+      const group = useRef<Group>(null!)
 
-    useLayoutEffect(() => {
-      const entity = ecs.world.createEntity({
-        instance: {
-          sceneObject: group.current
-        }
-      })
+      useLayoutEffect(() => {
+        const entity = ecs.world.createEntity({
+          instance: {
+            sceneObject: group.current
+          }
+        })
 
-      return () => ecs.world.destroyEntity(entity)
-    }, [])
+        return () => ecs.world.destroyEntity(entity)
+      }, [])
 
-    return (
-      <T.Group ref={mergeRefs([ref, group])} {...groupProps}>
-        {children}
-      </T.Group>
-    )
-  })
+      return (
+        <T.Group ref={mergeRefs([ref, group])} {...groupProps}>
+          {children}
+        </T.Group>
+      )
+    }
+  )
 
   return { world: ecs.world, useArchetype: ecs.useArchetype, Root, Instance }
 }
