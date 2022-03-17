@@ -1,0 +1,12 @@
+{
+  "name": "trinity",
+  "version": "0.0.1",
+  "description": "Trinity.",
+  "main": "dist/trinity.cjs.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7"
+  }
+}

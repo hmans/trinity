@@ -6,6 +6,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "postinstall": "preconstruct dev"
+  },
   "devDependencies": {
     "@preconstruct/cli": "^2.1.5"
   },
