@@ -1,8 +1,7 @@
 import { useRef } from "react"
 import { Mesh } from "three"
 import T, { useTicker } from "@hmans/trinity"
-import { Engine } from "@hmans/trinity"
-import { useAnimationFrame } from "@hmans/trinity"
+import { Engine, Scene } from "@hmans/trinity"
 
 function Thingy() {
   const mesh = useRef<Mesh>(null!)
@@ -22,8 +21,11 @@ function Thingy() {
 function App() {
   return (
     <Engine>
-      <T.DirectionalLight color="white" intensity={0.8} />
-      <Thingy />
+      <Scene>
+        <T.AmbientLight intensity={0.4} />
+        <T.DirectionalLight color="white" intensity={0.8} />
+        <Thingy />
+      </Scene>
     </Engine>
   )
 }

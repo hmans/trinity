@@ -8,7 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hmans/controlfreak": "^0.1.8",
+    "@hmans/ingrid": "^0.0.3",
     "@hmans/trinity": "^0.1.0",
+    "miniplex": "^0.7.1",
+    "randomish": "^0.1.2",
     "react": "^18.0.0-rc.2",
     "react-dom": "^18.0.0-rc.2",
     "three": "^0.138.3"
