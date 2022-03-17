@@ -12,7 +12,11 @@ export const Renderer: FC = ({ children }) => {
 
     setRenderer(() => {
       const renderer = new THREE.WebGLRenderer({ canvas: canvas.current })
+
+      renderer.autoClear = false
+
       renderer.setSize(canvas.current.clientWidth, canvas.current.clientHeight)
+
       return renderer
     })
 

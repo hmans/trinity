@@ -5,7 +5,12 @@ import * as THREE from "three"
 import { useRenderer } from "./Renderer"
 import { ParentContext } from "./useParent"
 
-export const Scene: FC = ({ children }) => {
+export const Scene: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil?: boolean }> = ({
+  children,
+  clearColor,
+  clearDepth,
+  clearStencil
+}) => {
   const renderer = useRenderer()
 
   const scene = useConst(() => new THREE.Scene())
@@ -22,6 +27,9 @@ export const Scene: FC = ({ children }) => {
   })
 
   useTicker("render", () => {
+    clearColor && renderer.clearColor()
+    clearDepth && renderer.clearDepth()
+    clearStencil && renderer.clearStencil()
     renderer.render(scene, camera)
   })
 

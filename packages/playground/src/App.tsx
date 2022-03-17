@@ -8,7 +8,7 @@ function App() {
       <Scene>
         <Bubbles />
       </Scene>
-      <Scene>
+      <Scene clearDepth>
         <Hud />
       </Scene>
     </Engine>
