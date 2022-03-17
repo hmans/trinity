@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, FC } from "react"
 import * as THREE from "three"
 import { useConst } from "../util/useConst"
+import { Ticker } from "./Ticker"
 import { ParentContext } from "./useParent"
 
 export const Engine: FC = ({ children }) => {
@@ -55,7 +56,9 @@ export const Engine: FC = ({ children }) => {
 
   return (
     <canvas ref={canvas}>
-      <ParentContext.Provider value={scene}>{children}</ParentContext.Provider>
+      <Ticker>
+        <ParentContext.Provider value={scene}>{children}</ParentContext.Provider>
+      </Ticker>
     </canvas>
   )
 }
