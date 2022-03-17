@@ -6,6 +6,9 @@
   "main": "dist/hmans-trinity.cjs.js",
   "module": "dist/hmans-trinity.esm.js",
   "license": "MIT",
+  "scripts": {
+    "build": "preconstruct build"
+  },
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
