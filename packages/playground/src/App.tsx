@@ -1,7 +1,6 @@
+import T, { Engine, Scene, useTicker } from "@hmans/trinity"
 import { useRef } from "react"
 import { Mesh } from "three"
-import T, { useTicker } from "@hmans/trinity"
-import { Engine, Scene } from "@hmans/trinity"
 
 function Thingy() {
   const mesh = useRef<Mesh>(null!)
@@ -11,7 +10,7 @@ function Thingy() {
   })
 
   return (
-    <T.Mesh ref={mesh} position={[1, 2, 3]}>
+    <T.Mesh ref={mesh}>
       <T.BoxGeometry args={[1, 2, 3]} />
       <T.MeshStandardMaterial color="red" />
     </T.Mesh>
