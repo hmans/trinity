@@ -14,6 +14,7 @@
 Big Features:
 
 - [x] Ticker
+- [ ] Custom cameras
 - [ ] Events
 - [ ] On-Demand Rendering everywhere
 
