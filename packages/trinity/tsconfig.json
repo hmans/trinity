@@ -9,7 +9,6 @@
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "outDir": "./dist",
     "isolatedModules": true
   },
   "include": ["src/**/*"],

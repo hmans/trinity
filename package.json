@@ -7,14 +7,15 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall": "preconstruct dev"
+    "postinstall": "preconstruct dev",
+    "build": "preconstruct build"
   },
   "devDependencies": {
     "@preconstruct/cli": "^2.1.5"
   },
   "preconstruct": {
     "packages": [
-      "packages/*"
+      "packages/trinity"
     ]
   },
   "prettier": {

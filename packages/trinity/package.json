@@ -3,7 +3,8 @@
   "private": false,
   "version": "0.1.0",
   "description": "Trinity.",
-  "main": "dist/trinity.cjs.js",
+  "main": "dist/hmans-trinity.cjs.js",
+  "module": "dist/hmans-trinity.esm.js",
   "license": "MIT",
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
@@ -13,12 +14,5 @@
   "peerDependencies": {
     "react": ">=17.0",
     "three": "^0.138.3"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react",
-      "@babel/preset-typescript"
-    ]
   }
 }
