@@ -2,15 +2,19 @@ import { Constructor } from "three"
 
 export type ReactorComponent<
   TConstructor extends Constructor<any>,
-  Instance = InstanceType<TConstructor>
+  TInstance = InstanceType<TConstructor>
 > = React.ForwardRefExoticComponent<
-  React.PropsWithoutRef<ReactorComponentProps<TConstructor>> & React.RefAttributes<Instance>
+  React.PropsWithoutRef<ReactorComponentProps<TConstructor>> & React.RefAttributes<TInstance>
 >
 
 export type ReactorComponentProps<
   TConstructor extends Constructor<any>,
-  T = InstanceType<TConstructor>
-> = MainProps<T> & AttachProp & ChildrenProp & ConstructorArgsProps<TConstructor> & ObjectProp<T>
+  TInstance = InstanceType<TConstructor>
+> = MainProps<TInstance> &
+  AttachProp &
+  ChildrenProp &
+  ConstructorArgsProps<TConstructor> &
+  ObjectProp<TInstance>
 
 type MainProps<T> = Omit<ConvenienceProps<T>, "children" | "attach" | "args">
 

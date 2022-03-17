@@ -7,12 +7,15 @@ import { applyRef } from "../util/applyRef"
 import { useManagedThreeObject } from "./useManagedThreeObject"
 import { Constructor, StringIndexable } from "../util/type"
 
-export const makeComponent = <Instance extends object, TConstructor extends Constructor<Instance>>(
+export const makeComponent = <
+  TConstructor extends Constructor<any>,
+  TInstance extends InstanceType<TConstructor>
+>(
   constructor: TConstructor,
   displayName: string
 ): ReactorComponent<TConstructor> => {
   /* Create a component that wraps the requested constructible instance */
-  const Component = forwardRef<Instance, ReactorComponentProps<TConstructor>>(
+  const Component = forwardRef<TInstance, ReactorComponentProps<TConstructor>>(
     ({ children, attach, args, ...props }, ref) => {
       /* Get the current parent. */
       const parent = useParent() as StringIndexable
