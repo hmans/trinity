@@ -1,10 +1,11 @@
 import { forwardRef, useEffect } from "react"
 import { Material, Object3D, BufferGeometry, Mesh, Fog } from "three"
 import { ParentContext, useParent } from "../engine/useParent"
-import { Constructor, ReactorComponent, ReactorComponentProps, StringIndexable } from "../types"
+import { ReactorComponent, ReactorComponentProps } from "./types"
 import { applyProps } from "../util/applyProps"
 import { applyRef } from "../util/applyRef"
 import { useManagedThreeObject } from "./useManagedThreeObject"
+import { Constructor, StringIndexable } from "../util/type"
 
 export const makeComponent = <Instance extends object>(
   constructor: Constructor<Instance>,

@@ -1,4 +1,4 @@
-import { StringIndexable } from "../types"
+import { StringIndexable } from "./type"
 
 /**
  * Convenience method for setting (potentially nested) properties on an object.

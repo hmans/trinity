@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Scene } from "three"
-import { Factory } from "../types"
+import { Factory } from "../util/type"
 
 export type ThreeObject<T = any> = T & {
   dispose?: Function
