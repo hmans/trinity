@@ -14,5 +14,8 @@
   "peerDependencies": {
     "react": ">=17.0",
     "three": "^0.138.3"
+  },
+  "dependencies": {
+    "react-merge-refs": "^1.1.0"
   }
 }

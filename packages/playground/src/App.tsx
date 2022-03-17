@@ -1,6 +1,8 @@
-import T, { Engine, Scene, useTicker } from "@hmans/trinity"
+import T, { Engine, makeInstanceComponents, Scene, useTicker } from "@hmans/trinity"
 import { useRef } from "react"
 import { Mesh } from "three"
+
+const Things = makeInstanceComponents()
 
 function Thingy() {
   const mesh = useRef<Mesh>(null!)
@@ -21,9 +23,16 @@ function App() {
   return (
     <Engine>
       <Scene>
+        <Things.Root>
+          <T.DodecahedronGeometry />
+          <T.MeshStandardMaterial color="orange" />
+        </Things.Root>
+
+        <Things.Instance />
+
         <T.AmbientLight intensity={0.4} />
         <T.DirectionalLight color="white" intensity={0.8} />
-        <Thingy />
+        {/* <Thingy /> */}
       </Scene>
     </Engine>
   )
