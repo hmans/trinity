@@ -15,4 +15,4 @@ export type Entity = {
   controller?: Controller
 } & IEntity
 
-export const ecs = createECS<Entity>()
+export const ECS = createECS<Entity>()

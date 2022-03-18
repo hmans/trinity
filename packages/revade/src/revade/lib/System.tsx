@@ -1,6 +1,6 @@
 import { Callback } from "@hmans/trinity"
 import { QueriedEntity, Query } from "miniplex"
-import { ecs, Entity } from "../state"
+import { ECS, Entity } from "../state"
 
 const System = <Q extends Query<Entity>>({
   archetype,
@@ -9,7 +9,7 @@ const System = <Q extends Query<Entity>>({
   archetype: Q
   children: (entities: QueriedEntity<Entity, Q>[], dt: number) => void
 }) => {
-  const { entities } = ecs.world.archetype(...archetype)
+  const { entities } = ECS.world.archetype(...archetype)
 
   return <Callback>{(dt: number) => children(entities, dt)}</Callback>
 }
