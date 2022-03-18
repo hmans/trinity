@@ -14,6 +14,8 @@ export const applyProps = (object: StringIndexable, props: StringIndexable) => {
     } else if (key in object) {
       if (object[key].setScalar && typeof value === "number") {
         object[key].setScalar(value)
+      } else if (object[key].copy && object[key].constructor === value.constructor) {
+        object[key].copy(value)
       } else if (object[key].set) {
         Array.isArray(value) ? object[key].set(...value) : object[key].set(value)
       } else {

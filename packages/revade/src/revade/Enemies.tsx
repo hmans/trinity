@@ -1,6 +1,6 @@
 import THREE, { makeInstanceComponents } from "@hmans/trinity"
 import { plusMinus } from "randomish"
-import { Vector3 } from "three"
+import { Quaternion, Vector3 } from "three"
 import { ECS } from "./state"
 
 const Enemy = makeInstanceComponents()
@@ -16,7 +16,10 @@ export const Enemies = ({ count = 100 }) => (
       {() => (
         <>
           <ECS.Component name="transform">
-            <Enemy.Instance position={[plusMinus(50), plusMinus(50), 0]} />
+            <Enemy.Instance
+              position={[plusMinus(50), plusMinus(50), 0]}
+              quaternion={new Quaternion().random()}
+            />
           </ECS.Component>
 
           <ECS.Component name="velocity">
