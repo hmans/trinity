@@ -1,5 +1,5 @@
 import THREE, { makeInstanceComponents } from "@hmans/trinity"
-import { plusMinus } from "randomish"
+import { between, number, plusMinus } from "randomish"
 import { tmpQuaternion } from "./lib/temps"
 import { ECS } from "./state"
 
@@ -25,6 +25,8 @@ export const Enemies = ({ count = 100 }) => (
           <ECS.Component name="velocity">
             <THREE.Vector3 />
           </ECS.Component>
+
+          <ECS.Component name="wobble" data={{ speed: between(0.5, 3), t: number(Math.PI * 2) }} />
         </>
       )}
     </ECS.Collection>

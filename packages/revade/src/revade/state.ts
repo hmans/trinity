@@ -11,6 +11,12 @@ export type Entity = {
   transform?: Object3D
   velocity?: Vector3
 
+  /* Animations */
+  wobble?: {
+    speed: number
+    t: number
+  }
+
   /* Input */
   controller?: Controller
 } & IEntity
