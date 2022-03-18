@@ -6,6 +6,10 @@ export const Player = () => (
   <ECS.Entity>
     <ECS.Component name="player" data={true} />
 
+    <ECS.Component name="velocity">
+      <T.Vector3 />
+    </ECS.Component>
+
     <ECS.Component name="controller" data={controller} />
 
     <ECS.Component name="transform">

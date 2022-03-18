@@ -1,10 +1,10 @@
-import { Player } from "./Player"
+import { PlayerControl } from "./PlayerControl"
 import { Velocity } from "./Velocity"
 import { Wobble } from "./Wobble"
 
 const Systems = () => (
   <>
-    <Player />
+    <PlayerControl />
     <Velocity />
     <Wobble />
   </>
