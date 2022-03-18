@@ -26,10 +26,10 @@ export const Renderer: FC = ({ children }) => {
 
   useWindowResizeHandler(() => {
     if (!renderer) return
-    const width = renderer.domElement.clientWidth
-    const height = renderer.domElement.clientHeight
+    const width = window.innerWidth
+    const height = window.innerHeight
     renderer.setSize(width, height)
-  }, [renderer, renderer?.domElement])
+  }, [renderer])
 
   return (
     <canvas ref={canvas}>

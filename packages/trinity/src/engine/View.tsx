@@ -48,17 +48,14 @@ export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil
   )
 
   useWindowResizeHandler(() => {
-    if (!renderer) return
-
-    const width = renderer.domElement.clientWidth
-    const height = renderer.domElement.clientHeight
+    const width = window.innerWidth
+    const height = window.innerHeight
 
     if (camera instanceof PerspectiveCamera) {
-      console.log("whee", width, height)
       camera.aspect = width / height
       camera.updateProjectionMatrix()
     }
-  }, [renderer, renderer?.domElement, camera])
+  }, [camera])
 
   return (
     <ViewContext.Provider value={api}>
