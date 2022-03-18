@@ -1,7 +1,6 @@
 import { VectorControl } from "@hmans/controlfreak"
 import { Vector3 } from "three"
 import System from "../lib/System"
-import { ecs } from "../state"
 
 const tmpvec3 = new Vector3()
 
