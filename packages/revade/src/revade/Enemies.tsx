@@ -13,9 +13,15 @@ export const Enemies = ({ count = 100 }) => (
 
     <ecs.Collection tag="enemy" initial={count}>
       {() => (
-        <ecs.Component name="transform">
-          <Enemy.Instance position={[plusMinus(50), plusMinus(50), 0]} />
-        </ecs.Component>
+        <>
+          <ecs.Component name="transform">
+            <Enemy.Instance position={[plusMinus(50), plusMinus(50), 0]} />
+          </ecs.Component>
+
+          <ecs.Component name="velocity">
+            <THREE.Vector3 />
+          </ecs.Component>
+        </>
       )}
     </ecs.Collection>
   </>
