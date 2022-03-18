@@ -1,8 +1,6 @@
 import { VectorControl } from "@hmans/controlfreak"
-import { Vector3 } from "three"
 import System from "../lib/System"
-
-const tmpvec3 = new Vector3()
+import { tmpVector3 } from "../lib/temps"
 
 export const Player = ({ thrust = 10 }) => (
   <System archetype={["controller", "transform"]}>
@@ -12,7 +10,7 @@ export const Player = ({ thrust = 10 }) => (
 
         const move = controller.controls.move as VectorControl
         transform.position.add(
-          tmpvec3.set(move.value.x * dt * thrust, move.value.y * dt * thrust, 0)
+          tmpVector3.set(move.value.x * dt * thrust, move.value.y * dt * thrust, 0)
         )
       }
     }}
