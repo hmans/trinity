@@ -1,5 +1,6 @@
 import THREE, { makeInstanceComponents } from "@hmans/trinity"
 import { plusMinus } from "randomish"
+import { Vector3 } from "three"
 import { ECS } from "./state"
 
 const Enemy = makeInstanceComponents()
@@ -11,7 +12,7 @@ export const Enemies = ({ count = 100 }) => (
       <THREE.MeshStandardMaterial color="#fff" wireframe />
     </Enemy.Root>
 
-    <ECS.Collection tag="enemy" initial={count}>
+    <ECS.Collection tag="enemy" initial={count} memoize>
       {() => (
         <>
           <ECS.Component name="transform">

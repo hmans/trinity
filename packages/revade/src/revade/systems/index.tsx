@@ -1,8 +1,10 @@
-import Player from "./Player"
+import { Player } from "./Player"
+import { Velocity } from "./Velocity"
 
 const Systems = () => (
   <>
     <Player />
+    <Velocity />
   </>
 )
 

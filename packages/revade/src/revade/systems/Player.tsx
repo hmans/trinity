@@ -4,7 +4,7 @@ import System from "../lib/System"
 
 const tmpvec3 = new Vector3()
 
-const Player = ({ thrust = 10 }) => (
+export const Player = ({ thrust = 10 }) => (
   <System archetype={["controller", "transform"]}>
     {(entities, dt) => {
       for (const { controller, transform } of entities) {
@@ -18,5 +18,3 @@ const Player = ({ thrust = 10 }) => (
     }}
   </System>
 )
-
-export default Player
