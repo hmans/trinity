@@ -26,7 +26,12 @@ export const Enemies = ({ count = 100 }) => (
             <THREE.Vector3 />
           </ECS.Component>
 
-          <ECS.Component name="wobble" data={{ speed: between(0.5, 3), t: number(Math.PI * 2) }} />
+          <ECS.Component
+            name="wobble"
+            data={{ speed: between(0.5, 1.5), t: number(Math.PI * 2) }}
+          />
+
+          <ECS.Component name="attraction" data={{ factor: 10, targets: [] }} />
         </>
       )}
     </ECS.Collection>

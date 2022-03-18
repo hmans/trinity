@@ -1,5 +1,5 @@
 import { Controller } from "@hmans/controlfreak"
-import { IEntity, Tag } from "miniplex"
+import { IEntity, QueriedEntity, Tag } from "miniplex"
 import { createECS } from "miniplex/react"
 import { Object3D, Vector3 } from "three"
 
@@ -10,6 +10,12 @@ export type Entity = {
   /* Movement */
   transform?: Object3D
   velocity?: Vector3
+
+  /* Flocking */
+  attraction?: {
+    targets: QueriedEntity<Entity, ["transform"]>[]
+    factor: number
+  }
 
   /* Animations */
   wobble?: {
