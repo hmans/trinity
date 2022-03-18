@@ -1,12 +1,12 @@
 import { VectorControl } from "@hmans/controlfreak"
 import { Vector3 } from "three"
-import System from "../../lib/System"
+import System from "../lib/System"
 import { ecs } from "../state"
 
 const tmpvec3 = new Vector3()
 
 const Player = ({ thrust = 10 }) => (
-  <System world={ecs.world} archetype={["controller", "transform"]}>
+  <System archetype={["controller", "transform"]}>
     {(entities, dt) => {
       for (const { controller, transform } of entities) {
         controller.update()

@@ -3,7 +3,7 @@ import { IEntity, Tag } from "miniplex"
 import { createECS } from "miniplex/react"
 import { Object3D } from "three"
 
-type Entity = {
+export type Entity = {
   player: Tag
 
   transform?: Object3D
