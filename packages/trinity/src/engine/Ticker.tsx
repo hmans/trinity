@@ -5,7 +5,7 @@ export type TickerStage = "update" | "lateUpdate" | "fixed" | "lateFixed" | "ren
 
 const TickerContext = createContext<TickerImpl>(null!)
 
-type TickerCallback = (dt: number) => void
+export type TickerCallback = (dt: number) => void
 
 class TickerImpl {
   timeScale = 1

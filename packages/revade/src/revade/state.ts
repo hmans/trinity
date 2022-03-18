@@ -1,3 +1,4 @@
+import { Controller } from "@hmans/controlfreak"
 import { IEntity, Tag } from "miniplex"
 import { createECS } from "miniplex/react"
 import { Object3D } from "three"
@@ -5,7 +6,8 @@ import { Object3D } from "three"
 type Entity = {
   player: Tag
 
-  position: Object3D
+  transform?: Object3D
+  controller?: Controller
 } & IEntity
 
 export const ecs = createECS<Entity>()
