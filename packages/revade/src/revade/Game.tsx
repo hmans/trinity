@@ -1,5 +1,6 @@
 import T, { Engine, useCamera, View } from "@hmans/trinity"
 import { PerspectiveCamera } from "three"
+import { Enemies } from "./Enemies"
 import { Player } from "./Player"
 import Systems from "./systems"
 
@@ -15,6 +16,7 @@ export const Game = () => (
     <View>
       <T.AmbientLight />
       <Player />
+      <Enemies />
       <Camera />
     </View>
   </Engine>

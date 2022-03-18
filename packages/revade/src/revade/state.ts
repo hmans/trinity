@@ -5,6 +5,7 @@ import { Object3D } from "three"
 
 export type Entity = {
   player: Tag
+  enemy: Tag
 
   transform?: Object3D
   controller?: Controller
