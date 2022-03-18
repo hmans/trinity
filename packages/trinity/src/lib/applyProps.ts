@@ -11,7 +11,7 @@ export const applyProps = (object: StringIndexable, props: StringIndexable) => {
     if (key.indexOf("-") > -1) {
       const [property, ...rest] = key.split("-")
       applyProps(object[property], { [rest.join("-")]: value })
-    } else if (object[key]) {
+    } else if (key in object) {
       if (object[key].setScalar && typeof value === "number") {
         object[key].setScalar(value)
       } else if (object[key].set) {
