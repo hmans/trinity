@@ -1,13 +1,13 @@
 import T, { Engine, View } from "@hmans/trinity"
+import { Player } from "./Player"
 
 export const Game = () => {
   return (
     <Engine>
       <View>
-        <T.Mesh>
-          <T.DodecahedronBufferGeometry />
-          <T.MeshNormalMaterial />
-        </T.Mesh>
+        <T.AmbientLight />
+
+        <Player />
       </View>
     </Engine>
   )
