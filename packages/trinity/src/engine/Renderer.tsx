@@ -23,6 +23,22 @@ export const Renderer: FC = ({ children }) => {
     return () => void setRenderer(undefined)
   }, [canvas.current])
 
+  useEffect(() => {
+    if (!renderer) return
+    const _renderer = renderer
+
+    function handleResize() {
+      const width = _renderer.domElement.clientWidth
+      const height = _renderer.domElement.clientHeight
+
+      _renderer.setSize(width, height)
+    }
+
+    window.addEventListener("resize", handleResize, false)
+
+    return () => void window.removeEventListener("resize", handleResize)
+  }, [renderer, renderer?.domElement])
+
   return (
     <canvas ref={canvas}>
       {renderer && <RendererContext.Provider value={renderer}>{children}</RendererContext.Provider>}
