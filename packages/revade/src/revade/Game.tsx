@@ -13,7 +13,7 @@ const Camera = () => {
     setCamera(camera.current)
   }, [camera.current])
 
-  return <T.PerspectiveCamera ref={camera} position={[0, 0, 100]} />
+  return <T.PerspectiveCamera ref={camera} position={[0, 0, 50]} />
 }
 
 export const Game = () => (
