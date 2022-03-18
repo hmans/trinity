@@ -5,7 +5,7 @@ import * as THREE from "three"
 import { useRenderer } from "./Renderer"
 import { ParentContext } from "./useParent"
 
-export const Scene: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil?: boolean }> = ({
+export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil?: boolean }> = ({
   children,
   clearColor,
   clearDepth,
