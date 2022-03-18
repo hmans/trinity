@@ -4,7 +4,8 @@ import { useTicker } from "./Ticker"
 import * as THREE from "three"
 import { useRenderer } from "./Renderer"
 import { ParentContext } from "./useParent"
-import { Camera } from "three"
+import { Camera, PerspectiveCamera } from "three"
+import { useWindowResizeHandler } from "./useWindowResizeHandler"
 
 type ViewAPI = {
   setCamera: (camera: Camera) => void
@@ -45,6 +46,19 @@ export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil
     }),
     []
   )
+
+  useWindowResizeHandler(() => {
+    if (!renderer) return
+
+    const width = renderer.domElement.clientWidth
+    const height = renderer.domElement.clientHeight
+
+    if (camera instanceof PerspectiveCamera) {
+      console.log("whee", width, height)
+      camera.aspect = width / height
+      camera.updateProjectionMatrix()
+    }
+  }, [renderer, renderer?.domElement, camera])
 
   return (
     <ViewContext.Provider value={api}>

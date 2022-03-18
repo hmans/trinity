@@ -1,5 +1,6 @@
 import React, { createContext, FC, useContext, useEffect, useRef, useState } from "react"
 import * as THREE from "three"
+import { useWindowResizeHandler } from "./useWindowResizeHandler"
 
 const RendererContext = createContext<THREE.WebGLRenderer>(null!)
 
@@ -23,20 +24,11 @@ export const Renderer: FC = ({ children }) => {
     return () => void setRenderer(undefined)
   }, [canvas.current])
 
-  useEffect(() => {
+  useWindowResizeHandler(() => {
     if (!renderer) return
-    const _renderer = renderer
-
-    function handleResize() {
-      const width = _renderer.domElement.clientWidth
-      const height = _renderer.domElement.clientHeight
-
-      _renderer.setSize(width, height)
-    }
-
-    window.addEventListener("resize", handleResize, false)
-
-    return () => void window.removeEventListener("resize", handleResize)
+    const width = renderer.domElement.clientWidth
+    const height = renderer.domElement.clientHeight
+    renderer.setSize(width, height)
   }, [renderer, renderer?.domElement])
 
   return (
