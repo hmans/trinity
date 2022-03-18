@@ -1,9 +1,16 @@
-import React, { FC } from "react"
+import React, { createContext, FC, useCallback, useContext, useMemo, useState } from "react"
 import { useConst } from "../lib/useConst"
 import { useTicker } from "./Ticker"
 import * as THREE from "three"
 import { useRenderer } from "./Renderer"
 import { ParentContext } from "./useParent"
+import { Camera } from "three"
+
+type ViewAPI = {
+  setCamera: (camera: Camera) => void
+}
+
+const ViewContext = createContext<ViewAPI>(null!)
 
 export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil?: boolean }> = ({
   children,
@@ -12,10 +19,9 @@ export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil
   clearStencil
 }) => {
   const renderer = useRenderer()
-
   const scene = useConst(() => new THREE.Scene())
 
-  const camera = useConst(() => {
+  const [camera, setCamera] = useState<Camera>(() => {
     const camera = new THREE.PerspectiveCamera(
       75,
       renderer.domElement.clientWidth / renderer.domElement.clientHeight,
@@ -33,5 +39,18 @@ export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil
     renderer.render(scene, camera)
   })
 
-  return <ParentContext.Provider value={scene}>{children}</ParentContext.Provider>
+  const api = useMemo(
+    () => ({
+      setCamera
+    }),
+    []
+  )
+
+  return (
+    <ViewContext.Provider value={api}>
+      <ParentContext.Provider value={scene}>{children}</ParentContext.Provider>
+    </ViewContext.Provider>
+  )
 }
+
+export const useView = () => useContext(ViewContext)
