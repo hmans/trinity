@@ -1,3 +1,5 @@
-const App = () => <p></p>
+import { Game } from "./revade/Game"
+
+const App = () => <Game />
 
 export default App
