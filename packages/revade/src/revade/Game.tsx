@@ -1,30 +1,10 @@
-import T, { Engine, useCamera, View } from "@hmans/trinity"
-import { FC } from "react"
-import { PerspectiveCamera } from "three"
-import { Enemies } from "./Enemies"
+import T, { Engine, View } from "@hmans/trinity"
+import { Enemies } from "./entities/Enemies"
 import { HUD } from "./HUD"
 import { PhysicsWorld } from "./lib/physics2d"
-import { Player } from "./Player"
-import { ECS } from "./state"
+import { Player } from "./entities/Player"
 import Systems from "./systems"
-
-const Camera: FC<{ offset?: [number, number, number] }> = ({
-  offset = [0, 0, 50]
-}) => {
-  const camera = useCamera<PerspectiveCamera>()
-
-  return (
-    <ECS.Entity>
-      <ECS.Component name="camera" data={{ offset }} />
-
-      <ECS.Component name="transform">
-        <T.Group position={offset}>
-          <T.PerspectiveCamera ref={camera} />
-        </T.Group>
-      </ECS.Component>
-    </ECS.Entity>
-  )
-}
+import { Camera } from "./entities/Camera"
 
 export const Game = () => (
   <>

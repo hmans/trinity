@@ -1,9 +1,9 @@
 import T from "@hmans/trinity"
-import { BodyThiefHack } from "./BodyThiefHack"
-import { controller } from "./controller"
-import { DynamicBody } from "./lib/physics2d/DynamicBody"
-import { BoxFixture, CircleFixture, Fixture } from "./lib/physics2d/Fixture"
-import { ECS } from "./state"
+import { BodyThiefHack } from "../BodyThiefHack"
+import { controller } from "../controller"
+import { DynamicBody } from "../lib/physics2d/DynamicBody"
+import { BoxFixture, CircleFixture, Fixture } from "../lib/physics2d/Fixture"
+import { ECS } from "../state"
 
 export const Player = () => (
   <ECS.Entity>
