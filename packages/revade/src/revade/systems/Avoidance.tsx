@@ -4,7 +4,7 @@ import { ECS } from "../state"
 
 const players = ECS.world.archetype("player", "transform")
 
-export const Avoidance = ({ radius = 1 }) => (
+export const Avoidance = ({ radius = 2 }) => (
   <System archetype={["avoidance", "velocity", "transform", "spatialHashing"]}>
     {(entities, dt) => {
       for (const { avoidance, velocity, transform, spatialHashing } of entities) {
