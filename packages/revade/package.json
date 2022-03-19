@@ -17,6 +17,7 @@
     "randomish": "^0.1.2",
     "react": "^18.0.0-rc.2",
     "react-dom": "^18.0.0-rc.2",
+    "react-merge-refs": "^1.1.0",
     "three": "^0.138.3"
   },
   "devDependencies": {

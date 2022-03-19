@@ -1,5 +1,6 @@
 import THREE, { makeInstanceComponents } from "@hmans/trinity"
 import { between, number, plusMinus } from "randomish"
+import { DynamicBody } from "./lib/physics2d/DynamicBody"
 import { tmpQuaternion } from "./lib/temps"
 import { ECS, spatialHashGrid } from "./state"
 
@@ -16,18 +17,24 @@ export const Enemies = ({ count = 100 }) => (
       {() => (
         <>
           <ECS.Component name="transform">
-            <Enemy.Instance
-              position={[plusMinus(50), plusMinus(50), 0]}
-              quaternion={tmpQuaternion.random()}
-            />
+            <DynamicBody>
+              <Enemy.Instance
+                position={[plusMinus(50), plusMinus(50), 0]}
+                quaternion={tmpQuaternion.random()}
+              />
+            </DynamicBody>
           </ECS.Component>
 
-          <ECS.Component name="velocity">
+          {/* <ECS.Component name="velocity">
             <THREE.Vector3 />
-          </ECS.Component>
+          </ECS.Component> */}
 
-          <ECS.Component name="spatialHashing" data={{ grid: spatialHashGrid }} />
+          {/* <ECS.Component
+            name="spatialHashing"
+            data={{ grid: spatialHashGrid }}
+          /> */}
 
+          {/*
           <ECS.Component
             name="wobble"
             data={{ speed: between(0.5, 1.5), t: number(Math.PI * 2) }}
@@ -35,6 +42,7 @@ export const Enemies = ({ count = 100 }) => (
 
           <ECS.Component name="attraction" data={{ factor: 20, targets: [] }} />
           <ECS.Component name="avoidance" data={{ factor: 10, targets: [] }} />
+          */}
         </>
       )}
     </ECS.Collection>
