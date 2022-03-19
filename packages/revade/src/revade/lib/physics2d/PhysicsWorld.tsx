@@ -6,8 +6,10 @@ import { createContext, FC, useContext, useState } from "react"
 import { Object3D } from "three"
 
 type Entity = {
-  body: pl.Body
-  transform: Object3D
+  physics2d: {
+    body: pl.Body
+    transform: Object3D
+  }
 } & IEntity
 
 const PhysicsWorldContext = createContext<{
@@ -31,7 +33,9 @@ export const PhysicsWorld: FC<{
     world.step(dt)
 
     /* Apply changes from physics world to scene objects */
-    for (const { body, transform } of ecs.entities) {
+    for (const {
+      physics2d: { body, transform }
+    } of ecs.entities) {
       const pos = body.getPosition()
       const rot = body.getAngle()
       transform.position.set(pos.x, pos.y, 0)

@@ -34,7 +34,9 @@ export const DynamicBody = forwardRef<
   }, [])
 
   useEffect(() => {
-    const entity = ecs.createEntity({ transform: group.current, body })
+    const entity = ecs.createEntity({
+      physics2d: { transform: group.current, body }
+    })
     return () => ecs.destroyEntity(entity)
   }, [])
 
