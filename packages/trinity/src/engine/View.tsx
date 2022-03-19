@@ -12,12 +12,12 @@ import { useTicker } from "./Ticker"
 import * as THREE from "three"
 import { useRenderer } from "./Renderer"
 import { ParentContext } from "./useParent"
-import { Camera, PerspectiveCamera } from "three"
+import { Camera, PerspectiveCamera, Vector2 } from "three"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
 
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
-import { GlitchPass } from "three/examples/jsm/postprocessing/GlitchPass"
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
 
 type ViewAPI = {
   setCamera: (camera: Camera) => void
@@ -40,6 +40,9 @@ export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil
     if (!renderer || !camera) return
     const renderPass = new RenderPass(scene, camera)
     composer.addPass(renderPass)
+
+    const bloomPass = new UnrealBloomPass(new Vector2(512, 512), 1, 1, 0.2)
+    composer.addPass(bloomPass)
   }, [composer])
 
   useTicker("render", () => {

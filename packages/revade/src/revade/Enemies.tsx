@@ -9,7 +9,7 @@ export const Enemies = ({ count = 100 }) => (
   <>
     <Enemy.Root>
       <THREE.DodecahedronBufferGeometry />
-      <THREE.MeshStandardMaterial color="#fff" wireframe />
+      <THREE.MeshStandardMaterial color="white" wireframe />
     </Enemy.Root>
 
     <ECS.Collection tag="enemy" initial={count} memoize>

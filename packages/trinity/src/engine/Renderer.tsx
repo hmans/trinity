@@ -14,13 +14,15 @@ export const Renderer: FC = ({ children }) => {
     setRenderer(() => {
       const renderer = new THREE.WebGLRenderer({
         canvas: canvas.current,
-        antialias: true,
         powerPreference: "high-performance",
+        antialias: false,
         alpha: false,
         stencil: false
       })
 
       renderer.autoClear = false
+      renderer.outputEncoding = THREE.sRGBEncoding
+      renderer.toneMapping = THREE.ACESFilmicToneMapping
 
       renderer.setSize(canvas.current.clientWidth, canvas.current.clientHeight)
 
