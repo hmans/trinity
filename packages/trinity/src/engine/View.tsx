@@ -4,6 +4,7 @@ import { Camera, PerspectiveCamera, Vector2 } from "three"
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
+import { FilmPass } from "three/examples/jsm/postprocessing/FilmPass"
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
 import { VignetteShader } from "three/examples/jsm/shaders/VignetteShader"
 import { useConst } from "../lib/useConst"
@@ -37,6 +38,9 @@ export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil
 
     /* Bloom */
     composer.addPass(new UnrealBloomPass(new Vector2(256, 256), 1, 0, 0.75))
+
+    /* Film */
+    composer.addPass(new FilmPass(0.3, 0, 0, 0))
 
     /* Vignette */
     const vignette = new ShaderPass(VignetteShader)
