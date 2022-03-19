@@ -13,7 +13,7 @@ export const DynamicBody = forwardRef<
   Group,
   ReactorComponentProps<typeof Group>
 >(({ children, ...props }, ref) => {
-  const world = usePhysicsWorld()
+  const { world, ecs } = usePhysicsWorld()
   const group = useRef<Group>(null!)
 
   const [body] = useState(() =>
@@ -31,14 +31,12 @@ export const DynamicBody = forwardRef<
 
     /* Remove body from world when onmounting */
     return () => void world.destroyBody(body)
-  }, [body])
+  }, [])
 
-  useTicker("fixed", () => {
-    const pos = body.getPosition()
-    const rot = body.getAngle()
-    group.current.position.set(pos.x, pos.y, 0)
-    group.current.rotation.set(0, 0, rot)
-  })
+  useEffect(() => {
+    const entity = ecs.createEntity({ transform: group.current, body })
+    return () => ecs.destroyEntity(entity)
+  }, [])
 
   return (
     <T.Group ref={mergeRefs([group, ref])} {...props}>
