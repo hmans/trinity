@@ -25,7 +25,8 @@ export const Renderer: FC = ({ children }) => {
       renderer.setClearColor("#222")
       // renderer.outputEncoding = THREE.sRGBEncoding
       // renderer.toneMapping = THREE.ACESFilmicToneMapping
-      // renderer.toneMappingExposure = 1.25
+      // renderer.toneMapping = THREE.ReinhardToneMapping
+      // renderer.toneMappingExposure = 1.5
 
       renderer.setSize(canvas.current.clientWidth, canvas.current.clientHeight)
 
