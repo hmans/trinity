@@ -8,14 +8,14 @@ import { ECS, spatialHashGrid } from "./state"
 
 const Enemy = makeInstanceComponents()
 
-export const Enemies = ({ count = 100 }) => (
+export const Enemies = () => (
   <>
     <Enemy.Root>
       <THREE.DodecahedronBufferGeometry />
       <THREE.MeshStandardMaterial color="white" wireframe />
     </Enemy.Root>
 
-    <ECS.Collection tag="enemy" initial={count} memoize>
+    <ECS.Collection tag="enemy" memoize>
       {() => (
         <>
           <ECS.Component name="transform">
@@ -29,19 +29,11 @@ export const Enemies = ({ count = 100 }) => (
 
           <ECS.Component name="attraction" data={{ factor: 20, targets: [] }} />
 
-          {/* <ECS.Component
-            name="spatialHashing"
-            data={{ grid: spatialHashGrid }}
-          /> */}
-
           {/*
           <ECS.Component
             name="wobble"
             data={{ speed: between(0.5, 1.5), t: number(Math.PI * 2) }}
           />
-
-          <ECS.Component name="attraction" data={{ factor: 20, targets: [] }} />
-          <ECS.Component name="avoidance" data={{ factor: 10, targets: [] }} />
           */}
         </>
       )}

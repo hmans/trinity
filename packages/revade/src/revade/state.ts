@@ -6,15 +6,15 @@ import { Body } from "planck"
 import { Object3D, Vector3 } from "three"
 
 export type Entity = {
-  player: Tag
-  enemy: Tag
+  player?: Tag
+  enemy?: Tag
 
   /* Movement */
   transform?: Object3D
   velocity?: Vector3
 
   /* Spatial Hashing */
-  spatialHashing: { grid: BoundlessGrid<QueriedEntity<Entity, ["transform"]>> }
+  spatialHashing?: { grid: BoundlessGrid<QueriedEntity<Entity, ["transform"]>> }
 
   /* Physics */
   body?: Body
