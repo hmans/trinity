@@ -12,7 +12,13 @@ export const Renderer: FC = ({ children }) => {
     if (!canvas.current) return
 
     setRenderer(() => {
-      const renderer = new THREE.WebGLRenderer({ canvas: canvas.current })
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvas.current,
+        antialias: true,
+        powerPreference: "high-performance",
+        alpha: false,
+        stencil: false
+      })
 
       renderer.autoClear = false
 
