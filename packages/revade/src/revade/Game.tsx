@@ -33,8 +33,13 @@ export const Game = () => (
       <Systems />
 
       <View>
+        <T.AmbientLight />
+        <T.GridHelper
+          rotation-x={Math.PI / 2}
+          args={[1024, 256, "#333", "#333"]}
+        />
+
         <PhysicsWorld gravity={[0, 0]}>
-          <T.AmbientLight />
           <Player />
           <Enemies />
           <Camera />
