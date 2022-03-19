@@ -12,13 +12,7 @@ export const Player = () => (
     <ECS.Component name="controller" data={controller} />
 
     <ECS.Component name="transform">
-      <DynamicBody
-        linearDamping={1}
-        angularDamping={1}
-        onCollisionEnter={() => console.log("enter")}
-        onCollisionExit={() => console.log("exit")}
-        onCollisionStay={() => console.log("stay")}
-      >
+      <DynamicBody linearDamping={1} angularDamping={1}>
         <BodyThiefHack />
         <BoxFixture size={[0.5, 0.5]}>
           <T.Mesh>

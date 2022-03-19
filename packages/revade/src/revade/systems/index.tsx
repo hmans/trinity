@@ -1,3 +1,5 @@
+import System from "../lib/System"
+import { ECS } from "../state"
 import { Attraction } from "./Attraction"
 import { Avoidance } from "./Avoidance"
 import { CameraRig } from "./CameraRig"
@@ -17,6 +19,8 @@ const Systems = () => (
     <Velocity />
     <Wobble />
     <CameraRig />
+
+    <System stage="render">{() => ECS.world.queue.flush()}</System>
   </>
 )
 

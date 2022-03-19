@@ -14,10 +14,17 @@ export const Sploders = () => (
     </Sploder.Root>
 
     <ECS.Collection tag="sploder" initial={1} memoize>
-      {() => (
+      {(entity) => (
         <>
           <ECS.Component name="transform">
-            <DynamicBody linearDamping={1} angularDamping={1}>
+            <DynamicBody
+              linearDamping={1}
+              angularDamping={1}
+              onCollisionEnter={() => {
+                console.log("KABOOM!")
+                ECS.world.queue.destroyEntity(entity)
+              }}
+            >
               <BodyThiefHack />
               <CircleFixture radius={3} density={0.1}>
                 <Sploder.Instance scale={3} />

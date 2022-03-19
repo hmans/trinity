@@ -26,17 +26,18 @@ export const Enemies = () => (
     </Enemy.Root>
 
     <ECS.Collection tag="enemy" memoize>
-      {() => (
+      {(entity) => (
         <>
           <ECS.Component name="transform">
             <DynamicBody
               position={getSpawnPosition()}
               linearDamping={1}
               angularDamping={1}
+              fixedRotation
             >
               <BodyThiefHack />
               <CircleFixture radius={0.9} density={0.1}>
-                <Enemy.Instance quaternion={tmpQuaternion.random()} />
+                <Enemy.Instance />
               </CircleFixture>
             </DynamicBody>
           </ECS.Component>

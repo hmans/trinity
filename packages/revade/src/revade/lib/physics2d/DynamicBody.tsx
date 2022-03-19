@@ -13,6 +13,7 @@ export const DynamicBody = forwardRef<
   ReactorComponentProps<typeof Group> & {
     linearDamping?: number
     angularDamping?: number
+    fixedRotation?: boolean
     onCollisionEnter?: Function
     onCollisionExit?: Function
     onCollisionStay?: Function
@@ -26,6 +27,7 @@ export const DynamicBody = forwardRef<
       onCollisionStay,
       linearDamping = 0,
       angularDamping = 0,
+      fixedRotation = false,
       ...props
     },
     ref
@@ -37,7 +39,8 @@ export const DynamicBody = forwardRef<
       world.createBody({
         type: "dynamic",
         linearDamping,
-        angularDamping
+        angularDamping,
+        fixedRotation
       })
     )
 
