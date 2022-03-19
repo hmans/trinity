@@ -3,11 +3,16 @@ import { BoundlessGrid } from "@hmans/ingrid"
 import { IEntity, QueriedEntity, Tag } from "miniplex"
 import { createECS } from "miniplex/react"
 import { Body } from "planck"
-import { Object3D, Vector3 } from "three"
+import { Object3D, PerspectiveCamera, Vector3 } from "three"
 
 export type Entity = {
   player?: Tag
   enemy?: Tag
+
+  /* Camera */
+  camera?: {
+    offset: [number, number, number]
+  }
 
   /* Movement */
   transform?: Object3D

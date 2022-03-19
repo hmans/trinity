@@ -1,4 +1,11 @@
-import React, { createContext, FC, useContext, useEffect, useMemo, useState } from "react"
+import React, {
+  createContext,
+  FC,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from "react"
 import * as THREE from "three"
 import { Camera, PerspectiveCamera, Vector2 } from "three"
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
@@ -20,12 +27,11 @@ type ViewAPI = {
 
 const ViewContext = createContext<ViewAPI>(null!)
 
-export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil?: boolean }> = ({
-  children,
-  clearColor,
-  clearDepth,
-  clearStencil
-}) => {
+export const View: FC<{
+  clearColor?: boolean
+  clearDepth?: boolean
+  clearStencil?: boolean
+}> = ({ children, clearColor, clearDepth, clearStencil }) => {
   const renderer = useRenderer()
   const composer = useMemo(() => new EffectComposer(renderer), [renderer])
   const scene = useConst(() => new THREE.Scene())
@@ -61,7 +67,10 @@ export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil
 
   const api = useMemo(
     () => ({
-      setCamera
+      setCamera: (camera: Camera) => {
+        console.log("setting camera:", camera)
+        setCamera(camera)
+      }
     }),
     []
   )
