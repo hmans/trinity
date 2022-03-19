@@ -17,11 +17,8 @@ export const Enemies = ({ count = 100 }) => (
       {() => (
         <>
           <ECS.Component name="transform">
-            <DynamicBody>
-              <Enemy.Instance
-                position={[plusMinus(50), plusMinus(50), 0]}
-                quaternion={tmpQuaternion.random()}
-              />
+            <DynamicBody position={[plusMinus(50), plusMinus(50), 0]}>
+              <Enemy.Instance quaternion={tmpQuaternion.random()} />
             </DynamicBody>
           </ECS.Component>
 
