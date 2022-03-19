@@ -1,11 +1,10 @@
 import THREE, { makeInstanceComponents } from "@hmans/trinity"
-import { between, number, plusMinus } from "randomish"
 import { Vector3 } from "three"
 import { BodyThiefHack } from "../BodyThiefHack"
 import { DynamicBody } from "../lib/physics2d/DynamicBody"
 import { CircleFixture } from "../lib/physics2d/Fixture"
 import { tmpQuaternion } from "../lib/temps"
-import { ECS, spatialHashGrid } from "../state"
+import { ECS } from "../state"
 
 const Enemy = makeInstanceComponents()
 
