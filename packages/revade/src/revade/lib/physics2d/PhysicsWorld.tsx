@@ -36,10 +36,12 @@ export const PhysicsWorld: FC<{
     for (const {
       physics2d: { body, transform }
     } of ecs.entities) {
-      const pos = body.getPosition()
-      const rot = body.getAngle()
-      transform.position.set(pos.x, pos.y, 0)
-      transform.rotation.set(0, 0, rot)
+      if (body.isAwake()) {
+        const pos = body.getPosition()
+        const rot = body.getAngle()
+        transform.position.set(pos.x, pos.y, 0)
+        transform.rotation.set(0, 0, rot)
+      }
     }
   })
 

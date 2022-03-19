@@ -42,10 +42,7 @@ export const DynamicBody = forwardRef<
 
   return (
     <T.Group ref={mergeRefs([group, ref])} {...props}>
-      <BodyContext.Provider value={body}>
-        <ECS.Component name="body" data={body} />
-        {children}
-      </BodyContext.Provider>
+      <BodyContext.Provider value={body}>{children}</BodyContext.Provider>
     </T.Group>
   )
 })

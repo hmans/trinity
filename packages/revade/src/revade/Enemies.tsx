@@ -1,5 +1,6 @@
 import THREE, { makeInstanceComponents } from "@hmans/trinity"
 import { between, number, plusMinus } from "randomish"
+import { BodyThiefHack } from "./BodyThiefHack"
 import { DynamicBody } from "./lib/physics2d/DynamicBody"
 import { CircleFixture } from "./lib/physics2d/Fixture"
 import { tmpQuaternion } from "./lib/temps"
@@ -19,6 +20,7 @@ export const Enemies = ({ count = 100 }) => (
         <>
           <ECS.Component name="transform">
             <DynamicBody position={[plusMinus(50), plusMinus(50), 0]}>
+              <BodyThiefHack />
               <CircleFixture radius={0.9}>
                 <Enemy.Instance quaternion={tmpQuaternion.random()} />
               </CircleFixture>
