@@ -1,13 +1,16 @@
 import { FC, forwardRef, useEffect, useRef, useState } from "react"
 import { Group, Quaternion, Vector3 } from "three"
 import { usePhysicsWorld } from "./PhysicsWorld"
-import T, { useTicker } from "@hmans/trinity"
+import T, { ReactorComponentProps, useTicker } from "@hmans/trinity"
 import { Vec2 } from "planck"
 import mergeRefs from "react-merge-refs"
 
 const tmpVec3 = new Vector3()
 
-export const DynamicBody = forwardRef(({ children }, ref) => {
+export const DynamicBody = forwardRef<
+  Group,
+  ReactorComponentProps<typeof Group>
+>(({ children }, ref) => {
   const world = usePhysicsWorld()
   const group = useRef<Group>(null!)
 
