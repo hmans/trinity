@@ -13,38 +13,63 @@ export const DynamicBody = forwardRef<
   ReactorComponentProps<typeof Group> & {
     linearDamping?: number
     angularDamping?: number
+    onCollisionEnter?: Function
+    onCollisionExit?: Function
+    onCollisionStay?: Function
   }
->(({ children, linearDamping = 0, angularDamping = 0, ...props }, ref) => {
-  const { world, ecs } = usePhysicsWorld()
-  const group = useRef<Group>(null!)
+>(
+  (
+    {
+      children,
+      onCollisionEnter,
+      onCollisionExit,
+      onCollisionStay,
+      linearDamping = 0,
+      angularDamping = 0,
+      ...props
+    },
+    ref
+  ) => {
+    const { world, ecs } = usePhysicsWorld()
+    const group = useRef<Group>(null!)
 
-  const [body] = useState(() =>
-    world.createBody({
-      type: "dynamic",
-      linearDamping,
-      angularDamping
-    })
-  )
+    const [body] = useState(() =>
+      world.createBody({
+        type: "dynamic",
+        linearDamping,
+        angularDamping
+      })
+    )
 
-  useEffect(() => {
-    /* Initialize the body with the scene object's transform */
-    group.current.getWorldPosition(tmpVec3)
-    body.setPosition(pl.Vec2(tmpVec3))
+    useEffect(() => {
+      /* Initialize the body with the scene object's transform */
+      group.current.getWorldPosition(tmpVec3)
+      body.setPosition(pl.Vec2(tmpVec3))
 
-    /* Remove body from world when onmounting */
-    return () => void world.destroyBody(body)
-  }, [])
+      /* Remove body from world when onmounting */
+      return () => void world.destroyBody(body)
+    }, [])
 
-  useEffect(() => {
-    const entity = ecs.createEntity({
-      physics2d: { transform: group.current, body }
-    })
-    return () => ecs.destroyEntity(entity)
-  }, [])
+    useEffect(() => {
+      const entity = ecs.createEntity({
+        physics2d: {
+          transform: group.current,
+          body,
+          onCollisionEnter,
+          onCollisionExit,
+          onCollisionStay
+        }
+      })
 
-  return (
-    <T.Group ref={mergeRefs([group, ref])} {...props}>
-      <BodyContext.Provider value={body}>{children}</BodyContext.Provider>
-    </T.Group>
-  )
-})
+      body.setUserData(entity)
+
+      return () => ecs.destroyEntity(entity)
+    }, [])
+
+    return (
+      <T.Group ref={mergeRefs([group, ref])} {...props}>
+        <BodyContext.Provider value={body}>{children}</BodyContext.Provider>
+      </T.Group>
+    )
+  }
+)

@@ -1,16 +1,8 @@
 import { useTicker } from "@hmans/trinity"
 import * as miniplex from "miniplex"
-import { IEntity } from "miniplex"
 import * as pl from "planck"
-import { createContext, FC, useContext, useState } from "react"
-import { Object3D } from "three"
-
-type Entity = {
-  physics2d: {
-    body: pl.Body
-    transform: Object3D
-  }
-} & IEntity
+import { createContext, FC, useContext, useEffect, useState } from "react"
+import { Entity } from "./Entity"
 
 const PhysicsWorldContext = createContext<{
   world: pl.World
@@ -27,6 +19,32 @@ export const PhysicsWorld: FC<{
       gravity: pl.Vec2(...gravity)
     })
   )
+
+  useEffect(() => {
+    world.on("begin-contact", function (contact) {
+      const userDataA = contact.getFixtureA().getBody().getUserData() as Entity
+      const userDataB = contact.getFixtureB().getBody().getUserData() as Entity
+
+      userDataA.physics2d.onCollisionEnter?.()
+      userDataB.physics2d.onCollisionEnter?.()
+    })
+
+    world.on("end-contact", function (contact) {
+      const userDataA = contact.getFixtureA().getBody().getUserData() as Entity
+      const userDataB = contact.getFixtureB().getBody().getUserData() as Entity
+
+      userDataA.physics2d.onCollisionExit?.()
+      userDataB.physics2d.onCollisionExit?.()
+    })
+
+    world.on("pre-solve", function (contact, oldManifold) {
+      const userDataA = contact.getFixtureA().getBody().getUserData() as Entity
+      const userDataB = contact.getFixtureB().getBody().getUserData() as Entity
+
+      userDataA.physics2d.onCollisionStay?.()
+      userDataB.physics2d.onCollisionStay?.()
+    })
+  }, [world])
 
   useTicker("fixed", (dt) => {
     /* Step the physics world */
