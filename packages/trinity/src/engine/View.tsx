@@ -38,11 +38,8 @@ export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil
 
   useEffect(() => {
     if (!renderer || !camera) return
-    const renderPass = new RenderPass(scene, camera)
-    composer.addPass(renderPass)
-
-    const bloomPass = new UnrealBloomPass(new Vector2(256, 256), 1, 0, 0.75)
-    composer.addPass(bloomPass)
+    composer.addPass(new RenderPass(scene, camera))
+    composer.addPass(new UnrealBloomPass(new Vector2(256, 256), 1, 0, 0.75))
   }, [composer])
 
   useTicker("render", () => {
