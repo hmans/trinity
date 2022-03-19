@@ -1,5 +1,6 @@
 import React, { createContext, FC, useContext, useEffect, useRef, useState } from "react"
 import * as THREE from "three"
+import { Color } from "three"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
 
 const RendererContext = createContext<THREE.WebGLRenderer>(null!)
@@ -21,6 +22,7 @@ export const Renderer: FC = ({ children }) => {
       })
 
       renderer.autoClear = false
+      renderer.setClearColor("#222")
       // renderer.outputEncoding = THREE.sRGBEncoding
       // renderer.toneMapping = THREE.ACESFilmicToneMapping
       // renderer.toneMappingExposure = 1.25

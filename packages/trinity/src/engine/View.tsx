@@ -1,23 +1,16 @@
-import React, {
-  createContext,
-  FC,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from "react"
-import { useConst } from "../lib/useConst"
-import { useTicker } from "./Ticker"
+import React, { createContext, FC, useContext, useEffect, useMemo, useState } from "react"
 import * as THREE from "three"
-import { useRenderer } from "./Renderer"
-import { ParentContext } from "./useParent"
 import { Camera, PerspectiveCamera, Vector2 } from "three"
-import { useWindowResizeHandler } from "./useWindowResizeHandler"
-
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
+import { VignetteShader } from "three/examples/jsm/shaders/VignetteShader"
+import { useConst } from "../lib/useConst"
+import { useRenderer } from "./Renderer"
+import { useTicker } from "./Ticker"
+import { ParentContext } from "./useParent"
+import { useWindowResizeHandler } from "./useWindowResizeHandler"
 
 type ViewAPI = {
   setCamera: (camera: Camera) => void
@@ -38,8 +31,18 @@ export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil
 
   useEffect(() => {
     if (!renderer || !camera) return
+
+    /* Render */
     composer.addPass(new RenderPass(scene, camera))
+
+    /* Bloom */
     composer.addPass(new UnrealBloomPass(new Vector2(256, 256), 1, 0, 0.75))
+
+    /* Vignette */
+    const vignette = new ShaderPass(VignetteShader)
+    vignette.uniforms["offset"].value = 0.5
+    vignette.uniforms["darkness"].value = 2
+    composer.addPass(vignette)
   }, [composer])
 
   useTicker("render", () => {
