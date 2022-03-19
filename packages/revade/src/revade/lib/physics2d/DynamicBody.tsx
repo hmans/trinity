@@ -1,9 +1,8 @@
-import T, { ReactorComponentProps, useTicker } from "@hmans/trinity"
+import T, { ReactorComponentProps } from "@hmans/trinity"
 import * as pl from "planck"
 import { forwardRef, useEffect, useRef, useState } from "react"
 import mergeRefs from "react-merge-refs"
 import { Group, Vector3 } from "three"
-import { ECS } from "../../state"
 import { BodyContext } from "./BodyContext"
 import { usePhysicsWorld } from "./PhysicsWorld"
 
