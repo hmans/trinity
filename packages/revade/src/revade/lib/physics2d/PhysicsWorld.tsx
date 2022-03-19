@@ -15,14 +15,9 @@ const PhysicsWorldContext = createContext<{
   ecs: miniplex.World<Entity>
 }>(null!)
 
-type PhysicsWorldProps = {
+export const PhysicsWorld: FC<{
   gravity?: [number, number]
-}
-
-export const PhysicsWorld: FC<PhysicsWorldProps> = ({
-  children,
-  gravity = [0, -9.81]
-}) => {
+}> = ({ children, gravity = [0, -9.81] }) => {
   const [ecs] = useState(() => new miniplex.World<Entity>())
 
   const [world] = useState(() =>
