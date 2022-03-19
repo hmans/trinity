@@ -1,7 +1,7 @@
 import THREE, { makeInstanceComponents } from "@hmans/trinity"
 import { between, number, plusMinus } from "randomish"
 import { tmpQuaternion } from "./lib/temps"
-import { ECS } from "./state"
+import { ECS, spatialHashGrid } from "./state"
 
 const Enemy = makeInstanceComponents()
 
@@ -26,12 +26,15 @@ export const Enemies = ({ count = 100 }) => (
             <THREE.Vector3 />
           </ECS.Component>
 
+          <ECS.Component name="spatialHashing" data={{ grid: spatialHashGrid }} />
+
           <ECS.Component
             name="wobble"
             data={{ speed: between(0.5, 1.5), t: number(Math.PI * 2) }}
           />
 
-          <ECS.Component name="attraction" data={{ factor: 10, targets: [] }} />
+          <ECS.Component name="attraction" data={{ factor: 20, targets: [] }} />
+          <ECS.Component name="avoidance" data={{ factor: 10, targets: [] }} />
         </>
       )}
     </ECS.Collection>
