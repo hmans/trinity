@@ -27,9 +27,7 @@ export const Enemies = ({ count = 100 }) => (
             </DynamicBody>
           </ECS.Component>
 
-          {/* <ECS.Component name="velocity">
-            <THREE.Vector3 />
-          </ECS.Component> */}
+          <ECS.Component name="attraction" data={{ factor: 20, targets: [] }} />
 
           {/* <ECS.Component
             name="spatialHashing"
