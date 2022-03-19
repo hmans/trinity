@@ -67,10 +67,7 @@ export const View: FC<{
 
   const api = useMemo(
     () => ({
-      setCamera: (camera: Camera) => {
-        console.log("setting camera:", camera)
-        setCamera(camera)
-      }
+      setCamera
     }),
     []
   )
