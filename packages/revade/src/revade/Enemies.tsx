@@ -19,9 +19,13 @@ export const Enemies = () => (
       {() => (
         <>
           <ECS.Component name="transform">
-            <DynamicBody position={[plusMinus(50), plusMinus(50), 0]}>
+            <DynamicBody
+              position={[plusMinus(50), plusMinus(50), 0]}
+              linearDamping={1}
+              angularDamping={1}
+            >
               <BodyThiefHack />
-              <CircleFixture radius={0.9}>
+              <CircleFixture radius={0.9} density={0.1}>
                 <Enemy.Instance quaternion={tmpQuaternion.random()} />
               </CircleFixture>
             </DynamicBody>

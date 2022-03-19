@@ -10,16 +10,19 @@ const tmpVec3 = new Vector3()
 
 export const DynamicBody = forwardRef<
   Group,
-  ReactorComponentProps<typeof Group>
->(({ children, ...props }, ref) => {
+  ReactorComponentProps<typeof Group> & {
+    linearDamping?: number
+    angularDamping?: number
+  }
+>(({ children, linearDamping = 0, angularDamping = 0, ...props }, ref) => {
   const { world, ecs } = usePhysicsWorld()
   const group = useRef<Group>(null!)
 
   const [body] = useState(() =>
     world.createBody({
       type: "dynamic",
-      linearDamping: 0.5,
-      angularDamping: 0.5
+      linearDamping,
+      angularDamping
     })
   )
 
