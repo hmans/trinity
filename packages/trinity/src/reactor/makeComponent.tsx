@@ -11,18 +11,18 @@ export const makeComponent = <
   TConstructor extends Constructor<any>,
   TInstance extends InstanceType<TConstructor>
 >(
-  constructor: TConstructor,
+  constructor: TConstructor | undefined,
   displayName: string
 ): ReactorComponent<TConstructor> => {
   /* Create a component that wraps the requested constructible instance */
   const Component = forwardRef<TInstance, ReactorComponentProps<TConstructor>>(
-    ({ children, attach, args, ...props }, ref) => {
+    ({ object: propObject, children, attach, args, ...props }, ref) => {
       /* Get the current parent. */
       const parent = useParent() as StringIndexable
 
       /* Create the instance of our THREE object. */
       const instance = useManagedThreeObject(
-        () => new constructor(...(Array.isArray(args) ? args : Array(args)))
+        () => propObject || new constructor!(...(Array.isArray(args) ? args : Array(args)))
       )
 
       /* Apply forwarded ref */

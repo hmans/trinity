@@ -1,13 +1,23 @@
+/* Types */
 export * from "./reactor/types"
+
+/* Components */
 export { Engine } from "./engine/Engine"
+export { Primitive } from "./reactor/Primitive"
 export { Ticker } from "./engine/Ticker"
 export { Callback } from "./engine/Callback"
 export { View } from "./engine/View"
-export { makeInstanceComponents } from "./tools/instances"
+
+/* Hooks */
 export { useAnimationFrame } from "./engine/useAnimationFrame"
 export { useTicker } from "./engine/Ticker"
-import { Reactor } from "./reactor/Reactor"
-export default Reactor
+export { useParent } from "./engine/useParent"
 
 /* Experiments */
+export { makeInstanceComponents } from "./tools/instances"
 export { useCamera } from "./experiments/useCamera"
+export { Text } from "./toolbox/Text"
+
+/* Export the Reactor as our default export */
+import { Reactor } from "./reactor/Reactor"
+export default Reactor

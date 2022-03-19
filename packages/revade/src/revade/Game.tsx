@@ -1,4 +1,4 @@
-import T, { Engine, useCamera, View } from "@hmans/trinity"
+import T, { Engine, Text, useCamera, View } from "@hmans/trinity"
 import { PerspectiveCamera } from "three"
 import { Enemies } from "./Enemies"
 import { Player } from "./Player"
@@ -18,6 +18,10 @@ export const Game = () => (
       <Player />
       <Enemies />
       <Camera />
+
+      <Text fontSize={10} color="red" anchorX="center" anchorY="middle" position-z={5}>
+        REVADE
+      </Text>
     </View>
   </Engine>
 )
