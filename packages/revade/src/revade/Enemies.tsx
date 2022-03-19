@@ -1,5 +1,6 @@
 import THREE, { makeInstanceComponents } from "@hmans/trinity"
 import { between, number, plusMinus } from "randomish"
+import { Vector3 } from "three"
 import { BodyThiefHack } from "./BodyThiefHack"
 import { DynamicBody } from "./lib/physics2d/DynamicBody"
 import { CircleFixture } from "./lib/physics2d/Fixture"
@@ -7,6 +8,16 @@ import { tmpQuaternion } from "./lib/temps"
 import { ECS, spatialHashGrid } from "./state"
 
 const Enemy = makeInstanceComponents()
+
+const players = ECS.world.archetype("player").entities
+
+const tmpVec3 = new Vector3()
+
+const getSpawnPosition = (distance = 100) =>
+  tmpVec3
+    .randomDirection()
+    .multiplyScalar(distance)
+    .add(players[0]!.transform!.position)
 
 export const Enemies = () => (
   <>
@@ -20,7 +31,7 @@ export const Enemies = () => (
         <>
           <ECS.Component name="transform">
             <DynamicBody
-              position={[plusMinus(50), plusMinus(50), 0]}
+              position={getSpawnPosition()}
               linearDamping={1}
               angularDamping={1}
             >
