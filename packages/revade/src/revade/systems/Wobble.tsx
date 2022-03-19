@@ -1,7 +1,7 @@
-import System from "../lib/System"
+import ArchetypeSystem from "../lib/ArchetypeSystem"
 
 export const Wobble = () => (
-  <System archetype={["transform", "wobble"]}>
+  <ArchetypeSystem archetype={["transform", "wobble"]}>
     {(entities, dt) => {
       for (const { transform, wobble } of entities) {
         wobble.t += dt
@@ -12,5 +12,5 @@ export const Wobble = () => (
         // transform.scale.setScalar(scale)
       }
     }}
-  </System>
+  </ArchetypeSystem>
 )

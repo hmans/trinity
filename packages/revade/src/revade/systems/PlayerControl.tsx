@@ -1,9 +1,9 @@
 import { VectorControl } from "@hmans/controlfreak"
 import { Vec2 } from "planck"
-import System from "../lib/System"
+import ArchetypeSystem from "../lib/ArchetypeSystem"
 
 export const PlayerControl = ({ thrust = 40 }) => (
-  <System archetype={["controller", "body"]}>
+  <ArchetypeSystem archetype={["controller", "body"]}>
     {(entities, dt) => {
       for (const { controller, body } of entities) {
         controller.update()
@@ -14,5 +14,5 @@ export const PlayerControl = ({ thrust = 40 }) => (
         }
       }
     }}
-  </System>
+  </ArchetypeSystem>
 )

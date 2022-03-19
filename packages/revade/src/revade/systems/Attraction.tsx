@@ -1,12 +1,12 @@
 import { Vec2 } from "planck"
-import System from "../lib/System"
+import ArchetypeSystem from "../lib/ArchetypeSystem"
 import { tmpVector3 } from "../lib/temps"
 import { ECS } from "../state"
 
 const players = ECS.world.archetype("player", "transform")
 
 export const Attraction = () => (
-  <System archetype={["attraction", "transform", "body"]}>
+  <ArchetypeSystem archetype={["attraction", "transform", "body"]}>
     {(entities, dt) => {
       for (const { attraction, transform, body } of entities) {
         /* Find targets (for now) */
@@ -28,5 +28,5 @@ export const Attraction = () => (
         }
       }
     }}
-  </System>
+  </ArchetypeSystem>
 )

@@ -1,11 +1,14 @@
-import System from "../lib/System"
+import ArchetypeSystem from "../lib/ArchetypeSystem"
 
 export const SpatialHashing = () => (
-  <System archetype={["transform", "spatialHashing"]}>
+  <ArchetypeSystem archetype={["transform", "spatialHashing"]}>
     {(entities, dt) => {
       for (const entity of entities) {
-        entity.spatialHashing.grid.placeEntity(entity, entity.transform.position)
+        entity.spatialHashing.grid.placeEntity(
+          entity,
+          entity.transform.position
+        )
       }
     }}
-  </System>
+  </ArchetypeSystem>
 )

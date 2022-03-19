@@ -1,11 +1,11 @@
 import { Vector3 } from "three"
-import System from "../lib/System"
+import ArchetypeSystem from "../lib/ArchetypeSystem"
 import { tmpVector3 } from "../lib/temps"
 
 const ZERO = new Vector3()
 
 export const Velocity = ({ damping = 4 }) => (
-  <System archetype={["velocity", "transform"]}>
+  <ArchetypeSystem archetype={["velocity", "transform"]}>
     {(entities, dt) => {
       for (const { velocity, transform } of entities) {
         /* Apply velocity */
@@ -15,5 +15,5 @@ export const Velocity = ({ damping = 4 }) => (
         velocity.lerp(ZERO, 1 - Math.exp(-damping * dt))
       }
     }}
-  </System>
+  </ArchetypeSystem>
 )
