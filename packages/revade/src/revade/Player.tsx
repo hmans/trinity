@@ -1,6 +1,7 @@
 import T from "@hmans/trinity"
 import { controller } from "./controller"
 import { DynamicBody } from "./lib/physics2d/DynamicBody"
+import { BoxFixture, CircleFixture, Fixture } from "./lib/physics2d/Fixture"
 import { ECS } from "./state"
 
 export const Player = () => (
@@ -11,10 +12,12 @@ export const Player = () => (
 
     <ECS.Component name="transform">
       <DynamicBody>
-        <T.Mesh>
-          <T.BoxGeometry />
-          <T.MeshStandardMaterial color="orange" wireframe />
-        </T.Mesh>
+        <BoxFixture size={[0.5, 0.5]} density={1}>
+          <T.Mesh>
+            <T.BoxGeometry />
+            <T.MeshStandardMaterial color="orange" wireframe />
+          </T.Mesh>
+        </BoxFixture>
       </DynamicBody>
     </ECS.Component>
   </ECS.Entity>

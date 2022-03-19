@@ -1,6 +1,7 @@
 import THREE, { makeInstanceComponents } from "@hmans/trinity"
 import { between, number, plusMinus } from "randomish"
 import { DynamicBody } from "./lib/physics2d/DynamicBody"
+import { CircleFixture } from "./lib/physics2d/Fixture"
 import { tmpQuaternion } from "./lib/temps"
 import { ECS, spatialHashGrid } from "./state"
 
@@ -18,7 +19,9 @@ export const Enemies = ({ count = 100 }) => (
         <>
           <ECS.Component name="transform">
             <DynamicBody position={[plusMinus(50), plusMinus(50), 0]}>
-              <Enemy.Instance quaternion={tmpQuaternion.random()} />
+              <CircleFixture radius={0.9}>
+                <Enemy.Instance quaternion={tmpQuaternion.random()} />
+              </CircleFixture>
             </DynamicBody>
           </ECS.Component>
 

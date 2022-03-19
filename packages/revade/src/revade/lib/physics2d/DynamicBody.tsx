@@ -4,6 +4,7 @@ import { forwardRef, useEffect, useRef, useState } from "react"
 import mergeRefs from "react-merge-refs"
 import { Group, Vector3 } from "three"
 import { ECS } from "../../state"
+import { BodyContext } from "./BodyContext"
 import { usePhysicsWorld } from "./PhysicsWorld"
 
 const tmpVec3 = new Vector3()
@@ -28,13 +29,6 @@ export const DynamicBody = forwardRef<
     group.current.getWorldPosition(tmpVec3)
     body.setPosition(pl.Vec2(tmpVec3))
 
-    /* Add a placeholder fixture */
-    body.createFixture({
-      shape: pl.Circle(0.9),
-      density: 0.5,
-      friction: 0.3
-    })
-
     /* Remove body from world when onmounting */
     return () => void world.destroyBody(body)
   }, [body])
@@ -48,8 +42,10 @@ export const DynamicBody = forwardRef<
 
   return (
     <T.Group ref={mergeRefs([group, ref])} {...props}>
-      <ECS.Component name="body" data={body} />
-      {children}
+      <BodyContext.Provider value={body}>
+        <ECS.Component name="body" data={body} />
+        {children}
+      </BodyContext.Provider>
     </T.Group>
   )
 })
