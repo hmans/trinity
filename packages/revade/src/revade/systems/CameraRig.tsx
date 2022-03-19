@@ -7,7 +7,7 @@ const players = ECS.world.archetype("player").entities
 const tmpVec3 = new Vector3()
 
 export const CameraRig = () => (
-  <ArchetypeSystem archetype={["camera", "transform"]}>
+  <ArchetypeSystem stage="lateUpdate" archetype={["camera", "transform"]}>
     {(entities, dt) => {
       const player = players[0]
       if (!player) return

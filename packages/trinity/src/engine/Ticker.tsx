@@ -1,7 +1,19 @@
-import React, { createContext, FC, useContext, useEffect, useLayoutEffect, useState } from "react"
+import React, {
+  createContext,
+  FC,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useState
+} from "react"
 import { useAnimationFrame } from "./useAnimationFrame"
 
-export type TickerStage = "update" | "lateUpdate" | "fixed" | "lateFixed" | "render"
+export type TickerStage =
+  | "update"
+  | "lateUpdate"
+  | "fixed"
+  | "lateFixed"
+  | "render"
 
 const TickerContext = createContext<TickerImpl>(null!)
 
@@ -35,11 +47,13 @@ class TickerImpl {
 
     /* Clamp the deltatime to prevent situations where thousands of frames are executed after
     the user returns from another tab. */
-    const dt = Math.max(0, this.maxDelta ? Math.min(frameDelta, this.maxDelta) : frameDelta)
+    const dt = Math.max(
+      0,
+      this.maxDelta ? Math.min(frameDelta, this.maxDelta) : frameDelta
+    )
 
     /* Run the normale update callbacks. */
     this.execute("update", dt * this.timeScale)
-    this.execute("lateUpdate", dt * this.timeScale)
 
     /* Run fixed-steps callbacks, based on our internal accumulator. */
     this.acc += dt * this.timeScale
@@ -48,6 +62,8 @@ class TickerImpl {
       this.execute("lateFixed", this.fixedStep)
       this.acc -= this.fixedStep
     }
+
+    this.execute("lateUpdate", dt * this.timeScale)
 
     /* Run any registered render callbacks. */
     this.execute("render", dt * this.timeScale)
@@ -61,7 +77,10 @@ class TickerImpl {
   }
 }
 
-export const Ticker: FC<{ timeScale?: number }> = ({ children, timeScale = 1 }) => {
+export const Ticker: FC<{ timeScale?: number }> = ({
+  children,
+  timeScale = 1
+}) => {
   const [ticker] = useState(() => new TickerImpl())
 
   useLayoutEffect(() => {
@@ -71,7 +90,9 @@ export const Ticker: FC<{ timeScale?: number }> = ({ children, timeScale = 1 }) 
 
   useAnimationFrame(() => ticker.tick())
 
-  return <TickerContext.Provider value={ticker}>{children}</TickerContext.Provider>
+  return (
+    <TickerContext.Provider value={ticker}>{children}</TickerContext.Provider>
+  )
 }
 
 export const useTicker = (stage: TickerStage, callback: TickerCallback) => {
