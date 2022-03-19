@@ -9,7 +9,9 @@ export const PlayerControl = ({ thrust = 40 }) => (
         controller.update()
 
         const move = controller.controls.move as VectorControl
-        body.applyForceToCenter(Vec2(move.value).mul(thrust))
+        if (move.value.x || move.value.y) {
+          body.applyForceToCenter(Vec2(move.value).mul(thrust), true)
+        }
       }
     }}
   </System>
