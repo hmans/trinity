@@ -12,7 +12,7 @@ export const Player = () => (
 
     <ECS.Component name="transform">
       <DynamicBody>
-        <BoxFixture size={[0.5, 0.5]} density={1}>
+        <BoxFixture size={[0.5, 0.5]}>
           <T.Mesh>
             <T.BoxGeometry />
             <T.MeshStandardMaterial color="orange" wireframe />

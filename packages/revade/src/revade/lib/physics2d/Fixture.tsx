@@ -10,13 +10,15 @@ type FixtureProps = {
 export const Fixture: FC<FixtureProps & { shape: pl.Shape }> = ({
   children,
   shape,
-  density = 1,
-  friction = 0
+  density = 0.5,
+  friction = 0.3
 }) => {
   const body = useBody()
-  const [fixture] = useState(() => body.createFixture({ shape }))
+  const [fixture] = useState(() =>
+    body.createFixture({ shape, density, friction })
+  )
 
-  useEffect(() => () => body.destroyFixture(fixture), [body, fixture])
+  useEffect(() => () => body.destroyFixture(fixture), [])
 
   useEffect(() => fixture.setDensity(density), [fixture, density])
   useEffect(() => fixture.setFriction(friction), [fixture, friction])
