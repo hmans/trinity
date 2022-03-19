@@ -8,6 +8,7 @@ import { Object3D, PerspectiveCamera, Vector3 } from "three"
 export type Entity = {
   player?: Tag
   enemy?: Tag
+  sploder?: Tag
 
   /* Camera */
   camera?: {

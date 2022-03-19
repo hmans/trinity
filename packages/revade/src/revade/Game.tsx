@@ -5,6 +5,7 @@ import { PhysicsWorld } from "./lib/physics2d"
 import { Player } from "./entities/Player"
 import Systems from "./systems"
 import { Camera } from "./entities/Camera"
+import { Sploders } from "./entities/Sploders"
 
 export const Game = () => (
   <>
@@ -22,6 +23,7 @@ export const Game = () => (
         <PhysicsWorld gravity={[0, 0]}>
           <Player />
           <Enemies />
+          <Sploders />
           <Camera />
         </PhysicsWorld>
       </View>
