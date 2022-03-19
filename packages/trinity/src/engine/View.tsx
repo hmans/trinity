@@ -41,7 +41,7 @@ export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil
     const renderPass = new RenderPass(scene, camera)
     composer.addPass(renderPass)
 
-    const bloomPass = new UnrealBloomPass(new Vector2(512, 512), 1, 1, 0.2)
+    const bloomPass = new UnrealBloomPass(new Vector2(256, 256), 1, 0, 0.75)
     composer.addPass(bloomPass)
   }, [composer])
 
