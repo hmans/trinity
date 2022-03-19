@@ -1,5 +1,4 @@
-import T, { Engine, Text, useCamera, View } from "@hmans/trinity"
-import { Tag } from "miniplex"
+import T, { Engine, useCamera, View } from "@hmans/trinity"
 import { FC } from "react"
 import { PerspectiveCamera } from "three"
 import { Enemies } from "./Enemies"
