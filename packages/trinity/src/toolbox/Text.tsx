@@ -65,9 +65,6 @@ export const Text: FC<TextProps> = ({ children, ...props }) => {
   /* Sync text object every time props change */
   useLayoutEffect(() => troika.sync())
 
-  /* Dispose text instance when unmounting */
-  useEffect(() => () => troika.dispose(), [troika])
-
   return (
     <Primitive object={troika} text={text} {...props}>
       {nodes}
