@@ -1,7 +1,10 @@
+import { Vector3 } from "three"
 import System from "../lib/System"
 import { tmpVector3 } from "../lib/temps"
 
-export const Velocity = () => (
+const ZERO = new Vector3()
+
+export const Velocity = ({ damping = 4 }) => (
   <System archetype={["velocity", "transform"]}>
     {(entities, dt) => {
       for (const { velocity, transform } of entities) {
@@ -9,7 +12,7 @@ export const Velocity = () => (
         transform.position.add(tmpVector3.copy(velocity).multiplyScalar(dt))
 
         /* Reduce velocity */
-        velocity.multiplyScalar(0.9)
+        velocity.lerp(ZERO, 1 - Math.exp(-damping * dt))
       }
     }}
   </System>
