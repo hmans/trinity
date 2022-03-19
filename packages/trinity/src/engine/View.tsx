@@ -1,10 +1,17 @@
-import React, { createContext, FC, useCallback, useContext, useMemo, useState } from "react"
-import { useConst } from "../lib/useConst"
-import { useTicker } from "./Ticker"
+import React, { createContext, FC, useContext, useEffect, useMemo, useState } from "react"
 import * as THREE from "three"
+import { Camera, PerspectiveCamera, Vector2 } from "three"
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
+import { BloomPass } from "three/examples/jsm/postprocessing/BloomPass"
+import { FilmPass } from "three/examples/jsm/postprocessing/FilmPass"
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
+import { VignetteShader } from "three/examples/jsm/shaders/VignetteShader"
+import { useConst } from "../lib/useConst"
 import { useRenderer } from "./Renderer"
+import { useTicker } from "./Ticker"
 import { ParentContext } from "./useParent"
-import { Camera, PerspectiveCamera } from "three"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
 
 type ViewAPI = {
@@ -20,24 +27,36 @@ export const View: FC<{ clearColor?: boolean; clearDepth?: boolean; clearStencil
   clearStencil
 }) => {
   const renderer = useRenderer()
+  const composer = useMemo(() => new EffectComposer(renderer), [renderer])
   const scene = useConst(() => new THREE.Scene())
+  const [camera, setCamera] = useState<Camera>()
 
-  const [camera, setCamera] = useState<Camera>(() => {
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      renderer.domElement.clientWidth / renderer.domElement.clientHeight,
-      0.1,
-      1000
-    )
-    camera.position.z = 10
-    return camera
-  })
+  useEffect(() => {
+    if (!renderer || !camera) return
+
+    /* Render */
+    composer.addPass(new RenderPass(scene, camera))
+
+    /* Bloom */
+    // composer.addPass(new UnrealBloomPass(new Vector2(256, 256), 1.5, 0.4, 0.85))
+    composer.addPass(new BloomPass(1, 14, 4, 256))
+
+    /* Film */
+    composer.addPass(new FilmPass(0.3, 0, 0, 0))
+
+    /* Vignette */
+    const vignette = new ShaderPass(VignetteShader)
+    vignette.uniforms["offset"].value = 0.5
+    vignette.uniforms["darkness"].value = 2
+    composer.addPass(vignette)
+  }, [composer])
 
   useTicker("render", () => {
     clearColor && renderer.clearColor()
     clearDepth && renderer.clearDepth()
     clearStencil && renderer.clearStencil()
-    renderer.render(scene, camera)
+
+    composer.render()
   })
 
   const api = useMemo(
