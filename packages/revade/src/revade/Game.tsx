@@ -35,7 +35,7 @@ export const Game = () => (
       <View>
         <T.AmbientLight />
         <T.GridHelper
-          rotation-x={Math.PI / 2}
+          rotation={[Math.PI / 2, 0.1, 0]}
           args={[1024, 256, "#333", "#333"]}
         />
 
