@@ -1,22 +1,21 @@
 import T from "@hmans/trinity"
 import { controller } from "./controller"
+import { DynamicBody } from "./lib/physics2d/DynamicBody"
 import { ECS } from "./state"
 
 export const Player = () => (
   <ECS.Entity>
     <ECS.Component name="player" data={true} />
 
-    <ECS.Component name="velocity">
-      <T.Vector3 />
-    </ECS.Component>
-
     <ECS.Component name="controller" data={controller} />
 
     <ECS.Component name="transform">
-      <T.Mesh>
-        <T.BoxGeometry />
-        <T.MeshStandardMaterial color="orange" wireframe />
-      </T.Mesh>
+      <DynamicBody>
+        <T.Mesh>
+          <T.BoxGeometry />
+          <T.MeshStandardMaterial color="orange" wireframe />
+        </T.Mesh>
+      </DynamicBody>
     </ECS.Component>
   </ECS.Entity>
 )

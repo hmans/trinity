@@ -2,6 +2,7 @@ import { Controller } from "@hmans/controlfreak"
 import { BoundlessGrid } from "@hmans/ingrid"
 import { IEntity, QueriedEntity, Tag } from "miniplex"
 import { createECS } from "miniplex/react"
+import { Body } from "planck"
 import { Object3D, Vector3 } from "three"
 
 export type Entity = {
@@ -14,6 +15,9 @@ export type Entity = {
 
   /* Spatial Hashing */
   spatialHashing: { grid: BoundlessGrid<QueriedEntity<Entity, ["transform"]>> }
+
+  /* Physics */
+  body?: Body
 
   /* Flocking */
   attraction?: {

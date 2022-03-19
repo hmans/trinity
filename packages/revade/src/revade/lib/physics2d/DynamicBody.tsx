@@ -4,6 +4,7 @@ import { usePhysicsWorld } from "./PhysicsWorld"
 import T, { ReactorComponentProps, useTicker } from "@hmans/trinity"
 import { Vec2 } from "planck"
 import mergeRefs from "react-merge-refs"
+import { ECS } from "../../state"
 
 const tmpVec3 = new Vector3()
 
@@ -30,5 +31,10 @@ export const DynamicBody = forwardRef<
     group.current.position.set(pos.x, pos.y, 0)
   })
 
-  return <T.Group ref={mergeRefs([group, ref])}>{children}</T.Group>
+  return (
+    <T.Group ref={mergeRefs([group, ref])}>
+      <ECS.Component name="body" data={body} />
+      {children}
+    </T.Group>
+  )
 })

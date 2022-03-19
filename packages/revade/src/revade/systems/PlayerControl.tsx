@@ -1,15 +1,16 @@
 import { VectorControl } from "@hmans/controlfreak"
+import { Vec2 } from "planck"
 import System from "../lib/System"
 import { tmpVector3 } from "../lib/temps"
 
 export const PlayerControl = ({ thrust = 100 }) => (
-  <System archetype={["controller", "velocity"]}>
+  <System archetype={["controller", "body"]}>
     {(entities, dt) => {
-      for (const { controller, velocity } of entities) {
+      for (const { controller, body } of entities) {
         controller.update()
 
         const move = controller.controls.move as VectorControl
-        velocity.add(tmpVector3.set(move.value.x * dt * thrust, move.value.y * dt * thrust, 0))
+        body.applyForceToCenter(Vec2(move.value).mul(40))
       }
     }}
   </System>
