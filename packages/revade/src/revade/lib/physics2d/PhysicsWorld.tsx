@@ -29,16 +29,16 @@ export const PhysicsWorld: FC<{
       const entityA = bodies.get(e.bodyA)
       const entityB = bodies.get(e.bodyB)
 
-      entityA?.physics2d.onCollisionEnter?.()
-      entityB?.physics2d.onCollisionEnter?.()
+      entityA?.physics2d.onCollisionEnter?.(entityB)
+      entityB?.physics2d.onCollisionEnter?.(entityA)
     })
 
     world.on("endContact", (e: p2.EndContactEvent) => {
       const entityA = bodies.get(e.bodyA)
       const entityB = bodies.get(e.bodyB)
 
-      entityA?.physics2d.onCollisionExit?.()
-      entityB?.physics2d.onCollisionExit?.()
+      entityA?.physics2d.onCollisionExit?.(entityB)
+      entityB?.physics2d.onCollisionExit?.(entityA)
     })
 
     world.on("preSolve", (e: p2.PreSolveEvent) => {})

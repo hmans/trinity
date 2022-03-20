@@ -3,6 +3,8 @@ import { ECS } from "../state"
 import T from "@hmans/trinity"
 import { useEffect } from "react"
 import { animate, easeIn, easeInOut, easeOut } from "popmotion"
+import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
+import { CircleShape } from "../lib/physics2d/Shape"
 
 const Splosion = makeInstanceComponents()
 
@@ -27,9 +29,19 @@ export const Splosions = () => (
         return (
           <>
             <ECS.Component name="transform">
-              <T.Group position={entity.spawnAt ?? [0, 0, 0]} scale={10}>
+              <PhysicsBody
+                position={entity.spawnAt ?? [0, 0, 0]}
+                scale={10}
+                mass={0}
+                onCollisionEnter={(other) => {
+                  /* TODO: "other" is the physics2d entity here, we need to get the game entity! */
+                  console.log("Sploding:", other)
+                  ECS.world.queue.destroyEntity(other)
+                }}
+              >
+                <CircleShape radius={10} />
                 <Splosion.Instance />
-              </T.Group>
+              </PhysicsBody>
             </ECS.Component>
 
             <ECS.Component
