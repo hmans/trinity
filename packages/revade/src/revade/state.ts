@@ -9,6 +9,7 @@ export type Entity = {
   player?: Tag
   enemy?: Tag
   sploder?: Tag
+  splosion?: Tag
 
   /* Camera */
   camera?: {
@@ -40,6 +41,12 @@ export type Entity = {
   wobble?: {
     speed: number
     t: number
+  }
+
+  /* Tools */
+  auto?: {
+    delay: number
+    callback: Function
   }
 
   /* Input */

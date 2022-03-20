@@ -9,6 +9,7 @@ import { Sploders } from "./entities/Sploders"
 import { PhysicsBody } from "./lib/physics2d/PhsyicsBody"
 import { BoxShape } from "./lib/physics2d/Shape"
 import { Material, MeshStandardMaterial } from "three"
+import { Splosions } from "./entities/Splosions"
 
 const Level = () => {
   const material = useManagedThreeObject(
@@ -70,6 +71,7 @@ export const Game = () => (
             <Player />
             <Enemies />
             <Sploders />
+            <Splosions />
             <Camera />
           </PhysicsWorld>
         </T.Group>
