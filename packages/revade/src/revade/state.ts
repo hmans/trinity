@@ -2,8 +2,8 @@ import { Controller } from "@hmans/controlfreak"
 import { BoundlessGrid } from "@hmans/ingrid"
 import { IEntity, QueriedEntity, Tag } from "miniplex"
 import { createECS } from "miniplex/react"
-import { Body } from "planck"
-import { Object3D, PerspectiveCamera, Vector3 } from "three"
+import p2 from "p2-es"
+import { Object3D, Vector3 } from "three"
 
 export type Entity = {
   player?: Tag
@@ -23,7 +23,7 @@ export type Entity = {
   spatialHashing?: { grid: BoundlessGrid<QueriedEntity<Entity, ["transform"]>> }
 
   /* Physics */
-  body?: Body
+  body?: p2.Body
 
   /* Flocking */
   attraction?: {

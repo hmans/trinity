@@ -1,8 +1,8 @@
 import THREE, { makeInstanceComponents } from "@hmans/trinity"
 import { Vector3 } from "three"
 import { BodyThiefHack } from "../BodyThiefHack"
-import { DynamicBody } from "../lib/physics2d/DynamicBody"
-import { CircleFixture } from "../lib/physics2d/Fixture"
+import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
+import { CircleShape } from "../lib/physics2d/Shape"
 import { tmpQuaternion } from "../lib/temps"
 import { ECS } from "../state"
 
@@ -17,6 +17,7 @@ const getSpawnPosition = (distance = 100) =>
     .randomDirection()
     .multiplyScalar(distance)
     .add(players[0]!.transform!.position)
+    .clone()
 
 export const Enemies = () => (
   <>
@@ -25,24 +26,26 @@ export const Enemies = () => (
       <THREE.MeshStandardMaterial color="white" wireframe />
     </Enemy.Root>
 
-    <ECS.Collection tag="enemy" memoize>
+    <ECS.Collection tag="enemy" initial={0} memoize>
       {(entity) => (
         <>
           <ECS.Component name="transform">
-            <DynamicBody
+            <PhysicsBody
               position={getSpawnPosition()}
-              linearDamping={1}
-              angularDamping={1}
-              fixedRotation
+              linearDamping={0.8}
+              angularDamping={0.8}
             >
               <BodyThiefHack />
-              <CircleFixture radius={0.9} density={0.1}>
+              <CircleShape radius={0.9}>
                 <Enemy.Instance />
-              </CircleFixture>
-            </DynamicBody>
+              </CircleShape>
+            </PhysicsBody>
           </ECS.Component>
 
-          <ECS.Component name="attraction" data={{ factor: 20, targets: [] }} />
+          <ECS.Component
+            name="attraction"
+            data={{ factor: 2000, targets: [] }}
+          />
 
           {/*
           <ECS.Component

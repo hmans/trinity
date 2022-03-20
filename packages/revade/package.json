@@ -13,7 +13,7 @@
     "@hmans/trinity": "^0.1.3",
     "@types/three": "^0.138.0",
     "miniplex": "^0.7.1",
-    "planck": "^1.0.0-alpha.3",
+    "p2-es": "^0.7.3",
     "randomish": "^0.1.2",
     "react": "^18.0.0-rc.2",
     "react-dom": "^18.0.0-rc.2",

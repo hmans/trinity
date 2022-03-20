@@ -1,4 +1,3 @@
-import { Vec2 } from "planck"
 import ArchetypeSystem from "../lib/ArchetypeSystem"
 import { tmpVector3 } from "../lib/temps"
 import { ECS } from "../state"
@@ -24,7 +23,7 @@ export const Attraction = () => (
             .normalize()
             .multiplyScalar(dt * attraction.factor)
 
-          body.applyForceToCenter(Vec2(force).mul(attraction.factor))
+          body.applyForce([force.x, force.y])
         }
       }
     }}

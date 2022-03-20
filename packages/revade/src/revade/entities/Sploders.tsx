@@ -1,7 +1,7 @@
 import T, { makeInstanceComponents } from "@hmans/trinity"
 import { BodyThiefHack } from "../BodyThiefHack"
-import { DynamicBody } from "../lib/physics2d/DynamicBody"
-import { CircleFixture } from "../lib/physics2d/Fixture"
+import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
+import { CircleShape } from "../lib/physics2d/Shape"
 import { ECS } from "../state"
 
 const Sploder = makeInstanceComponents()
@@ -17,19 +17,20 @@ export const Sploders = () => (
       {(entity) => (
         <>
           <ECS.Component name="transform">
-            <DynamicBody
+            <PhysicsBody
+              mass={10}
               linearDamping={1}
               angularDamping={1}
               onCollisionEnter={() => {
-                console.log("KABOOM!")
-                ECS.world.queue.destroyEntity(entity)
+                // console.log("KABOOM!")
+                // ECS.world.queue.destroyEntity(entity)
               }}
             >
               <BodyThiefHack />
-              <CircleFixture radius={3} density={0.1}>
+              <CircleShape radius={3}>
                 <Sploder.Instance scale={3} />
-              </CircleFixture>
-            </DynamicBody>
+              </CircleShape>
+            </PhysicsBody>
           </ECS.Component>
         </>
       )}

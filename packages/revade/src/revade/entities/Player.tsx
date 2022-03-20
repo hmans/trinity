@@ -1,8 +1,8 @@
 import T from "@hmans/trinity"
 import { BodyThiefHack } from "../BodyThiefHack"
 import { controller } from "../controller"
-import { DynamicBody } from "../lib/physics2d/DynamicBody"
-import { BoxFixture } from "../lib/physics2d/Fixture"
+import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
+import { BoxShape } from "../lib/physics2d/Shape"
 import { ECS } from "../state"
 
 export const Player = () => (
@@ -12,15 +12,15 @@ export const Player = () => (
     <ECS.Component name="controller" data={controller} />
 
     <ECS.Component name="transform">
-      <DynamicBody linearDamping={1} angularDamping={1}>
+      <PhysicsBody linearDamping={0.8} angularDamping={0.8}>
         <BodyThiefHack />
-        <BoxFixture size={[0.5, 0.5]}>
+        <BoxShape size={[1, 1]}>
           <T.Mesh>
             <T.BoxGeometry />
             <T.MeshStandardMaterial color="orange" wireframe />
           </T.Mesh>
-        </BoxFixture>
-      </DynamicBody>
+        </BoxShape>
+      </PhysicsBody>
     </ECS.Component>
   </ECS.Entity>
 )

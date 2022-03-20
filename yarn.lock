@@ -2186,6 +2186,13 @@ p-try@^2.0.0:
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
+p2-es@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/p2-es/-/p2-es-0.7.3.tgz#01ee005b94a5d391714508edfbdfbf6cab89beaa"
+  integrity sha512-7+YM2IyJbEVrjjFgik9U3ZyPWORp5JUn6tYP8d7LwBUtijXfX8uQojTl2gI+MLZrrhLuuX8NebZTyVtgL+1xYA==
+  dependencies:
+    poly-decomp "0.2.1"
+
 parse-glob@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/parse-glob/-/parse-glob-3.0.4.tgz#b2c376cfb11f35513badd173ef0bb6e3a388391c"
@@ -2236,12 +2243,10 @@ pirates@^4.0.1:
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.5.tgz#feec352ea5c3268fb23a37c702ab1699f35a5f3b"
   integrity sha512-8V9+HQPupnaXMA23c5hvl69zXvTwTzyAYasnkb0Tts4XvO4CliqONMOnvlq26rkhLC3nWDFBJf73LU1e1VZLaQ==
 
-planck@^1.0.0-alpha.3:
-  version "1.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/planck/-/planck-1.0.0-alpha.3.tgz#8337bee0b96f5fbd72bb8ffeab723ec1b36b84e1"
-  integrity sha512-8QHMPtbMMzfIElR+tJ6Cmmhb3sSziaalB1oeW1vvslvPsPfl7xFdNy2YnDKMBYRkl7w7vGw+M8nzEmLx+PKvrg==
-  dependencies:
-    stage-js "^0.9.4"
+poly-decomp@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/poly-decomp/-/poly-decomp-0.2.1.tgz#a5cc4088e9e2974070fa1ee23c7e3f2fc5b516d8"
+  integrity sha1-pcxAiOnil0Bw+h7iPH4/L8W1Ftg=
 
 postcss@^8.4.6:
   version "8.4.12"
@@ -2507,11 +2512,6 @@ spdx-license-ids@^3.0.0:
   version "3.0.11"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.11.tgz#50c0d8c40a14ec1bf449bae69a0ea4685a9d9f95"
   integrity sha512-Ctl2BrFiM0X3MANYgj3CkygxhRmr9mi6xhejbdO960nF6EDJApTYpn0BQnDKlnNBULKiCN1n3w9EBkHK8ZWg+g==
-
-stage-js@^0.9.4:
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/stage-js/-/stage-js-0.9.4.tgz#5d31eb8f33f1ca8d21c2043c6d21e47794b715f5"
-  integrity sha512-fNN6rkYD55T4NUxJE71hixXYS9DoyHVX5S8sQcq5yiozX1kqHP/wnByZwFfdAGNZjb5rROJ90zwb0EbM9U2Jqg==
 
 strip-indent@^3.0.0:
   version "3.0.0"

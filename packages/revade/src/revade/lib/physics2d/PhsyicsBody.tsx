@@ -1,5 +1,5 @@
 import T, { ReactorComponentProps } from "@hmans/trinity"
-import * as pl from "planck"
+import p2 from "p2-es"
 import { forwardRef, useEffect, useRef, useState } from "react"
 import mergeRefs from "react-merge-refs"
 import { Group, Vector3 } from "three"
@@ -8,9 +8,10 @@ import { usePhysicsWorld } from "./PhysicsWorld"
 
 const tmpVec3 = new Vector3()
 
-export const DynamicBody = forwardRef<
+export const PhysicsBody = forwardRef<
   Group,
   ReactorComponentProps<typeof Group> & {
+    mass?: number
     linearDamping?: number
     angularDamping?: number
     fixedRotation?: boolean
@@ -25,6 +26,7 @@ export const DynamicBody = forwardRef<
       onCollisionEnter,
       onCollisionExit,
       onCollisionStay,
+      mass = 1,
       linearDamping = 0,
       angularDamping = 0,
       fixedRotation = false,
@@ -35,24 +37,27 @@ export const DynamicBody = forwardRef<
     const { world, ecs } = usePhysicsWorld()
     const group = useRef<Group>(null!)
 
-    const [body] = useState(() =>
-      world.createBody({
-        type: "dynamic",
-        linearDamping,
-        angularDamping,
-        fixedRotation
-      })
+    const [body] = useState(
+      () =>
+        new p2.Body({
+          mass,
+          angularDamping,
+          damping: linearDamping,
+          fixedRotation
+        })
     )
 
     useEffect(() => {
       /* Initialize the body with the scene object's transform */
       group.current.getWorldPosition(tmpVec3)
-      body.setPosition(pl.Vec2(tmpVec3))
+      body.position = [tmpVec3.x, tmpVec3.y]
+      world.addBody(body)
 
       /* Remove body from world when onmounting */
-      return () => void world.destroyBody(body)
+      return () => void world.removeBody(body)
     }, [])
 
+    /* Create and destroy an ECS entity for this physics object */
     useEffect(() => {
       const entity = ecs.createEntity({
         physics2d: {
@@ -64,7 +69,7 @@ export const DynamicBody = forwardRef<
         }
       })
 
-      body.setUserData(entity)
+      // body.setUserData(entity)
 
       return () => ecs.destroyEntity(entity)
     }, [])

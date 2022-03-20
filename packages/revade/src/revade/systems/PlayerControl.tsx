@@ -1,8 +1,7 @@
 import { VectorControl } from "@hmans/controlfreak"
-import { Vec2 } from "planck"
 import ArchetypeSystem from "../lib/ArchetypeSystem"
 
-export const PlayerControl = ({ thrust = 40 }) => (
+export const PlayerControl = ({ thrust = 200 }) => (
   <ArchetypeSystem archetype={["controller", "body"]}>
     {(entities, dt) => {
       for (const { controller, body } of entities) {
@@ -10,7 +9,7 @@ export const PlayerControl = ({ thrust = 40 }) => (
 
         const move = controller.controls.move as VectorControl
         if (move.value.x || move.value.y) {
-          body.applyForceToCenter(Vec2(move.value).mul(thrust), true)
+          body.applyForce([move.value.x * thrust, move.value.y * thrust])
         }
       }
     }}
