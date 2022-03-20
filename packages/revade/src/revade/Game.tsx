@@ -10,22 +10,38 @@ import { PhysicsBody } from "./lib/physics2d/PhsyicsBody"
 import { BoxShape } from "./lib/physics2d/Shape"
 
 const Level = () => (
-  <T.Group rotation-z={0.5}>
+  <T.Group>
     <T.GridHelper
       rotation={[Math.PI / 2, 0, 0]}
       args={[120, 20, "#333", "#333"]}
     />
-    <PhysicsBody position-x={-65} mass={0}>
-      <BoxShape size={[10, 140]} />
+    <PhysicsBody position-x={-61} mass={0}>
+      <BoxShape size={[2, 124]} />
+      <T.Mesh>
+        <T.BoxGeometry args={[2, 124, 2]} />
+        <T.MeshStandardMaterial color="green" emissive="green" />
+      </T.Mesh>
     </PhysicsBody>
-    <PhysicsBody position-x={+65} mass={0}>
-      <BoxShape size={[10, 140]} />
+    <PhysicsBody position-x={+61} mass={0}>
+      <BoxShape size={[2, 124]} />
+      <T.Mesh>
+        <T.BoxGeometry args={[2, 124, 2]} />
+        <T.MeshStandardMaterial color="green" emissive="green" />
+      </T.Mesh>
     </PhysicsBody>
-    <PhysicsBody position-y={-65} mass={0}>
-      <BoxShape size={[140, 10]} />
+    <PhysicsBody position-y={-61} mass={0}>
+      <BoxShape size={[120, 2]} />
+      <T.Mesh>
+        <T.BoxGeometry args={[124, 2, 2]} />
+        <T.MeshStandardMaterial color="green" emissive="green" />
+      </T.Mesh>
     </PhysicsBody>
-    <PhysicsBody position-y={+65} mass={0}>
-      <BoxShape size={[140, 10]} />
+    <PhysicsBody position-y={+61} mass={0}>
+      <BoxShape size={[120, 2]} />
+      <T.Mesh>
+        <T.BoxGeometry args={[124, 2, 2]} />
+        <T.MeshStandardMaterial color="green" emissive="green" />
+      </T.Mesh>
     </PhysicsBody>
   </T.Group>
 )
@@ -40,13 +56,15 @@ export const Game = () => (
         <T.AmbientLight intensity={0.3} />
         <T.DirectionalLight intensity={0.2} position={[10, 10, 10]} />
 
-        <PhysicsWorld gravity={[0, 0]}>
-          <Level />
-          <Player />
-          <Enemies />
-          <Sploders />
-          <Camera />
-        </PhysicsWorld>
+        <T.Group>
+          <PhysicsWorld gravity={[0, 0]}>
+            <Level />
+            <Player />
+            <Enemies />
+            <Sploders />
+            <Camera />
+          </PhysicsWorld>
+        </T.Group>
       </View>
     </Engine>
   </>
