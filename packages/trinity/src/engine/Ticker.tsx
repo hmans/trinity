@@ -2,7 +2,6 @@ import React, {
   createContext,
   FC,
   useContext,
-  useEffect,
   useLayoutEffect,
   useState
 } from "react"
@@ -59,8 +58,6 @@ class TickerImpl {
 
     this.execute("update", dt * this.timeScale)
     this.execute("late", dt * this.timeScale)
-
-    /* Run any registered render callbacks. */
     this.execute("render", dt * this.timeScale)
   }
 
