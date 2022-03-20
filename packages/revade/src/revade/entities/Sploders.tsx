@@ -23,8 +23,8 @@ export const Sploders = () => (
               linearDamping={1}
               angularDamping={1}
               onCollisionEnter={() => {
-                // console.log("KABOOM!")
-                // ECS.world.queue.destroyEntity(entity)
+                console.log("KABOOM!")
+                ECS.world.queue.destroyEntity(entity)
               }}
             >
               <BodyThiefHack />

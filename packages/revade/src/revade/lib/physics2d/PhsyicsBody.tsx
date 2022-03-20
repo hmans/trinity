@@ -34,7 +34,7 @@ export const PhysicsBody = forwardRef<
     },
     ref
   ) => {
-    const { world, ecs } = usePhysicsWorld()
+    const { world, ecs, bodies } = usePhysicsWorld()
     const group = useRef<Group>(null!)
 
     const [body] = useState(
@@ -69,9 +69,12 @@ export const PhysicsBody = forwardRef<
         }
       })
 
-      // body.setUserData(entity)
+      bodies.set(body, entity)
 
-      return () => ecs.destroyEntity(entity)
+      return () => {
+        bodies.delete(body)
+        ecs.destroyEntity(entity)
+      }
     }, [])
 
     return (
