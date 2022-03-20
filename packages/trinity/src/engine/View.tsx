@@ -44,11 +44,11 @@ export const View: FC<{
     composer.addPass(new RenderPass(scene, camera))
 
     /* Bloom */
-    // composer.addPass(new UnrealBloomPass(new Vector2(256, 256), 1.5, 0.4, 0.85))
-    composer.addPass(new BloomPass(1, 14, 4, 256))
+    composer.addPass(new UnrealBloomPass(new Vector2(256, 256), 1.5, 1.4, 0.5))
+    // composer.addPass(new BloomPass(1, 14, 4, 256))
 
     /* Film */
-    composer.addPass(new FilmPass(0.3, 0, 0, 0))
+    composer.addPass(new FilmPass(0.3, 1, 1, 0))
 
     /* Vignette */
     const vignette = new ShaderPass(VignetteShader)

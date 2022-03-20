@@ -9,8 +9,8 @@ const Sploder = makeInstanceComponents()
 export const Sploders = () => (
   <>
     <Sploder.Root>
-      <T.SphereGeometry />
-      <T.MeshStandardMaterial color="#33c" />
+      <T.DodecahedronGeometry />
+      <T.MeshStandardMaterial color="#66f" />
     </Sploder.Root>
 
     <ECS.Collection tag="sploder" initial={1} memoize>

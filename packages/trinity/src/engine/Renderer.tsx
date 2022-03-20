@@ -31,10 +31,10 @@ export const Renderer: FC = ({ children }) => {
       renderer.autoClear = false
       renderer.setClearColor("#222")
       renderer.setPixelRatio(1)
-      // renderer.outputEncoding = THREE.sRGBEncoding
-      // renderer.toneMapping = THREE.ACESFilmicToneMapping
+      renderer.outputEncoding = THREE.sRGBEncoding
+      renderer.toneMapping = THREE.ACESFilmicToneMapping
       // renderer.toneMapping = THREE.ReinhardToneMapping
-      // renderer.toneMappingExposure = 1.5
+      renderer.toneMappingExposure = 1.25
 
       renderer.setSize(canvas.current.clientWidth, canvas.current.clientHeight)
 
