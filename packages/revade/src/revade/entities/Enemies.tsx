@@ -23,7 +23,7 @@ export const Enemies = () => (
   <>
     <Enemy.Root>
       <THREE.SphereGeometry args={[1, 8, 8]} />
-      <THREE.MeshStandardMaterial color="red" />
+      <THREE.MeshStandardMaterial color="white" />
     </Enemy.Root>
 
     <ECS.Collection tag="enemy" initial={0} memoize>
