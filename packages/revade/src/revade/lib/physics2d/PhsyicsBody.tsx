@@ -1,12 +1,14 @@
 import T, { ReactorComponentProps } from "@hmans/trinity"
 import p2 from "p2-es"
-import { forwardRef, useEffect, useRef, useState } from "react"
+import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from "react"
 import mergeRefs from "react-merge-refs"
-import { Group, Vector3 } from "three"
+import { Euler, Group, Quaternion, Vector3 } from "three"
 import { BodyContext } from "./BodyContext"
 import { usePhysicsWorld } from "./PhysicsWorld"
 
 const tmpVec3 = new Vector3()
+const tmpQuat = new Quaternion()
+const tmpEuler = new Euler()
 
 export const PhysicsBody = forwardRef<
   Group,
@@ -51,6 +53,12 @@ export const PhysicsBody = forwardRef<
       /* Initialize the body with the scene object's transform */
       group.current.getWorldPosition(tmpVec3)
       body.position = [tmpVec3.x, tmpVec3.y]
+
+      /* Get current rotation */
+      group.current.getWorldQuaternion(tmpQuat)
+      tmpEuler.setFromQuaternion(tmpQuat)
+      body.angle = tmpEuler.z
+
       world.addBody(body)
 
       /* Remove body from world when onmounting */

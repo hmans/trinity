@@ -1,4 +1,5 @@
 import THREE, { makeInstanceComponents } from "@hmans/trinity"
+import { plusMinus } from "randomish"
 import { Vector3 } from "three"
 import { BodyThiefHack } from "../BodyThiefHack"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
@@ -12,12 +13,11 @@ const players = ECS.world.archetype("player").entities
 
 const tmpVec3 = new Vector3()
 
-const getSpawnPosition = (distance = 100) =>
-  tmpVec3
-    .randomDirection()
-    .multiplyScalar(distance)
-    .add(players[0]!.transform!.position)
-    .clone()
+const getSpawnPosition = (distance = 100) => {
+  tmpVec3.set(plusMinus(55), plusMinus(55), 0)
+
+  return tmpVec3.clone()
+}
 
 export const Enemies = () => (
   <>
