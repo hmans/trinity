@@ -14,6 +14,8 @@ import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPa
 import { BloomPass } from "three/examples/jsm/postprocessing/BloomPass"
 import { FilmPass } from "three/examples/jsm/postprocessing/FilmPass"
 import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader"
+import { TechnicolorShader } from "three/examples/jsm/shaders/TechnicolorShader"
+import { VerticalTiltShiftShader } from "three/examples/jsm/shaders/VerticalTiltShiftShader"
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
 import { VignetteShader } from "three/examples/jsm/shaders/VignetteShader"
 import { useConst } from "../lib/useConst"
@@ -45,13 +47,15 @@ export const View: FC<{
     composer.addPass(new RenderPass(scene, camera))
 
     // composer.addPass(new ShaderPass(LuminosityShader))
+    // composer.addPass(new ShaderPass(TechnicolorShader))
+    // composer.addPass(new ShaderPass(VerticalTiltShiftShader))
 
     /* Bloom */
     composer.addPass(new UnrealBloomPass(new Vector2(256, 256), 2, 0.8, 0.3))
     // composer.addPass(new BloomPass(1, 14, 4, 256))
 
     /* Film */
-    // composer.addPass(new FilmPass(0.3, 1, 1, 0))
+    // composer.addPass(new FilmPass(0, 1, 1, 0))
 
     /* Vignette */
     const vignette = new ShaderPass(VignetteShader)
