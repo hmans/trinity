@@ -1,7 +1,7 @@
 export const LensDirtShader = {
   uniforms: {
     tDiffuse: { value: null },
-    tFoo: { value: null }
+    tDirt: { value: null }
   },
 
   vertexShader: `
@@ -17,11 +17,11 @@ export const LensDirtShader = {
 
     uniform float opacity;
     uniform sampler2D tDiffuse;
-    uniform sampler2D tFoo;
+    uniform sampler2D tDirt;
     varying vec2 vUv;
 
     void main() {
-      vec4 colorDirt = texture2D(tFoo, vUv);
+      vec4 colorDirt = texture2D(tDirt, vUv);
       vec4 colorGame = texture2D(tDiffuse, vUv);
 
       float luminance = linearToRelativeLuminance(colorGame.rgb);

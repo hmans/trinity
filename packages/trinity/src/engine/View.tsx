@@ -56,7 +56,7 @@ export const View: FC<{
 
     // composer.addPass(new ShaderPass(LuminosityShader))
     const dirt = new ShaderPass(LensDirtShader)
-    dirt.uniforms["tFoo"].value = new THREE.TextureLoader().load(
+    dirt.uniforms["tDirt"].value = new THREE.TextureLoader().load(
       "/textures/dirt01.png"
     )
     composer.addPass(dirt)
