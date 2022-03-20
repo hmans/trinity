@@ -43,11 +43,13 @@ export const PhysicsWorld: FC<{
     world.on("preSolve", (e: p2.PreSolveEvent) => {})
   }, [world])
 
+  /* Step the physics world */
   useTicker("fixed", (dt) => {
-    /* Step the physics world */
     world.step(dt)
+  })
 
-    /* Apply changes from physics world to scene objects */
+  /* Apply changes from physics world to scene objects */
+  useTicker("update", () => {
     for (const {
       physics2d: { body, transform }
     } of ecs.entities) {
