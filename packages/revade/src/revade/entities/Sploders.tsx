@@ -18,12 +18,12 @@ export const Sploders = () => (
       />
     </Sploder.Root>
 
-    <ECS.Collection tag="sploder" initial={1} memoize>
+    <ECS.Collection tag="sploder" initial={0} memoize>
       {(entity) => (
         <>
           <ECS.Component name="transform">
             <PhysicsBody
-              position={[0, 10, 0]}
+              position={entity.spawnAt!}
               mass={10}
               linearDamping={1}
               angularDamping={1}
