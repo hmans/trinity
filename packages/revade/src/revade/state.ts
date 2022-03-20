@@ -17,6 +17,7 @@ export type Entity = {
   }
 
   /* Movement */
+  spawnAt?: Vector3
   transform?: Object3D
   velocity?: Vector3
 

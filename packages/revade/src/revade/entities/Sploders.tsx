@@ -1,4 +1,5 @@
 import T, { makeInstanceComponents } from "@hmans/trinity"
+import { Tag } from "miniplex"
 import { BodyThiefHack } from "../BodyThiefHack"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
 import { CircleShape } from "../lib/physics2d/Shape"
@@ -28,6 +29,10 @@ export const Sploders = () => (
               angularDamping={1}
               onCollisionEnter={() => {
                 console.log("KABOOM!")
+                ECS.world.queue.createEntity({
+                  splosion: Tag,
+                  spawnAt: entity.transform?.position.clone()
+                })
                 ECS.world.queue.destroyEntity(entity)
               }}
             >

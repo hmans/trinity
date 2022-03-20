@@ -13,7 +13,7 @@ export const Splosions = () => (
       <T.MeshBasicMaterial color="yellow" />
     </Splosion.Root>
 
-    <ECS.Collection tag="splosion" initial={1} memoize>
+    <ECS.Collection tag="splosion" initial={0} memoize>
       {(entity) => {
         useEffect(() => {
           animate({
@@ -27,7 +27,7 @@ export const Splosions = () => (
         return (
           <>
             <ECS.Component name="transform">
-              <T.Group position-x={-20} scale={10}>
+              <T.Group position={entity.spawnAt ?? [0, 0, 0]} scale={10}>
                 <Splosion.Instance />
               </T.Group>
             </ECS.Component>
