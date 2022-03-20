@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect } from "react"
+import React, { forwardRef, useEffect, useLayoutEffect } from "react"
 import { Material, Object3D, BufferGeometry, Mesh, Fog } from "three"
 import { ParentContext, useParent } from "../engine/useParent"
 import { ReactorComponent, ReactorComponentProps } from "./types"
@@ -22,27 +22,29 @@ export const makeComponent = <
 
       /* Create the instance of our THREE object. */
       const instance = useManagedThreeObject(
-        () => propObject || new constructor!(...(Array.isArray(args) ? args : Array(args)))
+        () =>
+          propObject ||
+          new constructor!(...(Array.isArray(args) ? args : Array(args)))
       )
 
       /* Apply forwarded ref */
       applyRef(ref, instance)
 
       /* Apply props every time they change */
-      useEffect(() => {
+      useLayoutEffect(() => {
         /* Assign props */
         if (props) applyProps(instance, props)
       }, [instance, props])
 
       /* Mount scene object to parent */
-      useEffect(() => {
+      useLayoutEffect(() => {
         if (!(instance instanceof Object3D)) return
         parent.add(instance)
         return () => void parent.remove(instance)
       }, [parent, instance])
 
       /* Attach to parent attributes */
-      useEffect(() => {
+      useLayoutEffect(() => {
         if (!instance) return
 
         /* For specific types, set a default attach property */
