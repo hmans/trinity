@@ -30,8 +30,8 @@ export const LensDirtShader = {
       vec4 colorGame = texture2D(tDiffuse, vUv);
 
       float luminance = linearToRelativeLuminance(colorGame.rgb);
-      float step = smoothstep(minLuminance, maxLuminance, luminance) * strength;
+      float amount = smoothstep(minLuminance, maxLuminance, luminance) * strength;
 
-      gl_FragColor = colorGame + colorDirt * step;
+      gl_FragColor = colorGame + colorDirt * amount;
     }`
 }
