@@ -23,6 +23,7 @@ import { useRenderer } from "./Renderer"
 import { useTicker } from "./Ticker"
 import { ParentContext } from "./useParent"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
+import { LensDirtShader } from "../shaders/LensDirtShader"
 
 type ViewAPI = {
   setCamera: (camera: Camera) => void
@@ -53,6 +54,12 @@ export const View: FC<{
     /* Bloom */
     composer.addPass(new UnrealBloomPass(new Vector2(256, 256), 2, 0.8, 0.3))
     // composer.addPass(new BloomPass(1, 14, 4, 256))
+
+    const dirt = new ShaderPass(LensDirtShader)
+    dirt.uniforms["tFoo"].value = new THREE.TextureLoader().load(
+      "/textures/dirt01.png"
+    )
+    composer.addPass(dirt)
 
     /* Film */
     // composer.addPass(new FilmPass(0, 1, 1, 0))
