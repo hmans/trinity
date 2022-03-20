@@ -1,4 +1,11 @@
-import React, { createContext, FC, useContext, useEffect, useRef, useState } from "react"
+import React, {
+  createContext,
+  FC,
+  useContext,
+  useEffect,
+  useRef,
+  useState
+} from "react"
 import * as THREE from "three"
 import { Color } from "three"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
@@ -23,6 +30,7 @@ export const Renderer: FC = ({ children }) => {
 
       renderer.autoClear = false
       renderer.setClearColor("#222")
+      renderer.setPixelRatio(1)
       // renderer.outputEncoding = THREE.sRGBEncoding
       // renderer.toneMapping = THREE.ACESFilmicToneMapping
       // renderer.toneMapping = THREE.ReinhardToneMapping
@@ -45,7 +53,11 @@ export const Renderer: FC = ({ children }) => {
 
   return (
     <canvas ref={canvas}>
-      {renderer && <RendererContext.Provider value={renderer}>{children}</RendererContext.Provider>}
+      {renderer && (
+        <RendererContext.Provider value={renderer}>
+          {children}
+        </RendererContext.Provider>
+      )}
     </canvas>
   )
 }
