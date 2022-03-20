@@ -9,6 +9,7 @@ export { Callback } from "./engine/Callback"
 export { View } from "./engine/View"
 
 /* Hooks */
+export { useManagedThreeObject } from "./reactor/useManagedThreeObject"
 export { useAnimationFrame } from "./engine/useAnimationFrame"
 export { useTicker } from "./engine/Ticker"
 export { useParent } from "./engine/useParent"
