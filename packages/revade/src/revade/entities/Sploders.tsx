@@ -10,7 +10,11 @@ export const Sploders = () => (
   <>
     <Sploder.Root>
       <T.DodecahedronGeometry />
-      <T.MeshStandardMaterial color="#66f" />
+      <T.MeshStandardMaterial
+        color="#66f"
+        emissive={"#66f"}
+        emissiveIntensity={0.5}
+      />
     </Sploder.Root>
 
     <ECS.Collection tag="sploder" initial={1} memoize>

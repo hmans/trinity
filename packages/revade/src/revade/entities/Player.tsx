@@ -17,7 +17,11 @@ export const Player = () => (
         <CircleShape radius={1}>
           <T.Mesh>
             <T.SphereGeometry />
-            <T.MeshStandardMaterial color="hotpink" />
+            <T.MeshStandardMaterial
+              color="hotpink"
+              emissive="hotpink"
+              emissiveIntensity={0.8}
+            />
           </T.Mesh>
         </CircleShape>
       </PhysicsBody>

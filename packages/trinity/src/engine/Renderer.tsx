@@ -32,7 +32,7 @@ export const Renderer: FC = ({ children }) => {
       renderer.setClearColor("#222")
       renderer.setPixelRatio(1)
       renderer.outputEncoding = THREE.sRGBEncoding
-      renderer.toneMapping = THREE.ACESFilmicToneMapping
+      // renderer.toneMapping = THREE.ACESFilmicToneMapping
       // renderer.toneMapping = THREE.ReinhardToneMapping
       renderer.toneMappingExposure = 1.25
 
