@@ -47,7 +47,6 @@ export const View: FC<{
     /* Render */
     composer.addPass(new RenderPass(scene, camera))
 
-    // composer.addPass(new ShaderPass(LuminosityShader))
     // composer.addPass(new ShaderPass(TechnicolorShader))
     // composer.addPass(new ShaderPass(VerticalTiltShiftShader))
 
@@ -55,6 +54,7 @@ export const View: FC<{
     composer.addPass(new UnrealBloomPass(new Vector2(256, 256), 2, 0.8, 0.3))
     // composer.addPass(new BloomPass(1, 14, 4, 256))
 
+    // composer.addPass(new ShaderPass(LuminosityShader))
     const dirt = new ShaderPass(LensDirtShader)
     dirt.uniforms["tFoo"].value = new THREE.TextureLoader().load(
       "/textures/dirt01.png"
