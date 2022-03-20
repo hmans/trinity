@@ -1,7 +1,10 @@
 export const LensDirtShader = {
   uniforms: {
     tDiffuse: { value: null },
-    tDirt: { value: null }
+    tDirt: { value: null },
+    strength: { value: 1.0 },
+    minLuminance: { value: 0.1 },
+    maxLuminance: { value: 0.5 }
   },
 
   vertexShader: `
@@ -15,7 +18,9 @@ export const LensDirtShader = {
   fragmentShader: `
     #include <common>
 
-    uniform float opacity;
+    uniform float strength;
+    uniform float minLuminance;
+    uniform float maxLuminance;
     uniform sampler2D tDiffuse;
     uniform sampler2D tDirt;
     varying vec2 vUv;
@@ -25,7 +30,7 @@ export const LensDirtShader = {
       vec4 colorGame = texture2D(tDiffuse, vUv);
 
       float luminance = linearToRelativeLuminance(colorGame.rgb);
-      float step = smoothstep(0.1, 0.5, luminance) * 0.5;
+      float step = smoothstep(minLuminance, maxLuminance, luminance) * strength;
 
       gl_FragColor = colorGame + colorDirt * step;
     }`

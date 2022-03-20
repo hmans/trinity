@@ -59,6 +59,7 @@ export const View: FC<{
     dirt.uniforms["tDirt"].value = new THREE.TextureLoader().load(
       "/textures/dirt01.png"
     )
+    dirt.uniforms["strength"].value = 0.5
     composer.addPass(dirt)
 
     /* Film */
