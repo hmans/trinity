@@ -80,7 +80,7 @@ export const Ticker: FC<{ timeScale?: number }> = ({
     return () => void (ticker.timeScale = 1)
   }, [ticker, timeScale])
 
-  useAnimationFrame(() => ticker.tick())
+  useAnimationFrame(ticker.tick.bind(ticker))
 
   return (
     <TickerContext.Provider value={ticker}>{children}</TickerContext.Provider>
