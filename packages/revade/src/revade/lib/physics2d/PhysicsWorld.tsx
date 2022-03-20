@@ -3,6 +3,7 @@ import * as miniplex from "miniplex"
 import { createContext, FC, useContext, useEffect, useState } from "react"
 import { Entity } from "./Entity"
 import p2 from "p2-es"
+import { plusMinus } from "randomish"
 
 const PhysicsWorldContext = createContext<{
   world: p2.World
@@ -53,12 +54,12 @@ export const PhysicsWorld: FC<{
     for (const {
       physics2d: { body, transform }
     } of ecs.entities) {
-      // if (body.sleep) {
-      const pos = body.position
-      const rot = body.angle
-      transform.position.set(pos[0], pos[1], 0)
-      transform.rotation.set(0, 0, rot)
-      // }
+      if (body.sleepState !== p2.Body.SLEEPING) {
+        const pos = body.position
+        const rot = body.angle
+        transform.position.set(pos[0], pos[1], 0)
+        transform.rotation.set(0, 0, rot)
+      }
     }
   })
 
