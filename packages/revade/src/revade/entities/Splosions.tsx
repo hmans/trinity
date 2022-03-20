@@ -33,7 +33,7 @@ export const Splosions = () => (
                 position={entity.spawnAt ?? [0, 0, 0]}
                 scale={10}
                 mass={0}
-                onCollisionEnter={(other) => {
+                onCollisionEnter={(other: any) => {
                   /* TODO: "other" is the physics2d entity here, we need to get the game entity! */
                   console.log("Sploding:", other)
                   ECS.world.queue.destroyEntity(other)
