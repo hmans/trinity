@@ -8,12 +8,7 @@ import React, {
 } from "react"
 import { useAnimationFrame } from "./useAnimationFrame"
 
-export type TickerStage =
-  | "update"
-  | "lateUpdate"
-  | "fixed"
-  | "lateFixed"
-  | "render"
+export type TickerStage = "early" | "fixed" | "update" | "late" | "render"
 
 const TickerContext = createContext<TickerImpl>(null!)
 
@@ -53,17 +48,17 @@ class TickerImpl {
     )
 
     /* Run the normale update callbacks. */
-    this.execute("update", dt * this.timeScale)
+    this.execute("early", dt * this.timeScale)
 
     /* Run fixed-steps callbacks, based on our internal accumulator. */
     this.acc += dt * this.timeScale
     while (this.acc >= this.fixedStep) {
       this.execute("fixed", this.fixedStep)
-      this.execute("lateFixed", this.fixedStep)
       this.acc -= this.fixedStep
     }
 
-    this.execute("lateUpdate", dt * this.timeScale)
+    this.execute("update", dt * this.timeScale)
+    this.execute("late", dt * this.timeScale)
 
     /* Run any registered render callbacks. */
     this.execute("render", dt * this.timeScale)
