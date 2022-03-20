@@ -2,7 +2,7 @@ import T from "@hmans/trinity"
 import { BodyThiefHack } from "../BodyThiefHack"
 import { controller } from "../controller"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
-import { BoxShape } from "../lib/physics2d/Shape"
+import { BoxShape, CircleShape } from "../lib/physics2d/Shape"
 import { ECS } from "../state"
 
 export const Player = () => (
@@ -12,14 +12,14 @@ export const Player = () => (
     <ECS.Component name="controller" data={controller} />
 
     <ECS.Component name="transform">
-      <PhysicsBody linearDamping={0.8} angularDamping={0.8}>
+      <PhysicsBody linearDamping={0.8} angularDamping={0.8} fixedRotation>
         <BodyThiefHack />
-        <BoxShape size={[1, 1]}>
+        <CircleShape radius={1}>
           <T.Mesh>
-            <T.BoxGeometry />
-            <T.MeshStandardMaterial color="orange" wireframe />
+            <T.SphereGeometry />
+            <T.MeshStandardMaterial color="orange" />
           </T.Mesh>
-        </BoxShape>
+        </CircleShape>
       </PhysicsBody>
     </ECS.Component>
   </ECS.Entity>

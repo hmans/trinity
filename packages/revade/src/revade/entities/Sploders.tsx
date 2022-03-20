@@ -10,7 +10,7 @@ export const Sploders = () => (
   <>
     <Sploder.Root>
       <T.SphereGeometry />
-      <T.MeshStandardMaterial color="red" wireframe />
+      <T.MeshStandardMaterial color="#33c" />
     </Sploder.Root>
 
     <ECS.Collection tag="sploder" initial={1} memoize>

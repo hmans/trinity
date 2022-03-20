@@ -22,8 +22,8 @@ const getSpawnPosition = (distance = 100) =>
 export const Enemies = () => (
   <>
     <Enemy.Root>
-      <THREE.DodecahedronBufferGeometry />
-      <THREE.MeshStandardMaterial color="white" wireframe />
+      <THREE.SphereGeometry args={[1, 8, 8]} />
+      <THREE.MeshStandardMaterial color="red" />
     </Enemy.Root>
 
     <ECS.Collection tag="enemy" initial={0} memoize>
@@ -34,9 +34,10 @@ export const Enemies = () => (
               position={getSpawnPosition()}
               linearDamping={0.8}
               angularDamping={0.8}
+              fixedRotation
             >
               <BodyThiefHack />
-              <CircleShape radius={0.9}>
+              <CircleShape radius={1}>
                 <Enemy.Instance />
               </CircleShape>
             </PhysicsBody>

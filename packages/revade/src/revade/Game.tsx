@@ -14,7 +14,9 @@ export const Game = () => (
       <Systems />
 
       <View>
-        <T.AmbientLight />
+        <T.AmbientLight intensity={0.3} />
+        <T.DirectionalLight intensity={0.2} position={[10, 10, 10]} />
+
         <T.GridHelper
           rotation={[Math.PI / 2, 0.1, 0]}
           args={[1024, 256, "#333", "#333"]}
