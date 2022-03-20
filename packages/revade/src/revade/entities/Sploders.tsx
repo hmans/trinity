@@ -18,6 +18,7 @@ export const Sploders = () => (
         <>
           <ECS.Component name="transform">
             <PhysicsBody
+              position={[0, 10, 0]}
               mass={10}
               linearDamping={1}
               angularDamping={1}
