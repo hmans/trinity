@@ -15,7 +15,7 @@ export type TickerCallback = (dt: number) => void
 
 class TickerImpl {
   timeScale = 1
-  fixedStep = 1 / 60
+  fixedStep = 1 / 50
   maxDelta = 1
   lastTime = performance.now()
 
