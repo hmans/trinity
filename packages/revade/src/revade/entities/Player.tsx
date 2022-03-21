@@ -12,7 +12,7 @@ export const Player = () => (
     <ECS.Component name="controller" data={controller} />
 
     <ECS.Component name="transform">
-      <PhysicsBody linearDamping={0.8} angularDamping={0.8} fixedRotation>
+      <PhysicsBody linearDamping={0.99} fixedRotation>
         <BodyThiefHack />
         <CircleShape radius={1}>
           <T.Mesh>
