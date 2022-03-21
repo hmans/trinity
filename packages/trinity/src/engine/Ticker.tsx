@@ -33,11 +33,10 @@ class TickerImpl {
     callbacks.splice(pos, 1)
   }
 
-  tick() {
+  tick(time: DOMHighResTimeStamp) {
     /* Calculate frame delta */
-    const now = performance.now()
-    const frameDelta = (now - this.lastTime) / 1000
-    this.lastTime = now
+    const frameDelta = (time - this.lastTime) / 1000
+    this.lastTime = time
 
     /* Clamp the deltatime to prevent situations where thousands of frames are executed after
     the user returns from another tab. */

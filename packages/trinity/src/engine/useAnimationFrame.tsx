@@ -4,8 +4,8 @@ export const useAnimationFrame = (fn: Function) =>
   useLayoutEffect(() => {
     let looping = true
 
-    const tick = () => {
-      fn()
+    const tick = (time: DOMHighResTimeStamp) => {
+      fn(time)
       if (looping) requestAnimationFrame(tick)
     }
 
