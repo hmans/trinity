@@ -1,9 +1,8 @@
 import { useTicker } from "@hmans/trinity"
 import * as miniplex from "miniplex"
+import p2 from "p2-es"
 import { createContext, FC, useContext, useEffect, useState } from "react"
 import { Entity } from "./Entity"
-import p2 from "p2-es"
-import { plusMinus } from "randomish"
 
 const PhysicsWorldContext = createContext<{
   world: p2.World
@@ -45,7 +44,7 @@ export const PhysicsWorld: FC<{
   }, [world])
 
   /* Step the physics world */
-  useTicker("update", (dt) => {
+  useTicker("fixed", (dt) => {
     world.step(dt)
   })
 
