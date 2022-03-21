@@ -2,6 +2,8 @@ import { useTicker } from "@hmans/trinity"
 import * as miniplex from "miniplex"
 import p2 from "p2-es"
 import { createContext, FC, useContext, useEffect, useState } from "react"
+import { MathUtils, Vector3 } from "three"
+import { tmpVector3 } from "../temps"
 import { Entity } from "./Entity"
 
 const PhysicsWorldContext = createContext<{
@@ -49,15 +51,35 @@ export const PhysicsWorld: FC<{
   })
 
   /* Apply changes from physics world to scene objects */
-  useTicker("update", () => {
-    for (const {
-      physics2d: { body, transform }
-    } of ecs.entities) {
+  useTicker("postFixed", (alpha) => {
+    for (const { physics2d } of ecs.entities) {
+      const { interpolate, previousPosition, previousAngle, body, transform } =
+        physics2d
+
       if (body.sleepState !== p2.Body.SLEEPING) {
-        const pos = body.position
-        const rot = body.angle
-        transform.position.set(pos[0], pos[1], 0)
-        transform.rotation.set(0, 0, rot)
+        const nextPosition = body.position
+        const nextAngle = body.angle
+
+        if (interpolate) {
+          transform.position.set(
+            MathUtils.lerp(previousPosition[0], nextPosition[0], alpha),
+            MathUtils.lerp(previousPosition[1], nextPosition[1], alpha),
+            0
+          )
+
+          transform.rotation.set(
+            0,
+            0,
+            MathUtils.lerp(previousAngle, nextAngle, alpha)
+          )
+        } else {
+          transform.position.set(nextPosition[0], nextPosition[1], 0)
+          transform.rotation.set(0, 0, nextAngle)
+        }
+
+        /* Remember previous state */
+        physics2d.previousPosition = nextPosition
+        physics2d.previousAngle = nextAngle
       }
     }
   })

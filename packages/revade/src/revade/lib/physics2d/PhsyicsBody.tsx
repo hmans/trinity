@@ -13,6 +13,7 @@ const tmpEuler = new Euler()
 export const PhysicsBody = forwardRef<
   Group,
   ReactorComponentProps<typeof Group> & {
+    interpolate?: boolean
     mass?: number
     linearDamping?: number
     angularDamping?: number
@@ -29,6 +30,7 @@ export const PhysicsBody = forwardRef<
       onCollisionExit,
       onCollisionStay,
       mass = 1,
+      interpolate = false,
       linearDamping = 0,
       angularDamping = 0,
       fixedRotation = false,
@@ -61,16 +63,13 @@ export const PhysicsBody = forwardRef<
 
       world.addBody(body)
 
-      /* Remove body from world when onmounting */
-      return () => void world.removeBody(body)
-    }, [])
-
-    /* Create and destroy an ECS entity for this physics object */
-    useEffect(() => {
       const entity = ecs.createEntity({
         physics2d: {
           transform: group.current,
           body,
+          interpolate,
+          previousPosition: body.position,
+          previousAngle: body.angle,
           onCollisionEnter,
           onCollisionExit,
           onCollisionStay
@@ -79,10 +78,17 @@ export const PhysicsBody = forwardRef<
 
       bodies.set(body, entity)
 
+      /* Remove body from world when onmounting */
       return () => {
+        world.removeBody(body)
         bodies.delete(body)
         ecs.destroyEntity(entity)
       }
+    }, [])
+
+    /* Create and destroy an ECS entity for this physics object */
+    useEffect(() => {
+      return () => {}
     }, [])
 
     return (

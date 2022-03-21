@@ -11,6 +11,7 @@ export type TickerStage =
   | "early"
   | "fixed"
   | "lateFixed"
+  | "postFixed"
   | "update"
   | "lateUpdate"
   | "render"
@@ -56,11 +57,12 @@ class TickerImpl {
 
     /* Run fixed-steps callbacks, based on our internal accumulator. */
     this.acc += dt * this.timeScale
-    while (this.acc >= this.fixedStep / 2) {
+    while (this.acc >= this.fixedStep) {
+      this.acc -= this.fixedStep
       this.execute("fixed", this.fixedStep)
       this.execute("lateFixed", this.fixedStep)
-      this.acc -= this.fixedStep
     }
+    this.execute("postFixed", 1 - this.acc / this.fixedStep)
 
     this.execute("update", dt * this.timeScale)
     this.execute("lateUpdate", dt * this.timeScale)
