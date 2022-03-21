@@ -56,7 +56,7 @@ class TickerImpl {
 
     /* Run fixed-steps callbacks, based on our internal accumulator. */
     this.acc += dt * this.timeScale
-    while (this.acc >= this.fixedStep) {
+    while (this.acc >= this.fixedStep / 2) {
       this.execute("fixed", this.fixedStep)
       this.execute("lateFixed", this.fixedStep)
       this.acc -= this.fixedStep
