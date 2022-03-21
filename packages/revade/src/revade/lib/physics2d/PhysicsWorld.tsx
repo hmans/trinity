@@ -46,12 +46,11 @@ export const PhysicsWorld: FC<{
   }, [world])
 
   /* Step the physics world */
-  useTicker("fixed", (dt) => {
-    world.step(dt)
-  })
+  useTicker("update", (dt) => {
+    /* FIXME: doing this in update is wroooong */
 
-  /* Apply changes from physics world to scene objects */
-  useTicker("postFixed", (alpha) => {
+    world.step(dt)
+
     for (const { physics2d } of ecs.entities) {
       const { interpolate, previousPosition, previousAngle, body, transform } =
         physics2d

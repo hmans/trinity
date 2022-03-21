@@ -36,7 +36,7 @@ export const Enemies = () => (
           <ECS.Component name="transform">
             <PhysicsBody
               position={getSpawnPosition()}
-              linearDamping={0.8}
+              linearDamping={0.99}
               angularDamping={0.8}
               fixedRotation
             >
@@ -49,7 +49,7 @@ export const Enemies = () => (
 
           <ECS.Component
             name="attraction"
-            data={{ factor: 2000, targets: [] }}
+            data={{ factor: 8000, targets: [] }}
           />
 
           {/*
