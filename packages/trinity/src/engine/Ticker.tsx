@@ -7,7 +7,13 @@ import React, {
 } from "react"
 import { useAnimationFrame } from "./useAnimationFrame"
 
-export type TickerStage = "early" | "fixed" | "update" | "late" | "render"
+export type TickerStage =
+  | "early"
+  | "fixed"
+  | "lateFixed"
+  | "update"
+  | "lateUpdate"
+  | "render"
 
 const TickerContext = createContext<TickerImpl>(null!)
 
@@ -52,11 +58,12 @@ class TickerImpl {
     this.acc += dt * this.timeScale
     while (this.acc >= this.fixedStep) {
       this.execute("fixed", this.fixedStep)
+      this.execute("lateFixed", this.fixedStep)
       this.acc -= this.fixedStep
     }
 
     this.execute("update", dt * this.timeScale)
-    this.execute("late", dt * this.timeScale)
+    this.execute("lateUpdate", dt * this.timeScale)
     this.execute("render", dt * this.timeScale)
   }
 

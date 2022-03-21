@@ -7,7 +7,7 @@ const players = ECS.world.archetype("player").entities
 const tmpVec3 = new Vector3()
 
 export const CameraRig = () => (
-  <ArchetypeSystem stage="late" archetype={["camera", "transform"]}>
+  <ArchetypeSystem stage="lateFixed" archetype={["camera", "transform"]}>
     {(entities, dt) => {
       const player = players[0]
       if (!player) return
@@ -17,7 +17,7 @@ export const CameraRig = () => (
           .set(...camera.offset)
           .add(player.transform!.position)
 
-        transform.position.lerp(target, 0.1)
+        transform.position.lerp(target, 0.2)
       }
     }}
   </ArchetypeSystem>
