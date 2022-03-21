@@ -45,7 +45,7 @@ export const PhysicsWorld: FC<{
   }, [world])
 
   /* Step the physics world */
-  useTicker("fixed", (dt) => {
+  useTicker("update", (dt) => {
     world.step(dt)
   })
 
