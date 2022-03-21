@@ -39,7 +39,7 @@ export const Splosions = () => (
                   ECS.world.queue.destroyEntity(other)
                 }}
               >
-                <CircleShape radius={10} />
+                <CircleShape radius={15} />
                 <Splosion.Instance />
               </PhysicsBody>
             </ECS.Component>
