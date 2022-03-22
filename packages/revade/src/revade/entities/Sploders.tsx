@@ -28,11 +28,13 @@ export const Sploders = () => (
               linearDamping={1}
               angularDamping={1}
               onCollisionEnter={() => {
-                console.log("KABOOM!")
+                /* Spawn a splosion */
                 ECS.world.queue.createEntity({
                   splosion: Tag,
                   spawnAt: entity.transform?.position.clone()
                 })
+
+                /* And destroy myself */
                 ECS.world.queue.destroyEntity(entity)
               }}
             >
