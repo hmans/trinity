@@ -2,6 +2,7 @@ import THREE, { makeInstanceComponents } from "@hmans/trinity"
 import { easeOut } from "popmotion"
 import { plusMinus } from "randomish"
 import { Vector3 } from "three"
+import { explodePlayer } from "../actions/explodePlayer"
 import { BodyThiefHack } from "../BodyThiefHack"
 import { Animation } from "../lib/Animation"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
@@ -47,6 +48,9 @@ export const Enemies = () => (
               scale={0}
               fixedRotation
               interpolate
+              onCollisionEnter={({ userData: other }) => {
+                if (other?.player) explodePlayer(other)
+              }}
             >
               <BodyThiefHack />
               <CircleShape

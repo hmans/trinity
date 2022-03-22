@@ -10,7 +10,7 @@ export const CameraRig = () => (
   <ArchetypeSystem stage="lateUpdate" archetype={["camera", "transform"]}>
     {(entities, dt) => {
       const player = players[0]
-      if (!player) return
+      if (!player || !player.transform) return
 
       for (const { camera, transform } of entities) {
         const target = tmpVec3

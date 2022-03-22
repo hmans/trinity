@@ -6,11 +6,9 @@ import { BoxShape, CircleShape } from "../lib/physics2d/Shape"
 import { ECS, Layers } from "../state"
 
 export const Player = () => (
-  <ECS.Entity>
+  <ECS.Collection tag="player" initial={1}>
     {(entity) => (
       <>
-        <ECS.Component name="player" data={true} />
-
         <ECS.Component name="controller" data={controller} />
 
         <ECS.Component name="transform">
@@ -39,5 +37,5 @@ export const Player = () => (
         </ECS.Component>
       </>
     )}
-  </ECS.Entity>
+  </ECS.Collection>
 )
