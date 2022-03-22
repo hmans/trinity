@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import { animate, easeIn, easeInOut, easeOut } from "popmotion"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
 import { CircleShape } from "../lib/physics2d/Shape"
+import { explodeEnemy } from "../actions/explodeEnemy"
 
 const Splosion = makeInstanceComponents()
 
@@ -37,8 +38,7 @@ export const Splosions = () => (
                 mass={0}
                 onCollisionEnter={(other: any) => {
                   const otherEntity = other.physics2d.userData
-                  if (otherEntity?.enemy)
-                    ECS.world.queue.destroyEntity(otherEntity)
+                  if (otherEntity?.enemy) explodeEnemy(otherEntity)
                 }}
               >
                 <CircleShape radius={15} />
