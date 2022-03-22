@@ -10,5 +10,6 @@ export type Entity = {
     onCollisionEnter?: Function
     onCollisionExit?: Function
     onCollisionStay?: Function
+    userData?: any
   }
 } & IEntity

@@ -23,6 +23,7 @@ export const Sploders = () => (
         <>
           <ECS.Component name="transform">
             <PhysicsBody
+              userData={entity}
               position={entity.spawnAt!}
               mass={10}
               linearDamping={1}

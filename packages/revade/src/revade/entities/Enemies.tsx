@@ -40,6 +40,7 @@ export const Enemies = () => (
 
           <ECS.Component name="transform">
             <PhysicsBody
+              userData={entity}
               position={getSpawnPosition()}
               linearDamping={0.99}
               angularDamping={0.8}

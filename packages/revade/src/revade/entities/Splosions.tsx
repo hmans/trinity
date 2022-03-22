@@ -31,13 +31,14 @@ export const Splosions = () => (
           <>
             <ECS.Component name="transform">
               <PhysicsBody
+                userData={entity}
                 position={entity.spawnAt ?? [0, 0, 0]}
                 scale={10}
                 mass={0}
                 onCollisionEnter={(other: any) => {
-                  /* TODO: "other" is the physics2d entity here, we need to get the game entity! */
-                  console.log("Sploding:", other)
-                  ECS.world.queue.destroyEntity(other)
+                  const otherEntity = other.physics2d.userData
+                  if (otherEntity?.enemy)
+                    ECS.world.queue.destroyEntity(otherEntity)
                 }}
               >
                 <CircleShape radius={15} />

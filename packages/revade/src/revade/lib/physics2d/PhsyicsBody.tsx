@@ -21,6 +21,7 @@ export const PhysicsBody = forwardRef<
     onCollisionEnter?: Function
     onCollisionExit?: Function
     onCollisionStay?: Function
+    userData?: any
   }
 >(
   (
@@ -34,6 +35,7 @@ export const PhysicsBody = forwardRef<
       linearDamping = 0,
       angularDamping = 0,
       fixedRotation = false,
+      userData,
       ...props
     },
     ref
@@ -82,7 +84,8 @@ export const PhysicsBody = forwardRef<
           interpolate,
           onCollisionEnter,
           onCollisionExit,
-          onCollisionStay
+          onCollisionStay,
+          userData
         }
       })
 
