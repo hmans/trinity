@@ -28,15 +28,17 @@ export const Sploders = () => (
               mass={10}
               linearDamping={1}
               angularDamping={1}
-              onCollisionEnter={() => {
-                /* Spawn a splosion */
-                ECS.world.queue.createEntity({
-                  splosion: Tag,
-                  spawnAt: entity.transform?.position.clone()
-                })
+              onCollisionEnter={({ userData }) => {
+                if (userData?.player) {
+                  /* Spawn a splosion */
+                  ECS.world.queue.createEntity({
+                    splosion: Tag,
+                    spawnAt: entity.transform?.position.clone()
+                  })
 
-                /* And destroy myself */
-                ECS.world.queue.destroyEntity(entity)
+                  /* And destroy myself */
+                  ECS.world.queue.destroyEntity(entity)
+                }
               }}
             >
               <BodyThiefHack />
