@@ -53,7 +53,10 @@ export const Enemies = () => (
                 radius={1}
                 collisionGroup={Layers.Enemies}
                 collisionMask={
-                  Layers.Enemies | Layers.Player | Layers.Splosions
+                  Layers.Enemies |
+                  Layers.Player |
+                  Layers.Splosions |
+                  Layers.Default
                 }
               >
                 <Enemy.Instance />

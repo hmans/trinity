@@ -59,8 +59,9 @@ export const ECS = createECS<Entity>()
 export const spatialHashGrid = new BoundlessGrid(10)
 
 export const Layers = {
-  Player: 1,
-  Enemies: 2,
-  Pickups: 4,
-  Splosions: 8
+  Default: 1,
+  Player: 2,
+  Enemies: 4,
+  Pickups: 8,
+  Splosions: 16
 }

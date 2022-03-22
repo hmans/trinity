@@ -9,6 +9,7 @@ import { HUD } from "./HUD"
 import { PhysicsWorld } from "./lib/physics2d"
 import { PhysicsBody } from "./lib/physics2d/PhsyicsBody"
 import { BoxShape } from "./lib/physics2d/Shape"
+import { Layers } from "./state"
 import Systems from "./systems"
 
 const Level = () => {
@@ -28,25 +29,41 @@ const Level = () => {
         args={[120, 20, "#333", "#333"]}
       />
       <PhysicsBody position-x={-61} mass={0}>
-        <BoxShape size={[2, 124]} />
+        <BoxShape
+          size={[2, 124]}
+          collisionGroup={Layers.Default}
+          collisionMask={Layers.Player | Layers.Enemies}
+        />
         <T.Mesh material={material}>
           <T.BoxGeometry args={[2, 124, 2]} />
         </T.Mesh>
       </PhysicsBody>
       <PhysicsBody position-x={+61} mass={0}>
-        <BoxShape size={[2, 124]} />
+        <BoxShape
+          size={[2, 124]}
+          collisionGroup={Layers.Default}
+          collisionMask={Layers.Player | Layers.Enemies}
+        />
         <T.Mesh material={material}>
           <T.BoxGeometry args={[2, 124, 2]} />
         </T.Mesh>
       </PhysicsBody>
       <PhysicsBody position-y={-61} mass={0}>
-        <BoxShape size={[120, 2]} />
+        <BoxShape
+          size={[120, 2]}
+          collisionGroup={Layers.Default}
+          collisionMask={Layers.Player | Layers.Enemies}
+        />
         <T.Mesh material={material}>
           <T.BoxGeometry args={[124, 2, 2]} />
         </T.Mesh>
       </PhysicsBody>
       <PhysicsBody position-y={+61} mass={0}>
-        <BoxShape size={[120, 2]} />
+        <BoxShape
+          size={[120, 2]}
+          collisionGroup={Layers.Default}
+          collisionMask={Layers.Player | Layers.Enemies}
+        />
         <T.Mesh material={material}>
           <T.BoxGeometry args={[124, 2, 2]} />
         </T.Mesh>

@@ -24,7 +24,7 @@ export const Player = () => (
             <CircleShape
               radius={1}
               collisionGroup={Layers.Player}
-              collisionMask={Layers.Pickups | Layers.Enemies}
+              collisionMask={Layers.Pickups | Layers.Enemies | Layers.Default}
             >
               <T.Mesh>
                 <T.SphereGeometry />
