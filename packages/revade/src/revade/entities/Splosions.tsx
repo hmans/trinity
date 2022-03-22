@@ -26,6 +26,7 @@ export const Splosions = () => (
             onUpdate: (latest) => entity.transform?.scale.setScalar(latest)
           })
         }, [])
+
         return (
           <>
             <ECS.Component name="transform">
