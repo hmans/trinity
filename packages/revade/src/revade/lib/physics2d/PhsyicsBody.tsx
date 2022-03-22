@@ -41,39 +41,40 @@ export const PhysicsBody = forwardRef<
     const { world, ecs, bodies } = usePhysicsWorld()
     const group = useRef<Group>(null!)
 
-    const [body] = useState(
-      () =>
-        new p2.Body({
-          mass,
-          angularDamping,
-          damping: linearDamping,
-          fixedRotation
-        })
-    )
+    const [body, setBody] = useState<p2.Body>()
 
     useEffect(() => {
-      /* Initialize the body with the scene object's transform */
+      /* Get initial position */
       group.current.getWorldPosition(tmpVec3)
-      body.position = [tmpVec3.x, tmpVec3.y]
-      body.interpolatedPosition = [tmpVec3.x, tmpVec3.y]
 
-      /* Get current rotation */
+      /* Get initial rotation */
       group.current.getWorldQuaternion(tmpQuat)
       tmpEuler.setFromQuaternion(tmpQuat)
-      body.angle = tmpEuler.z
-      body.interpolatedAngle = tmpEuler.z
+
+      const body = new p2.Body({
+        mass,
+        angularDamping,
+        damping: linearDamping,
+        fixedRotation,
+        position: [tmpVec3.x, tmpVec3.y],
+        angle: tmpEuler.z
+      })
 
       world.addBody(body)
+      setBody(body)
 
       /* Remove body from world when onmounting */
       return () => {
         world.removeBody(body)
         bodies.delete(body)
+        setBody(undefined)
       }
     }, [])
 
     /* Create and destroy an ECS entity for this physics object */
     useEffect(() => {
+      if (!body) return
+
       const entity = ecs.createEntity({
         physics2d: {
           transform: group.current,
@@ -90,11 +91,13 @@ export const PhysicsBody = forwardRef<
       return () => {
         ecs.destroyEntity(entity)
       }
-    }, [])
+    }, [body])
 
     return (
       <T.Group ref={mergeRefs([group, ref])} {...props}>
-        <BodyContext.Provider value={body}>{children}</BodyContext.Provider>
+        {body && (
+          <BodyContext.Provider value={body}>{children}</BodyContext.Provider>
+        )}
       </T.Group>
     )
   }
