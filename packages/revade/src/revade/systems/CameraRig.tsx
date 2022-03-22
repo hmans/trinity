@@ -17,7 +17,7 @@ export const CameraRig = () => (
           .set(...camera.offset)
           .add(player.transform!.position)
 
-        transform.position.lerp(target, 0.2)
+        transform.position.lerp(target, 0.05)
       }
     }}
   </ArchetypeSystem>
