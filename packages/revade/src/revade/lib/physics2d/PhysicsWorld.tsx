@@ -46,39 +46,20 @@ export const PhysicsWorld: FC<{
   }, [world])
 
   /* Step the physics world */
-  useTicker("update", (dt) => {
-    /* FIXME: doing this in update is wroooong */
-
-    world.step(dt)
+  useTicker("physics", (dt) => {
+    world.step(1 / 50, dt, 10)
 
     for (const { physics2d } of ecs.entities) {
-      const { interpolate, previousPosition, previousAngle, body, transform } =
-        physics2d
+      const { interpolate, body, transform } = physics2d
 
       if (body.sleepState !== p2.Body.SLEEPING) {
-        const nextPosition = body.position
-        const nextAngle = body.angle
-
         if (interpolate) {
-          transform.position.set(
-            MathUtils.lerp(previousPosition[0], nextPosition[0], alpha),
-            MathUtils.lerp(previousPosition[1], nextPosition[1], alpha),
-            0
-          )
-
-          transform.rotation.set(
-            0,
-            0,
-            MathUtils.lerp(previousAngle, nextAngle, alpha)
-          )
+          transform.position.set(...body.interpolatedPosition, 0)
+          transform.rotation.set(0, 0, body.interpolatedAngle)
         } else {
-          transform.position.set(nextPosition[0], nextPosition[1], 0)
-          transform.rotation.set(0, 0, nextAngle)
+          transform.position.set(...body.position, 0)
+          transform.rotation.set(0, 0, body.angle)
         }
-
-        /* Remember previous state */
-        physics2d.previousPosition = nextPosition
-        physics2d.previousAngle = nextAngle
       }
     }
   })

@@ -39,6 +39,7 @@ export const Enemies = () => (
               linearDamping={0.99}
               angularDamping={0.8}
               fixedRotation
+              interpolate
             >
               <BodyThiefHack />
               <CircleShape radius={1}>

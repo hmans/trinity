@@ -9,9 +9,9 @@ import { useAnimationFrame } from "./useAnimationFrame"
 
 export type TickerStage =
   | "early"
+  | "physics"
   | "fixed"
   | "lateFixed"
-  | "postFixed"
   | "update"
   | "lateUpdate"
   | "render"
@@ -52,21 +52,23 @@ class TickerImpl {
       this.maxDelta ? Math.min(frameDelta, this.maxDelta) : frameDelta
     )
 
+    const dtScaled = dt * this.timeScale
+
     /* Run the normale update callbacks. */
-    this.execute("early", dt * this.timeScale)
+    this.execute("early", dtScaled)
+    this.execute("physics", dtScaled)
 
     /* Run fixed-steps callbacks, based on our internal accumulator. */
-    this.acc += dt * this.timeScale
+    this.acc += dtScaled
     while (this.acc >= this.fixedStep) {
       this.acc -= this.fixedStep
       this.execute("fixed", this.fixedStep)
       this.execute("lateFixed", this.fixedStep)
     }
-    this.execute("postFixed", 1 - this.acc / this.fixedStep)
 
-    this.execute("update", dt * this.timeScale)
-    this.execute("lateUpdate", dt * this.timeScale)
-    this.execute("render", dt * this.timeScale)
+    this.execute("update", dtScaled)
+    this.execute("lateUpdate", dtScaled)
+    this.execute("render", dtScaled)
   }
 
   private execute(stage: TickerStage, dt: number) {

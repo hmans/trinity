@@ -55,21 +55,30 @@ export const PhysicsBody = forwardRef<
       /* Initialize the body with the scene object's transform */
       group.current.getWorldPosition(tmpVec3)
       body.position = [tmpVec3.x, tmpVec3.y]
+      body.interpolatedPosition = [tmpVec3.x, tmpVec3.y]
 
       /* Get current rotation */
       group.current.getWorldQuaternion(tmpQuat)
       tmpEuler.setFromQuaternion(tmpQuat)
       body.angle = tmpEuler.z
+      body.interpolatedAngle = tmpEuler.z
 
       world.addBody(body)
 
+      /* Remove body from world when onmounting */
+      return () => {
+        world.removeBody(body)
+        bodies.delete(body)
+      }
+    }, [])
+
+    /* Create and destroy an ECS entity for this physics object */
+    useEffect(() => {
       const entity = ecs.createEntity({
         physics2d: {
           transform: group.current,
           body,
           interpolate,
-          previousPosition: body.position,
-          previousAngle: body.angle,
           onCollisionEnter,
           onCollisionExit,
           onCollisionStay
@@ -78,17 +87,9 @@ export const PhysicsBody = forwardRef<
 
       bodies.set(body, entity)
 
-      /* Remove body from world when onmounting */
       return () => {
-        world.removeBody(body)
-        bodies.delete(body)
         ecs.destroyEntity(entity)
       }
-    }, [])
-
-    /* Create and destroy an ECS entity for this physics object */
-    useEffect(() => {
-      return () => {}
     }, [])
 
     return (

@@ -7,8 +7,6 @@ export type Entity = {
     body: p2.Body
     transform: Object3D
     interpolate: boolean
-    previousPosition: [number, number]
-    previousAngle: number
     onCollisionEnter?: Function
     onCollisionExit?: Function
     onCollisionStay?: Function

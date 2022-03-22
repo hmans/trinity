@@ -1,15 +1,15 @@
 import T, { Engine, useManagedThreeObject, View } from "@hmans/trinity"
+import { MeshStandardMaterial } from "three"
+import { Camera } from "./entities/Camera"
 import { Enemies } from "./entities/Enemies"
+import { Player } from "./entities/Player"
+import { Sploders } from "./entities/Sploders"
+import { Splosions } from "./entities/Splosions"
 import { HUD } from "./HUD"
 import { PhysicsWorld } from "./lib/physics2d"
-import { Player } from "./entities/Player"
-import Systems from "./systems"
-import { Camera } from "./entities/Camera"
-import { Sploders } from "./entities/Sploders"
 import { PhysicsBody } from "./lib/physics2d/PhsyicsBody"
 import { BoxShape } from "./lib/physics2d/Shape"
-import { Material, MeshStandardMaterial } from "three"
-import { Splosions } from "./entities/Splosions"
+import Systems from "./systems"
 
 const Level = () => {
   const material = useManagedThreeObject(
