@@ -1,12 +1,11 @@
 import THREE, { makeInstanceComponents } from "@hmans/trinity"
-import { animate, easeIn, easeOut } from "popmotion"
+import { easeOut } from "popmotion"
 import { plusMinus } from "randomish"
-import { useEffect } from "react"
 import { Vector3 } from "three"
 import { BodyThiefHack } from "../BodyThiefHack"
+import { Animation } from "../lib/Animation"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
 import { CircleShape } from "../lib/physics2d/Shape"
-import { tmpQuaternion } from "../lib/temps"
 import { ECS } from "../state"
 
 const Enemy = makeInstanceComponents()
@@ -33,48 +32,41 @@ export const Enemies = () => (
     </Enemy.Root>
 
     <ECS.Collection tag="enemy" initial={0} memoize>
-      {(entity) => {
-        useEffect(() => {
-          animate({
-            from: 0,
-            to: 1,
-            ease: easeOut,
-            duration: 500,
-            onUpdate: (latest) => entity.transform!.scale.setScalar(latest)
-          })
-        }, [])
+      {(entity) => (
+        <>
+          <Animation from={0} to={1} ease={easeOut} duration={500}>
+            {(v) => entity.transform!.scale.setScalar(v)}
+          </Animation>
 
-        return (
-          <>
-            <ECS.Component name="transform">
-              <PhysicsBody
-                position={getSpawnPosition()}
-                linearDamping={0.99}
-                angularDamping={0.8}
-                fixedRotation
-                interpolate
-              >
-                <BodyThiefHack />
-                <CircleShape radius={1}>
-                  <Enemy.Instance />
-                </CircleShape>
-              </PhysicsBody>
-            </ECS.Component>
+          <ECS.Component name="transform">
+            <PhysicsBody
+              position={getSpawnPosition()}
+              linearDamping={0.99}
+              angularDamping={0.8}
+              scale={0}
+              fixedRotation
+              interpolate
+            >
+              <BodyThiefHack />
+              <CircleShape radius={1}>
+                <Enemy.Instance />
+              </CircleShape>
+            </PhysicsBody>
+          </ECS.Component>
 
-            <ECS.Component
-              name="attraction"
-              data={{ factor: 8000, targets: [] }}
-            />
+          <ECS.Component
+            name="attraction"
+            data={{ factor: 8000, targets: [] }}
+          />
 
-            {/*
+          {/*
           <ECS.Component
             name="wobble"
             data={{ speed: between(0.5, 1.5), t: number(Math.PI * 2) }}
           />
           */}
-          </>
-        )
-      }}
+        </>
+      )}
     </ECS.Collection>
   </>
 )
