@@ -3,6 +3,7 @@ import { FC, useEffect, useMemo } from "react"
 import { useBody } from "./BodyContext"
 
 type ShapeProps = {
+  sensor?: boolean
   collisionGroup?: number
   collisionMask?: number
 }
@@ -11,6 +12,7 @@ export const Shape: FC<ShapeProps & { shape: p2.Shape }> = ({
   children,
   collisionGroup,
   collisionMask,
+  sensor,
   shape
 }) => {
   const body = useBody()
@@ -18,6 +20,7 @@ export const Shape: FC<ShapeProps & { shape: p2.Shape }> = ({
   useEffect(() => {
     shape.collisionGroup = collisionGroup || 1
     shape.collisionMask = collisionMask || 1
+    shape.sensor = !!sensor
 
     body.addShape(shape)
     return () => void body.removeShape(shape)

@@ -23,7 +23,7 @@ export const Splosions = () => (
             to: [10, 15, 0],
             ease: [easeOut, easeIn],
             offset: [0, 0.1, 1],
-            duration: 2000,
+            duration: 1000,
             onUpdate: (latest) => entity.transform?.scale.setScalar(latest)
           })
         }, [])
@@ -41,10 +41,12 @@ export const Splosions = () => (
                 }}
               >
                 <CircleShape
-                  radius={15}
+                  radius={10}
                   collisionGroup={Layers.Splosions}
                   collisionMask={Layers.Enemies}
+                  sensor
                 />
+
                 <Splosion.Instance />
               </PhysicsBody>
             </ECS.Component>
