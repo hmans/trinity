@@ -1,5 +1,5 @@
 import { makeInstanceComponents } from "@hmans/trinity"
-import { ECS, Layers } from "../state"
+import { ECS, Entity, Layers } from "../state"
 import T from "@hmans/trinity"
 import { useEffect } from "react"
 import { animate, easeIn, easeInOut, easeOut } from "popmotion"
@@ -31,24 +31,9 @@ export const Splosions = () => (
         return (
           <>
             <ECS.Component name="transform">
-              <PhysicsBody
-                userData={entity}
-                position={entity.spawnAt ?? [0, 0, 0]}
-                scale={10}
-                mass={0}
-                onCollisionEnter={({ userData: other }) => {
-                  if (other?.enemy) explodeEnemy(other)
-                }}
-              >
-                <CircleShape
-                  radius={10}
-                  collisionGroup={Layers.Splosions}
-                  collisionMask={Layers.Enemies}
-                  sensor
-                />
-
-                <Splosion.Instance />
-              </PhysicsBody>
+              <Splosion.Instance position={entity.spawnAt ?? [0, 0, 0]}>
+                <SplosionForce entity={entity} />
+              </Splosion.Instance>
             </ECS.Component>
 
             <ECS.Component
@@ -63,4 +48,38 @@ export const Splosions = () => (
       }}
     </ECS.Collection>
   </>
+)
+
+const SplosionForce = ({ entity }: { entity: Entity }) => (
+  <ECS.Entity>
+    {(forceEntity) => (
+      <>
+        <ECS.Component name="transform">
+          <PhysicsBody
+            userData={entity}
+            scale={10}
+            mass={0}
+            onCollisionEnter={({ userData: other }) => {
+              if (other?.enemy) explodeEnemy(other)
+            }}
+          >
+            <CircleShape
+              radius={10}
+              collisionGroup={Layers.Splosions}
+              collisionMask={Layers.Enemies}
+              sensor
+            />
+          </PhysicsBody>
+        </ECS.Component>
+
+        <ECS.Component
+          name="auto"
+          data={{
+            delay: 0.2,
+            callback: () => ECS.world.queue.destroyEntity(forceEntity)
+          }}
+        />
+      </>
+    )}
+  </ECS.Entity>
 )
