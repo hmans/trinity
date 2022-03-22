@@ -57,3 +57,10 @@ export type Entity = {
 export const ECS = createECS<Entity>()
 
 export const spatialHashGrid = new BoundlessGrid(10)
+
+export const Layers = {
+  Player: 1,
+  Enemies: 2,
+  Pickups: 4,
+  Splosions: 8
+}

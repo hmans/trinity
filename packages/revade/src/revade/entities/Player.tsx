@@ -3,7 +3,7 @@ import { BodyThiefHack } from "../BodyThiefHack"
 import { controller } from "../controller"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
 import { BoxShape, CircleShape } from "../lib/physics2d/Shape"
-import { ECS } from "../state"
+import { ECS, Layers } from "../state"
 
 export const Player = () => (
   <ECS.Entity>
@@ -21,7 +21,11 @@ export const Player = () => (
             userData={entity}
           >
             <BodyThiefHack />
-            <CircleShape radius={1}>
+            <CircleShape
+              radius={1}
+              collisionGroup={Layers.Player}
+              collisionMask={Layers.Pickups | Layers.Enemies}
+            >
               <T.Mesh>
                 <T.SphereGeometry />
                 <T.MeshStandardMaterial

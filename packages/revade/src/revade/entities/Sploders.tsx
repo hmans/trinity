@@ -3,7 +3,7 @@ import { Tag } from "miniplex"
 import { BodyThiefHack } from "../BodyThiefHack"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
 import { CircleShape } from "../lib/physics2d/Shape"
-import { ECS } from "../state"
+import { ECS, Layers } from "../state"
 
 const Sploder = makeInstanceComponents()
 
@@ -42,7 +42,11 @@ export const Sploders = () => (
               }}
             >
               <BodyThiefHack />
-              <CircleShape radius={3}>
+              <CircleShape
+                radius={3}
+                collisionGroup={Layers.Pickups}
+                collisionMask={Layers.Player}
+              >
                 <Sploder.Instance scale={3} />
               </CircleShape>
             </PhysicsBody>

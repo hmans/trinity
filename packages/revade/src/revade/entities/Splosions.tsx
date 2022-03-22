@@ -1,5 +1,5 @@
 import { makeInstanceComponents } from "@hmans/trinity"
-import { ECS } from "../state"
+import { ECS, Layers } from "../state"
 import T from "@hmans/trinity"
 import { useEffect } from "react"
 import { animate, easeIn, easeInOut, easeOut } from "popmotion"
@@ -40,7 +40,11 @@ export const Splosions = () => (
                   if (other?.enemy) explodeEnemy(other)
                 }}
               >
-                <CircleShape radius={15} />
+                <CircleShape
+                  radius={15}
+                  collisionGroup={Layers.Splosions}
+                  collisionMask={Layers.Enemies}
+                />
                 <Splosion.Instance />
               </PhysicsBody>
             </ECS.Component>

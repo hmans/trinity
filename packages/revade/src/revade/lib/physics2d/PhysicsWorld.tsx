@@ -2,8 +2,6 @@ import { useTicker } from "@hmans/trinity"
 import * as miniplex from "miniplex"
 import p2 from "p2-es"
 import { createContext, FC, useContext, useEffect, useState } from "react"
-import { MathUtils, Vector3 } from "three"
-import { tmpVector3 } from "../temps"
 import { Entity } from "./Entity"
 
 const PhysicsWorldContext = createContext<{

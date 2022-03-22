@@ -6,7 +6,7 @@ import { BodyThiefHack } from "../BodyThiefHack"
 import { Animation } from "../lib/Animation"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
 import { CircleShape } from "../lib/physics2d/Shape"
-import { ECS } from "../state"
+import { ECS, Layers } from "../state"
 
 const Enemy = makeInstanceComponents()
 
@@ -49,7 +49,13 @@ export const Enemies = () => (
               interpolate
             >
               <BodyThiefHack />
-              <CircleShape radius={1}>
+              <CircleShape
+                radius={1}
+                collisionGroup={Layers.Enemies}
+                collisionMask={
+                  Layers.Enemies | Layers.Player | Layers.Splosions
+                }
+              >
                 <Enemy.Instance />
               </CircleShape>
             </PhysicsBody>
