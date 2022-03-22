@@ -5,7 +5,10 @@ import { ECS } from "../state"
 const players = ECS.world.archetype("player", "transform")
 
 export const Attraction = () => (
-  <ArchetypeSystem archetype={["attraction", "transform", "body"]}>
+  <ArchetypeSystem
+    stage="fixed"
+    archetype={["attraction", "transform", "body"]}
+  >
     {(entities, dt) => {
       for (const { attraction, transform, body } of entities) {
         /* Find targets (for now) */
@@ -21,7 +24,7 @@ export const Attraction = () => (
             .divideScalar(attraction.targets.length)
             .sub(transform.position)
             .normalize()
-            .multiplyScalar(dt * attraction.factor)
+            .multiplyScalar(attraction.factor)
 
           body.applyForce([force.x, force.y])
         }

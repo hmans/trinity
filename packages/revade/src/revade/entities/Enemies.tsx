@@ -68,10 +68,7 @@ export const Enemies = () => (
             </PhysicsBody>
           </ECS.Component>
 
-          <ECS.Component
-            name="attraction"
-            data={{ factor: 5000, targets: [] }}
-          />
+          <ECS.Component name="attraction" data={{ factor: 80, targets: [] }} />
 
           {/*
           <ECS.Component
