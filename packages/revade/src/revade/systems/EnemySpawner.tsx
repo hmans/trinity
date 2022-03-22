@@ -3,7 +3,7 @@ import { Tag } from "miniplex"
 import { useRef } from "react"
 import { ECS } from "../state"
 
-export const EnemySpawner = ({ interval = 1 }) => {
+export const EnemySpawner = ({ interval = 0.5 }) => {
   const cooldown = useRef(interval)
 
   useTicker("update", (dt) => {

@@ -66,7 +66,7 @@ export const Enemies = () => (
 
           <ECS.Component
             name="attraction"
-            data={{ factor: 8000, targets: [] }}
+            data={{ factor: 5000, targets: [] }}
           />
 
           {/*
