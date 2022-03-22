@@ -4,6 +4,7 @@ import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from "react"
 import mergeRefs from "react-merge-refs"
 import { Euler, Group, Quaternion, Vector3 } from "three"
 import { BodyContext } from "./BodyContext"
+import { CollisionCallback } from "./Entity"
 import { usePhysicsWorld } from "./PhysicsWorld"
 
 const tmpVec3 = new Vector3()
@@ -18,9 +19,9 @@ export const PhysicsBody = forwardRef<
     linearDamping?: number
     angularDamping?: number
     fixedRotation?: boolean
-    onCollisionEnter?: Function
-    onCollisionExit?: Function
-    onCollisionStay?: Function
+    onCollisionEnter?: CollisionCallback
+    onCollisionExit?: CollisionCallback
+    onCollisionStay?: CollisionCallback
     userData?: any
   }
 >(
@@ -84,9 +85,9 @@ export const PhysicsBody = forwardRef<
           interpolate,
           onCollisionEnter,
           onCollisionExit,
-          onCollisionStay,
-          userData
-        }
+          onCollisionStay
+        },
+        userData
       })
 
       bodies.set(body, entity)

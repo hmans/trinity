@@ -16,7 +16,7 @@ export const PhysicsWorld: FC<{
   gravity?: [number, number]
 }> = ({ children, gravity = [0, -9.81] }) => {
   const [ecs] = useState(() => new miniplex.World<Entity>())
-  const [bodies] = useState(() => new Map())
+  const [bodies] = useState(() => new Map<p2.Body, Entity>())
 
   const [world] = useState(
     () =>
@@ -27,16 +27,16 @@ export const PhysicsWorld: FC<{
 
   useEffect(() => {
     world.on("beginContact", (e: p2.BeginContactEvent) => {
-      const entityA = bodies.get(e.bodyA)
-      const entityB = bodies.get(e.bodyB)
+      const entityA = bodies.get(e.bodyA)!
+      const entityB = bodies.get(e.bodyB)!
 
       entityA?.physics2d.onCollisionEnter?.(entityB)
       entityB?.physics2d.onCollisionEnter?.(entityA)
     })
 
     world.on("endContact", (e: p2.EndContactEvent) => {
-      const entityA = bodies.get(e.bodyA)
-      const entityB = bodies.get(e.bodyB)
+      const entityA = bodies.get(e.bodyA)!
+      const entityB = bodies.get(e.bodyB)!
 
       entityA?.physics2d.onCollisionExit?.(entityB)
       entityB?.physics2d.onCollisionExit?.(entityA)

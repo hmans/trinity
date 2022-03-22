@@ -36,9 +36,8 @@ export const Splosions = () => (
                 position={entity.spawnAt ?? [0, 0, 0]}
                 scale={10}
                 mass={0}
-                onCollisionEnter={(other: any) => {
-                  const otherEntity = other.physics2d.userData
-                  if (otherEntity?.enemy) explodeEnemy(otherEntity)
+                onCollisionEnter={({ userData: other }) => {
+                  if (other?.enemy) explodeEnemy(other)
                 }}
               >
                 <CircleShape radius={15} />
