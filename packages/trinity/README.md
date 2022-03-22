@@ -14,10 +14,10 @@
 Big Features:
 
 - [x] Ticker
-- [ ] Custom cameras
-- [ ] Events
-- [ ] On-Demand Rendering everywhere
+- [x] Custom cameras
+- [ ] Pointer Event Handling
+- [ ] On-Demand Rendering everywhere?
 
 Misc:
 
-- [ ] Rename "Scene" to eg. "Layer"?
+- [x] Rename "Scene" to eg. "View"
