@@ -36,9 +36,6 @@ export const Enemies = () => (
               scale={0}
               fixedRotation
               interpolate
-              onCollisionEnter={({ userData: other }) => {
-                if (other?.player) explodePlayer(other)
-              }}
             >
               <BodyThiefHack />
               <CircleShape
@@ -50,6 +47,9 @@ export const Enemies = () => (
                   Layers.Splosions |
                   Layers.Default
                 }
+                onBeginContact={({ userData: other }) => {
+                  if (other?.player) explodePlayer(other)
+                }}
               >
                 <Enemy.Instance />
               </CircleShape>

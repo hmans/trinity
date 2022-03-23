@@ -1,13 +1,15 @@
 import p2 from "p2-es"
 import { FC, useEffect, useMemo } from "react"
 import { useBody } from "./BodyContext"
+import { Entity } from "./Entity"
+import { usePhysicsWorld } from "./PhysicsWorld"
 
 type ShapeProps = {
   sensor?: boolean
   collisionGroup?: number
   collisionMask?: number
-  onBeginContact?: (otherShape: p2.Shape) => void
-  onEndContact?: (otherShape: p2.Shape) => void
+  onBeginContact?: (entity: Entity) => void
+  onEndContact?: (entity: Entity) => void
 }
 
 export const Shape: FC<ShapeProps & { shape: p2.Shape }> = ({
@@ -20,6 +22,7 @@ export const Shape: FC<ShapeProps & { shape: p2.Shape }> = ({
   shape
 }) => {
   const body = useBody()
+  const { bodies } = usePhysicsWorld()
 
   useEffect(() => {
     shape.collisionGroup = collisionGroup || 1
@@ -35,8 +38,11 @@ export const Shape: FC<ShapeProps & { shape: p2.Shape }> = ({
     if (!onBeginContact) return
 
     body.world.on("beginContact", (e: p2.BeginContactEvent) => {
-      if (e.shapeA === shape) onBeginContact(e.shapeB)
-      else if (e.shapeB === shape) onBeginContact(e.shapeA)
+      const entityA = bodies.get(e.shapeA.body)
+      const entityB = bodies.get(e.shapeB.body)
+
+      if (e.shapeA === shape && entityB) onBeginContact(entityB)
+      if (e.shapeB === shape && entityA) onBeginContact(entityA)
     })
   })
 
@@ -44,8 +50,11 @@ export const Shape: FC<ShapeProps & { shape: p2.Shape }> = ({
     if (!onEndContact) return
 
     body.world.on("endContact", (e: p2.EndContactEvent) => {
-      if (e.shapeA === shape) onEndContact(e.shapeB)
-      else if (e.shapeB === shape) onEndContact(e.shapeA)
+      const entityA = bodies.get(e.shapeA.body)
+      const entityB = bodies.get(e.shapeB.body)
+
+      if (e.shapeA === shape && entityB) onEndContact(entityB)
+      if (e.shapeB === shape && entityA) onEndContact(entityA)
     })
   })
 

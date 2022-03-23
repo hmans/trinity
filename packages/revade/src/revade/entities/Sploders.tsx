@@ -29,15 +29,16 @@ export const Sploders = () => (
               mass={10}
               linearDamping={1}
               angularDamping={1}
-              onCollisionEnter={({ userData }) => {
-                if (userData?.player) explodeSploder(entity)
-              }}
             >
               <BodyThiefHack />
               <CircleShape
                 radius={3}
                 collisionGroup={Layers.Pickups}
                 collisionMask={Layers.Player}
+                onBeginContact={({ userData }) => {
+                  4
+                  if (userData?.player) explodeSploder(entity)
+                }}
               >
                 <Sploder.Instance scale={3} />
               </CircleShape>

@@ -10,6 +10,7 @@ const createECSHelper = () => createECS<Entity>()
 const PhysicsWorldContext = createContext<{
   world: p2.World
   ecs: ReturnType<typeof createECSHelper>
+  bodies: Map<p2.Body, Entity>
 }>(null!)
 
 export const PhysicsWorld: FC<{
@@ -23,6 +24,8 @@ export const PhysicsWorld: FC<{
         gravity
       })
   )
+
+  const [bodies] = useState(() => new Map<p2.Body, Entity>())
 
   const entities = ecs.world.archetype("body", "transform", "options").entities
 
@@ -45,7 +48,7 @@ export const PhysicsWorld: FC<{
   })
 
   return (
-    <PhysicsWorldContext.Provider value={{ world, ecs }}>
+    <PhysicsWorldContext.Provider value={{ world, ecs, bodies }}>
       {children}
     </PhysicsWorldContext.Provider>
   )

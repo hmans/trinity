@@ -34,7 +34,7 @@ export const PhysicsBody = forwardRef<
     },
     ref
   ) => {
-    const { world, ecs } = usePhysicsWorld()
+    const { world, ecs, bodies } = usePhysicsWorld()
     const group = useRef<Group>(null!)
 
     const [body] = useState<p2.Body>(
@@ -60,6 +60,9 @@ export const PhysicsBody = forwardRef<
       world.addBody(body)
       ecs.world.addComponent(entity, "transform", group.current)
 
+      /* Map body to entity */
+      bodies.set(body, entity)
+
       /* Get initial position */
       group.current.getWorldPosition(tmpVec3)
       body.position = [tmpVec3.x, tmpVec3.y]
@@ -72,6 +75,7 @@ export const PhysicsBody = forwardRef<
       return () => {
         ecs.world.destroyEntity(entity)
         world.removeBody(body)
+        bodies.delete(body)
       }
     }, [body])
 

@@ -17,20 +17,17 @@ export const Player = () => (
             fixedRotation
             interpolate
             userData={entity}
-            onCollisionEnter={({ userData: other }) => {
-              if (other.pickup) {
-                console.log("BLING BLING")
-                ECS.world.queue.destroyEntity(other)
-              }
-            }}
           >
             <BodyThiefHack />
             <CircleShape
               radius={1}
               collisionGroup={Layers.Player}
               collisionMask={Layers.Pickups | Layers.Enemies | Layers.Default}
-              onBeginContact={(other) => {
-                console.log(other)
+              onBeginContact={({ userData: other }) => {
+                if (other && other.pickup) {
+                  console.log("BLING BLING")
+                  ECS.world.queue.destroyEntity(other)
+                }
               }}
             >
               <T.Mesh>
