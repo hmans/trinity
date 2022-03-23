@@ -70,7 +70,7 @@ export const PhysicsBody = forwardRef<
     useLayoutEffect(() => {
       if (!body) return
 
-      const entity = ecs.createEntity({
+      const entity = ecs.world.createEntity({
         physics2d: {
           transform: group.current,
           body,
@@ -80,7 +80,7 @@ export const PhysicsBody = forwardRef<
       })
 
       return () => {
-        ecs.destroyEntity(entity)
+        ecs.world.destroyEntity(entity)
       }
     }, [body])
 

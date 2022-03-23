@@ -1,18 +1,21 @@
 import { useTicker } from "@hmans/trinity"
-import * as miniplex from "miniplex"
+import { createECS } from "miniplex/react"
 import p2 from "p2-es"
 import { createContext, FC, useContext, useEffect, useState } from "react"
 import { Entity } from "./Entity"
 
+/* https://stackoverflow.com/a/62620115 */
+const createECSHelper = () => createECS<Entity>()
+
 const PhysicsWorldContext = createContext<{
   world: p2.World
-  ecs: miniplex.World<Entity>
+  ecs: ReturnType<typeof createECSHelper>
 }>(null!)
 
 export const PhysicsWorld: FC<{
   gravity?: [number, number]
 }> = ({ children, gravity = [0, -9.81] }) => {
-  const [ecs] = useState(() => new miniplex.World<Entity>())
+  const [ecs] = useState(() => createECS<Entity>())
 
   const [world] = useState(
     () =>
@@ -34,7 +37,7 @@ export const PhysicsWorld: FC<{
   useTicker("physics", (dt) => {
     world.step(1 / 50, dt, 10)
 
-    for (const { physics2d } of ecs.entities) {
+    for (const { physics2d } of ecs.world.entities) {
       const { interpolate, body, transform } = physics2d
 
       if (body.sleepState !== p2.Body.SLEEPING) {
