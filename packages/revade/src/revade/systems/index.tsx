@@ -1,6 +1,7 @@
 import System from "../lib/System"
 import { ECS } from "../state"
 import { Attraction } from "./Attraction"
+import { AttractPickups } from "./AttractPickups"
 import { AutoSystem } from "./AutoSystem"
 import { Avoidance } from "./Avoidance"
 import { CameraRig } from "./CameraRig"
@@ -16,6 +17,7 @@ const Systems = () => (
     <SploderSpawner />
     <PlayerControl />
     <Attraction />
+    <AttractPickups />
     <Avoidance />
     <Velocity />
     <Wobble />

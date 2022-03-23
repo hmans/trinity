@@ -15,8 +15,6 @@ export const Game = () => (
   <>
     <HUD />
     <Engine>
-      <Systems />
-
       <View>
         <T.AmbientLight intensity={0.3} />
         <T.DirectionalLight intensity={0.2} position={[10, 10, 10]} />
@@ -32,6 +30,8 @@ export const Game = () => (
             <Camera />
 
             <EnemySpawner />
+
+            <Systems />
           </PhysicsWorld>
         </T.Group>
       </View>
