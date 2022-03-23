@@ -38,8 +38,7 @@ export const PhysicsWorld: FC<{
   useTicker("physics", (dt) => {
     world.step(1 / 50, dt, 10)
 
-    for (const entity of entities) {
-      const { body, transform, options } = entity
+    for (const { body, transform, options } of entities) {
       if (body.sleepState !== p2.Body.SLEEPING) {
         const position = options.interpolate
           ? body.interpolatedPosition
