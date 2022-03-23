@@ -1,11 +1,10 @@
-import { makeInstanceComponents } from "@hmans/trinity"
-import { ECS, Entity, Layers } from "../state"
-import T from "@hmans/trinity"
+import T, { makeInstanceComponents } from "@hmans/trinity"
+import { animate, easeIn, easeOut } from "popmotion"
 import { useEffect } from "react"
-import { animate, easeIn, easeInOut, easeOut } from "popmotion"
+import { BodyThiefHack } from "../BodyThiefHack"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
 import { CircleShape } from "../lib/physics2d/Shape"
-import { explodeEnemy } from "../actions/explodeEnemy"
+import { ECS, Layers } from "../state"
 
 const Splosion = makeInstanceComponents()
 
@@ -18,6 +17,7 @@ export const Splosions = () => (
 
     <ECS.Collection tag="splosion" initial={0} memoize>
       {(entity) => {
+        /* Animate explosion */
         useEffect(() => {
           animate({
             to: [10, 15, 0],
@@ -43,6 +43,7 @@ export const Splosions = () => (
                   collisionMask={Layers.Enemies}
                   sensor
                 />
+                <BodyThiefHack />
                 <Splosion.Instance />
               </PhysicsBody>
             </ECS.Component>

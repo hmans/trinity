@@ -30,9 +30,7 @@ export const Sploders = () => (
               linearDamping={1}
               angularDamping={1}
               onCollisionEnter={({ userData }) => {
-                if (userData?.player) {
-                  explodeSploder(entity)
-                }
+                if (userData?.player) explodeSploder(entity)
               }}
             >
               <BodyThiefHack />
