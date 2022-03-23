@@ -1,5 +1,6 @@
-import T, { useManagedThreeObject } from "@hmans/trinity"
-import { MeshStandardMaterial } from "three"
+import T, { useManagedThreeObject, useTicker } from "@hmans/trinity"
+import { useCallback, useRef } from "react"
+import { Group, MeshStandardMaterial } from "three"
 import { PhysicsBody } from "./lib/physics2d/PhsyicsBody"
 import { BoxShape } from "./lib/physics2d/Shape"
 import { Layers } from "./state"
@@ -14,8 +15,17 @@ export const Level = () => {
       })
   )
 
+  const group = useRef<Group>(null!)
+
+  // useTicker("fixed", () => {
+  //   if (group.current) {
+  //     group.current.rotation.z += 0.01
+  //     /* TODO: make the physics engine update its bodies transforms :b */
+  //   }
+  // })
+
   return (
-    <T.Group rotation-z={0.1} name="level">
+    <T.Group ref={group} rotation-z={0.1} name="level">
       <T.GridHelper
         rotation={[Math.PI / 2, 0, 0]}
         args={[120, 20, "#333", "#333"]}

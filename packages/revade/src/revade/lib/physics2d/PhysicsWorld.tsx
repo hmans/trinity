@@ -36,6 +36,17 @@ export const PhysicsWorld: FC<{
 
   /* Step the physics world */
   useTicker("physics", (dt) => {
+    // for (const { body, transform, options } of entities) {
+    //   /* Get initial position */
+    //   transform.getWorldPosition(tmpVector3)
+    //   body.position = [tmpVector3.x, tmpVector3.y]
+
+    //   /* Get initial rotation */
+    //   transform.getWorldQuaternion(tmpQuat)
+    //   tmpEuler.setFromQuaternion(tmpQuat)
+    //   body.angle = tmpEuler.z
+    // }
+
     world.step(1 / 50, dt, 10)
 
     for (const { body, transform, options } of entities) {
