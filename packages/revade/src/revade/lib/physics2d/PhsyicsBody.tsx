@@ -37,20 +37,28 @@ export const PhysicsBody = forwardRef<
     const { world, ecs } = usePhysicsWorld()
     const group = useRef<Group>(null!)
 
-    const [body] = useState<p2.Body>(() => {
-      const body = new p2.Body({
-        mass,
-        angularDamping,
-        damping: linearDamping,
-        fixedRotation
-      })
+    const [body] = useState<p2.Body>(
+      () =>
+        new p2.Body({
+          mass,
+          angularDamping,
+          damping: linearDamping,
+          fixedRotation
+        })
+    )
 
+    /* Create and destroy an ECS entity for this physics object */
+    useLayoutEffect(() => {
       world.addBody(body)
 
-      return body
-    })
+      /* Create entity */
+      const entity = ecs.world.createEntity({
+        body,
+        transform: group.current,
+        options: { interpolate },
+        userData
+      })
 
-    useLayoutEffect(() => {
       /* Get initial position */
       group.current.getWorldPosition(tmpVec3)
       body.position = [tmpVec3.x, tmpVec3.y]
@@ -60,25 +68,9 @@ export const PhysicsBody = forwardRef<
       tmpEuler.setFromQuaternion(tmpQuat)
       body.angle = tmpEuler.z
 
-      /* Remove body from world when onmounting */
-      return () => {
-        world.removeBody(body)
-      }
-    }, [])
-
-    /* Create and destroy an ECS entity for this physics object */
-    useLayoutEffect(() => {
-      if (!body) return
-
-      const entity = ecs.world.createEntity({
-        body,
-        transform: group.current,
-        options: { interpolate },
-        userData
-      })
-
       return () => {
         ecs.world.destroyEntity(entity)
+        world.removeBody(body)
       }
     }, [body])
 
