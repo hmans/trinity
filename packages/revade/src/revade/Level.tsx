@@ -8,8 +8,8 @@ export const Level = () => {
   const material = useManagedThreeObject(
     () =>
       new MeshStandardMaterial({
-        color: "green",
-        emissive: "green",
+        color: "hotpink",
+        emissive: "hotpink",
         emissiveIntensity: 0.7
       })
   )
