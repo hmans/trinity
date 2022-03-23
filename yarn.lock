@@ -2093,6 +2093,11 @@ miniplex@^0.7.1:
   resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.7.1.tgz#0cb9bb334af9f3c999af0879ae16872ea0aff0ae"
   integrity sha512-kHYlII9qsiOiMTgSGSWLuReKWmAI5ZAnK/ehpax8jefmtcPSCvFl0TfKTj1IZXBgL/eTlNYHd+r6gNtfHRITPA==
 
+miniplex@^0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.7.2.tgz#c0b759b21459de397006c47a072aa63dca469f07"
+  integrity sha512-xewG/5wleeA4rJzNqHCRuOAoQm24gNALPYAIpt+GlTT/jaDOZM2QJCOCXRE37dCWkTSE3tMGQJrGJqaQQfJTsA==
+
 ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
