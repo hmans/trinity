@@ -25,7 +25,11 @@ export const EnemySpawner = () => (
           spawner.t += spawner.interval
 
           getSpawnPosition(position)
-          while (position.distanceTo(players[0].transform!.position) < 50) {
+          while (
+            players[0] &&
+            players[0].transform &&
+            position.distanceTo(players[0].transform.position) < 50
+          ) {
             getSpawnPosition(position)
           }
 
