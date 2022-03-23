@@ -3,9 +3,9 @@ import p2 from "p2-es"
 import { Object3D } from "three"
 
 export type Entity = {
-  physics2d: {
-    body: p2.Body
-    transform: Object3D
+  transform: Object3D
+  body: p2.Body
+  options: {
     interpolate: boolean
   }
   userData?: any

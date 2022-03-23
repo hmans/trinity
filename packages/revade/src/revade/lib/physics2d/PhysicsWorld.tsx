@@ -24,15 +24,16 @@ export const PhysicsWorld: FC<{
       })
   )
 
+  const entities = ecs.world.archetype("body", "transform", "options").entities
+
   /* Step the physics world */
   useTicker("physics", (dt) => {
     world.step(1 / 50, dt, 10)
 
-    for (const { physics2d } of ecs.world.entities) {
-      const { interpolate, body, transform } = physics2d
-
+    for (const entity of entities) {
+      const { body, transform, options } = entity
       if (body.sleepState !== p2.Body.SLEEPING) {
-        if (interpolate) {
+        if (options.interpolate) {
           transform.position.set(...body.interpolatedPosition, 0)
           transform.rotation.set(0, 0, body.interpolatedAngle)
         } else {

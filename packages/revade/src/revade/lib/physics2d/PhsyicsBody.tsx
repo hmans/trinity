@@ -1,6 +1,6 @@
 import T, { ReactorComponentProps } from "@hmans/trinity"
 import p2 from "p2-es"
-import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { forwardRef, useLayoutEffect, useRef, useState } from "react"
 import mergeRefs from "react-merge-refs"
 import { Euler, Group, Quaternion, Vector3 } from "three"
 import { BodyContext } from "./BodyContext"
@@ -71,11 +71,9 @@ export const PhysicsBody = forwardRef<
       if (!body) return
 
       const entity = ecs.world.createEntity({
-        physics2d: {
-          transform: group.current,
-          body,
-          interpolate
-        },
+        body,
+        transform: group.current,
+        options: { interpolate },
         userData
       })
 
