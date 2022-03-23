@@ -15,7 +15,7 @@ export const Level = () => {
   )
 
   return (
-    <T.Group>
+    <T.Group rotation-z={0.1} name="level">
       <T.GridHelper
         rotation={[Math.PI / 2, 0, 0]}
         args={[120, 20, "#333", "#333"]}

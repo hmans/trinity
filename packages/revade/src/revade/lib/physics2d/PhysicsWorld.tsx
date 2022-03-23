@@ -2,6 +2,7 @@ import { useTicker } from "@hmans/trinity"
 import { createECS } from "miniplex/react"
 import p2 from "p2-es"
 import { createContext, FC, useContext, useEffect, useState } from "react"
+import { tmpVector3 } from "../temps"
 import { Entity } from "./Entity"
 
 /* https://stackoverflow.com/a/62620115 */
@@ -36,13 +37,14 @@ export const PhysicsWorld: FC<{
     for (const entity of entities) {
       const { body, transform, options } = entity
       if (body.sleepState !== p2.Body.SLEEPING) {
-        if (options.interpolate) {
-          transform.position.set(...body.interpolatedPosition, 0)
-          transform.rotation.set(0, 0, body.interpolatedAngle)
-        } else {
-          transform.position.set(...body.position, 0)
-          transform.rotation.set(0, 0, body.angle)
-        }
+        const position = options.interpolate
+          ? body.interpolatedPosition
+          : body.position
+
+        const angle = options.interpolate ? body.interpolatedAngle : body.angle
+
+        transform.position.set(...position, 0)
+        transform.rotation.set(0, 0, angle)
       }
     }
   })
