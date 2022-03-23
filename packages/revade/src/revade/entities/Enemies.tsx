@@ -1,7 +1,5 @@
 import THREE, { makeInstanceComponents } from "@hmans/trinity"
 import { easeOut } from "popmotion"
-import { plusMinus } from "randomish"
-import { Vector3 } from "three"
 import { explodePlayer } from "../actions/explodePlayer"
 import { BodyThiefHack } from "../BodyThiefHack"
 import { Animation } from "../lib/Animation"
@@ -10,16 +8,6 @@ import { CircleShape } from "../lib/physics2d/Shape"
 import { ECS, Layers } from "../state"
 
 const Enemy = makeInstanceComponents()
-
-const players = ECS.world.archetype("player").entities
-
-const tmpVec3 = new Vector3()
-
-const getSpawnPosition = (distance = 100) => {
-  tmpVec3.set(plusMinus(55), plusMinus(55), 0)
-
-  return tmpVec3.clone()
-}
 
 export const Enemies = () => (
   <>
@@ -42,7 +30,7 @@ export const Enemies = () => (
           <ECS.Component name="transform">
             <PhysicsBody
               userData={entity}
-              position={getSpawnPosition()}
+              position={entity.spawnAt!}
               linearDamping={0.99}
               angularDamping={0.8}
               scale={0}
