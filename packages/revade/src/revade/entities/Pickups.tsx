@@ -11,8 +11,8 @@ const Pickup = makeInstanceComponents()
 export const Pickups = () => (
   <>
     <Pickup.Root>
-      <T.BoxGeometry args={[0.5, 1, 0.5]} />
-      <T.MeshBasicMaterial color="#3c3" />
+      <T.SphereGeometry args={[0.35]} />
+      <T.MeshStandardMaterial color="#3c3" emissive="#3c3" />
     </Pickup.Root>
 
     <ECS.Collection tag="pickup">

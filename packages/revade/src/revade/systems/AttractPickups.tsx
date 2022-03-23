@@ -20,12 +20,12 @@ export const AttractPickups = () => (
 
         const len = distance.length()
 
-        if (len < 20) {
+        if (len < 10) {
           const force = distance
             .normalize()
-            .multiplyScalar((1 - Math.pow(len / 20, 5)) * 60)
+            .multiplyScalar((1 - len / 10) * 100)
 
-          pickup.body.applyForce([force.x, force.y])
+          pickup.body.velocity = [force.x, force.y]
         }
       }
     }}
