@@ -2,8 +2,12 @@ import { useTicker } from "@hmans/trinity"
 import { createECS } from "miniplex/react"
 import p2 from "p2-es"
 import { createContext, FC, useContext, useEffect, useState } from "react"
-import { tmpVector3 } from "../temps"
+import { Euler, Quaternion, Vector3 } from "three"
 import { Entity } from "./Entity"
+
+const tmpVector3 = new Vector3()
+const tmpQuat = new Quaternion()
+const tmpEuler = new Euler()
 
 /* https://stackoverflow.com/a/62620115 */
 const createECSHelper = () => createECS<Entity>()
@@ -41,9 +45,18 @@ export const PhysicsWorld: FC<{
           ? body.interpolatedPosition
           : body.position
 
-        const angle = options.interpolate ? body.interpolatedAngle : body.angle
+        let angle = options.interpolate ? body.interpolatedAngle : body.angle
 
-        transform.position.set(...position, 0)
+        /* Get initial rotation */
+        transform.getWorldQuaternion(tmpQuat)
+        tmpEuler.setFromQuaternion(tmpQuat)
+        angle -= tmpEuler.z
+
+        /* position */
+        tmpVector3.set(...position, 0)
+        transform.parent!.worldToLocal(tmpVector3)
+
+        transform.position.copy(tmpVector3)
         transform.rotation.set(0, 0, angle)
       }
     }
