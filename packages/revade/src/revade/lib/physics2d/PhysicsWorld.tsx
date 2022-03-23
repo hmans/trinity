@@ -24,15 +24,6 @@ export const PhysicsWorld: FC<{
       })
   )
 
-  /* Set up contact event handling */
-  useEffect(() => {
-    world.on("beginContact", (e: p2.BeginContactEvent) => {})
-
-    world.on("endContact", (e: p2.EndContactEvent) => {})
-
-    world.on("preSolve", (e: p2.PreSolveEvent) => {})
-  }, [world])
-
   /* Step the physics world */
   useTicker("physics", (dt) => {
     world.step(1 / 50, dt, 10)
