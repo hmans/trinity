@@ -44,33 +44,33 @@ export const PhysicsBody = forwardRef<
     const { world, ecs, bodies } = usePhysicsWorld()
     const group = useRef<Group>(null!)
 
-    const [body, setBody] = useState<p2.Body>()
-
-    useLayoutEffect(() => {
-      /* Get initial position */
-      group.current.getWorldPosition(tmpVec3)
-
-      /* Get initial rotation */
-      group.current.getWorldQuaternion(tmpQuat)
-      tmpEuler.setFromQuaternion(tmpQuat)
-
+    const [body] = useState<p2.Body>(() => {
       const body = new p2.Body({
         mass,
         angularDamping,
         damping: linearDamping,
-        fixedRotation,
-        position: [tmpVec3.x, tmpVec3.y],
-        angle: tmpEuler.z
+        fixedRotation
       })
 
       world.addBody(body)
-      setBody(body)
+
+      return body
+    })
+
+    useLayoutEffect(() => {
+      /* Get initial position */
+      group.current.getWorldPosition(tmpVec3)
+      body.position = [tmpVec3.x, tmpVec3.y]
+
+      /* Get initial rotation */
+      group.current.getWorldQuaternion(tmpQuat)
+      tmpEuler.setFromQuaternion(tmpQuat)
+      body.angle = tmpEuler.z
 
       /* Remove body from world when onmounting */
       return () => {
         world.removeBody(body)
         bodies.delete(body)
-        setBody(undefined)
       }
     }, [])
 
@@ -99,9 +99,7 @@ export const PhysicsBody = forwardRef<
 
     return (
       <T.Group ref={mergeRefs([group, ref])} {...props}>
-        {body && (
-          <BodyContext.Provider value={body}>{children}</BodyContext.Provider>
-        )}
+        <BodyContext.Provider value={body}>{children}</BodyContext.Provider>
       </T.Group>
     )
   }
