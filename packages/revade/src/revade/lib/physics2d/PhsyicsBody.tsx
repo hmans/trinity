@@ -4,7 +4,6 @@ import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from "react"
 import mergeRefs from "react-merge-refs"
 import { Euler, Group, Quaternion, Vector3 } from "three"
 import { BodyContext } from "./BodyContext"
-import { CollisionCallback } from "./Entity"
 import { usePhysicsWorld } from "./PhysicsWorld"
 
 const tmpVec3 = new Vector3()
@@ -19,18 +18,12 @@ export const PhysicsBody = forwardRef<
     linearDamping?: number
     angularDamping?: number
     fixedRotation?: boolean
-    onCollisionEnter?: CollisionCallback
-    onCollisionExit?: CollisionCallback
-    onCollisionStay?: CollisionCallback
     userData?: any
   }
 >(
   (
     {
       children,
-      onCollisionEnter,
-      onCollisionExit,
-      onCollisionStay,
       mass = 1,
       interpolate = false,
       linearDamping = 0,
@@ -41,7 +34,7 @@ export const PhysicsBody = forwardRef<
     },
     ref
   ) => {
-    const { world, ecs, bodies } = usePhysicsWorld()
+    const { world, ecs } = usePhysicsWorld()
     const group = useRef<Group>(null!)
 
     const [body] = useState<p2.Body>(() => {
@@ -70,7 +63,6 @@ export const PhysicsBody = forwardRef<
       /* Remove body from world when onmounting */
       return () => {
         world.removeBody(body)
-        bodies.delete(body)
       }
     }, [])
 
@@ -82,15 +74,10 @@ export const PhysicsBody = forwardRef<
         physics2d: {
           transform: group.current,
           body,
-          interpolate,
-          onCollisionEnter,
-          onCollisionExit,
-          onCollisionStay
+          interpolate
         },
         userData
       })
-
-      bodies.set(body, entity)
 
       return () => {
         ecs.destroyEntity(entity)

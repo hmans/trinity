@@ -7,14 +7,12 @@ import { Entity } from "./Entity"
 const PhysicsWorldContext = createContext<{
   world: p2.World
   ecs: miniplex.World<Entity>
-  bodies: Map<p2.Body, Entity>
 }>(null!)
 
 export const PhysicsWorld: FC<{
   gravity?: [number, number]
 }> = ({ children, gravity = [0, -9.81] }) => {
   const [ecs] = useState(() => new miniplex.World<Entity>())
-  const [bodies] = useState(() => new Map<p2.Body, Entity>())
 
   const [world] = useState(
     () =>
@@ -23,22 +21,11 @@ export const PhysicsWorld: FC<{
       })
   )
 
+  /* Set up contact event handling */
   useEffect(() => {
-    world.on("beginContact", (e: p2.BeginContactEvent) => {
-      const entityA = bodies.get(e.bodyA)!
-      const entityB = bodies.get(e.bodyB)!
+    world.on("beginContact", (e: p2.BeginContactEvent) => {})
 
-      entityA?.physics2d.onCollisionEnter?.(entityB)
-      entityB?.physics2d.onCollisionEnter?.(entityA)
-    })
-
-    world.on("endContact", (e: p2.EndContactEvent) => {
-      const entityA = bodies.get(e.bodyA)!
-      const entityB = bodies.get(e.bodyB)!
-
-      entityA?.physics2d.onCollisionExit?.(entityB)
-      entityB?.physics2d.onCollisionExit?.(entityA)
-    })
+    world.on("endContact", (e: p2.EndContactEvent) => {})
 
     world.on("preSolve", (e: p2.PreSolveEvent) => {})
   }, [world])
@@ -63,7 +50,7 @@ export const PhysicsWorld: FC<{
   })
 
   return (
-    <PhysicsWorldContext.Provider value={{ world, ecs, bodies }}>
+    <PhysicsWorldContext.Provider value={{ world, ecs }}>
       {children}
     </PhysicsWorldContext.Provider>
   )
