@@ -30,11 +30,8 @@ export const makeComponent = <
       /* Apply forwarded ref */
       applyRef(ref, instance)
 
-      /* Apply props every time they change */
-      useLayoutEffect(() => {
-        /* Assign props */
-        if (props) applyProps(instance, props)
-      }, [instance, props])
+      /* Apply props */
+      if (props) applyProps(instance, props)
 
       /* Mount scene object to parent */
       useLayoutEffect(() => {
