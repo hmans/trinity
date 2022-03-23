@@ -4,7 +4,7 @@ import { PerspectiveCamera } from "three"
 import { ECS } from "../state"
 
 export const Camera: FC<{ offset?: [number, number, number] }> = ({
-  offset = [0, 0, 50]
+  offset = [0, 0, 75]
 }) => {
   const camera = useCamera<PerspectiveCamera>()
 
