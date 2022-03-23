@@ -31,9 +31,20 @@ export const Splosions = () => (
         return (
           <>
             <ECS.Component name="transform">
-              <Splosion.Instance position={entity.spawnAt ?? [0, 0, 0]}>
-                <SplosionForce entity={entity} />
-              </Splosion.Instance>
+              <PhysicsBody
+                position={entity.spawnAt ?? [0, 0, 0]}
+                userData={entity}
+                scale={10}
+                mass={0}
+              >
+                <CircleShape
+                  radius={10}
+                  collisionGroup={Layers.Splosions}
+                  collisionMask={Layers.Enemies}
+                  sensor
+                />
+                <Splosion.Instance />
+              </PhysicsBody>
             </ECS.Component>
 
             <ECS.Component
@@ -48,38 +59,4 @@ export const Splosions = () => (
       }}
     </ECS.Collection>
   </>
-)
-
-const SplosionForce = ({ entity }: { entity: Entity }) => (
-  <ECS.Entity>
-    {(forceEntity) => (
-      <>
-        <ECS.Component name="transform">
-          <PhysicsBody
-            userData={entity}
-            scale={10}
-            mass={0}
-            onCollisionEnter={({ userData: other }) => {
-              if (other?.enemy) explodeEnemy(other)
-            }}
-          >
-            <CircleShape
-              radius={10}
-              collisionGroup={Layers.Splosions}
-              collisionMask={Layers.Enemies}
-              sensor
-            />
-          </PhysicsBody>
-        </ECS.Component>
-
-        <ECS.Component
-          name="auto"
-          data={{
-            delay: 0.2,
-            callback: () => ECS.world.queue.destroyEntity(forceEntity)
-          }}
-        />
-      </>
-    )}
-  </ECS.Entity>
 )

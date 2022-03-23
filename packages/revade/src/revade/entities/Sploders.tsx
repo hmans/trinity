@@ -1,5 +1,6 @@
 import T, { makeInstanceComponents } from "@hmans/trinity"
 import { Tag } from "miniplex"
+import { explodeSploder } from "../actions/explodeSploder"
 import { BodyThiefHack } from "../BodyThiefHack"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
 import { CircleShape } from "../lib/physics2d/Shape"
@@ -30,14 +31,7 @@ export const Sploders = () => (
               angularDamping={1}
               onCollisionEnter={({ userData }) => {
                 if (userData?.player) {
-                  /* Spawn a splosion */
-                  ECS.world.queue.createEntity({
-                    splosion: Tag,
-                    spawnAt: entity.transform?.position.clone()
-                  })
-
-                  /* And destroy myself */
-                  ECS.world.queue.destroyEntity(entity)
+                  explodeSploder(entity)
                 }
               }}
             >
