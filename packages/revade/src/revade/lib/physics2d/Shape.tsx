@@ -6,12 +6,16 @@ type ShapeProps = {
   sensor?: boolean
   collisionGroup?: number
   collisionMask?: number
+  onBeginContact?: (otherShape: p2.Shape) => void
+  onEndContact?: (otherShape: p2.Shape) => void
 }
 
 export const Shape: FC<ShapeProps & { shape: p2.Shape }> = ({
   children,
   collisionGroup,
   collisionMask,
+  onBeginContact,
+  onEndContact,
   sensor,
   shape
 }) => {
@@ -25,6 +29,25 @@ export const Shape: FC<ShapeProps & { shape: p2.Shape }> = ({
     body.addShape(shape)
     return () => void body.removeShape(shape)
   }, [])
+
+  /* Register contact callbacks */
+  useEffect(() => {
+    if (!onBeginContact) return
+
+    body.world.on("beginContact", (e: p2.BeginContactEvent) => {
+      if (e.shapeA === shape) onBeginContact(e.shapeB)
+      else if (e.shapeB === shape) onBeginContact(e.shapeA)
+    })
+  })
+
+  useEffect(() => {
+    if (!onEndContact) return
+
+    body.world.on("endContact", (e: p2.EndContactEvent) => {
+      if (e.shapeA === shape) onEndContact(e.shapeB)
+      else if (e.shapeB === shape) onEndContact(e.shapeA)
+    })
+  })
 
   return <>{children}</>
 }

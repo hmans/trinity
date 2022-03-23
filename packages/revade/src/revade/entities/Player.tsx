@@ -29,6 +29,9 @@ export const Player = () => (
               radius={1}
               collisionGroup={Layers.Player}
               collisionMask={Layers.Pickups | Layers.Enemies | Layers.Default}
+              onBeginContact={(other) => {
+                console.log(other)
+              }}
             >
               <T.Mesh>
                 <T.SphereGeometry />
