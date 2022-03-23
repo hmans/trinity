@@ -1,5 +1,4 @@
 import { Controller } from "@hmans/controlfreak"
-import { BoundlessGrid } from "@hmans/ingrid"
 import { IEntity, QueriedEntity, Tag } from "miniplex"
 import { createECS } from "miniplex/react"
 import p2 from "p2-es"
@@ -20,9 +19,6 @@ export type Entity = {
   spawnAt?: Vector3
   transform?: Object3D
   velocity?: Vector3
-
-  /* Spatial Hashing */
-  spatialHashing?: { grid: BoundlessGrid<QueriedEntity<Entity, ["transform"]>> }
 
   /* Physics */
   body?: p2.Body
@@ -55,8 +51,6 @@ export type Entity = {
 } & IEntity
 
 export const ECS = createECS<Entity>()
-
-export const spatialHashGrid = new BoundlessGrid(10)
 
 export const Layers = {
   Default: 1,

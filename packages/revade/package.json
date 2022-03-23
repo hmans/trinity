@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@hmans/controlfreak": "^0.1.8",
-    "@hmans/ingrid": "^0.0.3",
     "@hmans/trinity": "^0.1.7",
     "@types/three": "^0.138.0",
     "miniplex": "^0.7.1",

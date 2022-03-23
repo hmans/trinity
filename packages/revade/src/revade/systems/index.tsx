@@ -6,7 +6,6 @@ import { Avoidance } from "./Avoidance"
 import { CameraRig } from "./CameraRig"
 import { EnemySpawner } from "./EnemySpawner"
 import { PlayerControl } from "./PlayerControl"
-import { SpatialHashing } from "./SpatialHashing"
 import { SploderSpawner } from "./SploderSpawner"
 import { Velocity } from "./Velocity"
 import { Wobble } from "./Wobble"
@@ -15,7 +14,6 @@ const Systems = () => (
   <>
     <EnemySpawner />
     <SploderSpawner />
-    <SpatialHashing />
     <PlayerControl />
     <Attraction />
     <Avoidance />
