@@ -3,7 +3,8 @@ import { insideCircle, number } from "randomish"
 import { useEffect } from "react"
 import { BodyThiefHack } from "../BodyThiefHack"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
-import { ECS } from "../state"
+import { CircleShape } from "../lib/physics2d/Shape"
+import { ECS, Layers } from "../state"
 
 const Pickup = makeInstanceComponents()
 
@@ -28,9 +29,16 @@ export const Pickups = () => (
                 position={entity.spawnAt}
                 rotation-z={number(Math.PI * 2)}
                 linearDamping={0.5}
+                userData={entity}
               >
                 <BodyThiefHack />
-                <Pickup.Instance />
+
+                <CircleShape
+                  collisionGroup={Layers.Pickups}
+                  collisionMask={Layers.Player | Layers.Default}
+                >
+                  <Pickup.Instance />
+                </CircleShape>
               </PhysicsBody>
             </ECS.Component>
           </>

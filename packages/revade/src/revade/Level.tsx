@@ -24,7 +24,7 @@ export const Level = () => {
         <BoxShape
           size={[2, 124]}
           collisionGroup={Layers.Default}
-          collisionMask={Layers.Player | Layers.Enemies}
+          collisionMask={Layers.Player | Layers.Enemies | Layers.Pickups}
         />
         <T.Mesh material={material}>
           <T.BoxGeometry args={[2, 124, 2]} />
@@ -34,7 +34,7 @@ export const Level = () => {
         <BoxShape
           size={[2, 124]}
           collisionGroup={Layers.Default}
-          collisionMask={Layers.Player | Layers.Enemies}
+          collisionMask={Layers.Player | Layers.Enemies | Layers.Pickups}
         />
         <T.Mesh material={material}>
           <T.BoxGeometry args={[2, 124, 2]} />
@@ -44,7 +44,7 @@ export const Level = () => {
         <BoxShape
           size={[120, 2]}
           collisionGroup={Layers.Default}
-          collisionMask={Layers.Player | Layers.Enemies}
+          collisionMask={Layers.Player | Layers.Enemies | Layers.Pickups}
         />
         <T.Mesh material={material}>
           <T.BoxGeometry args={[124, 2, 2]} />
@@ -54,7 +54,7 @@ export const Level = () => {
         <BoxShape
           size={[120, 2]}
           collisionGroup={Layers.Default}
-          collisionMask={Layers.Player | Layers.Enemies}
+          collisionMask={Layers.Player | Layers.Enemies | Layers.Pickups}
         />
         <T.Mesh material={material}>
           <T.BoxGeometry args={[124, 2, 2]} />

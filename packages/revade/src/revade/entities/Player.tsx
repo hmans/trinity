@@ -17,6 +17,12 @@ export const Player = () => (
             fixedRotation
             interpolate
             userData={entity}
+            onCollisionEnter={({ userData: other }) => {
+              if (other.pickup) {
+                console.log("BLING BLING")
+                ECS.world.queue.destroyEntity(other)
+              }
+            }}
           >
             <BodyThiefHack />
             <CircleShape
