@@ -47,17 +47,18 @@ export const PhysicsBody = forwardRef<
         })
     )
 
-    /* Create and destroy an ECS entity for this physics object */
-    useLayoutEffect(() => {
-      world.addBody(body)
-
-      /* Create entity */
-      const entity = ecs.world.createEntity({
+    const [entity] = useState(() =>
+      ecs.world.createEntity({
         body,
-        transform: group.current,
         options: { interpolate },
         userData
       })
+    )
+
+    /* Create and destroy an ECS entity for this physics object */
+    useLayoutEffect(() => {
+      world.addBody(body)
+      ecs.world.addComponent(entity, "transform", group.current)
 
       /* Get initial position */
       group.current.getWorldPosition(tmpVec3)
