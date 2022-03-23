@@ -9,6 +9,7 @@ export type Entity = {
   enemy?: Tag
   sploder?: Tag
   splosion?: Tag
+  pickup?: Tag
 
   /* Camera */
   camera?: {
