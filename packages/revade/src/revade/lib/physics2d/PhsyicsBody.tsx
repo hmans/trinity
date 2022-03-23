@@ -46,7 +46,7 @@ export const PhysicsBody = forwardRef<
 
     const [body, setBody] = useState<p2.Body>()
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       /* Get initial position */
       group.current.getWorldPosition(tmpVec3)
 
@@ -75,7 +75,7 @@ export const PhysicsBody = forwardRef<
     }, [])
 
     /* Create and destroy an ECS entity for this physics object */
-    useEffect(() => {
+    useLayoutEffect(() => {
       if (!body) return
 
       const entity = ecs.createEntity({
