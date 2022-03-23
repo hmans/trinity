@@ -1,76 +1,14 @@
-import T, { Engine, useManagedThreeObject, View } from "@hmans/trinity"
-import { MeshStandardMaterial } from "three"
+import T, { Engine, View } from "@hmans/trinity"
+import { EnemySpawner } from "./EnemySpawner"
 import { Camera } from "./entities/Camera"
 import { Enemies } from "./entities/Enemies"
 import { Player } from "./entities/Player"
 import { Sploders } from "./entities/Sploders"
 import { Splosions } from "./entities/Splosions"
 import { HUD } from "./HUD"
+import { Level } from "./Level"
 import { PhysicsWorld } from "./lib/physics2d"
-import { PhysicsBody } from "./lib/physics2d/PhsyicsBody"
-import { BoxShape } from "./lib/physics2d/Shape"
-import { ECS, Layers } from "./state"
 import Systems from "./systems"
-
-const Level = () => {
-  const material = useManagedThreeObject(
-    () =>
-      new MeshStandardMaterial({
-        color: "green",
-        emissive: "green",
-        emissiveIntensity: 0.7
-      })
-  )
-
-  return (
-    <T.Group>
-      <T.GridHelper
-        rotation={[Math.PI / 2, 0, 0]}
-        args={[120, 20, "#333", "#333"]}
-      />
-      <PhysicsBody position-x={-61} mass={0}>
-        <BoxShape
-          size={[2, 124]}
-          collisionGroup={Layers.Default}
-          collisionMask={Layers.Player | Layers.Enemies}
-        />
-        <T.Mesh material={material}>
-          <T.BoxGeometry args={[2, 124, 2]} />
-        </T.Mesh>
-      </PhysicsBody>
-      <PhysicsBody position-x={+61} mass={0}>
-        <BoxShape
-          size={[2, 124]}
-          collisionGroup={Layers.Default}
-          collisionMask={Layers.Player | Layers.Enemies}
-        />
-        <T.Mesh material={material}>
-          <T.BoxGeometry args={[2, 124, 2]} />
-        </T.Mesh>
-      </PhysicsBody>
-      <PhysicsBody position-y={-61} mass={0}>
-        <BoxShape
-          size={[120, 2]}
-          collisionGroup={Layers.Default}
-          collisionMask={Layers.Player | Layers.Enemies}
-        />
-        <T.Mesh material={material}>
-          <T.BoxGeometry args={[124, 2, 2]} />
-        </T.Mesh>
-      </PhysicsBody>
-      <PhysicsBody position-y={+61} mass={0}>
-        <BoxShape
-          size={[120, 2]}
-          collisionGroup={Layers.Default}
-          collisionMask={Layers.Player | Layers.Enemies}
-        />
-        <T.Mesh material={material}>
-          <T.BoxGeometry args={[124, 2, 2]} />
-        </T.Mesh>
-      </PhysicsBody>
-    </T.Group>
-  )
-}
 
 export const Game = () => (
   <>
@@ -91,12 +29,7 @@ export const Game = () => (
             <Splosions />
             <Camera />
 
-            <ECS.Entity>
-              <ECS.Component
-                name="spawner"
-                data={{ t: 0, interval: 2, amount: 5 }}
-              />
-            </ECS.Entity>
+            <EnemySpawner />
           </PhysicsWorld>
         </T.Group>
       </View>
