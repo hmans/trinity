@@ -1,10 +1,10 @@
 import { IEntity } from "miniplex"
 import { createECS } from "miniplex/react"
-import React, { FC, forwardRef, useEffect, useLayoutEffect, useRef } from "react"
+import React, { FC, forwardRef, useLayoutEffect, useRef } from "react"
 import mergeRefs from "react-merge-refs"
 import { Group, InstancedMesh, Object3D } from "three"
-import { useTicker } from "../engine/Ticker"
 import T from ".."
+import { useTicker } from "../engine/Ticker"
 import { ReactorComponentProps } from "../reactor/types"
 
 type InstanceEntity = {
@@ -20,11 +20,9 @@ export const makeInstanceComponents = () => {
 
   /* This component renders the InstancedMesh itself and continuously updates it
      from the data in the ECS. */
-  const Root: FC<ReactorComponentProps<typeof InstancedMesh> & { countStep?: number }> = ({
-    children,
-    countStep = 1000,
-    ...props
-  }) => {
+  const Root: FC<
+    ReactorComponentProps<typeof InstancedMesh> & { countStep?: number }
+  > = ({ children, countStep = 1000, ...props }) => {
     const instancedMesh = useRef<InstancedMesh>(null!)
 
     /* The following hook will make sure this entire component gets re-rendered when
@@ -32,7 +30,8 @@ export const makeInstanceComponents = () => {
        or shrink the instance buffer. */
     const { entities } = ecs.useArchetype("instance")
 
-    const instanceLimit = Math.floor(entities.length / countStep + 1) * countStep
+    const instanceLimit =
+      Math.floor(entities.length / countStep + 1) * countStep
 
     function updateInstances() {
       const l = entities.length
@@ -48,7 +47,11 @@ export const makeInstanceComponents = () => {
     useTicker("render", updateInstances)
 
     return (
-      <T.InstancedMesh ref={instancedMesh} {...props} args={[null!, null!, instanceLimit]}>
+      <T.InstancedMesh
+        ref={instancedMesh}
+        {...props}
+        args={[null!, null!, instanceLimit]}
+      >
         {children}
       </T.InstancedMesh>
     )
