@@ -1,7 +1,5 @@
-import { useTicker } from "@hmans/trinity"
 import { Tag } from "miniplex"
-import { plusMinus, number } from "randomish"
-import { useRef } from "react"
+import { number, plusMinus } from "randomish"
 import { Vector3 } from "three"
 import ArchetypeSystem from "../lib/ArchetypeSystem"
 import { ECS } from "../state"
