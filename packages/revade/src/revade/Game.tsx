@@ -9,7 +9,7 @@ import { HUD } from "./HUD"
 import { PhysicsWorld } from "./lib/physics2d"
 import { PhysicsBody } from "./lib/physics2d/PhsyicsBody"
 import { BoxShape } from "./lib/physics2d/Shape"
-import { Layers } from "./state"
+import { ECS, Layers } from "./state"
 import Systems from "./systems"
 
 const Level = () => {
@@ -90,6 +90,13 @@ export const Game = () => (
             <Sploders />
             <Splosions />
             <Camera />
+
+            <ECS.Entity>
+              <ECS.Component
+                name="spawner"
+                data={{ t: 0, interval: 2, amount: 5 }}
+              />
+            </ECS.Entity>
           </PhysicsWorld>
         </T.Group>
       </View>

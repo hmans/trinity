@@ -46,6 +46,12 @@ export type Entity = {
     callback: Function
   }
 
+  spawner?: {
+    t: number
+    interval: number
+    amount: number
+  }
+
   /* Input */
   controller?: Controller
 } & IEntity
