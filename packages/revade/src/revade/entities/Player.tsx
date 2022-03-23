@@ -19,16 +19,24 @@ export const Player = () => (
             userData={entity}
           >
             <BodyThiefHack />
+
             <CircleShape
               radius={1}
+              sensor
               collisionGroup={Layers.Player}
-              collisionMask={Layers.Pickups | Layers.Enemies | Layers.Default}
+              collisionMask={Layers.Pickups}
               onBeginContact={({ userData: other }) => {
                 if (other && other.pickup) {
                   console.log("BLING BLING")
                   ECS.world.queue.destroyEntity(other)
                 }
               }}
+            />
+
+            <CircleShape
+              radius={1}
+              collisionGroup={Layers.Player}
+              collisionMask={Layers.Enemies | Layers.Default}
             >
               <T.Mesh>
                 <T.SphereGeometry />
