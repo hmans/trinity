@@ -36,7 +36,6 @@ export const Sploders = () => (
                 collisionGroup={Layers.Pickups}
                 collisionMask={Layers.Player}
                 onBeginContact={({ userData }) => {
-                  4
                   if (userData?.player) explodeSploder(entity)
                 }}
               >
