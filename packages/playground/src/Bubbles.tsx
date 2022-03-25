@@ -1,5 +1,5 @@
 import T, { makeInstanceComponents, Scene, useTicker } from "@hmans/trinity"
-import { createECS } from "miniplex/react"
+import { createECS } from "miniplex-react"
 import { IEntity, Tag } from "miniplex"
 import { Object3D } from "three"
 import { number, plusMinus } from "randomish"
@@ -19,7 +19,9 @@ export const Bubbles = () => {
 
   useTicker("update", () => {
     for (const { transform, wobble } of entities) {
-      transform.scale.setScalar(1 + Math.cos(wobble.offset + performance.now() / 1000) * 0.6)
+      transform.scale.setScalar(
+        1 + Math.cos(wobble.offset + performance.now() / 1000) * 0.6
+      )
     }
   })
 
@@ -37,10 +39,15 @@ export const Bubbles = () => {
         {() => (
           <>
             <ecs.Component name="transform">
-              <Bubble.Instance position={[plusMinus(20), plusMinus(20), plusMinus(20)]} />
+              <Bubble.Instance
+                position={[plusMinus(20), plusMinus(20), plusMinus(20)]}
+              />
             </ecs.Component>
 
-            <ecs.Component name="wobble" data={{ offset: number(Math.PI * 2) }} />
+            <ecs.Component
+              name="wobble"
+              data={{ offset: number(Math.PI * 2) }}
+            />
           </>
         )}
       </ecs.Collection>

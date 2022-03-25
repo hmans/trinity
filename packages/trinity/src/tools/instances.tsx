@@ -1,5 +1,5 @@
 import { IEntity } from "miniplex"
-import { createECS } from "miniplex/react"
+import { createECS } from "miniplex-react"
 import React, { FC, forwardRef, useLayoutEffect, useRef } from "react"
 import mergeRefs from "react-merge-refs"
 import { Group, InstancedMesh, Object3D } from "three"
