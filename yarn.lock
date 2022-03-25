@@ -2134,22 +2134,15 @@ minimist@^1.2.5:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
-miniplex-react@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/miniplex-react/-/miniplex-react-0.1.4.tgz#01a72d07aa93df5e5a80ef982ded9989fbb71608"
-  integrity sha512-++Oe1FwN3vuGf56vrFs6pq+WCpbnvVJ0JfH4aAP+czT8jsnEEbp4dxIw5KbLaKllr4CQLV9yBxAO+l0OPP2KpQ==
-  dependencies:
-    miniplex "^0.8.0-0"
+miniplex-react@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/miniplex-react/-/miniplex-react-0.1.7.tgz#08d95b405cd4dc9e03f700f540f494ef02f6e63c"
+  integrity sha512-epf8NDsZCq3GlsypUQVJTvip4WwIUEFX8MeGd7XexW0L03EE0/9p6k8FlxBtyJi8IoE/FKLjjXRyZ4IAnFFEOg==
 
 miniplex@^0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.7.1.tgz#0cb9bb334af9f3c999af0879ae16872ea0aff0ae"
   integrity sha512-kHYlII9qsiOiMTgSGSWLuReKWmAI5ZAnK/ehpax8jefmtcPSCvFl0TfKTj1IZXBgL/eTlNYHd+r6gNtfHRITPA==
-
-miniplex@^0.8.0-0:
-  version "0.8.0-0"
-  resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.8.0-0.tgz#cde84f23808b2e878aff5709d0d402a2cc6e7d5e"
-  integrity sha512-awnMA9v3kM9h9Gtuj6kjPplZ+isMQfi9kj6j7wvKtGBKE9jl+q3TTs615gSnhvhdq+rYXbnQoej7VVupxKoDeQ==
 
 miniplex@^0.8.0-1:
   version "0.8.0-1"

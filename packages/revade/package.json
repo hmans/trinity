@@ -12,7 +12,7 @@
     "@hmans/trinity": "^0.1.7",
     "@types/three": "^0.138.0",
     "miniplex": "^0.8.0-1",
-    "miniplex-react": "^0.1.4",
+    "miniplex-react": "^0.1.7",
     "p2-es": "^0.7.3",
     "popmotion": "^11.0.3",
     "randomish": "^0.1.2",
