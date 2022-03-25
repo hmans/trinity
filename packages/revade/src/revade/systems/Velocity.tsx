@@ -1,6 +1,7 @@
 import { Vector3 } from "three"
 import ArchetypeSystem from "../lib/ArchetypeSystem"
-import { tmpVector3 } from "../lib/temps"
+
+const tmpVector3 = new Vector3()
 
 const ZERO = new Vector3()
 

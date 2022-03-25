@@ -1,8 +1,10 @@
+import { Vector3 } from "three"
 import ArchetypeSystem from "../lib/ArchetypeSystem"
-import { tmpVector3 } from "../lib/temps"
 import { ECS } from "../state"
 
 const players = ECS.world.archetype("player", "transform")
+
+const tmpVector3 = new Vector3()
 
 export const Avoidance = ({ radius = 2 }) => (
   <ArchetypeSystem archetype={["avoidance", "velocity", "transform"]}>
