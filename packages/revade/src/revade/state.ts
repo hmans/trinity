@@ -1,5 +1,5 @@
 import { Controller } from "@hmans/controlfreak"
-import { IEntity, QueriedEntity, Tag } from "miniplex"
+import { IEntity, EntityWith, Tag } from "miniplex"
 import { createECS } from "miniplex/react"
 import p2 from "p2-es"
 import { Object3D, Vector3 } from "three"
@@ -26,12 +26,12 @@ export type Entity = {
 
   /* Flocking */
   attraction?: {
-    targets: QueriedEntity<Entity, ["transform"]>[]
+    targets: EntityWith<Entity, "transform">[]
     factor: number
   }
 
   avoidance?: {
-    targets: QueriedEntity<Entity, ["transform"]>[]
+    targets: EntityWith<Entity, "transform">[]
     factor: number
   }
 

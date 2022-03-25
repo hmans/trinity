@@ -1,6 +1,6 @@
 import { Callback } from "@hmans/trinity"
 import { TickerStage } from "@hmans/trinity/src/engine/Ticker"
-import { QueriedEntity, Query } from "miniplex"
+import { EntityWith, Query } from "miniplex"
 import { ECS, Entity } from "../state"
 
 const ArchetypeSystem = <Q extends Query<Entity>>({
@@ -10,7 +10,7 @@ const ArchetypeSystem = <Q extends Query<Entity>>({
 }: {
   archetype: Q
   stage?: TickerStage
-  children: (entities: QueriedEntity<Entity, Q>[], dt: number) => void
+  children: (entities: EntityWith<Entity, Q[number]>[], dt: number) => void
 }) => {
   const { entities } = ECS.world.archetype(...archetype)
 
