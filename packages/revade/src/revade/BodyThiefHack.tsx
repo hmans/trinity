@@ -1,4 +1,4 @@
-import { useBody } from "./lib/physics2d/BodyContext"
+import { useBody } from "../lib/physics2d/BodyContext"
 import { ECS } from "./state"
 
 export const BodyThiefHack = () => {

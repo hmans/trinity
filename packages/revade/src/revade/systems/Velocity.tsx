@@ -1,5 +1,5 @@
 import { Vector3 } from "three"
-import ArchetypeSystem from "../lib/ArchetypeSystem"
+import ArchetypeSystem from "../../lib/ArchetypeSystem"
 
 const tmpVector3 = new Vector3()
 

@@ -1,8 +1,8 @@
 import T from "@hmans/trinity"
 import { BodyThiefHack } from "../BodyThiefHack"
 import { controller } from "../controller"
-import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
-import { CircleShape } from "../lib/physics2d/Shape"
+import { PhysicsBody } from "../../lib/physics2d/PhsyicsBody"
+import { CircleShape } from "../../lib/physics2d/Shape"
 import { ECS, Layers } from "../state"
 
 export const Player = () => (

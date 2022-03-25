@@ -1,4 +1,4 @@
-import System from "../lib/System"
+import System from "../../lib/System"
 import { ECS } from "../state"
 import { Attraction } from "./Attraction"
 import { AttractPickups } from "./AttractPickups"

@@ -2,8 +2,8 @@ import T, { makeInstanceComponents } from "@hmans/trinity"
 import { Tag } from "miniplex"
 import { explodeSploder } from "../actions/explodeSploder"
 import { BodyThiefHack } from "../BodyThiefHack"
-import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
-import { CircleShape } from "../lib/physics2d/Shape"
+import { PhysicsBody } from "../../lib/physics2d/PhsyicsBody"
+import { CircleShape } from "../../lib/physics2d/Shape"
 import { ECS, Layers } from "../state"
 
 const Sploder = makeInstanceComponents()

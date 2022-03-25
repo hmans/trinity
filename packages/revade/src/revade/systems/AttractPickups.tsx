@@ -1,6 +1,6 @@
 import p2, { NaiveBroadphase } from "p2-es"
 import { Vector3 } from "three"
-import ArchetypeSystem from "../lib/ArchetypeSystem"
+import ArchetypeSystem from "../../lib/ArchetypeSystem"
 import { ECS } from "../state"
 
 const players = ECS.world.archetype("player").entities

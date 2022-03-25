@@ -1,8 +1,8 @@
 import T, { useManagedThreeObject, useTicker } from "@hmans/trinity"
 import { useCallback, useRef } from "react"
 import { Group, MeshStandardMaterial } from "three"
-import { PhysicsBody } from "./lib/physics2d/PhsyicsBody"
-import { BoxShape } from "./lib/physics2d/Shape"
+import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
+import { BoxShape } from "../lib/physics2d/Shape"
 import { Layers } from "./state"
 
 export const Level = () => {

@@ -1,7 +1,7 @@
 import { Tag } from "miniplex"
 import { number, plusMinus } from "randomish"
 import { Vector3 } from "three"
-import ArchetypeSystem from "../lib/ArchetypeSystem"
+import ArchetypeSystem from "../../lib/ArchetypeSystem"
 import { ECS } from "../state"
 
 const players = ECS.world.archetype("player").entities

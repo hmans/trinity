@@ -2,8 +2,8 @@ import T, { makeInstanceComponents } from "@hmans/trinity"
 import { insideCircle, number } from "randomish"
 import { useEffect } from "react"
 import { BodyThiefHack } from "../BodyThiefHack"
-import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
-import { CircleShape } from "../lib/physics2d/Shape"
+import { PhysicsBody } from "../../lib/physics2d/PhsyicsBody"
+import { CircleShape } from "../../lib/physics2d/Shape"
 import { ECS, Layers } from "../state"
 
 const Pickup = makeInstanceComponents()

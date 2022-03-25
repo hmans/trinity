@@ -1,7 +1,7 @@
 import { Callback } from "@hmans/trinity"
 import { TickerStage } from "@hmans/trinity/src/engine/Ticker"
 import { EntityWith, Query } from "miniplex"
-import { ECS, Entity } from "../state"
+import { ECS, Entity } from "../revade/state"
 
 const ArchetypeSystem = <Q extends Query<Entity>>({
   archetype,

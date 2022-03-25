@@ -1,4 +1,4 @@
-import ArchetypeSystem from "../lib/ArchetypeSystem"
+import ArchetypeSystem from "../../lib/ArchetypeSystem"
 
 export const AutoSystem = () => (
   <ArchetypeSystem archetype={["auto"]}>

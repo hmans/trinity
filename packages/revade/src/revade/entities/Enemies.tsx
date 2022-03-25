@@ -2,9 +2,9 @@ import THREE, { makeInstanceComponents } from "@hmans/trinity"
 import { easeOut } from "popmotion"
 import { explodePlayer } from "../actions/explodePlayer"
 import { BodyThiefHack } from "../BodyThiefHack"
-import { Animation } from "../lib/Animation"
-import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
-import { CircleShape } from "../lib/physics2d/Shape"
+import { Animation } from "../../lib/Animation"
+import { PhysicsBody } from "../../lib/physics2d/PhsyicsBody"
+import { CircleShape } from "../../lib/physics2d/Shape"
 import { ECS, Layers } from "../state"
 
 const Enemy = makeInstanceComponents()

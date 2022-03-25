@@ -8,7 +8,7 @@ import { Sploders } from "./entities/Sploders"
 import { Splosions } from "./entities/Splosions"
 import { HUD } from "./HUD"
 import { Level } from "./Level"
-import { PhysicsWorld } from "./lib/physics2d"
+import { PhysicsWorld } from "../lib/physics2d"
 import Systems from "./systems"
 
 export const Game = () => (
