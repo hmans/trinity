@@ -1184,10 +1184,19 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.33":
+"@types/react@*":
   version "17.0.41"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.41.tgz#6e179590d276394de1e357b3f89d05d7d3da8b85"
   integrity sha512-chYZ9ogWUodyC7VUTRBfblysKLjnohhFY9bGLwvnUFFy48+vB9DikmB3lW0qTFmBcKSzmdglcvkHK71IioOlDA==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@^17.0.33":
+  version "17.0.43"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.43.tgz#4adc142887dd4a2601ce730bc56c3436fdb07a55"
+  integrity sha512-8Q+LNpdxf057brvPu1lMtC5Vn7J119xrP1aq4qiaefNioQUYANF/CYeK4NsKorSZyUGJ66g0IM+4bbjwx45o2A==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2355,12 +2364,12 @@ randomish@^0.1.2:
   integrity sha512-ey+EdYVbejq3HJjEswWEza2B8ouORqMSyPS6A0WqokCuxRVhIQ+SP8Tx364GIxuWBNaBAJQoWRXXNTXv049NiA==
 
 react-dom@^18.0.0-rc.2:
-  version "18.0.0-rc.2-next-b9de50d2f-20220308"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.0.0-rc.2-next-b9de50d2f-20220308.tgz#b8000dd5b86c77e0f2c4c069d01b279e34d6fcc2"
-  integrity sha512-5BXlUQVqACNjYtDZAM8fM9/QOJRJBD+DZlILPQ+MLvFuOBhz16lxXBXZnHMB0kuZJrKDXp8DLUeTyNn2B9pCYQ==
+  version "18.0.0-rc.3-next-de516ca5a-20220321"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.0.0-rc.3-next-de516ca5a-20220321.tgz#62fbdabcbb86bde102e7a381c348c01557ca645e"
+  integrity sha512-U1g0XE9dgI1b9moPQhvPtIeNnnVaDyyJ2nyr2sgoQM1tWw23hgCU9UUpZ2kNPcyLQZGMQsBCtd/Xs+XNd1RNjQ==
   dependencies:
     loose-envify "^1.1.0"
-    scheduler "0.21.0-rc.2-next-b9de50d2f-20220308"
+    scheduler "0.21.0-rc.3-next-de516ca5a-20220321"
 
 react-merge-refs@^1.1.0:
   version "1.1.0"
@@ -2373,9 +2382,9 @@ react-refresh@^0.11.0:
   integrity sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==
 
 react@^18.0.0-rc.2:
-  version "18.0.0-rc.2-next-b9de50d2f-20220308"
-  resolved "https://registry.yarnpkg.com/react/-/react-18.0.0-rc.2-next-b9de50d2f-20220308.tgz#817d40520b76c3f3e8314eeda1abf85d9070465c"
-  integrity sha512-1RpONBLI/vgKN/kdq0DtPxrgXHS5OXCHbzXWXk2RcLRjlbBiqmAPUIpCq7x+02WhYQkgA6D0iRJo4NJ9fZMCGQ==
+  version "18.0.0-rc.3-next-de516ca5a-20220321"
+  resolved "https://registry.yarnpkg.com/react/-/react-18.0.0-rc.3-next-de516ca5a-20220321.tgz#d70087705399967d62a8b8611a494a944b5250c0"
+  integrity sha512-yPIz7BWOWO3HEgm+XBEavKkI/byVDPnODJXpYo3yIat+XRV7irbHpb+l1IxrEZpbWxM3N5S4tCz315cIYGTyLQ==
   dependencies:
     loose-envify "^1.1.0"
 
@@ -2512,10 +2521,10 @@ safe-buffer@~5.1.1:
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
   integrity sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==
 
-scheduler@0.21.0-rc.2-next-b9de50d2f-20220308:
-  version "0.21.0-rc.2-next-b9de50d2f-20220308"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.21.0-rc.2-next-b9de50d2f-20220308.tgz#f3e89d3670b99adf1e1091644793bd73db03cbb0"
-  integrity sha512-aBVNOtcCn7k8FUi0lsIY34DZN1SUeuAjAQB6Y55Cxrhtrx9mggUepmF5gTWn7Z2RkEhQtrp7fzmRA/24bxxNJQ==
+scheduler@0.21.0-rc.3-next-de516ca5a-20220321:
+  version "0.21.0-rc.3-next-de516ca5a-20220321"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.21.0-rc.3-next-de516ca5a-20220321.tgz#121bdefae4df37f1acefd1bfc136727db0537dfd"
+  integrity sha512-g/Zjh5Nz9nxRP3xQQJuegLJWzJQuO03XF1WkWRS37PNczvw1jOV30utrrCxx819JNsA4A3JXAhdBjyZj81LMfw==
   dependencies:
     loose-envify "^1.1.0"
 
@@ -2728,9 +2737,9 @@ type-fest@^0.8.1:
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
 typescript@^4.5.4:
-  version "4.6.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.2.tgz#fe12d2727b708f4eef40f51598b3398baa9611d4"
-  integrity sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==
+  version "4.6.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.3.tgz#eefeafa6afdd31d725584c67a0eaba80f6fc6c6c"
+  integrity sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==
 
 unicode-canonical-property-names-ecmascript@^2.0.0:
   version "2.0.0"
