@@ -8,7 +8,7 @@ const tmpVec3 = new Vector3()
 
 export const CameraRig = () => (
   <ArchetypeSystem stage="lateUpdate" archetype={["camera", "transform"]}>
-    {(entities, dt) => {
+    {(entities) => {
       const player = players[0]
       if (!player || !player.transform) return
 

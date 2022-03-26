@@ -991,11 +991,6 @@
   resolved "https://registry.yarnpkg.com/@hmans/controlfreak/-/controlfreak-0.1.8.tgz#231f9f81adb2a9d2c4edfabef2514ffb6c959042"
   integrity sha512-klmqgFu3901IIDCSwXeTNpZXCkn1oWv3f8ifHOLv4lg978aqlcfFJ3LYxHGc0K0ZznW8NkqVhB38yNi9S1REeA==
 
-"@hmans/ingrid@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@hmans/ingrid/-/ingrid-0.0.3.tgz#d2171bb5b47c778197e3abd1fbe929d9cf98edde"
-  integrity sha512-I0DBi3jBUgFFC6iqpuOcgrQhhVWKkka+5uS+V2HgLvWKjhNeZaUPdl3msVo3K/JdhmaQ8404mPM6kTNhZB8AfQ==
-
 "@jridgewell/resolve-uri@^3.0.3":
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/@jridgewell/resolve-uri/-/resolve-uri-3.0.5.tgz#68eb521368db76d040a6315cdb24bf2483037b9c"
@@ -1182,14 +1177,14 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
   integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
 
-"@types/react-dom@^17.0.10", "@types/react-dom@^17.0.13":
+"@types/react-dom@^17.0.10":
   version "17.0.14"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.14.tgz#c8f917156b652ddf807711f5becbd2ab018dea9f"
   integrity sha512-H03xwEP1oXmSfl3iobtmQ/2dHF5aBHr8aUMwyGZya6OW45G+xtdzmq6HkncefiBt5JU8DVyaWl/nWZbjZCnzAQ==
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.33", "@types/react@^17.0.40":
+"@types/react@*", "@types/react@^17.0.33":
   version "17.0.41"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.41.tgz#6e179590d276394de1e357b3f89d05d7d3da8b85"
   integrity sha512-chYZ9ogWUodyC7VUTRBfblysKLjnohhFY9bGLwvnUFFy48+vB9DikmB3lW0qTFmBcKSzmdglcvkHK71IioOlDA==
@@ -2139,11 +2134,6 @@ miniplex-react@^0.1.7:
   resolved "https://registry.yarnpkg.com/miniplex-react/-/miniplex-react-0.1.7.tgz#08d95b405cd4dc9e03f700f540f494ef02f6e63c"
   integrity sha512-epf8NDsZCq3GlsypUQVJTvip4WwIUEFX8MeGd7XexW0L03EE0/9p6k8FlxBtyJi8IoE/FKLjjXRyZ4IAnFFEOg==
 
-miniplex@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.7.1.tgz#0cb9bb334af9f3c999af0879ae16872ea0aff0ae"
-  integrity sha512-kHYlII9qsiOiMTgSGSWLuReKWmAI5ZAnK/ehpax8jefmtcPSCvFl0TfKTj1IZXBgL/eTlNYHd+r6gNtfHRITPA==
-
 miniplex@^0.8.0-1:
   version "0.8.0-1"
   resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.8.0-1.tgz#2c3a7cfd8dab9bcbad81081f7ef2ac8dbb054c8b"
@@ -2737,7 +2727,7 @@ type-fest@^0.8.1:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
-typescript@^4.5.4, typescript@^4.6.0:
+typescript@^4.5.4:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.2.tgz#fe12d2727b708f4eef40f51598b3398baa9611d4"
   integrity sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==
