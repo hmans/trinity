@@ -4,8 +4,8 @@ import { Ticker } from "./Ticker"
 
 export const Engine: FC = ({ children }) => {
   return (
-    <Renderer>
-      <Ticker>{children}</Ticker>
-    </Renderer>
+    <Ticker>
+      <Renderer>{children}</Renderer>
+    </Ticker>
   )
 }

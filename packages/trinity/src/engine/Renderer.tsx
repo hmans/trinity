@@ -7,7 +7,6 @@ import React, {
   useState
 } from "react"
 import * as THREE from "three"
-import { Color } from "three"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
 
 const RendererContext = createContext<THREE.WebGLRenderer>(null!)
