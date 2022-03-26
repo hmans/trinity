@@ -3,6 +3,7 @@ export * from "./reactor/types"
 
 /* Components */
 export { Engine } from "./engine/Engine"
+export { Renderer } from "./engine/Renderer"
 export { Primitive } from "./reactor/Primitive"
 export { Ticker } from "./engine/Ticker"
 export { Callback } from "./engine/Callback"
