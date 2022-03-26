@@ -3,7 +3,7 @@ import ArchetypeSystem from "../../lib/ArchetypeSystem"
 
 export const PlayerControl = ({ thrust = 150 }) => (
   <ArchetypeSystem stage="fixed" archetype={["controller", "body"]}>
-    {(entities, dt) => {
+    {(entities) => {
       for (const { controller, body } of entities) {
         controller.update()
 
