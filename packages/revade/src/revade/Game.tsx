@@ -19,21 +19,19 @@ export const Game = () => (
         <T.AmbientLight intensity={0.3} />
         <T.DirectionalLight intensity={0.2} position={[10, 10, 10]} />
 
-        <T.Group>
-          <PhysicsWorld gravity={[0, 0]}>
-            <Level />
-            <Player />
-            <Enemies />
-            <Sploders />
-            <Splosions />
-            <Pickups />
-            <Camera />
+        <PhysicsWorld gravity={[0, 0]}>
+          <Level />
+          <Player />
+          <Enemies />
+          <Sploders />
+          <Splosions />
+          <Pickups />
+          <Camera />
 
-            <EnemySpawner />
+          <EnemySpawner />
 
-            <Systems />
-          </PhysicsWorld>
-        </T.Group>
+          <Systems />
+        </PhysicsWorld>
       </View>
     </Engine>
   </>
