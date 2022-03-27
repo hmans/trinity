@@ -9,7 +9,7 @@ import { Splosions } from "./entities/Splosions"
 import { GameFSM } from "./Game"
 
 export const Gameplay = () => {
-  useLayoutEffect(resetGameplayState)
+  useLayoutEffect(resetGameplayState, [])
 
   return (
     <>
