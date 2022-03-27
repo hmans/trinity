@@ -8,6 +8,7 @@ export default defineConfig({
   optimizeDeps: {
     exclude: [
       "miniplex",
+      "miniplex-react",
       "@hmans/controlfreak",
       "@hmans/trinity",
       "@hmans/signal"
