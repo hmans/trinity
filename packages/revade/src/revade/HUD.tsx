@@ -11,8 +11,13 @@ export const HUD = () => {
       <div>REVADE</div>
 
       <GameFSM.Match state={["gameplay", "gameover"]}>
-        <div>SCORE: {score}</div>
-        <div>MULTIPLIER: {multiplier}x</div>
+        <div>
+          SCORE: {score.toLocaleString("de-DE", { maximumFractionDigits: 0 })}
+        </div>
+        <div>
+          MULTIPLIER:{" "}
+          {multiplier.toLocaleString("de-DE", { maximumFractionDigits: 0 })}x
+        </div>
       </GameFSM.Match>
     </div>
   )
