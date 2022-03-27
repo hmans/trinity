@@ -21,7 +21,7 @@ export const Enemies = () => (
       />
     </Enemy.Root>
 
-    <ECS.Collection tag="enemy" initial={0} memoize>
+    <ECS.Collection tag="enemy" initial={0}>
       {(entity) => {
         return (
           <>

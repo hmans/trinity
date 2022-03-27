@@ -19,7 +19,7 @@ export const Sploders = () => (
       />
     </Sploder.Root>
 
-    <ECS.Collection tag="sploder" initial={0} memoize>
+    <ECS.Collection tag="sploder" initial={0}>
       {(entity) => (
         <>
           <ECS.Component name="transform">

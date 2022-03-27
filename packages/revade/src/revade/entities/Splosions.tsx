@@ -15,7 +15,7 @@ export const Splosions = () => (
       <T.MeshBasicMaterial color="yellow" />
     </Splosion.Root>
 
-    <ECS.Collection tag="splosion" initial={0} memoize>
+    <ECS.Collection tag="splosion" initial={0}>
       {(entity) => {
         /* Animate explosion */
         useEffect(() => {
