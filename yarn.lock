@@ -2126,9 +2126,9 @@ minimist-options@4.1.0:
     kind-of "^6.0.3"
 
 miniplex-react@^0.1.7:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/miniplex-react/-/miniplex-react-0.1.8.tgz#8233e1ea667d8fa15adc12616b1bb3943071e858"
-  integrity sha512-OoA+vitVpJBqyszIFp/2FVUDh27NhwvZjZsJJBckiV0vk36R3VjG+dNsoEhZBBUY3IzpqvV/MXRtfvPL37SjpA==
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/miniplex-react/-/miniplex-react-0.1.9.tgz#15fd75505d023e9bc0287944043f96ed1cb37dbe"
+  integrity sha512-8tDV60DCi8CB/HVA9G5Zh165pE2StnMeviO/jInCLltuGaUoPABM51jyT7SWfn+LQOOWzW5rI1bZpAJ9U2oqWA==
   dependencies:
     "@hmans/react-toolbox" "^0.1.4"
 
