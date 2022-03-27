@@ -10,7 +10,7 @@ const tmpVec3 = new Vector3()
 const position = new Vector3()
 
 const getSpawnPosition = (vec3: Vector3) => {
-  vec3.set(plusMinus(55), plusMinus(55), 0)
+  vec3.set(plusMinus(50), plusMinus(50), 0)
 }
 
 export const EnemySpawner = () => (
