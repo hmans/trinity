@@ -3,6 +3,7 @@ import { IEntity, EntityWith, Tag } from "miniplex"
 import { createECS } from "miniplex-react"
 import p2 from "p2-es"
 import { Object3D, Vector3 } from "three"
+import { makeStore } from "statery"
 
 export type Entity = {
   player?: Tag
@@ -68,3 +69,5 @@ export const Layers = {
   Pickups: 8,
   Splosions: 16
 }
+
+export const store = makeStore({ score: 0, multiplier: 1 })
