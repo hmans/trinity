@@ -6,7 +6,18 @@ import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
 import { BoxShape } from "../lib/physics2d/Shape"
 import { Layers } from "./state"
 
+const Rotator = ({ speed = 1 }) => {
+  const body = useBody()
+
+  useTicker("fixed", (dt) => {
+    body.angle += speed * dt
+  })
+
+  return null
+}
+
 export const Level = () => {
+  console.log("Level")
   const material = useManagedThreeObject(
     () =>
       new MeshStandardMaterial({
@@ -18,6 +29,7 @@ export const Level = () => {
 
   return (
     <PhysicsBody mass={0}>
+      <Rotator speed={0} />
       <T.GridHelper
         rotation={[Math.PI / 2, 0, 0]}
         args={[120, 20, "#333", "#333"]}
