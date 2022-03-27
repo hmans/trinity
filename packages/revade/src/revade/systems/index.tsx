@@ -8,11 +8,14 @@ import { CameraRig } from "./CameraRig"
 import { EnemySpawner } from "./EnemySpawner"
 import { PlayerControl } from "./PlayerControl"
 import { SploderSpawner } from "./SploderSpawner"
+import { UpdateControllers } from "./UpdateControllers"
 import { Velocity } from "./Velocity"
 import { Wobble } from "./Wobble"
 
 const Systems = () => (
   <>
+    <UpdateControllers />
+
     <EnemySpawner />
     <SploderSpawner />
     <PlayerControl />
