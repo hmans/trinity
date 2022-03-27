@@ -1,5 +1,6 @@
 import { Tag } from "miniplex"
 import { ECS, Entity } from "../state"
+import { explodeEnemy } from "./explodeEnemy"
 
 const enemies = ECS.world.archetype("enemy", "transform").entities
 
@@ -19,7 +20,7 @@ export const explodeSploder = (entity: Entity & { sploder: Tag }) => {
   for (const enemy of enemies) {
     if (enemy.transform.position.distanceTo(position) < 18) {
       /* Remove enemy */
-      ECS.world.queue.destroyEntity(enemy)
+      explodeEnemy(enemy)
 
       /* Spawn a score pickup */
       ECS.world.queue.createEntity({

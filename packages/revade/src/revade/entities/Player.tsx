@@ -4,6 +4,7 @@ import { controller } from "../controller"
 import { PhysicsBody } from "../../lib/physics2d/PhsyicsBody"
 import { CircleShape } from "../../lib/physics2d/Shape"
 import { ECS, Layers } from "../state"
+import { increaseMultiplier } from "../actions/increaseMultiplier"
 
 export const Player = () => (
   <ECS.Collection tag="player" initial={1}>
@@ -27,7 +28,7 @@ export const Player = () => (
               collisionMask={Layers.Pickups}
               onBeginContact={({ userData: other }) => {
                 if (other && other.pickup) {
-                  console.log("BLING BLING")
+                  increaseMultiplier()
                   ECS.world.queue.destroyEntity(other)
                 }
               }}

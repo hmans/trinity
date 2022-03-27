@@ -12,7 +12,7 @@ export const HUD = () => {
 
       <GameFSM.Match state={["gameplay", "gameover"]}>
         <div>SCORE: {score}</div>
-        <div>MULTIPLIER: {multiplier}</div>
+        <div>MULTIPLIER: {multiplier}x</div>
       </GameFSM.Match>
     </div>
   )
