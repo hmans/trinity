@@ -10,6 +10,7 @@
     "build": "preconstruct build"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7"
@@ -19,6 +20,7 @@
     "three": "^0.138.3"
   },
   "dependencies": {
+    "@hmans/react-toolbox": "^0.1.4",
     "miniplex": "^0.8.0-1",
     "miniplex-react": "^0.1.7",
     "react-merge-refs": "^1.1.0",

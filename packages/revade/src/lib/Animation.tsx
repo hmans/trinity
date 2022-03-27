@@ -5,7 +5,8 @@ export const Animation: FC<
   AnimationOptions<number> & { children?: (v: number) => void }
 > = ({ children, ...props }) => {
   useLayoutEffect(() => {
-    animate({ onUpdate: children, ...props })
+    const playback = animate({ onUpdate: children, ...props })
+    return () => playback.stop()
   }, [])
 
   return null

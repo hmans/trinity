@@ -6,7 +6,12 @@ import { visualizer } from "rollup-plugin-visualizer"
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
-    exclude: ["miniplex", "@hmans/controlfreak", "@hmans/trinity"],
+    exclude: [
+      "miniplex",
+      "@hmans/controlfreak",
+      "@hmans/trinity",
+      "@hmans/signal"
+    ],
     include: ["react/jsx-runtime"]
   },
   build: {

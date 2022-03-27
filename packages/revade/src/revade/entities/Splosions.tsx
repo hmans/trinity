@@ -19,13 +19,15 @@ export const Splosions = () => (
       {(entity) => {
         /* Animate explosion */
         useEffect(() => {
-          animate({
+          const playback = animate({
             to: [10, 15, 0],
             ease: [easeOut, easeIn],
             offset: [0, 0.1, 1],
             duration: 1000,
             onUpdate: (latest) => entity.transform?.scale.setScalar(latest)
           })
+
+          return () => playback.stop()
         }, [])
 
         return (

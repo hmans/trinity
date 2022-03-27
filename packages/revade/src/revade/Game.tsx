@@ -1,15 +1,26 @@
 import T, { Engine, View } from "@hmans/trinity"
-import { EnemySpawner } from "./EnemySpawner"
+import React from "react"
+import { makeFSM } from "../lib/FSM"
+import { PhysicsWorld } from "../lib/physics2d"
 import { Camera } from "./entities/Camera"
-import { Enemies } from "./entities/Enemies"
-import { Pickups } from "./entities/Pickups"
-import { Player } from "./entities/Player"
-import { Sploders } from "./entities/Sploders"
-import { Splosions } from "./entities/Splosions"
+import { GameOver } from "./GameOver"
+import { Gameplay } from "./Gameplay"
 import { HUD } from "./HUD"
 import { Level } from "./Level"
-import { PhysicsWorld } from "../lib/physics2d"
-import Systems from "./systems"
+import { Menu } from "./Menu"
+
+export const GameFSM = makeFSM({
+  states: ["menu", "gameplay", "pause", "gameover"],
+  state: "menu",
+  transitions: {
+    startGame: { from: "menu", to: "gameplay" },
+    pauseGame: { from: "gameplay", to: "pause" },
+    resumeGame: { from: "pause", to: "gameplay" },
+    abortGame: { from: "pause", to: "menu" },
+    gameOver: { from: "gameplay", to: "gameover" },
+    returnToMenu: { from: ["gameover", "gameplay"], to: "menu" }
+  }
+})
 
 export const Game = () => (
   <>
@@ -18,19 +29,22 @@ export const Game = () => (
       <View>
         <T.AmbientLight intensity={0.3} />
         <T.DirectionalLight intensity={0.2} position={[10, 10, 10]} />
+        <Camera />
 
         <PhysicsWorld gravity={[0, 0]}>
           <Level />
-          <Player />
-          <Enemies />
-          <Sploders />
-          <Splosions />
-          <Pickups />
-          <Camera />
 
-          <EnemySpawner />
+          <GameFSM.Match state="menu">
+            <Menu />
+          </GameFSM.Match>
 
-          <Systems />
+          <GameFSM.Match state={["gameplay", "gameover"]}>
+            <Gameplay />
+
+            <GameFSM.Match state="gameover">
+              <GameOver />
+            </GameFSM.Match>
+          </GameFSM.Match>
         </PhysicsWorld>
       </View>
     </Engine>

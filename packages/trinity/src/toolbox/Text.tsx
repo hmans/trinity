@@ -7,7 +7,7 @@
 import React, { FC, useEffect, useLayoutEffect } from "react"
 import type { ColorRepresentation, Mesh } from "three"
 import { Text as TroikaText } from "troika-three-text"
-import { useConst } from "../lib/useConst"
+import { useConst } from "@hmans/react-toolbox"
 import { Primitive } from "../reactor/Primitive"
 import { ReactorComponentProps } from "../reactor/types"
 
@@ -23,7 +23,13 @@ type TextProps = ReactorComponentProps<typeof Mesh> &
     textAlign: "left" | "right" | "center" | "justify"
     font: string
     anchorX: number | "left" | "center" | "right"
-    anchorY: number | "top" | "top-baseline" | "middle" | "bottom-baseline" | "bottom"
+    anchorY:
+      | number
+      | "top"
+      | "top-baseline"
+      | "middle"
+      | "bottom-baseline"
+      | "bottom"
     clipRect: [number, number, number, number]
     depthOffset: number
     direction: "auto" | "ltr" | "rtl"
