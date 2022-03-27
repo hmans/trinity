@@ -17,7 +17,6 @@ const Rotator = ({ speed = 1 }) => {
 }
 
 export const Level = () => {
-  console.log("Level")
   const material = useManagedThreeObject(
     () =>
       new MeshStandardMaterial({
