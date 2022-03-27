@@ -1,6 +1,7 @@
 import { Tag } from "miniplex"
 import { number, plusMinus } from "randomish"
-import { Vector3 } from "three"
+import { MathUtils, Vector3 } from "three"
+import { clamp } from "three/src/math/MathUtils"
 import ArchetypeSystem from "../../lib/ArchetypeSystem"
 import { GameFSM } from "../Game"
 import { ECS } from "../state"
@@ -18,10 +19,18 @@ export const EnemySpawner = () => (
   <ArchetypeSystem archetype={["enemySpawner"]}>
     {(entities, dt) => {
       for (const { enemySpawner: spawner } of entities) {
+        /* Time bookkeeping */
         spawner.t -= dt
+
+        /* Spawn enemies? */
         if (spawner.t <= 0) {
           spawner.t += spawner.interval
+          console.log("Spawning enemies")
 
+          /* Increase difficulty */
+          spawner.interval = Math.max(spawner.interval - 0.1, 0.5)
+
+          /* Spawn enemies */
           getSpawnPosition(position)
           while (
             players[0] &&

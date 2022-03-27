@@ -4,7 +4,7 @@ export const EnemySpawner = () => (
   <ECS.Entity>
     <ECS.Component
       name="enemySpawner"
-      data={{ t: 0, interval: 2, amount: 5 }}
+      data={{ t: 0, interval: 4, amount: 5 }}
     />
   </ECS.Entity>
 )
