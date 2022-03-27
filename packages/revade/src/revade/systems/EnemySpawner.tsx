@@ -39,7 +39,7 @@ export const EnemySpawner = () => (
           }
 
           for (let i = 0; i < enemySpawner.amount; i++) {
-            ECS.world.createEntity({
+            ECS.world.queue.createEntity({
               enemy: Tag,
               spawnAt: tmpVec3
                 .randomDirection()
