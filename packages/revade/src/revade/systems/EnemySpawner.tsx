@@ -6,7 +6,6 @@ import { GameFSM } from "../Game"
 import { ECS } from "../state"
 
 const players = ECS.world.archetype("player").entities
-const spawners = ECS.world.archetype("spawner").entities
 
 const tmpVec3 = new Vector3()
 const position = new Vector3()
@@ -16,9 +15,9 @@ const getSpawnPosition = (vec3: Vector3) => {
 }
 
 export const EnemySpawner = () => (
-  <ArchetypeSystem archetype={["spawner"]}>
+  <ArchetypeSystem archetype={["enemySpawner"]}>
     {(entities, dt) => {
-      for (const { spawner } of entities) {
+      for (const { enemySpawner: spawner } of entities) {
         spawner.t -= dt
         if (spawner.t <= 0) {
           spawner.t += spawner.interval

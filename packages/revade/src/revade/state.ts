@@ -47,7 +47,7 @@ export type Entity = {
     callback: Function
   }
 
-  spawner?: {
+  enemySpawner?: {
     t: number
     interval: number
     amount: number
