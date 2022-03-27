@@ -1,4 +1,5 @@
 import System from "../../lib/System"
+import { GameFSM } from "../Game"
 import { ECS } from "../state"
 import { Attraction } from "./Attraction"
 import { AttractPickups } from "./AttractPickups"
@@ -17,7 +18,9 @@ const Systems = () => (
     <UpdateControllers />
 
     <EnemySpawner />
-    <SploderSpawner />
+    <GameFSM.Match state="gameplay">
+      <SploderSpawner />
+    </GameFSM.Match>
     <PlayerControl />
 
     <Attraction />
