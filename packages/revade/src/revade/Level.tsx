@@ -1,6 +1,5 @@
 import T, { useManagedThreeObject, useTicker } from "@hmans/trinity"
-import { useCallback, useRef } from "react"
-import { Group, MeshStandardMaterial, Object3D } from "three"
+import { MeshStandardMaterial } from "three"
 import { useBody } from "../lib/physics2d/BodyContext"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
 import { BoxShape } from "../lib/physics2d/Shape"
