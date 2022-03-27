@@ -35,13 +35,21 @@ export const makeInstanceComponents = () => {
 
     function updateInstances() {
       const l = entities.length
+      let count = 0
       for (let i = 0; i < l; i++) {
         const { instance } = entities[i]
-        instancedMesh.current!.setMatrixAt(i, instance.sceneObject.matrixWorld)
+
+        if (instance.sceneObject.visible) {
+          instancedMesh.current!.setMatrixAt(
+            i,
+            instance.sceneObject.matrixWorld
+          )
+          count++
+        }
       }
 
       instancedMesh.current.instanceMatrix.needsUpdate = true
-      instancedMesh.current.count = entities.length
+      instancedMesh.current.count = count
     }
 
     useTicker("render", updateInstances)

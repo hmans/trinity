@@ -42,6 +42,8 @@ export type Entity = {
   }
 
   /* Tools */
+  lifetime?: number
+
   auto?: {
     delay: number
     callback: Function

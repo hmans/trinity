@@ -7,6 +7,8 @@ import { AutoSystem } from "./AutoSystem"
 import { Avoidance } from "./Avoidance"
 import { CameraRig } from "./CameraRig"
 import { EnemySpawner } from "./EnemySpawner"
+import { Lifetime } from "./Lifetime"
+import { Pickups } from "./Pickups"
 import { PlayerControl } from "./PlayerControl"
 import { SploderSpawner } from "./SploderSpawner"
 import { UpdateControllers } from "./UpdateControllers"
@@ -16,6 +18,7 @@ import { Wobble } from "./Wobble"
 const Systems = () => (
   <>
     <UpdateControllers />
+    <Lifetime />
 
     <EnemySpawner />
     <GameFSM.Match state="gameplay">
@@ -30,6 +33,7 @@ const Systems = () => (
     <Wobble />
     <AutoSystem />
     <CameraRig />
+    <Pickups />
 
     <System stage="render">{() => ECS.world.queue.flush()}</System>
   </>

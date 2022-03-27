@@ -24,6 +24,8 @@ export const Pickups = () => (
 
         return (
           <>
+            <ECS.Component name="lifetime" data={0} />
+
             <ECS.Component name="transform">
               <PhysicsBody
                 position={entity.spawnAt}
