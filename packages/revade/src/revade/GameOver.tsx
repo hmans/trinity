@@ -1,6 +1,14 @@
-import { Text } from "@hmans/trinity"
+import { Text, useTicker } from "@hmans/trinity"
+import { controller } from "./controller"
+import { GameFSM } from "./Game"
 
 export const GameOver = () => {
+  useTicker("update", () => {
+    if (controller.controls.fire.value) {
+      GameFSM.transition("returnToMenu")
+    }
+  })
+
   return (
     <>
       <Text

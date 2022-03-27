@@ -1,9 +1,12 @@
 import {
+  BooleanControl,
   clampVector,
   compositeKeyboardVector,
   Controller,
   gamepadAxisVector,
-  VectorControl
+  VectorControl,
+  whenButtonPressed,
+  whenKeyPressed
 } from "@hmans/controlfreak"
 
 export const controller = new Controller()
@@ -13,3 +16,8 @@ controller
   .addStep(compositeKeyboardVector("w", "s", "a", "d"))
   .addStep(gamepadAxisVector(0, 1))
   .addStep(clampVector(1))
+
+controller
+  .addControl("fire", BooleanControl)
+  .addStep(whenKeyPressed(" "))
+  .addStep(whenButtonPressed(0))
