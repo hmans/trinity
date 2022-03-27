@@ -1,7 +1,7 @@
 import { VectorControl } from "@hmans/controlfreak"
 import ArchetypeSystem from "../../lib/ArchetypeSystem"
 
-export const PlayerControl = ({ thrust = 150 }) => (
+export const PlayerControl = ({ thrust = 200 }) => (
   <ArchetypeSystem stage="fixed" archetype={["controller", "body"]}>
     {(entities) => {
       for (const { controller, body } of entities) {

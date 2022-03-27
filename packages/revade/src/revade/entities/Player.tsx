@@ -13,7 +13,7 @@ export const Player = () => (
 
         <ECS.Component name="transform">
           <PhysicsBody
-            linearDamping={0.99}
+            linearDamping={0.9995}
             fixedRotation
             interpolate
             userData={entity}
