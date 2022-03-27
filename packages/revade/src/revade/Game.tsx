@@ -8,6 +8,7 @@ import { Gameplay } from "./Gameplay"
 import { HUD } from "./HUD"
 import { Level } from "./Level"
 import { Menu } from "./Menu"
+import Systems from "./systems"
 
 export const GameFSM = makeFSM({
   states: ["menu", "gameplay", "pause", "gameover"],
@@ -27,11 +28,12 @@ export const Game = () => (
     <HUD />
     <Engine>
       <View>
-        <T.AmbientLight intensity={0.3} />
-        <T.DirectionalLight intensity={0.2} position={[10, 10, 10]} />
-        <Camera />
-
         <PhysicsWorld gravity={[0, 0]}>
+          <T.AmbientLight intensity={0.3} />
+          <T.DirectionalLight intensity={0.2} position={[10, 10, 10]} />
+
+          <Systems />
+          <Camera />
           <Level />
 
           <GameFSM.Match state="menu">

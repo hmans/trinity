@@ -16,6 +16,7 @@ const Systems = () => (
     <EnemySpawner />
     <SploderSpawner />
     <PlayerControl />
+
     <Attraction />
     <AttractPickups />
     <Avoidance />
