@@ -6,6 +6,7 @@ import { usePhysicsWorld } from "./PhysicsWorld"
 
 type ShapeProps = {
   sensor?: boolean
+  offset?: [number, number]
   collisionGroup?: number
   collisionMask?: number
   onBeginContact?: (entity: Entity) => void
@@ -19,7 +20,8 @@ export const Shape: FC<ShapeProps & { shape: p2.Shape }> = ({
   onBeginContact,
   onEndContact,
   sensor,
-  shape
+  shape,
+  offset = [0, 0]
 }) => {
   const body = useBody()
   const { bodies } = usePhysicsWorld()
@@ -29,7 +31,7 @@ export const Shape: FC<ShapeProps & { shape: p2.Shape }> = ({
     shape.collisionMask = collisionMask || 1
     shape.sensor = !!sensor
 
-    body.addShape(shape)
+    body.addShape(shape, offset)
     return () => void body.removeShape(shape)
   }, [])
 

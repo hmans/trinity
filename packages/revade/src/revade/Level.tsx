@@ -1,6 +1,7 @@
 import T, { useManagedThreeObject, useTicker } from "@hmans/trinity"
 import { useCallback, useRef } from "react"
-import { Group, MeshStandardMaterial } from "three"
+import { Group, MeshStandardMaterial, Object3D } from "three"
+import { useBody } from "../lib/physics2d/BodyContext"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"
 import { BoxShape } from "../lib/physics2d/Shape"
 import { Layers } from "./state"
@@ -15,61 +16,52 @@ export const Level = () => {
       })
   )
 
-  const group = useRef<Group>(null!)
-
-  // useTicker("fixed", () => {
-  //   if (group.current) {
-  //     group.current.rotation.z += 0.01
-  //     /* TODO: make the physics engine update its bodies transforms :b */
-  //   }
-  // })
-
   return (
-    <T.Group ref={group} rotation-z={0.1} name="level">
+    <PhysicsBody mass={0}>
       <T.GridHelper
         rotation={[Math.PI / 2, 0, 0]}
         args={[120, 20, "#333", "#333"]}
       />
-      <PhysicsBody position-x={-61} mass={0}>
-        <BoxShape
-          size={[2, 124]}
-          collisionGroup={Layers.Default}
-          collisionMask={Layers.Player | Layers.Enemies | Layers.Pickups}
-        />
-        <T.Mesh material={material}>
-          <T.BoxGeometry args={[2, 124, 2]} />
-        </T.Mesh>
-      </PhysicsBody>
-      <PhysicsBody position-x={+61} mass={0}>
-        <BoxShape
-          size={[2, 124]}
-          collisionGroup={Layers.Default}
-          collisionMask={Layers.Player | Layers.Enemies | Layers.Pickups}
-        />
-        <T.Mesh material={material}>
-          <T.BoxGeometry args={[2, 124, 2]} />
-        </T.Mesh>
-      </PhysicsBody>
-      <PhysicsBody position-y={-61} mass={0}>
-        <BoxShape
-          size={[120, 2]}
-          collisionGroup={Layers.Default}
-          collisionMask={Layers.Player | Layers.Enemies | Layers.Pickups}
-        />
-        <T.Mesh material={material}>
-          <T.BoxGeometry args={[124, 2, 2]} />
-        </T.Mesh>
-      </PhysicsBody>
-      <PhysicsBody position-y={+61} mass={0}>
-        <BoxShape
-          size={[120, 2]}
-          collisionGroup={Layers.Default}
-          collisionMask={Layers.Player | Layers.Enemies | Layers.Pickups}
-        />
-        <T.Mesh material={material}>
-          <T.BoxGeometry args={[124, 2, 2]} />
-        </T.Mesh>
-      </PhysicsBody>
-    </T.Group>
+
+      <BoxShape
+        offset={[-61, 0]}
+        size={[2, 124]}
+        collisionGroup={Layers.Default}
+        collisionMask={Layers.Player | Layers.Enemies | Layers.Pickups}
+      />
+      <T.Mesh position={[-61, 0, 0]} material={material}>
+        <T.BoxGeometry args={[2, 124, 2]} />
+      </T.Mesh>
+
+      <BoxShape
+        offset={[+61, 0]}
+        size={[2, 124]}
+        collisionGroup={Layers.Default}
+        collisionMask={Layers.Player | Layers.Enemies | Layers.Pickups}
+      />
+      <T.Mesh position={[+61, 0, 0]} material={material}>
+        <T.BoxGeometry args={[2, 124, 2]} />
+      </T.Mesh>
+
+      <BoxShape
+        offset={[0, -61]}
+        size={[124, 2]}
+        collisionGroup={Layers.Default}
+        collisionMask={Layers.Player | Layers.Enemies | Layers.Pickups}
+      />
+      <T.Mesh position={[0, -61, 0]} material={material}>
+        <T.BoxGeometry args={[124, 2, 2]} />
+      </T.Mesh>
+
+      <BoxShape
+        offset={[0, +61]}
+        size={[124, 2]}
+        collisionGroup={Layers.Default}
+        collisionMask={Layers.Player | Layers.Enemies | Layers.Pickups}
+      />
+      <T.Mesh position={[0, +61, 0]} material={material}>
+        <T.BoxGeometry args={[124, 2, 2]} />
+      </T.Mesh>
+    </PhysicsBody>
   )
 }

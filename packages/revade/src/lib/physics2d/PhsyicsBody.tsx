@@ -1,6 +1,12 @@
 import T, { ReactorComponentProps } from "@hmans/trinity"
 import p2 from "p2-es"
-import { forwardRef, useLayoutEffect, useRef, useState } from "react"
+import {
+  forwardRef,
+  useImperativeHandle,
+  useLayoutEffect,
+  useRef,
+  useState
+} from "react"
 import mergeRefs from "react-merge-refs"
 import { Euler, Group, Quaternion, Vector3 } from "three"
 import { BodyContext } from "./BodyContext"
@@ -17,6 +23,7 @@ export const PhysicsBody = forwardRef<
     mass?: number
     linearDamping?: number
     angularDamping?: number
+    angularVelocity?: number
     fixedRotation?: boolean
     userData?: any
   }
@@ -29,6 +36,7 @@ export const PhysicsBody = forwardRef<
       linearDamping = 0,
       angularDamping = 0,
       fixedRotation = false,
+      angularVelocity = 0,
       userData,
       ...props
     },
@@ -42,6 +50,7 @@ export const PhysicsBody = forwardRef<
         new p2.Body({
           mass,
           angularDamping,
+          angularVelocity,
           damping: linearDamping,
           fixedRotation
         })
