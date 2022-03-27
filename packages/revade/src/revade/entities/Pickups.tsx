@@ -19,7 +19,7 @@ export const Pickups = () => (
       {(entity) => {
         useEffect(() => {
           const force = insideCircle()
-          entity.body!.applyForce([force.x * 200, force.y * 200])
+          entity.body!.applyForce([force.x * 200, force.y * 300])
         }, [])
 
         return (
