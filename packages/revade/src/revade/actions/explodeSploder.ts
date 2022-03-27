@@ -18,7 +18,7 @@ export const explodeSploder = (entity: Entity & { sploder: Tag }) => {
 
   /* Destroy all enemies that are within the explosion radius */
   for (const enemy of enemies) {
-    if (enemy.transform.position.distanceTo(position) < 18) {
+    if (enemy.transform.position.distanceTo(position) < 20) {
       /* Remove enemy */
       explodeEnemy(enemy)
 
