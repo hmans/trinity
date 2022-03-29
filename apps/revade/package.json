@@ -11,7 +11,6 @@
     "@hmans/controlfreak": "^0.1.8",
     "@hmans/react-toolbox": "^0.1.4",
     "@hmans/signal": "^0.1.0",
-    "@hmans/trinity": "^0.2.0",
     "@react-trinity/reactor": "^0.2.0",
     "@react-trinity/toybox": "^0.2.0",
     "@types/three": "^0.139.0",
@@ -23,6 +22,7 @@
     "react": "^18.0.0-rc.3",
     "react-dom": "^18.0.0-rc.3",
     "react-merge-refs": "^1.1.0",
+    "react-trinity": "^0.2.0",
     "statery": "^0.5.4",
     "three": "^0.139.0"
   },

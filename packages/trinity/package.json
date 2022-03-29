@@ -1,10 +1,10 @@
 {
-  "name": "@hmans/trinity",
+  "name": "react-trinity",
   "private": false,
   "version": "0.2.0",
   "description": "Trinity.",
-  "main": "dist/hmans-trinity.cjs.js",
-  "module": "dist/hmans-trinity.esm.js",
+  "main": "dist/react-trinity.cjs.js",
+  "module": "dist/react-trinity.esm.js",
   "license": "MIT",
   "scripts": {
     "build": "preconstruct build"

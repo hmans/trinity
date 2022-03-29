@@ -1,4 +1,4 @@
-import { Engine, View } from "@hmans/trinity"
+import { Engine, View } from "react-trinity"
 import T from "@react-trinity/reactor"
 import React from "react"
 import { makeFSM } from "../lib/FSM"

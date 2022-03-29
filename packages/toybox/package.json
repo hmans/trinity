@@ -11,7 +11,7 @@
     "build": "preconstruct build"
   },
   "peerDependencies": {
-    "@hmans/trinity": "^0.2.0",
+    "react-trinity": "^0.2.0",
     "@react-trinity/reactor": "^0.2.0",
     "react": ">= 17.0",
     "three": ">= 0.138.0"
@@ -31,7 +31,7 @@
     ]
   },
   "devDependencies": {
-    "@hmans/trinity": "*",
+    "react-trinity": "*",
     "@react-trinity/reactor": "*",
     "@types/react": "^17.0.43",
     "@types/three": "^0.139.0",

@@ -1,4 +1,4 @@
-import { useTicker } from "@hmans/trinity"
+import { useTicker } from "react-trinity"
 import T, { ReactorComponentProps } from "@react-trinity/reactor"
 import { IEntity } from "miniplex"
 import { createECS } from "miniplex-react"
@@ -19,9 +19,9 @@ export const makeInstanceComponents = () => {
 
   /* This component renders the InstancedMesh itself and continuously updates it
      from the data in the ECS. */
-  const Root: FC<
-    ReactorComponentProps<typeof InstancedMesh> & { countStep?: number }
-  > = ({ children, countStep = 1000, ...props }) => {
+  const Root: FC<ReactorComponentProps<typeof InstancedMesh> & {
+    countStep?: number
+  }> = ({ children, countStep = 1000, ...props }) => {
     const instancedMesh = useRef<InstancedMesh>(null!)
 
     /* The following hook will make sure this entire component gets re-rendered when

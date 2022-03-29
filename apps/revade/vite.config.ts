@@ -9,8 +9,8 @@ export default defineConfig({
     exclude: [
       "miniplex",
       "miniplex-react",
+      "react-trinity",
       "@hmans/controlfreak",
-      "@hmans/trinity",
       "@hmans/signal"
     ],
     include: ["react/jsx-runtime"]
