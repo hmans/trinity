@@ -1,6 +1,6 @@
-import type { ReactorComponentProps } from "@react-trinity/reactor"
+import { ReactorComponentProps } from "@react-trinity/reactor"
 import T from "@react-trinity/reactor"
-import type { IEntity } from "miniplex"
+import { IEntity } from "miniplex"
 import { createECS } from "miniplex-react"
 import React, { FC, forwardRef, useLayoutEffect, useRef } from "react"
 import mergeRefs from "react-merge-refs"
