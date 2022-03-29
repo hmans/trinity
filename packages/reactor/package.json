@@ -1,0 +1,24 @@
+{
+  "name": "@react-trinity/reactor",
+  "private": false,
+  "version": "0.1.0",
+  "description": "Trinity Reactor.",
+  "main": "dist/react-trinity-reactor.cjs.js",
+  "module": "dist/react-trinity-reactor.esm.js",
+  "types": "dist/react-trinity-reactor.cjs.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "preconstruct build"
+  },
+  "peerDependencies": {
+    "react": ">= 17",
+    "three": "^0.138.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+    ]
+  }
+}
