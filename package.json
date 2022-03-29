@@ -8,11 +8,12 @@
     "apps/*"
   ],
   "scripts": {
-    "postinstall": "preconstruct dev",
+    "postinstall": "preconstruct dev && manypkg check",
     "dev": "preconstruct dev",
     "build": "preconstruct build"
   },
   "devDependencies": {
+    "@manypkg/cli": "^0.19.1",
     "@preconstruct/cli": "^2.1.5"
   },
   "preconstruct": {
