@@ -12,10 +12,6 @@
     "dev": "preconstruct dev",
     "build": "preconstruct build"
   },
-  "devDependencies": {
-    "@manypkg/cli": "^0.19.1",
-    "@preconstruct/cli": "^2.1.5"
-  },
   "preconstruct": {
     "packages": [
       "packages/*"
@@ -29,5 +25,9 @@
     "singleQuote": false,
     "arrowParens": "always",
     "printWidth": 80
+  },
+  "dependencies": {
+    "@manypkg/cli": "^0.19.1",
+    "@preconstruct/cli": "^2.1.5"
   }
 }

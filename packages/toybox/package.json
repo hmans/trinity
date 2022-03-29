@@ -31,9 +31,11 @@
     ]
   },
   "devDependencies": {
+    "@hmans/trinity": "*",
+    "@react-trinity/reactor": "*",
     "@types/react": "^17.0.43",
     "@types/three": "^0.139.0",
-    "react": "^17.0.2",
+    "react": "^18.0.0-rc.3",
     "three": "^0.139.0"
   }
 }
