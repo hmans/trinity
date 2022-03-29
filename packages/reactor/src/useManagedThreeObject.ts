@@ -21,7 +21,6 @@ export const useManagedThreeObject = <Instance = any>(
 
     return () => {
       if ("dispose" in instance) {
-        console.debug("Disposing", instance.constructor.name)
         instance.dispose()
       }
     }
