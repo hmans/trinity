@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react"
 import { createRef } from "react"
-import { Mesh, MeshStandardMaterial } from "three"
+import { BoxGeometry, Mesh, MeshStandardMaterial } from "three"
 import T from "../src"
 
 describe("Reactor", () => {
@@ -36,5 +36,51 @@ describe("Reactor", () => {
     const ref = createRef<MeshStandardMaterial>()
     render(<T.MeshStandardMaterial ref={ref} color="red" />)
     expect(ref.current.color.getHexString()).toEqual("ff0000")
+  })
+
+  it("allows you to attach objects to other objects through the 'attach' prop", () => {
+    const mesh = createRef<Mesh>()
+    const material = createRef<MeshStandardMaterial>()
+
+    render(
+      <T.Mesh ref={mesh}>
+        <T.MeshStandardMaterial
+          ref={material}
+          color="hotpink"
+          attach="material"
+        />
+      </T.Mesh>
+    )
+
+    expect(mesh.current.material).toBe(material.current)
+  })
+
+  it("automatically attaches materials and geometries", () => {
+    const mesh = createRef<Mesh>()
+    const material = createRef<MeshStandardMaterial>()
+    const geometry = createRef<BoxGeometry>()
+
+    render(
+      <T.Mesh ref={mesh}>
+        <T.MeshStandardMaterial ref={material} />
+        <T.BoxGeometry ref={geometry} />
+      </T.Mesh>
+    )
+
+    expect(mesh.current.material).toBe(material.current)
+    expect(mesh.current.geometry).toBe(geometry.current)
+  })
+
+  it("automatically attaches the object to a parent if there is one", () => {
+    const parent = createRef<Mesh>()
+    const child = createRef<Mesh>()
+
+    render(
+      <T.Mesh ref={parent}>
+        <T.Mesh ref={child} />
+      </T.Mesh>
+    )
+
+    expect(child.current.parent).toBe(parent.current)
   })
 })
