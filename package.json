@@ -13,7 +13,7 @@
     "build": "preconstruct build",
     "test": "jest",
     "ci": "preconstruct validate && manypkg check && yarn build && yarn test",
-    "release": "yarn build && yarn test && yarn changeset publish"
+    "release": "yarn ci && yarn changeset publish"
   },
   "preconstruct": {
     "packages": [
