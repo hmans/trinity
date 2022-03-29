@@ -1,4 +1,4 @@
-import { useTicker } from "react-trinity"
+import { useTicker } from "@react-trinity/ticker"
 import T from "@react-trinity/reactor"
 import React, { useEffect, useRef, useState } from "react"
 import { Mesh } from "three"

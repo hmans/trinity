@@ -4,7 +4,7 @@ import { IEntity } from "miniplex"
 import { createECS } from "miniplex-react"
 import React, { FC, forwardRef, useLayoutEffect, useRef } from "react"
 import mergeRefs from "react-merge-refs"
-import { useTicker } from "react-trinity"
+import { useTicker } from "@react-trinity/ticker"
 import { Group, InstancedMesh, Object3D } from "three"
 
 type InstanceEntity = {

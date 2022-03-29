@@ -1,4 +1,4 @@
-import { useTicker } from "react-trinity"
+import { useTicker } from "@react-trinity/ticker"
 import { Tag } from "miniplex"
 import { plusMinus } from "randomish"
 import { useRef } from "react"

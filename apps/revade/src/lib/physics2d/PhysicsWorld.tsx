@@ -1,4 +1,4 @@
-import { useTicker } from "react-trinity"
+import { useTicker } from "@react-trinity/ticker"
 import { createECS } from "miniplex-react"
 import p2 from "p2-es"
 import { createContext, FC, useContext, useEffect, useState } from "react"

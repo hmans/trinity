@@ -10,6 +10,7 @@ export default defineConfig({
       "miniplex",
       "miniplex-react",
       "react-trinity",
+      "@react-trinity/ticker",
       "@hmans/controlfreak",
       "@hmans/signal"
     ],

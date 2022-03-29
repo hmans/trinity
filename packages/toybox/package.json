@@ -12,6 +12,7 @@
   },
   "peerDependencies": {
     "@react-trinity/reactor": "^0.2.1",
+    "@react-trinity/ticker": "^0.2.1",
     "react": ">= 17.0",
     "react-trinity": "^0.2.1",
     "three": ">= 0.138.0"

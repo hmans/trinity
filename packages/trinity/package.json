@@ -24,6 +24,7 @@
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4",
     "@react-trinity/reactor": "^0.2.1",
+    "@react-trinity/ticker": "^0.2.2",
     "react-merge-refs": "^1.1.0"
   },
   "babel": {
