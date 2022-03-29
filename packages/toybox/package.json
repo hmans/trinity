@@ -1,7 +1,7 @@
 {
   "name": "@react-trinity/toybox",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Trinity Toybox.",
   "main": "dist/react-trinity-toybox.cjs.js",
   "module": "dist/react-trinity-toybox.esm.js",
@@ -12,7 +12,8 @@
   },
   "peerDependencies": {
     "@hmans/trinity": "^0.1.8",
-    "react": ">= 17",
+    "@react-trinity/reactor": "^0.1.2",
+    "react": ">= 17.0",
     "three": "^0.138.0"
   },
   "dependencies": {
@@ -28,5 +29,11 @@
       "@babel/preset-react",
       "@babel/preset-typescript"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.43",
+    "@types/three": "^0.139.0",
+    "react": "^17.0.2",
+    "three": "^0.139.0"
   }
 }

@@ -1,7 +1,8 @@
-import T, { useCamera } from "@hmans/trinity"
+import { useCamera } from "@hmans/trinity"
 import { FC } from "react"
 import { PerspectiveCamera } from "three"
 import { ECS } from "../state"
+import T from "@react-trinity/reactor"
 
 export const Camera: FC<{ offset?: [number, number, number] }> = ({
   offset = [0, 0, 75]

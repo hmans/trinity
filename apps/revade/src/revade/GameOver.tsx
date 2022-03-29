@@ -1,4 +1,5 @@
-import { Text, useTicker } from "@hmans/trinity"
+import { useTicker } from "@hmans/trinity"
+import { Text } from "@react-trinity/toybox"
 import { controller } from "./controller"
 import { GameFSM } from "./Game"
 

@@ -1,4 +1,5 @@
-import T, { useManagedThreeObject, useTicker } from "@hmans/trinity"
+import { useTicker } from "@hmans/trinity"
+import T, { useManagedThreeObject } from "@react-trinity/reactor"
 import { MeshStandardMaterial } from "three"
 import { useBody } from "../lib/physics2d/BodyContext"
 import { PhysicsBody } from "../lib/physics2d/PhsyicsBody"

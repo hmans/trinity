@@ -7,8 +7,12 @@ import React, {
 import { BufferGeometry, Fog, Material, Object3D } from "three"
 import { applyProps } from "./lib/applyProps"
 import { applyRef } from "./lib/applyRef"
-import { ReactorComponent, ReactorComponentProps } from "./types"
-import type { Constructor, StringIndexable } from "./types/utilities"
+import type {
+  Constructor,
+  ReactorComponent,
+  ReactorComponentProps,
+  StringIndexable
+} from "./types"
 import { useManagedThreeObject } from "./useManagedThreeObject"
 
 export const ParentContext = createContext<THREE.Object3D>(null!)

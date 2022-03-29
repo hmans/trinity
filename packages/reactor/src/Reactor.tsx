@@ -1,7 +1,6 @@
 import * as THREE from "three"
 import { makeComponent } from "./makeComponent"
-import type { ReactorComponent } from "./types"
-import type { Constructor } from "./types/utilities"
+import type { Constructor, ReactorComponent } from "./types"
 
 type THREE = typeof THREE
 

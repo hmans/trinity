@@ -1,4 +1,16 @@
-import type { Constructor } from "./utilities"
+/* A bunch of utility types. */
+
+export interface Constructor<Instance = any> {
+  new (...args: any[]): Instance
+}
+
+export type StringIndexable = {
+  [key: string]: any
+}
+
+export type Factory<T = any> = () => T
+
+/* The good stuff */
 
 export type ReactorComponent<
   TConstructor extends Constructor<any>,

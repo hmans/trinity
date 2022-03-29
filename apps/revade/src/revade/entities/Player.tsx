@@ -1,4 +1,4 @@
-import T from "@hmans/trinity"
+import T from "@react-trinity/reactor"
 import { BodyThiefHack } from "../BodyThiefHack"
 import { controller } from "../controller"
 import { PhysicsBody } from "../../lib/physics2d/PhsyicsBody"

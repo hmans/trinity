@@ -12,6 +12,8 @@
     "@hmans/react-toolbox": "^0.1.4",
     "@hmans/signal": "^0.1.0",
     "@hmans/trinity": "^0.1.7",
+    "@react-trinity/reactor": "^0.1.2",
+    "@react-trinity/toybox": "^0.1.2",
     "@types/three": "^0.138.0",
     "miniplex": "^0.8.0-1",
     "miniplex-react": "^0.1.7",

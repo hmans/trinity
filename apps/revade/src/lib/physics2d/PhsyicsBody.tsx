@@ -1,4 +1,4 @@
-import T, { ReactorComponentProps } from "@hmans/trinity"
+import T, { ReactorComponentProps } from "@react-trinity/reactor"
 import p2 from "p2-es"
 import {
   forwardRef,
