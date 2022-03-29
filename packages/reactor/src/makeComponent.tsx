@@ -47,14 +47,14 @@ export const makeComponent = <
 
       /* Mount scene object to parent */
       useLayoutEffect(() => {
-        if (!(instance instanceof Object3D)) return
+        if (!parent || !(instance instanceof Object3D)) return
         parent.add(instance)
         return () => void parent.remove(instance)
       }, [parent, instance])
 
       /* Attach to parent attributes */
       useLayoutEffect(() => {
-        if (!instance) return
+        if (!parent || !instance) return
 
         /* For specific types, set a default attach property */
         if (!attach) {
