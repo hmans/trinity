@@ -11,9 +11,9 @@
     "build": "preconstruct build"
   },
   "peerDependencies": {
-    "react-trinity": "^0.2.1",
     "@react-trinity/reactor": "^0.2.1",
     "react": ">= 17.0",
+    "react-trinity": "^0.2.1",
     "three": ">= 0.138.0"
   },
   "dependencies": {
@@ -31,11 +31,11 @@
     ]
   },
   "devDependencies": {
-    "react-trinity": "*",
     "@react-trinity/reactor": "*",
     "@types/react": "^17.0.43",
     "@types/three": "^0.139.0",
     "react": "^18.0.0-rc.3",
+    "react-trinity": "*",
     "three": "^0.139.0"
   }
 }
