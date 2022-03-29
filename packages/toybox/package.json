@@ -1,0 +1,26 @@
+{
+  "name": "@react-trinity/toybox",
+  "private": false,
+  "version": "0.1.0",
+  "description": "Trinity Toybox.",
+  "main": "dist/react-trinity-toybox.cjs.js",
+  "module": "dist/react-trinity-toybox.esm.js",
+  "types": "dist/react-trinity-toybox.cjs.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "preconstruct build"
+  },
+  "peerDependencies": {
+    "@hmans/trinity": "^0.1.8"
+  },
+  "dependencies": {
+    "troika-three-text": "^0.46.3"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+    ]
+  }
+}
