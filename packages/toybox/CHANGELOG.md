@@ -1,5 +1,11 @@
 # @react-trinity/toybox
 
+## 0.2.2
+
+### Patch Changes
+
+- 7751cc3: Type tweaks
+
 ## 0.2.1
 
 ### Patch Changes
