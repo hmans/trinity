@@ -31,5 +31,8 @@
     "react": "^18.0.0-rc.3",
     "react-dom": "^18.0.0-rc.3",
     "ts-jest": "^27.1.4"
+  },
+  "dependencies": {
+    "@hmans/react-toolbox": "^0.1.4"
   }
 }

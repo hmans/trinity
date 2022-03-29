@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useConst } from "@hmans/react-toolbox"
+import { useEffect } from "react"
 import { Scene } from "three"
 import type { Factory } from "./types"
 
@@ -13,7 +14,7 @@ export type ThreeObject<T = any> = T & {
 export const useManagedThreeObject = <Instance = any>(
   fn: Factory<Instance>
 ) => {
-  const [instance] = useState<ThreeObject>(fn)
+  const instance = useConst<ThreeObject>(fn)
 
   /* Automatically dispose the object if we can */
   useEffect(() => {
