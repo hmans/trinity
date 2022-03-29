@@ -21,10 +21,7 @@
   },
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4",
-    "miniplex": "^0.8.0-1",
-    "miniplex-react": "^0.1.7",
-    "react-merge-refs": "^1.1.0",
-    "troika-three-text": "^0.46.3"
+    "react-merge-refs": "^1.1.0"
   },
   "babel": {
     "presets": [
