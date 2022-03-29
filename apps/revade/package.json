@@ -1,7 +1,7 @@
 {
   "name": "revade",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,9 +11,9 @@
     "@hmans/controlfreak": "^0.1.8",
     "@hmans/react-toolbox": "^0.1.4",
     "@hmans/signal": "^0.1.0",
-    "@hmans/trinity": "^0.1.7",
-    "@react-trinity/reactor": "^0.1.3",
-    "@react-trinity/toybox": "^0.1.3",
+    "@hmans/trinity": "^0.2.0",
+    "@react-trinity/reactor": "^0.2.0",
+    "@react-trinity/toybox": "^1.0.0",
     "@types/three": "^0.139.0",
     "miniplex": "^0.8.0-2",
     "miniplex-react": "^0.1.11",
