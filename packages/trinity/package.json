@@ -1,7 +1,7 @@
 {
   "name": "react-trinity",
   "private": false,
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Trinity.",
   "main": "dist/react-trinity.cjs.js",
   "module": "dist/react-trinity.esm.js",
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4",
-    "@react-trinity/reactor": "^0.2.0",
+    "@react-trinity/reactor": "^0.2.1",
     "react-merge-refs": "^1.1.0"
   },
   "babel": {

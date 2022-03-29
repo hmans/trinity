@@ -1,7 +1,7 @@
 {
   "name": "@react-trinity/toybox",
   "private": false,
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Trinity Toybox.",
   "main": "dist/react-trinity-toybox.cjs.js",
   "module": "dist/react-trinity-toybox.esm.js",
@@ -11,8 +11,8 @@
     "build": "preconstruct build"
   },
   "peerDependencies": {
-    "react-trinity": "^0.2.0",
-    "@react-trinity/reactor": "^0.2.0",
+    "react-trinity": "^0.2.1",
+    "@react-trinity/reactor": "^0.2.1",
     "react": ">= 17.0",
     "three": ">= 0.138.0"
   },
