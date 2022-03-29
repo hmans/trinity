@@ -4,10 +4,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "scripts": {
     "postinstall": "preconstruct dev",
+    "dev": "preconstruct dev",
     "build": "preconstruct build"
   },
   "devDependencies": {
