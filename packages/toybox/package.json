@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@react-trinity/reactor": "*",
+    "@react-trinity/ticker": "*",
     "@types/react": "^17.0.43",
     "@types/three": "^0.139.0",
     "react": "^18.0.0-rc.3",

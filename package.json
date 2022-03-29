@@ -12,7 +12,7 @@
     "dev": "preconstruct dev",
     "build": "preconstruct build",
     "test": "jest",
-    "ci": "yarn build && yarn test",
+    "ci": "preconstruct validate && manypkg check && yarn build && yarn test",
     "release": "yarn build && yarn test && yarn changeset publish"
   },
   "preconstruct": {
