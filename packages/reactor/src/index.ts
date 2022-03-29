@@ -1,5 +1,5 @@
 /* Named Exports */
-export { makeComponent, useParent } from "./makeComponent"
+export { makeComponent, useParent, ParentContext } from "./makeComponent"
 export { useManagedThreeObject } from "./useManagedThreeObject"
 export { Primitive } from "./Primitive"
 

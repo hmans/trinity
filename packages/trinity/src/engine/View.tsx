@@ -21,9 +21,9 @@ import { VignetteShader } from "three/examples/jsm/shaders/VignetteShader"
 import { useConst } from "@hmans/react-toolbox"
 import { useRenderer } from "./Renderer"
 import { useTicker } from "./Ticker"
-import { ParentContext } from "./useParent"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
 import { LensDirtShader } from "../shaders/LensDirtShader"
+import { ParentContext } from "@react-trinity/reactor"
 
 type ViewAPI = {
   setCamera: (camera: Camera) => void

@@ -1,7 +1,7 @@
 {
   "name": "@hmans/trinity",
   "private": false,
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Trinity.",
   "main": "dist/hmans-trinity.cjs.js",
   "module": "dist/hmans-trinity.esm.js",
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4",
+    "@react-trinity/reactor": "^0.1.1",
     "react-merge-refs": "^1.1.0"
   },
   "babel": {
