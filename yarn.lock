@@ -3523,19 +3523,14 @@ minimist-options@4.1.0:
     is-plain-obj "^1.1.0"
     kind-of "^6.0.3"
 
-miniplex-react@^0.1.11, miniplex-react@^0.1.7:
+miniplex-react@^0.1.11:
   version "0.1.11"
   resolved "https://registry.yarnpkg.com/miniplex-react/-/miniplex-react-0.1.11.tgz#ccba16bc90c3f7c3b098ce96c02ebc5cdbf8f6b5"
   integrity sha512-+TtjKseXMGjbqbvHyiBPXKnTrDCoVsG+GUbZ9uDpBrQSYPXMd8g2pHJFHnizW8BvNShaVTnVYQzewf0Z96DHCQ==
   dependencies:
     "@hmans/react-toolbox" "^0.1.4"
 
-miniplex@^0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.7.2.tgz#c0b759b21459de397006c47a072aa63dca469f07"
-  integrity sha512-xewG/5wleeA4rJzNqHCRuOAoQm24gNALPYAIpt+GlTT/jaDOZM2QJCOCXRE37dCWkTSE3tMGQJrGJqaQQfJTsA==
-
-miniplex@^0.8.0-1:
+miniplex@^0.8.0-2:
   version "0.8.0-2"
   resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.8.0-2.tgz#86ccef1cf4dfffdd8c560beab19d6f3fb6fa6860"
   integrity sha512-+kXYV1DATjQiL8a74Kc64rHc5LBou5+8Kje4VJYeUUu4O8Q9A/w4HVB+fH7sItndOfzkotX10JTwqOB/hgtzNA==
@@ -3852,21 +3847,13 @@ randomish@^0.1.2:
   resolved "https://registry.yarnpkg.com/randomish/-/randomish-0.1.2.tgz#debd277491733260c80044359590ca2d4eea3032"
   integrity sha512-ey+EdYVbejq3HJjEswWEza2B8ouORqMSyPS6A0WqokCuxRVhIQ+SP8Tx364GIxuWBNaBAJQoWRXXNTXv049NiA==
 
-react-dom@^18.0.0-rc.2:
-  version "18.0.0-rc.3-next-e7d0053e6-20220325"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.0.0-rc.3-next-e7d0053e6-20220325.tgz#6bd3e7d627b853a04a65c9dc3a3b148d01ff96d9"
-  integrity sha512-LIpWe5CdiO8NZ+K4YzGj8wdqW44eBBNwUy3Q9OTYBY4G+JB31/c8GGzoBC2FvVkSVLTb4LUHBGYiyl7s2n1zug==
+react-dom@^18.0.0-rc.2, react-dom@^18.0.0-rc.3:
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.0.0.tgz#26b88534f8f1dbb80853e1eabe752f24100d8023"
+  integrity sha512-XqX7uzmFo0pUceWFCt7Gff6IyIMzFUn7QMZrbrQfGxtaxXZIcGQzoNpRLE3fQLnS4XzLLPMZX2T9TRcSrasicw==
   dependencies:
     loose-envify "^1.1.0"
-    scheduler "0.21.0-rc.3-next-e7d0053e6-20220325"
-
-react-dom@^18.0.0-rc.3:
-  version "18.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.0.0-rc.3.tgz#e26884e58dea59c6887e6b1f6a53851314253c94"
-  integrity sha512-WPlWXyzZp22+uGUNNNoZnAPWAcr5sSeaEj0S1lLqKc2DkovKugJl1VgnBfk6gQX9llTb5/qkRNVtW31WdhG8iA==
-  dependencies:
-    loose-envify "^1.1.0"
-    scheduler "^0.21.0-rc.3"
+    scheduler "^0.21.0"
 
 react-is@^17.0.1:
   version "17.0.2"
@@ -3891,17 +3878,10 @@ react@^17.0.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
-react@^18.0.0-rc.2:
-  version "18.0.0-rc.3-next-e7d0053e6-20220325"
-  resolved "https://registry.yarnpkg.com/react/-/react-18.0.0-rc.3-next-e7d0053e6-20220325.tgz#4f1f47fddb6393b8cd3a0f4fd000deeca42cd5a9"
-  integrity sha512-6NlK01y2cbOS+s8+Ludj90p0kKE1+EvmWef0TPrLgFkC7l3EtcZvDBk+DR14+CQgVDybvT4Dh4DAAyH4knUbTA==
-  dependencies:
-    loose-envify "^1.1.0"
-
-react@^18.0.0-rc.3:
-  version "18.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/react/-/react-18.0.0-rc.3.tgz#bb7c7fe1fb8f2909bf2bcd9834642fabddbb90ed"
-  integrity sha512-2NzSty8Dtq+5lnOdnP5MNA2iSn51PmvAuqgHLmUoXU3ohEtL+r0a1Az1iWvurMBIqW9cz49fJ42AM/+ziPmlWg==
+react@^18.0.0-rc.2, react@^18.0.0-rc.3:
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-18.0.0.tgz#b468736d1f4a5891f38585ba8e8fb29f91c3cb96"
+  integrity sha512-x+VL6wbT4JRVPm7EGxXhZ8w8LTROaxPXOqhlGyVSrv0sB1jkyFGgXxJ8LVoPRLvPR6/CIZGFmfzqUa2NYeMr2A==
   dependencies:
     loose-envify "^1.1.0"
 
@@ -4069,10 +4049,10 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-scheduler@0.21.0-rc.3-next-e7d0053e6-20220325, scheduler@^0.21.0-rc.3:
-  version "0.21.0-rc.3-next-e7d0053e6-20220325"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.21.0-rc.3-next-e7d0053e6-20220325.tgz#53c7e95c2d10b82b11e58056033f6a6131b2033a"
-  integrity sha512-DIpRZC4U7E4snduICzeIL4N16C9R1kX/CIBrH5kp0kGB6zbTkIKSBnuAXoKgmgHe2tt2LVGWN1x2XMgw3xylLw==
+scheduler@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.21.0.tgz#6fd2532ff5a6d877b6edb12f00d8ab7e8f308820"
+  integrity sha512-1r87x5fz9MXqswA2ERLo0EbOAU74DpIUO090gIasYTqlVoJeMcl+Z1Rg7WHz+qtPujhS/hGIt9kxZOYBV3faRQ==
   dependencies:
     loose-envify "^1.1.0"
 
