@@ -2,11 +2,11 @@ import React, {
   createContext,
   forwardRef,
   useContext,
+  useImperativeHandle,
   useLayoutEffect
 } from "react"
 import { BufferGeometry, Fog, Material, Object3D } from "three"
 import { applyProps } from "./lib/applyProps"
-import { applyRef } from "./lib/applyRef"
 import type {
   Constructor,
   ReactorComponent,
@@ -40,7 +40,7 @@ export const makeComponent = <
       )
 
       /* Apply forwarded ref */
-      applyRef(ref, instance)
+      useImperativeHandle(ref, () => instance)
 
       /* Apply props */
       if (props) applyProps(instance, props)
