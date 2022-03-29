@@ -6,18 +6,9 @@ import { GameFSM } from "./Game"
 
 const MenuOrb = ({ speed = 1.5 }) => {
   const ref = useRef<Mesh>(null!)
-  const [ready, setReady] = useState(false)
-
-  useEffect(() => {
-    setTimeout(() => setReady(true), 500)
-  }, [])
 
   useTicker("update", (dt) => {
     ref.current.rotation.x = ref.current.rotation.y += speed * dt
-
-    if (ready && controller.controls.fire.value) {
-      GameFSM.transition("startGame")
-    }
   })
 
   return (
@@ -28,4 +19,18 @@ const MenuOrb = ({ speed = 1.5 }) => {
   )
 }
 
-export const Menu = () => <MenuOrb />
+export const Menu = () => {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => setReady(true), 500)
+  }, [])
+
+  useTicker("update", (dt) => {
+    if (ready && controller.controls.fire.value) {
+      GameFSM.transition("startGame")
+    }
+  })
+
+  return <MenuOrb />
+}
