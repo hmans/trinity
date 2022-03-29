@@ -14,7 +14,7 @@
     "@hmans/trinity": "^0.1.8",
     "@react-trinity/reactor": "^0.1.2",
     "react": ">= 17.0",
-    "three": "^0.138.0"
+    "three": ">= 0.138.0"
   },
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4",

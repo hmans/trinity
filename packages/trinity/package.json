@@ -19,7 +19,7 @@
   },
   "peerDependencies": {
     "react": ">=17.0",
-    "three": "^0.138.3"
+    "three": ">=0.138.3"
   },
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4",
