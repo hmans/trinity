@@ -1,7 +1,7 @@
 {
   "name": "@react-trinity/toybox",
   "private": false,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Trinity Toybox.",
   "main": "dist/react-trinity-toybox.cjs.js",
   "module": "dist/react-trinity-toybox.esm.js",

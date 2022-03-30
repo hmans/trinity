@@ -1,5 +1,14 @@
 # react-trinity
 
+## 0.3.3
+
+### Patch Changes
+
+- ea08cf6: Mark all packages as sideeffects-free
+- Updated dependencies [ea08cf6]
+  - @react-trinity/reactor@0.3.2
+  - @react-trinity/ticker@0.3.1
+
 ## 0.3.2
 
 ### Patch Changes

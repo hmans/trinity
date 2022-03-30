@@ -1,5 +1,11 @@
 # @react-trinity/toybox
 
+## 0.3.1
+
+### Patch Changes
+
+- ea08cf6: Mark all packages as sideeffects-free
+
 ## 0.3.0
 
 ### Minor Changes
