@@ -11,10 +11,6 @@
     "build": "preconstruct build",
     "test": "yarn jest"
   },
-  "peerDependencies": {
-    "react": ">= 18.0",
-    "three": ">= 0.138.0"
-  },
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -28,12 +24,16 @@
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
     "jest": "^27.5.1",
-    "react": "^18.0.0-rc.3",
-    "react-dom": "^18.0.0-rc.3",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "three": "^0.139.0",
     "ts-jest": "^27.1.4"
   },
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4"
+  },
+  "peerDependencies": {
+    "react": ">=18.0",
+    "three": ">=0.139.0"
   }
 }
