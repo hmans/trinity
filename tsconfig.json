@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "ES2015",
+    "moduleResolution": "node",
+    "declaration": true,
+    "strict": true,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true
+  },
+  "include": ["packages/**/src/**/*", "packages/**/test/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
