@@ -3,12 +3,12 @@ name: Tests
 on:
   push:
     branches:
-      - 'main'
+      - "main"
   pull_request: {}
 
 jobs:
   build:
-    name: Build, lint, and test
+    name: Build and run tests
     runs-on: ubuntu-latest
 
     steps:
@@ -21,9 +21,9 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Install deps and build (with cache)
-        uses: bahmutov/npm-install@v1
+        uses: Borales/actions-yarn@v2.3.0
         with:
-          install-command: yarn install --immutable --silent
+          cmd: install --immutable --silent
 
-      - name: Jest run
+      - name: Run CI script
         run: yarn ci
