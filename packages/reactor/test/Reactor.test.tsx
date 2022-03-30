@@ -1,8 +1,7 @@
 import { render } from "@testing-library/react"
-import { createRef } from "react"
+import React, { createRef } from "react"
 import { BoxGeometry, Mesh, MeshStandardMaterial } from "three"
 import T from "../src"
-import React from "react"
 
 describe("Reactor", () => {
   it("wraps an instance of the equivalent THREE object", () => {
