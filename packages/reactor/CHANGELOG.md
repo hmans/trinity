@@ -1,5 +1,12 @@
 # @react-trinity/reactor
 
+## 0.3.0
+
+### Minor Changes
+
+- be0105e: Provide makeReactor for generating localized mini reactors (tree shaking!)
+- 22debb8: Make sure everything uses React 18 and Three 139
+
 ## 0.2.1
 
 ### Patch Changes
