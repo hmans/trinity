@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState
 } from "react"
-import * as THREE from "three"
+import { sRGBEncoding, WebGLRenderer } from "three"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
 
 const RendererContext = createContext<THREE.WebGLRenderer>(null!)
@@ -19,7 +19,7 @@ export const Renderer: FC = ({ children }) => {
     if (!canvas.current) return
 
     setRenderer(() => {
-      const renderer = new THREE.WebGLRenderer({
+      const renderer = new WebGLRenderer({
         canvas: canvas.current,
         powerPreference: "high-performance",
         antialias: false,
@@ -30,7 +30,7 @@ export const Renderer: FC = ({ children }) => {
       renderer.autoClear = false
       renderer.setClearColor("#222")
       renderer.setPixelRatio(1)
-      renderer.outputEncoding = THREE.sRGBEncoding
+      renderer.outputEncoding = sRGBEncoding
       // renderer.toneMapping = THREE.ACESFilmicToneMapping
       // renderer.toneMapping = THREE.ReinhardToneMapping
       renderer.toneMappingExposure = 1.25

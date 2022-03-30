@@ -1,11 +1,10 @@
 /* Named Exports */
 export { makeComponent, useParent, ParentContext } from "./makeComponent"
 export { useManagedThreeObject } from "./useManagedThreeObject"
+export { makeReactor } from "./Reactor"
 export { Primitive } from "./Primitive"
 export * from "./types"
 
 /* Default Export */
-import { makeReactor } from "./Reactor"
-export { makeReactor }
-import * as THREE from "three"
-export default makeReactor(THREE)
+import { defaultReactor } from "./defaultReactor"
+export default defaultReactor

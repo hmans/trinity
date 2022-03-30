@@ -6,8 +6,7 @@ import React, {
   useMemo,
   useState
 } from "react"
-import * as THREE from "three"
-import { Camera, PerspectiveCamera, Vector2 } from "three"
+import { Camera, PerspectiveCamera, Scene, TextureLoader, Vector2 } from "three"
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
@@ -38,7 +37,7 @@ export const View: FC<{
 }> = ({ children, clearColor, clearDepth, clearStencil }) => {
   const renderer = useRenderer()
   const composer = useMemo(() => new EffectComposer(renderer), [renderer])
-  const scene = useConst(() => new THREE.Scene())
+  const scene = useConst(() => new Scene())
   const [camera, setCamera] = useState<Camera>()
 
   useEffect(() => {
@@ -56,7 +55,7 @@ export const View: FC<{
 
     // composer.addPass(new ShaderPass(LuminosityShader))
     const dirt = new ShaderPass(LensDirtShader)
-    dirt.uniforms["tDirt"].value = new THREE.TextureLoader().load(
+    dirt.uniforms["tDirt"].value = new TextureLoader().load(
       "/textures/dirt01.png"
     )
     dirt.uniforms["strength"].value = 0.5
