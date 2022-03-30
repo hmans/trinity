@@ -3,27 +3,31 @@ name: Tests
 on:
   push:
     branches:
-      - 'main'
+      - "main"
   pull_request: {}
 
 jobs:
   build:
-    name: Build, lint, and test
+    name: Build and Run Tests
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Use Node ${{ matrix.node }}
+      - name: Set up Node
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 14
 
-      - name: Install deps and build (with cache)
-        uses: bahmutov/npm-install@v1
-        with:
-          install-command: yarn install --immutable --silent
+      - name: Set up Yarn cache
+        uses: c-hive/gha-yarn-cache@v2
 
-      - name: Jest run
-        run: yarn ci
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Test packages
+        run: yarn test
