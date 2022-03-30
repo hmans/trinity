@@ -14,7 +14,6 @@
     "@react-trinity/reactor": "^0.2.1",
     "@react-trinity/ticker": "^0.2.1",
     "react": ">= 18.0",
-    "react-trinity": "^0.2.1",
     "three": ">= 0.139.0"
   },
   "dependencies": {
@@ -40,7 +39,6 @@
     "@types/three": "^0.139.0",
     "jest": "^27.5.1",
     "react": "^18.0.0",
-    "react-trinity": "*",
     "three": "^0.139.0",
     "ts-jest": "^27.1.4"
   }
