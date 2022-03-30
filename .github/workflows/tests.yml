@@ -27,9 +27,9 @@ jobs:
       - name: Build packages
         uses: Borales/actions-yarn@v2.3.0
         with:
-          cmd: yarn build
+          cmd: build
 
       - name: Test packages
         uses: Borales/actions-yarn@v2.3.0
         with:
-          cmd: yarn test
+          cmd: test
