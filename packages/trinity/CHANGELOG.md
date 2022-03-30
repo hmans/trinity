@@ -1,4 +1,12 @@
-# @hmans/trinity
+# react-trinity
+
+## 0.3.2
+
+### Patch Changes
+
+- 534418c: Tweaks to how three is imported in order to pave the way to tree-shaking support
+- Updated dependencies [534418c]
+  - @react-trinity/reactor@0.3.1
 
 ## 0.3.1
 
