@@ -23,7 +23,10 @@ jobs:
       - name: Install deps and build (with cache)
         uses: Borales/actions-yarn@v2.3.0
         with:
-          cmd: install --immutable --silent
+          cmd: install
 
-      - name: Run CI script
-        run: yarn ci
+      - name: Build packages
+        run: yarn build
+
+      - name: Test packages
+        run: yarn test
