@@ -1,10 +1,13 @@
-import T, { ReactorComponentProps } from "@react-trinity/reactor"
+import { makeReactor, ReactorComponentProps } from "@react-trinity/reactor"
 import { useTicker } from "@react-trinity/ticker"
 import { IEntity } from "miniplex"
 import { createECS } from "miniplex-react"
 import React, { FC, forwardRef, useLayoutEffect, useRef } from "react"
 import mergeRefs from "react-merge-refs"
 import { Group, InstancedMesh, Object3D } from "three"
+
+/* Create a local reactor with the Three.js classes we need */
+const T = makeReactor({ Group, InstancedMesh, Object3D })
 
 type InstanceEntity = {
   instance: {
