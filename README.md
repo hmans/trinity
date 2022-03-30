@@ -1,3 +1,5 @@
+[![CI](https://github.com/hmans/react-trinity/workflows/Tests/badge.svg)](https://github.com/hmans/react-trinity/actions/workflows/tests.yml)
+
 # TRINITY
 
 ### Here Be Dragons!
