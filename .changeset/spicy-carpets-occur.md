@@ -3,7 +3,6 @@
 "@react-trinity/ticker": minor
 "@react-trinity/toybox": minor
 "react-trinity": minor
-"revade": minor
 ---
 
 Make sure everything uses React 18 and Three 139

@@ -1,5 +1,4 @@
 ---
-"revade": minor
 "@react-trinity/toybox": minor
 "react-trinity": minor
 "@react-trinity/ticker": minor
