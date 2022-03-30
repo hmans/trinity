@@ -14,12 +14,12 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
-    "react": "^18.0.0-rc.3",
+    "react": "^18.0.0",
     "three": "^0.139.0"
   },
   "peerDependencies": {
-    "react": ">=17.0",
-    "three": ">=0.138.3"
+    "react": ">=18.0",
+    "three": ">=0.139.0"
   },
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4",
