@@ -1,8 +1,6 @@
 import { makeComponent } from "./makeComponent"
 import type { Constructor, ReactorComponent } from "./types"
 
-type ThreeLike = { [key: string]: Constructor }
-
 type Reactor<Source> = {
   [K in keyof Source]: Source[K] extends Constructor
     ? ReactorComponent<Source[K]>
@@ -16,7 +14,7 @@ const cache = {} as Record<string, ReactorComponent<any, any>>
  * Trinity component that wraps the class (see `makeComponent`.)
  */
 
-export function makeReactor<Source extends ThreeLike>(source: Source): Reactor<Source> {
+export function makeReactor<Source extends Record<string, any>>(source: Source): Reactor<Source> {
   return new Proxy<Reactor<Source>>({} as Reactor<Source>, {
     get: (_, name: string) => {
       /* Create and memoize a wrapper component for the specified property. */
