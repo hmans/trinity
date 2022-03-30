@@ -5,5 +5,7 @@ export { Primitive } from "./Primitive"
 export * from "./types"
 
 /* Default Export */
-import { Reactor } from "./Reactor"
-export default Reactor
+import { makeReactor } from "./Reactor"
+export { makeReactor }
+import * as THREE from "three"
+export default makeReactor(THREE)
