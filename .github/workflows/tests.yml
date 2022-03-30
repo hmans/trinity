@@ -24,16 +24,10 @@ jobs:
         uses: c-hive/gha-yarn-cache@v2
 
       - name: Install dependencies
-        uses: Borales/actions-yarn@v2.3.0
-        with:
-          cmd: install
+        run: yarn install
 
       - name: Build packages
-        uses: Borales/actions-yarn@v2.3.0
-        with:
-          cmd: build
+        run: yarn build
 
       - name: Test packages
-        uses: Borales/actions-yarn@v2.3.0
-        with:
-          cmd: test
+        run: yarn test
