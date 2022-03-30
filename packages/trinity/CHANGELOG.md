@@ -1,5 +1,11 @@
 # @hmans/trinity
 
+## 0.3.1
+
+### Patch Changes
+
+- a59a9ed: Re-export all sub package exports, including the default Reactor export
+
 ## 0.3.0
 
 ### Minor Changes
