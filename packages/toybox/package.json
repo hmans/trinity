@@ -7,6 +7,7 @@
   "module": "dist/react-trinity-toybox.esm.js",
   "types": "dist/react-trinity-toybox.cjs.d.ts",
   "license": "MIT",
+  "sideEffects": false,
   "scripts": {
     "build": "preconstruct build"
   },

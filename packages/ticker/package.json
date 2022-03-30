@@ -7,6 +7,7 @@
   "module": "dist/react-trinity-ticker.esm.js",
   "types": "dist/react-trinity-ticker.cjs.d.ts",
   "license": "MIT",
+  "sideEffects": false,
   "scripts": {
     "build": "preconstruct build",
     "test": "yarn jest"

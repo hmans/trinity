@@ -6,6 +6,7 @@
   "main": "dist/react-trinity.cjs.js",
   "module": "dist/react-trinity.esm.js",
   "license": "MIT",
+  "sideEffects": false,
   "scripts": {
     "build": "preconstruct build"
   },
