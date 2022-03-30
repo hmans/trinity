@@ -1,6 +1,16 @@
 module.exports = {
   verbose: true,
   preset: "ts-jest",
-  projects: ["packages/*"],
-  roots: []
+  testMatch: [
+    "**/tests/**/*.+(ts|tsx|js)",
+    "**/?(*.)+(spec|test).+(ts|tsx|js)"
+  ],
+  testPathIgnorePatterns: ["node_modules"],
+  testEnvironment: "jsdom",
+  moduleFileExtensions: ["js", "ts", "tsx"],
+  globals: {
+    "ts-jest": {
+      isolatedModules: true
+    }
+  }
 }
