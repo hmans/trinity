@@ -9,6 +9,13 @@
   "scripts": {
     "build": "preconstruct build"
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
@@ -17,21 +24,14 @@
     "react": "^18.0.0",
     "three": "^0.139.0"
   },
-  "peerDependencies": {
-    "react": ">=18.0",
-    "three": ">=0.139.0"
-  },
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4",
     "@react-trinity/reactor": "^0.2.1",
     "@react-trinity/ticker": "^0.2.2",
     "react-merge-refs": "^1.1.0"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react",
-      "@babel/preset-typescript"
-    ]
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "three": ">=0.139.0"
   }
 }

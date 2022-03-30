@@ -1,10 +1,9 @@
-import { ReactorComponentProps } from "@react-trinity/reactor"
-import T from "@react-trinity/reactor"
+import T, { ReactorComponentProps } from "@react-trinity/reactor"
+import { useTicker } from "@react-trinity/ticker"
 import { IEntity } from "miniplex"
 import { createECS } from "miniplex-react"
 import React, { FC, forwardRef, useLayoutEffect, useRef } from "react"
 import mergeRefs from "react-merge-refs"
-import { useTicker } from "@react-trinity/ticker"
 import { Group, InstancedMesh, Object3D } from "three"
 
 type InstanceEntity = {

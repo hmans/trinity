@@ -11,6 +11,13 @@
     "build": "preconstruct build",
     "test": "yarn jest"
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+    ]
+  },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^13.0.0-alpha.6",
@@ -22,13 +29,6 @@
     "ts-jest": "^27.1.4"
   },
   "peerDependencies": {
-    "react": ">= 18.0"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react",
-      "@babel/preset-typescript"
-    ]
+    "react": ">=18.0.0"
   }
 }
