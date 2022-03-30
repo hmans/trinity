@@ -34,10 +34,14 @@
   "devDependencies": {
     "@react-trinity/reactor": "*",
     "@react-trinity/ticker": "*",
+    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/react": "^12.1.4",
     "@types/react": "^17.0.43",
     "@types/three": "^0.139.0",
+    "jest": "^27.5.1",
     "react": "^18.0.0-rc.3",
     "react-trinity": "*",
-    "three": "^0.139.0"
+    "three": "^0.139.0",
+    "ts-jest": "^27.1.4"
   }
 }
