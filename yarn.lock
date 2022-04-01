@@ -4643,10 +4643,24 @@ miniplex-react@^0.1.11:
   dependencies:
     "@hmans/react-toolbox" "^0.1.4"
 
+miniplex-react@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/miniplex-react/-/miniplex-react-0.2.1.tgz#79c9781a70160579923f84058825f316b4b7f60b"
+  integrity sha512-tOkmtVOPu/Xl7mFHjnl6gTzrozp4SLo3lNebKd/d/CMcuR4EToIKlXArQRKqJdO06pqvtVdj9urJWZX2E6wf2Q==
+  dependencies:
+    "@hmans/react-toolbox" "^0.1.4"
+
 miniplex@^0.8.0-2:
   version "0.8.0-2"
   resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.8.0-2.tgz#86ccef1cf4dfffdd8c560beab19d6f3fb6fa6860"
   integrity sha512-+kXYV1DATjQiL8a74Kc64rHc5LBou5+8Kje4VJYeUUu4O8Q9A/w4HVB+fH7sItndOfzkotX10JTwqOB/hgtzNA==
+  dependencies:
+    "@hmans/signal" "^0.1.7"
+
+miniplex@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.9.0.tgz#e7ce7a7a7a36c62adaff7b6568082d2a8c0dcde7"
+  integrity sha512-mBmESBX2ZsuKo6DFxjw2OINRqEMKt1KtMr67Rb8QE0kFJbkuhbzkcjfdTqH2sDdOWvSs7vcmAsTfWOhdair/gQ==
   dependencies:
     "@hmans/signal" "^0.1.7"
 

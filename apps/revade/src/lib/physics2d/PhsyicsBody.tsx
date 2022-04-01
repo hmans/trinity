@@ -67,7 +67,7 @@ export const PhysicsBody = forwardRef<
     /* Create and destroy an ECS entity for this physics object */
     useLayoutEffect(() => {
       world.addBody(body)
-      ecs.world.addComponent(entity, "transform", group.current)
+      ecs.world.addComponent(entity, { transform: group.current })
 
       /* Map body to entity */
       bodies.set(body, entity)
