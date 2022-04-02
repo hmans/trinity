@@ -4636,26 +4636,12 @@ minimist@^1.2.0:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
   integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
 
-miniplex-react@^0.1.11:
-  version "0.1.11"
-  resolved "https://registry.yarnpkg.com/miniplex-react/-/miniplex-react-0.1.11.tgz#ccba16bc90c3f7c3b098ce96c02ebc5cdbf8f6b5"
-  integrity sha512-+TtjKseXMGjbqbvHyiBPXKnTrDCoVsG+GUbZ9uDpBrQSYPXMd8g2pHJFHnizW8BvNShaVTnVYQzewf0Z96DHCQ==
-  dependencies:
-    "@hmans/react-toolbox" "^0.1.4"
-
 miniplex-react@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/miniplex-react/-/miniplex-react-0.2.1.tgz#79c9781a70160579923f84058825f316b4b7f60b"
   integrity sha512-tOkmtVOPu/Xl7mFHjnl6gTzrozp4SLo3lNebKd/d/CMcuR4EToIKlXArQRKqJdO06pqvtVdj9urJWZX2E6wf2Q==
   dependencies:
     "@hmans/react-toolbox" "^0.1.4"
-
-miniplex@^0.8.0-2:
-  version "0.8.0-2"
-  resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.8.0-2.tgz#86ccef1cf4dfffdd8c560beab19d6f3fb6fa6860"
-  integrity sha512-+kXYV1DATjQiL8a74Kc64rHc5LBou5+8Kje4VJYeUUu4O8Q9A/w4HVB+fH7sItndOfzkotX10JTwqOB/hgtzNA==
-  dependencies:
-    "@hmans/signal" "^0.1.7"
 
 miniplex@^0.9.0:
   version "0.9.0"
