@@ -34,7 +34,7 @@ export const Sploders = () => (
               <CircleShape
                 radius={3}
                 collisionGroup={Layers.Pickups}
-                collisionMask={Layers.Player}
+                collisionMask={Layers.Player | Layers.Default}
                 onBeginContact={({ userData }) => {
                   if (userData?.player) explodeSploder(entity)
                 }}
