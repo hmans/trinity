@@ -25,6 +25,8 @@ export const PhysicsBody = forwardRef<
     angularDamping?: number
     angularVelocity?: number
     fixedRotation?: boolean
+    fixedX?: boolean
+    fixedY?: boolean
     userData?: any
   }
 >(
@@ -36,6 +38,8 @@ export const PhysicsBody = forwardRef<
       linearDamping = 0,
       angularDamping = 0,
       fixedRotation = false,
+      fixedX = false,
+      fixedY = false,
       angularVelocity = 0,
       userData,
       ...props
@@ -52,7 +56,9 @@ export const PhysicsBody = forwardRef<
           angularDamping,
           angularVelocity,
           damping: linearDamping,
-          fixedRotation
+          fixedRotation,
+          fixedX,
+          fixedY
         })
     )
 

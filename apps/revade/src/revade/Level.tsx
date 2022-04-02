@@ -27,7 +27,7 @@ export const Level = () => {
   )
 
   return (
-    <PhysicsBody mass={1000} rotation-z={Math.PI / 4}>
+    <PhysicsBody mass={1} rotation-z={Math.PI / 4} fixedX fixedY>
       <Rotator speed={-0.02} />
 
       <T.GridHelper
