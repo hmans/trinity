@@ -4650,13 +4650,6 @@ miniplex-react@^0.2.1:
   dependencies:
     "@hmans/react-toolbox" "^0.1.4"
 
-miniplex@^0.8.0-2:
-  version "0.8.0-2"
-  resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.8.0-2.tgz#86ccef1cf4dfffdd8c560beab19d6f3fb6fa6860"
-  integrity sha512-+kXYV1DATjQiL8a74Kc64rHc5LBou5+8Kje4VJYeUUu4O8Q9A/w4HVB+fH7sItndOfzkotX10JTwqOB/hgtzNA==
-  dependencies:
-    "@hmans/signal" "^0.1.7"
-
 miniplex@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.9.0.tgz#e7ce7a7a7a36c62adaff7b6568082d2a8c0dcde7"
