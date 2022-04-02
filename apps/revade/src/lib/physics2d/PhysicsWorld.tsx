@@ -36,19 +36,10 @@ export const PhysicsWorld: FC<{
 
   /* Step the physics world */
   useTicker("physics", (dt) => {
-    // for (const { body, transform, options } of entities) {
-    //   /* Get initial position */
-    //   transform.getWorldPosition(tmpVector3)
-    //   body.position = [tmpVector3.x, tmpVector3.y]
-
-    //   /* Get initial rotation */
-    //   transform.getWorldQuaternion(tmpQuat)
-    //   tmpEuler.setFromQuaternion(tmpQuat)
-    //   body.angle = tmpEuler.z
-    // }
-
+    /* Step the world */
     world.step(1 / 50, dt, 10)
 
+    /* Copy transforms back into scene */
     for (const { body, transform, options } of entities) {
       if (body.sleepState !== p2.Body.SLEEPING) {
         const position = options.interpolate
@@ -60,7 +51,6 @@ export const PhysicsWorld: FC<{
         /* Get initial rotation */
         transform.getWorldQuaternion(tmpQuat)
         tmpEuler.setFromQuaternion(tmpQuat)
-        angle -= tmpEuler.z
 
         /* position */
         tmpVector3.set(...position, 0)
