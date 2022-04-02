@@ -13,6 +13,10 @@ type EnemyTag = {
   enemy: Tag
 }
 
+type LevelTag = {
+  level: Tag
+}
+
 type SploderTag = {
   sploder: Tag
 }
@@ -86,6 +90,7 @@ type VelocityComponent = {
 
 type OptionalComponents = PlayerTag &
   EnemyTag &
+  LevelTag &
   SploderTag &
   SplosionTag &
   PickupTag &
