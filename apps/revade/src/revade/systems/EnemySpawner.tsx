@@ -5,6 +5,7 @@ import ArchetypeSystem from "../../lib/ArchetypeSystem"
 import { ECS } from "../state"
 
 const players = ECS.world.archetype("player").entities
+const levels = ECS.world.archetype("level", "transform").entities
 
 const tmpVec3 = new Vector3()
 const position = new Vector3()
@@ -16,6 +17,9 @@ const getSpawnPosition = (vec3: Vector3) => {
 export const EnemySpawner = () => (
   <ArchetypeSystem archetype={["enemySpawner"]}>
     {(entities, dt) => {
+      const level = levels[0]
+      if (!level) return
+
       for (const { enemySpawner } of entities) {
         /* Time bookkeeping */
         enemySpawner.t -= dt
@@ -28,7 +32,7 @@ export const EnemySpawner = () => (
           /* Increase difficulty */
           enemySpawner.interval = Math.max(enemySpawner.interval - 0.1, 0.5)
 
-          /* Spawn enemies */
+          /* Find a position that's not too close to the player */
           getSpawnPosition(position)
           while (
             players[0] &&
@@ -38,6 +42,10 @@ export const EnemySpawner = () => (
             getSpawnPosition(position)
           }
 
+          /* Rotate position according to level rotation */
+          position.applyQuaternion(level.transform.quaternion)
+
+          /* Spawn a couple of enemies with a random distance around the position */
           for (let i = 0; i < enemySpawner.amount; i++) {
             ECS.world.queue.createEntity({
               enemy: Tag,
