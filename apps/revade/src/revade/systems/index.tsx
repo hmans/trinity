@@ -13,7 +13,6 @@ import { PlayerControl } from "./PlayerControl"
 import { SploderSpawner } from "./SploderSpawner"
 import { UpdateControllers } from "./UpdateControllers"
 import { Velocity } from "./Velocity"
-import { Wobble } from "./Wobble"
 
 const Systems = () => (
   <>
@@ -30,7 +29,6 @@ const Systems = () => (
     <AttractPickups />
     <Avoidance />
     <Velocity />
-    <Wobble />
     <AutoSystem />
     <CameraRig />
     <Pickups />

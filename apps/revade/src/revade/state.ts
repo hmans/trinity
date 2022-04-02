@@ -65,12 +65,6 @@ export type Entity = {
     factor: number
   }
 
-  /* Animations */
-  wobble?: {
-    speed: number
-    t: number
-  }
-
   /* Tools */
   lifetime?: number
 

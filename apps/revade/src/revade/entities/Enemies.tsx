@@ -66,13 +66,6 @@ export const Enemies = () => (
               name="attraction"
               data={{ factor: 60, targets: [] }}
             />
-
-            {/*
-          <ECS.Component
-            name="wobble"
-            data={{ speed: between(0.5, 1.5), t: number(Math.PI * 2) }}
-          />
-          */}
           </>
         )
       }}
