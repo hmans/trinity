@@ -25,18 +25,63 @@ type PickupTag = {
   pickup: Tag
 }
 
+type AttractionComponent = {
+  attraction: {
+    targets: EntityWith<Entity, "transform">[]
+    factor: number
+  }
+}
+
+type AutoComponent = {
+  auto: {
+    delay: number
+    callback: Function
+  }
+}
+
+type AvoidanceComponent = {
+  avoidance: {
+    targets: EntityWith<Entity, "transform">[]
+    factor: number
+  }
+}
+
 type CameraComponent = {
   camera: {
     offset: [number, number, number]
   }
 }
 
+type ControllerComponent = {
+  controller: Controller
+}
+
+type EnemySpawnerComponent = {
+  enemySpawner: {
+    t: number
+    interval: number
+    amount: number
+  }
+}
+
+type LifetimeComponent = {
+  lifetime: number
+}
+
 type PhysicsBodyComponent = {
   body: p2.Body
 }
 
-type ControllerComponent = {
-  controller: Controller
+type SpawnAtComponent = {
+  spawnAt: Vector3
+}
+
+type TransformComponent = {
+  transform: Object3D
+}
+
+type VelocityComponent = {
+  velocity: Vector3
 }
 
 type OptionalComponents = PlayerTag &
@@ -44,41 +89,19 @@ type OptionalComponents = PlayerTag &
   SploderTag &
   SplosionTag &
   PickupTag &
+  AttractionComponent &
+  AutoComponent &
+  AvoidanceComponent &
   CameraComponent &
+  ControllerComponent &
+  EnemySpawnerComponent &
+  LifetimeComponent &
   PhysicsBodyComponent &
-  ControllerComponent
+  SpawnAtComponent &
+  TransformComponent &
+  VelocityComponent
 
-export type Entity = {
-  /* Movement */
-  spawnAt?: Vector3
-  transform?: Object3D
-  velocity?: Vector3
-
-  /* Flocking */
-  attraction?: {
-    targets: EntityWith<Entity, "transform">[]
-    factor: number
-  }
-
-  avoidance?: {
-    targets: EntityWith<Entity, "transform">[]
-    factor: number
-  }
-
-  /* Tools */
-  lifetime?: number
-
-  auto?: {
-    delay: number
-    callback: Function
-  }
-
-  enemySpawner?: {
-    t: number
-    interval: number
-    amount: number
-  }
-} & Partial<OptionalComponents>
+export type Entity = Partial<OptionalComponents>
 
 export const ECS = createECS<Entity>()
 
