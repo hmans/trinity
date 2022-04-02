@@ -1,4 +1,3 @@
-import { IEntity } from "miniplex"
 import p2 from "p2-es"
 import { Object3D } from "three"
 
@@ -9,4 +8,4 @@ export type Entity = {
     interpolate: boolean
   }
   userData?: any
-} & IEntity
+}
