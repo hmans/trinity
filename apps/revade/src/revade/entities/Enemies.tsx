@@ -16,8 +16,8 @@ export const Enemies = () => (
     <Enemy.Root>
       <THREE.SphereGeometry args={[1, 8, 8]} />
       <THREE.MeshStandardMaterial
-        color="white"
-        emissive="white"
+        color="orange"
+        emissive="orange"
         emissiveIntensity={0.3}
       />
     </Enemy.Root>

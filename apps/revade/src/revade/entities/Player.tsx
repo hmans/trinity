@@ -42,8 +42,8 @@ export const Player = () => (
               <T.Mesh>
                 <T.SphereGeometry />
                 <T.MeshStandardMaterial
-                  color="hotpink"
-                  emissive="hotpink"
+                  color="#6f6"
+                  emissive="#6f6"
                   emissiveIntensity={0.8}
                 />
               </T.Mesh>

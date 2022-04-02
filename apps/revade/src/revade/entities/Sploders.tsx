@@ -13,7 +13,7 @@ export const Sploders = () => (
     <Sploder.Root>
       <T.DodecahedronGeometry />
       <T.MeshStandardMaterial
-        color="#66f"
+        color="#6f6"
         emissive={"#66f"}
         emissiveIntensity={0.5}
       />

@@ -13,7 +13,7 @@ export const Pickups = () => (
   <>
     <Pickup.Root>
       <T.SphereGeometry args={[0.35]} />
-      <T.MeshStandardMaterial color="#3c3" emissive="#3c3" />
+      <T.MeshStandardMaterial color="#0c0" emissive="#0c0" />
     </Pickup.Root>
 
     <ECS.Collection tag="pickup">
