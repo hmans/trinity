@@ -5,13 +5,33 @@ import p2 from "p2-es"
 import { makeStore } from "statery"
 import { Object3D, Vector3 } from "three"
 
-export type Entity = {
-  player?: Tag
-  enemy?: Tag
-  sploder?: Tag
-  splosion?: Tag
-  pickup?: Tag
+type PlayerTag = {
+  player: Tag
+}
 
+type EnemyTag = {
+  enemy: Tag
+}
+
+type SploderTag = {
+  sploder: Tag
+}
+
+type SplosionTag = {
+  splosion: Tag
+}
+
+type PickupTag = {
+  pickup: Tag
+}
+
+type OptionalComponents = PlayerTag &
+  EnemyTag &
+  SploderTag &
+  SplosionTag &
+  PickupTag
+
+export type Entity = {
   /* Camera */
   camera?: {
     offset: [number, number, number]
@@ -58,7 +78,7 @@ export type Entity = {
 
   /* Input */
   controller?: Controller
-}
+} & Partial<OptionalComponents>
 
 export const ECS = createECS<Entity>()
 
