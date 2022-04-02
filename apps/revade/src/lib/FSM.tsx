@@ -57,10 +57,12 @@ export function makeFSM<
       if (!fsm.states.includes(s)) throw new Error(`Unknown state ${s}.`)
     if (!fsm.states.includes(to)) throw new Error(`Unknown state ${to}.`)
 
-    if (!from.includes(fsm.state))
-      throw new Error(
+    if (!from.includes(fsm.state)) {
+      console.error(
         `Transition "${name}" requested to transition from state "${from}", but current state is "${fsm.state}".`
       )
+      return
+    }
 
     /* We're good. Lets' go! */
     enterState(to)
