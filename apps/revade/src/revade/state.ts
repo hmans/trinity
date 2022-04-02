@@ -25,25 +25,34 @@ type PickupTag = {
   pickup: Tag
 }
 
+type CameraComponent = {
+  camera: {
+    offset: [number, number, number]
+  }
+}
+
+type PhysicsBodyComponent = {
+  body: p2.Body
+}
+
+type ControllerComponent = {
+  controller: Controller
+}
+
 type OptionalComponents = PlayerTag &
   EnemyTag &
   SploderTag &
   SplosionTag &
-  PickupTag
+  PickupTag &
+  CameraComponent &
+  PhysicsBodyComponent &
+  ControllerComponent
 
 export type Entity = {
-  /* Camera */
-  camera?: {
-    offset: [number, number, number]
-  }
-
   /* Movement */
   spawnAt?: Vector3
   transform?: Object3D
   velocity?: Vector3
-
-  /* Physics */
-  body?: p2.Body
 
   /* Flocking */
   attraction?: {
@@ -75,9 +84,6 @@ export type Entity = {
     interval: number
     amount: number
   }
-
-  /* Input */
-  controller?: Controller
 } & Partial<OptionalComponents>
 
 export const ECS = createECS<Entity>()
