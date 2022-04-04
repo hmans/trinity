@@ -1,5 +1,6 @@
-import { useLayoutEffect } from "react"
+import { useEffect, useLayoutEffect } from "react"
 import { resetGameplayState } from "./actions/resetGameplayState"
+import { filter } from "./audio"
 import { EnemySpawner } from "./EnemySpawner"
 import { Enemies } from "./entities/Enemies"
 import { Pickups } from "./entities/Pickups"
@@ -10,6 +11,10 @@ import { GameFSM } from "./Game"
 
 export const Gameplay = () => {
   useLayoutEffect(resetGameplayState, [])
+
+  useEffect(() => {
+    filter.frequency.rampTo(20000, 3)
+  }, [])
 
   return (
     <>

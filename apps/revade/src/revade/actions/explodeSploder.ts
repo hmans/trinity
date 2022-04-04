@@ -1,4 +1,5 @@
 import { Tag } from "miniplex"
+import { playSplosionSound } from "../audio"
 import { ECS, Entity } from "../state"
 import { explodeEnemy } from "./explodeEnemy"
 
@@ -15,6 +16,9 @@ export const explodeSploder = (entity: Entity & { sploder: Tag }) => {
 
   /* And destroy myself */
   ECS.world.queue.destroyEntity(entity)
+
+  /* Sound! */
+  playSplosionSound()
 
   /* Destroy all enemies that are within the explosion radius */
   for (const enemy of enemies) {

@@ -1,10 +1,11 @@
 import T from "@react-trinity/reactor"
-import { BodyThiefHack } from "../BodyThiefHack"
-import { controller } from "../controller"
 import { PhysicsBody } from "../../lib/physics2d/PhsyicsBody"
 import { CircleShape } from "../../lib/physics2d/Shape"
-import { ECS, Layers } from "../state"
 import { increaseMultiplier } from "../actions/increaseMultiplier"
+import { playPickupSound } from "../audio"
+import { BodyThiefHack } from "../BodyThiefHack"
+import { controller } from "../controller"
+import { ECS, Layers } from "../state"
 
 export const Player = () => (
   <ECS.Collection tag="player" initial={1}>
@@ -28,6 +29,7 @@ export const Player = () => (
               collisionMask={Layers.Pickups}
               onBeginContact={({ userData: other }) => {
                 if (other && other.pickup) {
+                  playPickupSound()
                   increaseMultiplier()
                   ECS.world.queue.destroyEntity(other)
                 }

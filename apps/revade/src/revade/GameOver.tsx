@@ -1,5 +1,7 @@
 import { useTicker } from "@react-trinity/ticker"
 import { Text } from "@react-trinity/toybox"
+import { useEffect } from "react"
+import { filter } from "./audio"
 import { controller } from "./controller"
 import { GameFSM } from "./Game"
 
@@ -9,6 +11,10 @@ export const GameOver = () => {
       GameFSM.transition("returnToMenu")
     }
   })
+
+  useEffect(() => {
+    filter.frequency.rampTo(300, 1)
+  }, [])
 
   return (
     <>
