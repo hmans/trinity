@@ -1,0 +1,15 @@
+.loader {
+  position: fixed;
+
+  font: 30px/1 "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  padding: 1em 2em;
+  border-radius: 5px;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}

@@ -10,7 +10,7 @@ import { Level } from "./Level"
 import { Menu } from "./Menu"
 import Systems from "./systems"
 import { GameFSM } from "./GameFSM"
-import { Loader } from "./Loader"
+import { Loader } from "../lib/loader/Loader"
 
 export const Game = () => (
   <Loader>
