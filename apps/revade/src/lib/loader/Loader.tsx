@@ -12,7 +12,7 @@ export const Loader: FC = ({ children }) => {
   return gameStarted ? (
     <>{children}</>
   ) : ready ? (
-    <div className="loader" onClick={() => setGameStarted(true)}>
+    <div className="loader ready" onClick={() => setGameStarted(true)}>
       CLICK TO PLAY
     </div>
   ) : (
