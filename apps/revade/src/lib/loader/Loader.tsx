@@ -1,10 +1,21 @@
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
 import "./Loader.css"
 
-const LoadScreen: FC = () => {
-  return <div className="loader">LOADING</div>
-}
-
 export const Loader: FC = ({ children }) => {
-  return <LoadScreen />
+  const [ready, setReady] = useState(false)
+  const [gameStarted, setGameStarted] = useState(false)
+
+  useEffect(() => {
+    setInterval(() => setReady(true), 1000)
+  }, [])
+
+  return gameStarted ? (
+    <>{children}</>
+  ) : ready ? (
+    <div className="loader" onClick={() => setGameStarted(true)}>
+      CLICK TO PLAY
+    </div>
+  ) : (
+    <div className="loader">LOADING</div>
+  )
 }
