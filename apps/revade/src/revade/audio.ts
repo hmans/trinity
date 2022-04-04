@@ -2,10 +2,10 @@ import { Compressor, Filter, now, Player, PolySynth, Synth } from "tone"
 
 const comp = new Compressor(-30, 3).toDestination()
 
-export const filter = new Filter(400, "lowpass").connect(comp)
+export const filter = new Filter(300, "lowpass").connect(comp)
 
 export const music = new Player("/audio/revade.ogg").connect(filter)
-music.autostart = true
+music.autostart = false
 music.loop = true
 music.volume.value = -2
 

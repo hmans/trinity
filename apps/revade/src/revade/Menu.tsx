@@ -30,6 +30,7 @@ export const Menu = () => {
   }, [])
 
   useEffect(() => {
+    music.start()
     filter.frequency.rampTo(300, 2)
   }, [])
 

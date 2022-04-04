@@ -1,21 +1,26 @@
 .loader {
+  transition: 0.5s ease-out;
   position: fixed;
 
   font: 30px/1 "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: bold;
-  background-color: #ddd;
+  background-color: #999;
   color: black;
   padding: 1em 2em;
   border-radius: 5px;
+  text-align: center;
 
+  width: 300px;
   top: 50%;
   left: 50%;
 
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) rotate(12deg);
 }
 
 .loader.ready {
+  background-color: #ddd;
   cursor: pointer;
+  transform: translate(-50%, -50%) rotate(-12deg);
 }
 
 .loader.ready:hover {
