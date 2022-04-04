@@ -1,10 +1,11 @@
 .loader {
   transition: 0.5s ease-out;
   position: fixed;
+  opacity: 0.5;
 
   font: 30px/1 "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: bold;
-  background-color: #999;
+  background-color: #ddd;
   color: black;
   padding: 1em 2em;
   border-radius: 5px;
@@ -15,9 +16,12 @@
   left: 50%;
 
   transform: translate(-50%, -50%) rotate(12deg);
+
+  box-shadow: rgba(255, 255, 255, 0.4) 0px 0px 60px 10px;
 }
 
 .loader.ready {
+  opacity: 1;
   background-color: #ddd;
   cursor: pointer;
   transform: translate(-50%, -50%) rotate(-12deg);
