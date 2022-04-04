@@ -1,7 +1,6 @@
 import { Engine, View } from "react-trinity"
 import T from "@react-trinity/reactor"
 import React from "react"
-import { makeFSM } from "../lib/FSM"
 import { PhysicsWorld } from "../lib/physics2d"
 import { Camera } from "./entities/Camera"
 import { GameOver } from "./GameOver"
@@ -10,19 +9,7 @@ import { HUD } from "./HUD"
 import { Level } from "./Level"
 import { Menu } from "./Menu"
 import Systems from "./systems"
-
-export const GameFSM = makeFSM({
-  states: ["menu", "gameplay", "pause", "gameover"],
-  state: "menu",
-  transitions: {
-    startGame: { from: "menu", to: "gameplay" },
-    pauseGame: { from: "gameplay", to: "pause" },
-    resumeGame: { from: "pause", to: "gameplay" },
-    abortGame: { from: "pause", to: "menu" },
-    gameOver: { from: "gameplay", to: "gameover" },
-    returnToMenu: { from: ["gameover", "gameplay"], to: "menu" }
-  }
-})
+import { GameFSM } from "./GameFSM"
 
 export const Game = () => (
   <>

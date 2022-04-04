@@ -7,7 +7,7 @@ import { Pickups } from "./entities/Pickups"
 import { Player } from "./entities/Player"
 import { Sploders } from "./entities/Sploders"
 import { Splosions } from "./entities/Splosions"
-import { GameFSM } from "./Game"
+import { GameFSM } from "./GameFSM"
 
 export const Gameplay = () => {
   useLayoutEffect(resetGameplayState, [])

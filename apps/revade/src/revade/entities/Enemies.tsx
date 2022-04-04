@@ -6,7 +6,7 @@ import { Animation } from "../../lib/Animation"
 import { PhysicsBody } from "../../lib/physics2d/PhsyicsBody"
 import { CircleShape } from "../../lib/physics2d/Shape"
 import { ECS, Layers } from "../state"
-import { GameFSM } from "../Game"
+import { GameFSM } from "../GameFSM"
 import THREE from "@react-trinity/reactor"
 
 const Enemy = makeInstanceComponents()

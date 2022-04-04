@@ -3,7 +3,7 @@ import { Text } from "@react-trinity/toybox"
 import { useEffect } from "react"
 import { filter } from "./audio"
 import { controller } from "./controller"
-import { GameFSM } from "./Game"
+import { GameFSM } from "./GameFSM"
 
 export const GameOver = () => {
   useTicker("update", () => {

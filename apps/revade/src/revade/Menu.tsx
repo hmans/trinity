@@ -3,7 +3,7 @@ import T from "@react-trinity/reactor"
 import React, { useEffect, useRef, useState } from "react"
 import { Mesh } from "three"
 import { controller } from "./controller"
-import { GameFSM } from "./Game"
+import { GameFSM } from "./GameFSM"
 import { filter, music } from "./audio"
 import * as Tone from "tone"
 

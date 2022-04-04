@@ -1,5 +1,5 @@
 import { useStore } from "statery"
-import { GameFSM } from "./Game"
+import { GameFSM } from "./GameFSM"
 import "./HUD.css"
 import { store } from "./state"
 

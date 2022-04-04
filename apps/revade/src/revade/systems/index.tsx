@@ -1,5 +1,5 @@
 import System from "../../lib/System"
-import { GameFSM } from "../Game"
+import { GameFSM } from "../GameFSM"
 import { ECS } from "../state"
 import { Attraction } from "./Attraction"
 import { AttractPickups } from "./AttractPickups"
