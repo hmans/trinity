@@ -21,7 +21,7 @@
   "devDependencies": {
     "@react-trinity/reactor": "*",
     "@react-trinity/ticker": "*",
-    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.0",
     "@types/react": "^17.0.43",
     "@types/three": "^0.139.0",
