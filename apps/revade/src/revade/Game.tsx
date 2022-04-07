@@ -13,7 +13,7 @@ import { GameFSM } from "./GameFSM"
 import { Launcher } from "../lib/launcher/Launcher"
 
 export const Game = () => (
-  <Launcher>
+  <>
     <HUD />
     <Engine>
       <View>
@@ -39,5 +39,5 @@ export const Game = () => (
         </PhysicsWorld>
       </View>
     </Engine>
-  </Launcher>
+  </>
 )
