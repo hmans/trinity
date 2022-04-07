@@ -11,6 +11,11 @@ export const Launcher: FC = ({ children }) => {
     })
   }
 
+  const onFullscreenStart = () => {
+    document.documentElement.requestFullscreen()
+    onStart()
+  }
+
   return gameStarted ? (
     <>{children}</>
   ) : (
@@ -18,7 +23,7 @@ export const Launcher: FC = ({ children }) => {
       <div className="button" onClick={onStart}>
         PLAY WINDOWED
       </div>
-      <div className="button" onClick={onStart}>
+      <div className="button" onClick={onFullscreenStart}>
         PLAY FULLSCREEN
       </div>
     </div>
