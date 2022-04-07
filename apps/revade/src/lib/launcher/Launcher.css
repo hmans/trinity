@@ -1,33 +1,25 @@
 .loader {
   transition: 0.5s ease-out;
   position: fixed;
-  opacity: 0.5;
+  top: 50%;
+  left: 50%;
 
-  font: 30px/1 "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font: 20px/1 "Helvetica Neue", Arial, Helvetica, sans-serif;
+  transform: translate(-50%, -50%);
+}
+
+.loader .button {
+  display: block;
+  margin: 1em;
+  width: 300px;
+
   font-weight: bold;
   background-color: #ddd;
   color: black;
   padding: 1em 2em;
   border-radius: 5px;
   text-align: center;
+  box-shadow: rgba(255, 255, 255, 0.3) 0px 0px 10px 3px;
 
-  width: 300px;
-  top: 50%;
-  left: 50%;
-
-  transform: translate(-50%, -50%);
-
-  box-shadow: rgba(255, 255, 255, 0.4) 0px 0px 60px 10px;
-}
-
-.loader.ready {
-  opacity: 1;
-  background-color: #ddd;
   cursor: pointer;
-  transform: translate(-50%, -50%) scale(1.1);
-}
-
-.loader.ready:hover {
-  cursor: pointer;
-  background-color: white;
 }

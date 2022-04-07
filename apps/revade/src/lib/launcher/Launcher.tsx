@@ -3,12 +3,7 @@ import "./Launcher.css"
 import * as Tone from "tone"
 
 export const Launcher: FC = ({ children }) => {
-  const [ready, setReady] = useState(false)
   const [gameStarted, setGameStarted] = useState(false)
-
-  useEffect(() => {
-    setInterval(() => setReady(true), 1000)
-  }, [])
 
   const onStart = () => {
     Tone.start().then(() => {
@@ -18,11 +13,14 @@ export const Launcher: FC = ({ children }) => {
 
   return gameStarted ? (
     <>{children}</>
-  ) : ready ? (
-    <div className="loader ready" onClick={onStart}>
-      CLICK TO PLAY
-    </div>
   ) : (
-    <div className="loader">LOADING</div>
+    <div className="loader ready">
+      <div className="button" onClick={onStart}>
+        PLAY WINDOWED
+      </div>
+      <div className="button" onClick={onStart}>
+        PLAY FULLSCREEN
+      </div>
+    </div>
   )
 }
