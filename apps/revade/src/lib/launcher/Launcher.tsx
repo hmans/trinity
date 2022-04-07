@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from "react"
-import "./Loader.css"
+import "./Launcher.css"
 import * as Tone from "tone"
 
-export const Loader: FC = ({ children }) => {
+export const Launcher: FC = ({ children }) => {
   const [ready, setReady] = useState(false)
   const [gameStarted, setGameStarted] = useState(false)
 

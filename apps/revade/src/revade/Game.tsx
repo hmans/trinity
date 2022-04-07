@@ -10,10 +10,10 @@ import { Level } from "./Level"
 import { Menu } from "./Menu"
 import Systems from "./systems"
 import { GameFSM } from "./GameFSM"
-import { Loader } from "../lib/loader/Loader"
+import { Launcher } from "../lib/launcher/Launcher"
 
 export const Game = () => (
-  <Loader>
+  <Launcher>
     <HUD />
     <Engine>
       <View>
@@ -39,5 +39,5 @@ export const Game = () => (
         </PhysicsWorld>
       </View>
     </Engine>
-  </Loader>
+  </Launcher>
 )
