@@ -4,7 +4,7 @@ const comp = new Compressor(-30, 3).toDestination()
 
 export const filter = new Filter(300, "lowpass").connect(comp)
 
-export const music = new Player("/audio/revade.ogg").connect(filter)
+export const music = new Player("/audio/revade.mp3").connect(filter)
 music.autostart = false
 music.loop = true
 music.volume.value = -2
