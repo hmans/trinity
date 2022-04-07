@@ -3,6 +3,9 @@ export { Engine } from "./engine/Engine"
 export { Renderer } from "./engine/Renderer"
 export { View } from "./engine/View"
 
+/* Loaders */
+export * from "./loaders"
+
 /* Experiments */
 export { useCamera } from "./experiments/useCamera"
 
