@@ -5,10 +5,9 @@ import * as Tone from "tone"
 export const Launcher: FC = ({ children }) => {
   const [gameStarted, setGameStarted] = useState(false)
 
-  const onStart = () => {
-    Tone.start().then(() => {
-      setGameStarted(true)
-    })
+  const onStart = async () => {
+    await Tone.start()
+    setGameStarted(true)
   }
 
   const onFullscreenStart = () => {
@@ -23,6 +22,7 @@ export const Launcher: FC = ({ children }) => {
       <div className="button" onClick={onStart}>
         PLAY WINDOWED
       </div>
+
       <div className="button" onClick={onFullscreenStart}>
         PLAY FULLSCREEN
       </div>
