@@ -11,7 +11,10 @@ export const Launcher: FC = ({ children }) => {
   }
 
   const onFullscreenStart = () => {
-    document.documentElement.requestFullscreen()
+    const $el = document.documentElement
+    if ("webkitRequestFullscreen" in $el) ($el as any).webkitRequestFullscreen()
+    else $el.requestFullscreen()
+
     onStart()
   }
 
