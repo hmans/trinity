@@ -13,6 +13,8 @@ export const Canvas: FC<{ children?: ReactNode; theme?: CSSProperties }> = ({
       height: "100vh",
       zIndex: 1,
       userSelect: "none",
+      WebkitUserSelect: "none",
+      cursor: "default",
       ...theme
     }}
   >
