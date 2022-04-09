@@ -19,7 +19,7 @@ type Anchor =
   | "left"
   | "top-left"
 
-const anchorStyles: Record<Anchor, CSSProperties> = {
+const anchorStyles: Partial<Record<Anchor, CSSProperties>> = {
   top: {
     position: "absolute",
     top: 0,
