@@ -1,6 +1,6 @@
 import T from "@react-trinity/reactor"
 import React from "react"
-import { Engine, View } from "react-trinity"
+import { Renderer, Ticker, View } from "react-trinity"
 import { PhysicsWorld } from "../lib/physics2d"
 import { Music } from "./audio"
 import { Camera } from "./entities/Camera"
@@ -13,9 +13,9 @@ import { Menu } from "./Menu"
 import Systems from "./systems"
 
 export const Game = () => (
-  <>
+  <Ticker>
     <HUD />
-    <Engine>
+    <Renderer>
       <View>
         <PhysicsWorld gravity={[0, 0]}>
           <T.AmbientLight intensity={0.3} />
@@ -39,6 +39,6 @@ export const Game = () => (
           </GameFSM.Match>
         </PhysicsWorld>
       </View>
-    </Engine>
-  </>
+    </Renderer>
+  </Ticker>
 )
