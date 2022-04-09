@@ -45,10 +45,11 @@ export const HUD = () => (
     <GameFSM.Match state="menu">
       <UI.Text
         anchor="top"
-        marginTop={50}
-        fontSize="clamp(30px, 30vmin, 300px)"
+        marginTop="5vmin"
+        fontSize="25vmin"
         fontWeight={800}
-        color="orange"
+        color="#fa3"
+        textShadow="#fa38 0px 0px 40px, white 10px 10px, hotpink 20px 20px, hotpink 20px 20px 40px"
       >
         REVADE
       </UI.Text>
