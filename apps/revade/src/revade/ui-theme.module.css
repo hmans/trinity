@@ -5,3 +5,21 @@
   font: 4vw/1 "Anek Tamil", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-shadow: "rgba(0, 0, 0, 0.7) 3px 3px 4px";
 }
+
+.theme button {
+  transition: background 0.2s ease-out, box-shadow 0.2s ease-out;
+  outline: none;
+  font: inherit;
+
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-bottom-width: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0.5rem;
+  padding: 0.5rem 2rem 0.25rem 2rem;
+}
+
+.theme button:hover {
+  background-color: white;
+  border-color: orange;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 30px;
+}

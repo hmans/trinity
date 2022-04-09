@@ -82,7 +82,10 @@ const Menu = () => {
       </UI.Panel>
 
       {ready && (
-        <UI.VerticalGroup anchor="bottom" style={{ marginBottom: 50 }}>
+        <UI.VerticalGroup
+          anchor="bottom"
+          style={{ marginBottom: 50, gap: "1rem" }}
+        >
           <UI.Button onClick={startGame}>START</UI.Button>
           <UI.Button>OPTIONS</UI.Button>
           <UI.Button>CREDITS</UI.Button>
