@@ -1,6 +1,6 @@
 import T, { ReactorComponentProps } from "@react-trinity/reactor"
 import p2 from "p2-es"
-import { forwardRef, useLayoutEffect, useRef, useState } from "react"
+import { forwardRef, useEffect, useRef, useState } from "react"
 import mergeRefs from "react-merge-refs"
 import { Euler, Group, Quaternion, Vector3 } from "three"
 import { BodyContext } from "./BodyContext"
@@ -65,7 +65,7 @@ export const PhysicsBody = forwardRef<
     )
 
     /* Create and destroy an ECS entity for this physics object */
-    useLayoutEffect(() => {
+    useEffect(() => {
       world.addBody(body)
       ecs.world.addComponent(entity, { transform: group.current })
 

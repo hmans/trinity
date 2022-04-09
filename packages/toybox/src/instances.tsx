@@ -2,7 +2,7 @@ import { makeReactor, ReactorComponentProps } from "@react-trinity/reactor"
 import { useTicker } from "@react-trinity/ticker"
 import { IEntity } from "miniplex"
 import { createECS } from "miniplex-react"
-import React, { FC, forwardRef, useLayoutEffect, useRef } from "react"
+import React, { FC, forwardRef, useEffect, useRef } from "react"
 import mergeRefs from "react-merge-refs"
 import { Group, InstancedMesh, Object3D } from "three"
 
@@ -73,7 +73,7 @@ export const makeInstanceComponents = () => {
     ({ children, ...groupProps }, ref) => {
       const group = useRef<Group>(null!)
 
-      useLayoutEffect(() => {
+      useEffect(() => {
         const entity = ecs.world.createEntity({
           instance: {
             sceneObject: group.current
