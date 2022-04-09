@@ -91,20 +91,51 @@ const Menu = () => {
   )
 }
 
-export const HUD = () => (
-  <UI.Canvas className={theme.theme}>
-    <GameFSM.Match state="menu">
-      <Menu />
-    </GameFSM.Match>
+export const HUD = () => {
+  useTicker("update", () => {
+    const move = controller.controls.move.value
 
-    <GameFSM.Match state="gameover">
-      <UI.Text anchor="bottom" style={{ marginBottom: "min(50px, 4vw)" }}>
-        ~ HIT SPACE TO CONTINUE ~
-      </UI.Text>
-    </GameFSM.Match>
+    if (move.y != 0) {
+      console.log("w00t")
 
-    <GameFSM.Match state={["gameplay", "gameover"]}>
-      <ScoreDisplay />
-    </GameFSM.Match>
-  </UI.Canvas>
-)
+      /* Get a list of all elements that can receive focus */
+      const focusableElements = [
+        ...document.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+      ]
+
+      const focusedElement = document.querySelector(":focus")!
+      const pos = focusableElements.indexOf(focusedElement)
+
+      if (pos >= 0) {
+        console.log(pos)
+
+        const nextElement =
+          focusableElements[(pos + 1) % focusableElements.length]
+
+        nextElement.focus()
+      } else {
+        focusableElements[0]?.focus()
+      }
+    }
+  })
+
+  return (
+    <UI.Canvas className={theme.theme}>
+      <GameFSM.Match state="menu">
+        <Menu />
+      </GameFSM.Match>
+
+      <GameFSM.Match state="gameover">
+        <UI.Text anchor="bottom" style={{ marginBottom: "min(50px, 4vw)" }}>
+          ~ HIT SPACE TO CONTINUE ~
+        </UI.Text>
+      </GameFSM.Match>
+
+      <GameFSM.Match state={["gameplay", "gameover"]}>
+        <ScoreDisplay />
+      </GameFSM.Match>
+    </UI.Canvas>
+  )
+}
