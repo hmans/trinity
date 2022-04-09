@@ -1,10 +1,11 @@
 import { CSSProperties, FC, ReactNode } from "react"
 
-export const Canvas: FC<{ children?: ReactNode; theme?: CSSProperties }> = ({
-  children,
-  theme
-}) => (
+export const Canvas: FC<{
+  children?: ReactNode
+  className?: string
+}> = ({ children, className }) => (
   <div
+    className={className}
     style={{
       position: "fixed",
       top: 0,
@@ -14,8 +15,7 @@ export const Canvas: FC<{ children?: ReactNode; theme?: CSSProperties }> = ({
       zIndex: 1,
       userSelect: "none",
       WebkitUserSelect: "none",
-      cursor: "default",
-      ...theme
+      cursor: "default"
     }}
   >
     {children}

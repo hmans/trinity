@@ -1,4 +1,4 @@
-import { CSSProperties, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTicker } from "react-trinity"
 import { useStore } from "statery"
 import * as UI from "../lib/ui"
@@ -6,12 +6,7 @@ import { filter } from "./audio"
 import { controller } from "./controller"
 import { GameFSM } from "./GameFSM"
 import { store } from "./state"
-
-const theme: CSSProperties = {
-  color: "white",
-  font: "4vw/1 'Anek Tamil', 'Helvetica Neue', Helvetica, Arial, sans-serif",
-  textShadow: "rgba(0, 0, 0, 0.7) 3px 3px 4px"
-}
+import theme from "./ui-theme.module.css"
 
 const ScoreDisplay = () => {
   const { score, multiplier } = useStore(store)
@@ -87,18 +82,18 @@ const Menu = () => {
       </UI.Panel>
 
       {ready && (
-        <UI.Panel anchor="bottom" style={{ marginBottom: 50 }}>
+        <UI.VerticalGroup anchor="bottom" style={{ marginBottom: 50 }}>
           <UI.Button onClick={startGame}>START</UI.Button>
           <UI.Button>OPTIONS</UI.Button>
           <UI.Button>CREDITS</UI.Button>
-        </UI.Panel>
+        </UI.VerticalGroup>
       )}
     </>
   )
 }
 
 export const HUD = () => (
-  <UI.Canvas theme={theme}>
+  <UI.Canvas className={theme.theme}>
     <GameFSM.Match state="menu">
       <Menu />
     </GameFSM.Match>

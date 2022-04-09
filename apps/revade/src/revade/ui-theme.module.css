@@ -1,0 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@400;800&display=swap");
+
+.theme {
+  color: white;
+  font: 4vw/1 "Anek Tamil", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-shadow: "rgba(0, 0, 0, 0.7) 3px 3px 4px";
+}
