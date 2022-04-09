@@ -1,6 +1,9 @@
-import { FC, ReactNode } from "react"
+import { CSSProperties, FC, ReactNode } from "react"
 
-export const Canvas: FC<{ children?: ReactNode }> = ({ children }) => (
+export const Canvas: FC<{ children?: ReactNode; theme?: CSSProperties }> = ({
+  children,
+  theme
+}) => (
   <div
     style={{
       position: "fixed",
@@ -9,7 +12,8 @@ export const Canvas: FC<{ children?: ReactNode }> = ({ children }) => (
       width: "100vw",
       height: "100vh",
       zIndex: 1,
-      userSelect: "none"
+      userSelect: "none",
+      ...theme
     }}
   >
     {children}

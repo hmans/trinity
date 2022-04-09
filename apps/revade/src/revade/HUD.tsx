@@ -1,16 +1,22 @@
 import { useStore } from "statery"
 import { GameFSM } from "./GameFSM"
-import "./HUD.css"
 import { store } from "./state"
 
 import * as UI from "../lib/ui"
+
+const theme = {
+  padding: "30px",
+  color: "white",
+  font: "30px/1 'Helvetica Neue'",
+  fontWeight: "bold"
+}
 
 export const HUD = () => {
   const { score, multiplier } = useStore(store)
 
   return (
-    <UI.Canvas>
-      <div className="HUD">
+    <UI.Canvas theme={theme}>
+      <div>
         <div>REVADE</div>
 
         <GameFSM.Match state={["gameplay", "gameover"]}>
