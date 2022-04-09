@@ -54,8 +54,10 @@ export const HUD = () => (
         REVADE
       </UI.Text>
 
-      <UI.Text anchor="bottom" marginBottom="min(50px, 4vw)">
-        ~ HIT SPACE TO START ~
+      <UI.Text anchor="bottom" marginBottom="10vmin">
+        <UI.Button>START</UI.Button>
+        <UI.Button>OPTIONS</UI.Button>
+        <UI.Button>CREDITS</UI.Button>
       </UI.Text>
     </GameFSM.Match>
 

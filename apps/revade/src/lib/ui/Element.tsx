@@ -45,20 +45,21 @@ export type ElementProps = CSSProperties & {
   anchor?: Anchor
 }
 
-export const Element: FC<ElementProps> = ({
-  children,
-  css,
-  anchor,
-  ...props
-}) => (
-  <div
-    style={{
-      ...defaultStyles,
-      ...(anchor ? anchorStyles[anchor] : {}),
-      ...props,
-      ...css
-    }}
-  >
-    {children}
-  </div>
-)
+export const Element: FC<ElementProps & {
+  tagName?: keyof JSX.IntrinsicElements
+}> = ({ tagName = "div", children, css, anchor, ...props }) => {
+  const Tag = tagName
+
+  return (
+    <Tag
+      style={{
+        ...defaultStyles,
+        ...(anchor ? anchorStyles[anchor] : {}),
+        ...props,
+        ...css
+      }}
+    >
+      {children}
+    </Tag>
+  )
+}
