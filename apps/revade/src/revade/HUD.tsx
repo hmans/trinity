@@ -29,6 +29,7 @@ export const ScoreDisplay = () => {
       margin="min(30px, 4vw)"
       fontSize="60%"
       color="lime"
+      textShadow="black 1px 1px 3px, rgba(0, 255, 0, 0.99) 0px 0px 20px"
     >
       <UI.Text>SCORE: {scoreString}</UI.Text>
       <UI.Text>MULTIPLIER: {multiplierString}x</UI.Text>
