@@ -7,7 +7,7 @@ import * as UI from "../lib/ui"
 const theme = {
   padding: "30px",
   color: "white",
-  font: "30px/1 'Helvetica Neue'",
+  font: "4vw/1 'Helvetica Neue'",
   fontWeight: "bold"
 }
 
@@ -16,19 +16,19 @@ export const HUD = () => {
 
   return (
     <UI.Canvas theme={theme}>
-      <div>
-        <div>REVADE</div>
+      <UI.Panel>
+        <UI.Text>REVADE</UI.Text>
 
         <GameFSM.Match state={["gameplay", "gameover"]}>
-          <div>
+          <UI.Text>
             SCORE: {score.toLocaleString("de-DE", { maximumFractionDigits: 0 })}
-          </div>
-          <div>
+          </UI.Text>
+          <UI.Text>
             MULTIPLIER:{" "}
             {multiplier.toLocaleString("de-DE", { maximumFractionDigits: 0 })}x
-          </div>
+          </UI.Text>
         </GameFSM.Match>
-      </div>
+      </UI.Panel>
     </UI.Canvas>
   )
 }
