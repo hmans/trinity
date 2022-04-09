@@ -1,12 +1,6 @@
 import T, { ReactorComponentProps } from "@react-trinity/reactor"
 import p2 from "p2-es"
-import {
-  forwardRef,
-  useImperativeHandle,
-  useLayoutEffect,
-  useRef,
-  useState
-} from "react"
+import { forwardRef, useLayoutEffect, useRef, useState } from "react"
 import mergeRefs from "react-merge-refs"
 import { Euler, Group, Quaternion, Vector3 } from "three"
 import { BodyContext } from "./BodyContext"
