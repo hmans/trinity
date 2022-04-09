@@ -10,7 +10,7 @@ import { Splosions } from "./entities/Splosions"
 import { GameFSM } from "./GameFSM"
 
 export const Gameplay = () => {
-  useLayoutEffect(resetGameplayState, [])
+  useEffect(resetGameplayState, [])
 
   useEffect(() => {
     filter.frequency.rampTo(20000, 3)
