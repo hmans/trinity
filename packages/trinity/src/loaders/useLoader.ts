@@ -2,13 +2,16 @@ type ResourceEntry<T> = Promise<T> | T
 
 const loadedResources: { [url: string]: ResourceEntry<any> } = {}
 
-export const useLoader = <T extends object>(Loader: any, url: string): T => {
+export const useLoader = <Resource extends object>(
+  Loader: any,
+  url: string
+): Resource => {
   /* If there's already a cached entry, return or throw it */
   if (loadedResources[url]) {
     if (loadedResources[url] instanceof Promise) {
       throw loadedResources[url]
     } else {
-      return loadedResources[url] as T
+      return loadedResources[url] as Resource
     }
   }
 
@@ -16,7 +19,7 @@ export const useLoader = <T extends object>(Loader: any, url: string): T => {
   no previous attempts at loading it, so let's get to it! */
 
   /* Create a promise */
-  const promise = new Promise((resolve: (data: T) => void) => {
+  const promise = new Promise((resolve: (data: Resource) => void) => {
     new Loader().load(url, resolve)
   })
 

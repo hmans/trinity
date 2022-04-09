@@ -4,8 +4,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { Mesh } from "three"
 import { controller } from "./controller"
 import { GameFSM } from "./GameFSM"
-import { filter, music } from "./audio"
-import * as Tone from "tone"
+import { filter } from "./audio"
 
 const MenuOrb = ({ speed = 1.5 }) => {
   const ref = useRef<Mesh>(null!)
@@ -30,7 +29,6 @@ export const Menu = () => {
   }, [])
 
   useEffect(() => {
-    music.start()
     filter.frequency.rampTo(300, 2)
   }, [])
 
