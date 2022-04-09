@@ -1,6 +1,8 @@
 import { CSSProperties, FC, ReactNode } from "react"
 
-const defaultStyles: CSSProperties = {}
+const defaultStyles: CSSProperties = {
+  boxSizing: "border-box"
+}
 
 const debugStyles: CSSProperties = {
   backgroundColor: "rgba(200, 100, 50, 0.2)"
@@ -41,14 +43,22 @@ export type ElementProps = {
   children?: ReactNode
   css?: CSSProperties
   anchor?: Anchor
+  margin?: number
   debug?: boolean
 }
 
-export const Element: FC<ElementProps> = ({ children, css, anchor, debug }) => (
+export const Element: FC<ElementProps> = ({
+  children,
+  css,
+  anchor,
+  margin,
+  debug
+}) => (
   <div
     style={{
       ...defaultStyles,
       ...(anchor ? anchorStyles[anchor] : {}),
+      margin,
       ...css
     }}
   >
