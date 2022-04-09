@@ -1,5 +1,4 @@
-import { FC, ReactNode } from "react"
+import { FC } from "react"
+import { Element, ElementProps } from "./Element"
 
-export const Panel: FC<{ children?: ReactNode }> = ({ children }) => (
-  <div>{children}</div>
-)
+export const Panel: FC<ElementProps> = (props) => <Element {...props} />
