@@ -74,7 +74,7 @@ const Menu = () => {
             fontWeight: 800,
             color: "#fa3",
             textShadow:
-              "#fa38 0px 0px 40px, white 10px 10px, hotpink 20px 20px, hotpink 20px 20px 40px"
+              "#fa38 0px 0px 4vmin, white 1vmin 1vmin, hotpink 2vmin 2vmin, hotpink 2vmin 2vmin 4vmin, black 0px 0px 6vmin"
           }}
         >
           REVADE
