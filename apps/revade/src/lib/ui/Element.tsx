@@ -42,7 +42,7 @@ const anchorStyles: Partial<Record<Anchor, CSSProperties>> = {
   }
 }
 
-export type ElementProps<T = HTMLDivElement> = HTMLProps<T> & {
+export type ElementProps<T = unknown> = HTMLProps<T> & {
   children?: ReactNode
   anchor?: Anchor
 }
@@ -54,7 +54,7 @@ export const Element: FC<ElementProps & {
 
   return (
     <Tag
-      {...props}
+      {...(props as any)}
       style={{
         ...defaultStyles,
         ...(anchor ? anchorStyles[anchor] : {}),
