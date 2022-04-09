@@ -51,12 +51,6 @@ const Menu = () => {
     filter.frequency.rampTo(300, 2)
   }, [])
 
-  useTicker("update", () => {
-    if (controller.controls.fire.value) {
-      startGame()
-    }
-  })
-
   const startGame = () => {
     if (ready) {
       GameFSM.transition("startGame")
@@ -86,7 +80,9 @@ const Menu = () => {
           anchor="bottom"
           style={{ marginBottom: 50, gap: "1rem" }}
         >
-          <UI.Button onClick={startGame}>START</UI.Button>
+          <UI.Button onClick={startGame} autoFocus>
+            START
+          </UI.Button>
           <UI.Button>OPTIONS</UI.Button>
           <UI.Button>CREDITS</UI.Button>
         </UI.VerticalGroup>

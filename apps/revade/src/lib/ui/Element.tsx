@@ -3,6 +3,7 @@ import {
   DetailedHTMLProps,
   FC,
   HTMLAttributes,
+  HTMLProps,
   ReactNode
 } from "react"
 
@@ -41,9 +42,8 @@ const anchorStyles: Partial<Record<Anchor, CSSProperties>> = {
   }
 }
 
-export type ElementProps = HTMLAttributes<unknown> & {
+export type ElementProps<T = HTMLDivElement> = HTMLProps<T> & {
   children?: ReactNode
-  css?: CSSProperties
   anchor?: Anchor
 }
 
@@ -61,7 +61,6 @@ export const Element: FC<ElementProps & {
         ...style
       }}
     >
-      <div></div>
       {children}
     </Tag>
   )
