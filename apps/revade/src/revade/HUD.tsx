@@ -46,7 +46,7 @@ export const HUD = () => (
       <UI.Text
         anchor="top"
         marginTop={50}
-        fontSize="min(30vh)"
+        fontSize="clamp(30px, 30vmin, 300px)"
         fontWeight={800}
         color="orange"
       >
