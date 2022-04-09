@@ -1,9 +1,11 @@
+import { CSSProperties, useEffect, useState } from "react"
+import { useTicker } from "react-trinity"
 import { useStore } from "statery"
+import * as UI from "../lib/ui"
+import { filter } from "./audio"
+import { controller } from "./controller"
 import { GameFSM } from "./GameFSM"
 import { store } from "./state"
-
-import * as UI from "../lib/ui"
-import { CSSProperties } from "react"
 
 const theme: CSSProperties = {
   color: "white",
@@ -41,6 +43,22 @@ const ScoreDisplay = () => {
 }
 
 const Menu = () => {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => setReady(true), 500)
+  }, [])
+
+  useEffect(() => {
+    filter.frequency.rampTo(300, 2)
+  }, [])
+
+  useTicker("update", () => {
+    if (ready && controller.controls.fire.value) {
+      GameFSM.transition("startGame")
+    }
+  })
+
   return (
     <>
       <UI.Text
