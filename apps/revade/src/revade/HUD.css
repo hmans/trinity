@@ -1,12 +1,6 @@
 .HUD {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
   padding: 30px;
-
   color: white;
-  user-select: none;
   font: 30px/1 "Helvetica Neue";
   font-weight: bold;
 }
