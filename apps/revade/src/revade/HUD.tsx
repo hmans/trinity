@@ -92,34 +92,34 @@ const Menu = () => {
 }
 
 export const HUD = () => {
-  useTicker("update", () => {
-    const move = controller.controls.move.value
+  // useTicker("update", () => {
+  //   const move = controller.controls.move.value
 
-    if (move.y != 0) {
-      console.log("w00t")
+  //   if (move.y != 0) {
+  //     console.log("w00t")
 
-      /* Get a list of all elements that can receive focus */
-      const focusableElements = [
-        ...document.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        )
-      ]
+  //     /* Get a list of all elements that can receive focus */
+  //     const focusableElements = [
+  //       ...document.querySelectorAll(
+  //         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  //       )
+  //     ]
 
-      const focusedElement = document.querySelector(":focus")!
-      const pos = focusableElements.indexOf(focusedElement)
+  //     const focusedElement = document.querySelector(":focus")!
+  //     const pos = focusableElements.indexOf(focusedElement)
 
-      if (pos >= 0) {
-        console.log(pos)
+  //     if (pos >= 0) {
+  //       console.log(pos)
 
-        const nextElement =
-          focusableElements[(pos + 1) % focusableElements.length]
+  //       const nextElement =
+  //         focusableElements[(pos + 1) % focusableElements.length]
 
-        nextElement.focus()
-      } else {
-        focusableElements[0]?.focus()
-      }
-    }
-  })
+  //       nextElement.focus()
+  //     } else {
+  //       focusableElements[0]?.focus()
+  //     }
+  //   }
+  // })
 
   return (
     <UI.Canvas className={theme.theme}>
