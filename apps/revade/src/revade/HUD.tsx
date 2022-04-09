@@ -11,7 +11,7 @@ const theme: CSSProperties = {
   textShadow: "rgba(0, 0, 0, 0.7) 3px 3px 4px"
 }
 
-export const ScoreDisplay = () => {
+const ScoreDisplay = () => {
   const { score, multiplier } = useStore(store)
 
   const scoreString = score.toLocaleString("de-DE", {
@@ -40,9 +40,9 @@ export const ScoreDisplay = () => {
   )
 }
 
-export const HUD = () => (
-  <UI.Canvas theme={theme}>
-    <GameFSM.Match state="menu">
+const Menu = () => {
+  return (
+    <>
       <UI.Text
         anchor="top"
         marginTop="5vmin"
@@ -59,6 +59,14 @@ export const HUD = () => (
         <UI.Button>OPTIONS</UI.Button>
         <UI.Button>CREDITS</UI.Button>
       </UI.Text>
+    </>
+  )
+}
+
+export const HUD = () => (
+  <UI.Canvas theme={theme}>
+    <GameFSM.Match state="menu">
+      <Menu />
     </GameFSM.Match>
 
     <GameFSM.Match state="gameover">
