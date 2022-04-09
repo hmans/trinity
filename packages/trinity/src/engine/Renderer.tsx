@@ -1,6 +1,7 @@
 import React, {
   createContext,
   FC,
+  ReactNode,
   useContext,
   useEffect,
   useRef,
@@ -11,7 +12,7 @@ import { useWindowResizeHandler } from "./useWindowResizeHandler"
 
 const RendererContext = createContext<THREE.WebGLRenderer>(null!)
 
-export const Renderer: FC = ({ children }) => {
+export const Renderer: FC<{ children?: ReactNode }> = ({ children }) => {
   const canvas = useRef<HTMLCanvasElement>(null!)
   const [renderer, setRenderer] = useState<THREE.WebGLRenderer>()
 

@@ -1,5 +1,5 @@
 import p2 from "p2-es"
-import { FC, useEffect, useMemo } from "react"
+import { FC, ReactNode, useEffect, useMemo } from "react"
 import { useBody } from "./BodyContext"
 import { Entity } from "./Entity"
 import { usePhysicsWorld } from "./PhysicsWorld"
@@ -11,6 +11,7 @@ type ShapeProps = {
   collisionMask?: number
   onBeginContact?: (entity: Entity) => void
   onEndContact?: (entity: Entity) => void
+  children?: ReactNode
 }
 
 export const Shape: FC<ShapeProps & { shape: p2.Shape }> = ({
@@ -75,9 +76,8 @@ export const BoxShape: FC<ShapeProps & { size?: [number, number] }> = ({
   size = [0.5, 0.5],
   ...props
 }) => {
-  const shape = useMemo(
-    () => new p2.Box({ width: size[0], height: size[1] }),
-    [...size]
-  )
+  const shape = useMemo(() => new p2.Box({ width: size[0], height: size[1] }), [
+    ...size
+  ])
   return <Shape shape={shape} {...props} />
 }

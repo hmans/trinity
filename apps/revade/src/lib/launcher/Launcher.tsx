@@ -1,8 +1,8 @@
-import { FC, useEffect, useState } from "react"
-import "./Launcher.css"
+import { FC, ReactNode, useState } from "react"
 import * as Tone from "tone"
+import "./Launcher.css"
 
-export const Launcher: FC = ({ children }) => {
+export const Launcher: FC<{ children: ReactNode }> = ({ children }) => {
   const [gameStarted, setGameStarted] = useState(false)
 
   const onStart = async () => {

@@ -96,7 +96,9 @@ export const PhysicsBody = forwardRef<
 
     return (
       <T.Group ref={mergeRefs([group, ref])} {...props}>
-        <BodyContext.Provider value={body}>{children}</BodyContext.Provider>
+        <BodyContext.Provider value={body}>
+          {typeof children === "function" ? children() : children}
+        </BodyContext.Provider>
       </T.Group>
     )
   }

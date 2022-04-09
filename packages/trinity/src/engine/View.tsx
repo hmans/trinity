@@ -1,6 +1,7 @@
 import React, {
   createContext,
   FC,
+  ReactNode,
   useContext,
   useEffect,
   useMemo,
@@ -31,6 +32,7 @@ type ViewAPI = {
 const ViewContext = createContext<ViewAPI>(null!)
 
 export const View: FC<{
+  children?: ReactNode
   clearColor?: boolean
   clearDepth?: boolean
   clearStencil?: boolean

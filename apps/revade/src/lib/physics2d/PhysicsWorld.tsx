@@ -1,7 +1,7 @@
 import { useTicker } from "@react-trinity/ticker"
 import { createECS } from "miniplex-react"
 import p2 from "p2-es"
-import { createContext, FC, useContext, useEffect, useState } from "react"
+import { createContext, FC, ReactNode, useContext, useState } from "react"
 import { Euler, Quaternion, Vector3 } from "three"
 import { Entity } from "./Entity"
 
@@ -20,6 +20,7 @@ const PhysicsWorldContext = createContext<{
 
 export const PhysicsWorld: FC<{
   gravity?: [number, number]
+  children: ReactNode
 }> = ({ children, gravity = [0, -9.81] }) => {
   const [ecs] = useState(() => createECS<Entity>())
 

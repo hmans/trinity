@@ -1,6 +1,7 @@
 import React, {
   createContext,
   FC,
+  ReactNode,
   useContext,
   useLayoutEffect,
   useState
@@ -79,7 +80,7 @@ class TickerImpl {
   }
 }
 
-export const Ticker: FC<{ timeScale?: number }> = ({
+export const Ticker: FC<{ children?: ReactNode; timeScale?: number }> = ({
   children,
   timeScale = 1
 }) => {
