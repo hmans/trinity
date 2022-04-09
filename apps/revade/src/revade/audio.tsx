@@ -21,12 +21,12 @@ pling.volume.value = -8
 export function playPickupSound() {
   const t = now()
   const offset = 1046.5 // C6
-  pling.triggerAttackRelease(offset, "16n", t, 1)
+  pling.triggerAttackRelease(offset, "16n", t, 0.3)
   pling.triggerAttackRelease(
     offset * 2 + Math.random() * 50,
     "16n",
     t + 0.1,
-    0.5
+    0.2
   )
 }
 
