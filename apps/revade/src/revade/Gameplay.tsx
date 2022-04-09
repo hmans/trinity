@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from "react"
+import { useEffect } from "react"
 import { resetGameplayState } from "./actions/resetGameplayState"
 import { filter } from "./audio"
 import { EnemySpawner } from "./EnemySpawner"
