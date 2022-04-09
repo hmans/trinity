@@ -12,7 +12,7 @@ const theme: CSSProperties = {
   textShadow: "rgba(0, 0, 0, 0.7) 3px 3px 4px"
 }
 
-export const HUD = () => {
+export const ScoreDisplay = () => {
   const { score, multiplier } = useStore(store)
 
   const scoreString = score.toLocaleString("de-DE", {
@@ -23,34 +23,39 @@ export const HUD = () => {
   })
 
   return (
-    <UI.Canvas theme={theme}>
-      <GameFSM.Match state="menu">
-        <UI.Text anchor="top" marginTop={50} fontSize="200%" color="orange">
-          REVADE
-        </UI.Text>
-        <UI.Text anchor="bottom" marginBottom={30}>
-          ~ HIT SPACE TO START ~
-        </UI.Text>
-      </GameFSM.Match>
-
-      <GameFSM.Match state="gameover">
-        <UI.Text anchor="bottom" marginBottom={30}>
-          ~ HIT SPACE TO CONTINUE ~
-        </UI.Text>
-      </GameFSM.Match>
-
-      <GameFSM.Match state={["gameplay", "gameover"]}>
-        <UI.VerticalGroup
-          anchor="top-left"
-          gap={10}
-          margin={30}
-          fontSize="60%"
-          color="lime"
-        >
-          <UI.Text>SCORE: {scoreString}</UI.Text>
-          <UI.Text>MULTIPLIER: {multiplierString}x</UI.Text>
-        </UI.VerticalGroup>
-      </GameFSM.Match>
-    </UI.Canvas>
+    <UI.VerticalGroup
+      anchor="top-left"
+      gap={10}
+      margin="min(30px, 4vw)"
+      fontSize="60%"
+      color="lime"
+    >
+      <UI.Text>SCORE: {scoreString}</UI.Text>
+      <UI.Text>MULTIPLIER: {multiplierString}x</UI.Text>
+    </UI.VerticalGroup>
   )
 }
+
+export const HUD = () => (
+  <UI.Canvas theme={theme}>
+    <GameFSM.Match state="menu">
+      <UI.Text anchor="top" marginTop={50} fontSize="200%" color="orange">
+        REVADE
+      </UI.Text>
+
+      <UI.Text anchor="bottom" marginBottom="min(50px, 4vw)">
+        ~ HIT SPACE TO START ~
+      </UI.Text>
+    </GameFSM.Match>
+
+    <GameFSM.Match state="gameover">
+      <UI.Text anchor="bottom" marginBottom="min(50px, 4vw)">
+        ~ HIT SPACE TO CONTINUE ~
+      </UI.Text>
+    </GameFSM.Match>
+
+    <GameFSM.Match state={["gameplay", "gameover"]}>
+      <ScoreDisplay />
+    </GameFSM.Match>
+  </UI.Canvas>
+)
