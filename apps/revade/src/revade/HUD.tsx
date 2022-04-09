@@ -7,8 +7,7 @@ import { CSSProperties } from "react"
 
 const theme: CSSProperties = {
   color: "white",
-  font: "4vw/1 'Helvetica Neue'",
-  fontWeight: "bold",
+  font: "4vw/1 'Anek Tamil', 'Helvetica Neue', Helvetica, Arial, sans-serif",
   textShadow: "rgba(0, 0, 0, 0.7) 3px 3px 4px"
 }
 
@@ -31,8 +30,12 @@ export const ScoreDisplay = () => {
       color="lime"
       textShadow="black 1px 1px 3px, rgba(0, 255, 0, 0.99) 0px 0px 20px"
     >
-      <UI.Text>SCORE: {scoreString}</UI.Text>
-      <UI.Text>MULTIPLIER: {multiplierString}x</UI.Text>
+      <UI.Text>
+        SCORE: <strong>{scoreString}</strong>
+      </UI.Text>
+      <UI.Text>
+        MULTIPLIER: <strong>{multiplierString}x</strong>
+      </UI.Text>
     </UI.VerticalGroup>
   )
 }
@@ -40,7 +43,13 @@ export const ScoreDisplay = () => {
 export const HUD = () => (
   <UI.Canvas theme={theme}>
     <GameFSM.Match state="menu">
-      <UI.Text anchor="top" marginTop={50} fontSize="200%" color="orange">
+      <UI.Text
+        anchor="top"
+        marginTop={50}
+        fontSize="min(30vh)"
+        fontWeight={800}
+        color="orange"
+      >
         REVADE
       </UI.Text>
 
