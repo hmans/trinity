@@ -39,26 +39,23 @@ const anchorStyles: Record<Anchor, CSSProperties> = {
   }
 }
 
-export type ElementProps = {
+export type ElementProps = CSSProperties & {
   children?: ReactNode
   css?: CSSProperties
   anchor?: Anchor
-  margin?: number
-  debug?: boolean
 }
 
 export const Element: FC<ElementProps> = ({
   children,
   css,
   anchor,
-  margin,
-  debug
+  ...props
 }) => (
   <div
     style={{
       ...defaultStyles,
       ...(anchor ? anchorStyles[anchor] : {}),
-      margin,
+      ...props,
       ...css
     }}
   >
