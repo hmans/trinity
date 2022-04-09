@@ -9,7 +9,6 @@ type ButtonProps = {
   onClick?: Function
 }
 
-export const Button: FC<ElementProps & ButtonProps> = ({
-  onClick,
-  ...props
-}) => <Element {...styles} {...props} tagName="button"></Element>
+export const Button: FC<ElementProps & ButtonProps> = ({ ...props }) => (
+  <Element style={styles} {...props} tagName="button"></Element>
+)

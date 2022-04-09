@@ -19,6 +19,7 @@ const ScoreDisplay = () => {
   const scoreString = score.toLocaleString("de-DE", {
     maximumFractionDigits: 0
   })
+
   const multiplierString = multiplier.toLocaleString("de-DE", {
     maximumFractionDigits: 0
   })
@@ -26,11 +27,13 @@ const ScoreDisplay = () => {
   return (
     <UI.VerticalGroup
       anchor="top-left"
-      gap={10}
-      margin="min(30px, 4vw)"
-      fontSize="60%"
-      color="lime"
-      textShadow="black 1px 1px 3px, rgba(0, 255, 0, 0.99) 0px 0px 20px"
+      style={{
+        gap: 10,
+        margin: "min(30px, 4vw)",
+        fontSize: "60%",
+        color: "lime",
+        textShadow: "black 1px 1px 3px, rgba(0, 255, 0, 0.99) 0px 0px 20px"
+      }}
     >
       <UI.Text>
         SCORE: <strong>{scoreString}</strong>
@@ -67,23 +70,28 @@ const Menu = () => {
 
   return (
     <>
-      <UI.Text
-        anchor="top"
-        marginTop="5vmin"
-        fontSize="25vmin"
-        fontWeight={800}
-        color="#fa3"
-        textShadow="#fa38 0px 0px 40px, white 10px 10px, hotpink 20px 20px, hotpink 20px 20px 40px"
-      >
-        REVADE
-      </UI.Text>
+      <UI.Panel anchor="top">
+        <UI.Text
+          anchor="top"
+          style={{
+            marginTop: "5vmin",
+            fontSize: "25vmin",
+            fontWeight: 800,
+            color: "#fa3",
+            textShadow:
+              "#fa38 0px 0px 40px, white 10px 10px, hotpink 20px 20px, hotpink 20px 20px 40px"
+          }}
+        >
+          REVADE
+        </UI.Text>
+      </UI.Panel>
 
       {ready && (
-        <UI.Text anchor="bottom" marginBottom="10vmin">
-          <UI.Button>START</UI.Button>
+        <UI.Panel anchor="bottom" style={{ marginBottom: 50 }}>
+          <UI.Button onClick={startGame}>START</UI.Button>
           <UI.Button>OPTIONS</UI.Button>
           <UI.Button>CREDITS</UI.Button>
-        </UI.Text>
+        </UI.Panel>
       )}
     </>
   )
@@ -96,7 +104,7 @@ export const HUD = () => (
     </GameFSM.Match>
 
     <GameFSM.Match state="gameover">
-      <UI.Text anchor="bottom" marginBottom="min(50px, 4vw)">
+      <UI.Text anchor="bottom" style={{ marginBottom: "min(50px, 4vw)" }}>
         ~ HIT SPACE TO CONTINUE ~
       </UI.Text>
     </GameFSM.Match>

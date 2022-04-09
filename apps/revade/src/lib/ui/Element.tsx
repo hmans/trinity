@@ -1,11 +1,13 @@
-import { CSSProperties, FC, ReactNode } from "react"
+import {
+  CSSProperties,
+  DetailedHTMLProps,
+  FC,
+  HTMLAttributes,
+  ReactNode
+} from "react"
 
 const defaultStyles: CSSProperties = {
   boxSizing: "border-box"
-}
-
-const debugStyles: CSSProperties = {
-  backgroundColor: "rgba(200, 100, 50, 0.2)"
 }
 
 type Anchor =
@@ -39,7 +41,7 @@ const anchorStyles: Partial<Record<Anchor, CSSProperties>> = {
   }
 }
 
-export type ElementProps = CSSProperties & {
+export type ElementProps = HTMLAttributes<unknown> & {
   children?: ReactNode
   css?: CSSProperties
   anchor?: Anchor
@@ -47,18 +49,19 @@ export type ElementProps = CSSProperties & {
 
 export const Element: FC<ElementProps & {
   tagName?: keyof JSX.IntrinsicElements
-}> = ({ tagName = "div", children, css, anchor, ...props }) => {
+}> = ({ tagName = "div", children, anchor, style = {}, ...props }) => {
   const Tag = tagName
 
   return (
     <Tag
+      {...props}
       style={{
         ...defaultStyles,
         ...(anchor ? anchorStyles[anchor] : {}),
-        ...props,
-        ...css
+        ...style
       }}
     >
+      <div></div>
       {children}
     </Tag>
   )
