@@ -5,6 +5,11 @@ const styles: CSSProperties = {
   cursor: "pointer"
 }
 
-export const Button: FC<ElementProps> = ({ ...props }) => (
-  <Element {...styles} {...props} tagName="button"></Element>
-)
+type ButtonProps = {
+  onClick?: Function
+}
+
+export const Button: FC<ElementProps & ButtonProps> = ({
+  onClick,
+  ...props
+}) => <Element {...styles} {...props} tagName="button"></Element>

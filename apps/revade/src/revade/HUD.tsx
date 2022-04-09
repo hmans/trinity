@@ -54,10 +54,16 @@ const Menu = () => {
   }, [])
 
   useTicker("update", () => {
-    if (ready && controller.controls.fire.value) {
-      GameFSM.transition("startGame")
+    if (controller.controls.fire.value) {
+      startGame()
     }
   })
+
+  const startGame = () => {
+    if (ready) {
+      GameFSM.transition("startGame")
+    }
+  }
 
   return (
     <>
@@ -72,11 +78,13 @@ const Menu = () => {
         REVADE
       </UI.Text>
 
-      <UI.Text anchor="bottom" marginBottom="10vmin">
-        <UI.Button>START</UI.Button>
-        <UI.Button>OPTIONS</UI.Button>
-        <UI.Button>CREDITS</UI.Button>
-      </UI.Text>
+      {ready && (
+        <UI.Text anchor="bottom" marginBottom="10vmin">
+          <UI.Button>START</UI.Button>
+          <UI.Button>OPTIONS</UI.Button>
+          <UI.Button>CREDITS</UI.Button>
+        </UI.Text>
+      )}
     </>
   )
 }
