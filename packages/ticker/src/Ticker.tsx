@@ -3,7 +3,7 @@ import React, {
   FC,
   ReactNode,
   useContext,
-  useEffect,
+  useLayoutEffect,
   useState
 } from "react"
 import { useAnimationFrame } from "./useAnimationFrame"
@@ -86,7 +86,7 @@ export const Ticker: FC<{ children?: ReactNode; timeScale?: number }> = ({
 }) => {
   const [ticker] = useState(() => new TickerImpl())
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     ticker.timeScale = timeScale
     return () => void (ticker.timeScale = 1)
   }, [ticker, timeScale])
@@ -101,7 +101,7 @@ export const Ticker: FC<{ children?: ReactNode; timeScale?: number }> = ({
 export const useTicker = (stage: TickerStage, callback: TickerCallback) => {
   const ticker = useContext(TickerContext)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     ticker.on(stage, callback)
     return () => ticker.off(stage, callback)
   })

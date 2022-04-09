@@ -6,7 +6,7 @@
 
 import { useConst } from "@hmans/react-toolbox"
 import { Primitive, ReactorComponentProps } from "@react-trinity/reactor"
-import React, { FC, useEffect } from "react"
+import React, { FC, useLayoutEffect } from "react"
 import type { ColorRepresentation, Mesh } from "three"
 import { Text as TroikaText } from "troika-three-text"
 
@@ -68,7 +68,7 @@ export const Text: FC<TextProps> = ({ children, ...props }) => {
   }, [children])
 
   /* Sync text object every time props change */
-  useEffect(() => troika.sync())
+  useLayoutEffect(() => troika.sync())
 
   return (
     <Primitive object={troika} text={text} {...props}>

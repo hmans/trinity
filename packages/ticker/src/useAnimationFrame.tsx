@@ -1,7 +1,7 @@
-import { useEffect } from "react"
+import { useLayoutEffect } from "react"
 
 export const useAnimationFrame = (fn: Function) =>
-  useEffect(() => {
+  useLayoutEffect(() => {
     let looping = true
 
     const tick = (time: DOMHighResTimeStamp) => {
