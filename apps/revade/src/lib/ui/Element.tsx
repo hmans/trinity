@@ -49,19 +49,15 @@ export type ElementProps<T = unknown> = HTMLProps<T> & {
 
 export const Element: FC<ElementProps & {
   tagName?: keyof JSX.IntrinsicElements
-}> = ({ tagName = "div", children, anchor, style = {}, ...props }) => {
-  const Tag = tagName
-
-  return (
-    <Tag
-      {...(props as any)}
-      style={{
-        ...defaultStyles,
-        ...(anchor ? anchorStyles[anchor] : {}),
-        ...style
-      }}
-    >
-      {children}
-    </Tag>
-  )
-}
+}> = ({ tagName: Tag = "div", children, anchor, style = {}, ...props }) => (
+  <Tag
+    {...(props as any)}
+    style={{
+      ...defaultStyles,
+      ...(anchor ? anchorStyles[anchor] : {}),
+      ...style
+    }}
+  >
+    {children}
+  </Tag>
+)
