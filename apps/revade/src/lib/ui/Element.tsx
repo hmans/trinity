@@ -42,22 +42,28 @@ const anchorStyles: Partial<Record<Anchor, CSSProperties>> = {
   }
 }
 
-export type ElementProps<T = unknown> = HTMLProps<T> & {
+export type ElementProps = {
   children?: ReactNode
   anchor?: Anchor
 }
 
-export const Element: FC<ElementProps & {
-  tagName?: keyof JSX.IntrinsicElements
-}> = ({ tagName: Tag = "div", children, anchor, style = {}, ...props }) => (
-  <Tag
-    {...(props as any)}
-    style={{
-      ...defaultStyles,
-      ...(anchor ? anchorStyles[anchor] : {}),
-      ...style
-    }}
-  >
-    {children}
-  </Tag>
-)
+export function Element<T extends keyof JSX.IntrinsicElements = "div">({
+  tagName: Tag = "div" as T,
+  anchor,
+  style = {},
+  ...props
+}: ElementProps &
+  HTMLProps<T> & {
+    tagName?: T
+  }) {
+  return (
+    <Tag
+      {...(props as any)}
+      style={{
+        ...defaultStyles,
+        ...(anchor ? anchorStyles[anchor] : {}),
+        ...style
+      }}
+    />
+  )
+}
