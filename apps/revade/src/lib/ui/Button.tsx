@@ -5,6 +5,6 @@ const styles: CSSProperties = {
   cursor: "pointer"
 }
 
-export const Button: FC<ElementProps & HTMLProps<"button">> = ({
-  ...props
-}) => <Element<"button"> style={styles} {...props} tagName="button" />
+export const Button: FC<ElementProps<"button">> = ({ ...props }) => (
+  <Element style={styles} {...props} tagName="button" />
+)
