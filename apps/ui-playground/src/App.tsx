@@ -1,5 +1,13 @@
+import { Game } from "./Game"
+import { UI } from "./UI"
+
 function App() {
-  return <div className="App">I'm the game</div>
+  return (
+    <div>
+      <Game />
+      <UI />
+    </div>
+  )
 }
 
 export default App

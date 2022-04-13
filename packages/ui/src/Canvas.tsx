@@ -5,6 +5,5 @@ export const Canvas = styled("div", {
   left: 0,
   top: 0,
   width: "100vw",
-  height: "100vh",
-  backgroundColor: "red"
+  height: "100vh"
 })
