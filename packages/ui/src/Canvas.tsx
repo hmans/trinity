@@ -14,6 +14,5 @@ const noPointerEvents = css({
 })
 
 export const Canvas = styled.div(fullScreen, noPointerEvents, {
-  zIndex: 100,
-  backgroundColor: "red"
+  zIndex: 100
 })
