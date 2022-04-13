@@ -1,5 +1,11 @@
 # @react-trinity/reactor
 
+## 0.3.2
+
+### Patch Changes
+
+- 0c5b464: Export TickerCallback and TickerStage types
+
 ## 0.3.1
 
 ### Patch Changes

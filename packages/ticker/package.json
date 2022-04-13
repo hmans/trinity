@@ -1,7 +1,7 @@
 {
   "name": "@react-trinity/ticker",
   "private": false,
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Trinity Ticker.",
   "main": "dist/react-trinity-ticker.cjs.js",
   "module": "dist/react-trinity-ticker.esm.js",
