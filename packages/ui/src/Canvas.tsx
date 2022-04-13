@@ -1,11 +1,19 @@
+import { css } from "@emotion/react"
 import styled from "@emotion/styled"
 
-export const Canvas = styled.div({
+const fullScreen = css({
   position: "fixed",
   left: 0,
   top: 0,
   width: "100vw",
-  height: "100vh",
-  pointerEvents: "none",
-  zIndex: 100
+  height: "100vh"
+})
+
+const noPointerEvents = css({
+  pointerEvents: "none"
+})
+
+export const Canvas = styled.div(fullScreen, noPointerEvents, {
+  zIndex: 100,
+  backgroundColor: "red"
 })

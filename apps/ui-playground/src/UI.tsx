@@ -1,3 +1,3 @@
 import { Canvas } from "@hmans/ui"
 
-export const UI = () => <Canvas></Canvas>
+export const UI = () => <Canvas>moo</Canvas>
