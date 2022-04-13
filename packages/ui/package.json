@@ -1,0 +1,31 @@
+{
+  "name": "@hmans/ui",
+  "private": false,
+  "version": "0.0.1",
+  "description": "Game UI.",
+  "main": "dist/hmans-ui.cjs.js",
+  "module": "dist/hmans-ui.esm.js",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "preconstruct build"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "react": "^18.0.0"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  }
+}
