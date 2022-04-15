@@ -15,7 +15,7 @@
   background: linear-gradient(#eee 0%, #ccc 100%);
 
   font: inherit;
-  font-size: max(5vmin, 50px);
+  font-size: max(5vmin, 18px);
   color: rgba(0, 0, 0, 0.7);
   font-weight: bold;
   text-shadow: rgba(0, 0, 0, 0.2) 1px 1px 3px;

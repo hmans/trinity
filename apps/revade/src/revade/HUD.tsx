@@ -23,6 +23,7 @@ const ScoreDisplay = () => {
         spacing={10}
         style={{
           color: "lime",
+          fontSize: "70%",
           textShadow: "black 1px 1px 3px, rgba(0, 255, 0, 0.99) 0px 0px 20px"
         }}
       >
@@ -88,7 +89,7 @@ const Menu = () => {
 
 export const HUD = () => {
   return (
-    <UI.Canvas>
+    <UI.Canvas className={theme.theme}>
       <GameFSM.Match state="menu">
         <Menu />
       </GameFSM.Match>
