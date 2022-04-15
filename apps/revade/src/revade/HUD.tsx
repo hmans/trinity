@@ -1,44 +1,42 @@
+import * as UI from "@hmans/ui"
 import { useEffect, useState } from "react"
-import { useTicker } from "react-trinity"
 import { useStore } from "statery"
-import * as UI from "../lib/ui"
 import { filter } from "./audio"
-import { controller } from "./controller"
 import { GameFSM } from "./GameFSM"
 import { store } from "./state"
 import theme from "./ui-theme.module.css"
 
-const ScoreDisplay = () => {
-  const { score, multiplier } = useStore(store)
+// const ScoreDisplay = () => {
+//   const { score, multiplier } = useStore(store)
 
-  const scoreString = score.toLocaleString("de-DE", {
-    maximumFractionDigits: 0
-  })
+//   const scoreString = score.toLocaleString("de-DE", {
+//     maximumFractionDigits: 0
+//   })
 
-  const multiplierString = multiplier.toLocaleString("de-DE", {
-    maximumFractionDigits: 0
-  })
+//   const multiplierString = multiplier.toLocaleString("de-DE", {
+//     maximumFractionDigits: 0
+//   })
 
-  return (
-    <UI.VerticalGroup
-      anchor="top-left"
-      style={{
-        gap: 10,
-        margin: "min(30px, 4vw)",
-        fontSize: "60%",
-        color: "lime",
-        textShadow: "black 1px 1px 3px, rgba(0, 255, 0, 0.99) 0px 0px 20px"
-      }}
-    >
-      <UI.Text>
-        SCORE: <strong>{scoreString}</strong>
-      </UI.Text>
-      <UI.Text>
-        MULTIPLIER: <strong>{multiplierString}x</strong>
-      </UI.Text>
-    </UI.VerticalGroup>
-  )
-}
+//   return (
+//     <UI.VerticalGroup
+//       anchor="top-left"
+//       style={{
+//         gap: 10,
+//         margin: "min(30px, 4vw)",
+//         fontSize: "60%",
+//         color: "lime",
+//         textShadow: "black 1px 1px 3px, rgba(0, 255, 0, 0.99) 0px 0px 20px"
+//       }}
+//     >
+//       <UI.Text>
+//         SCORE: <strong>{scoreString}</strong>
+//       </UI.Text>
+//       <UI.Text>
+//         MULTIPLIER: <strong>{multiplierString}x</strong>
+//       </UI.Text>
+//     </UI.VerticalGroup>
+//   )
+// }
 
 const Menu = () => {
   const [ready, setReady] = useState(false)
@@ -59,9 +57,8 @@ const Menu = () => {
 
   return (
     <>
-      <UI.Panel anchor="top">
+      <UI.Panel center top>
         <UI.Text
-          anchor="top"
           style={{
             marginTop: "5vmin",
             fontSize: "25vmin",
@@ -75,7 +72,7 @@ const Menu = () => {
         </UI.Text>
       </UI.Panel>
 
-      {ready && (
+      {/* {ready && (
         <UI.VerticalGroup
           anchor="bottom"
           style={{ marginBottom: 50, gap: "1rem" }}
@@ -86,46 +83,19 @@ const Menu = () => {
           <UI.Button>OPTIONS</UI.Button>
           <UI.Button>CREDITS</UI.Button>
         </UI.VerticalGroup>
-      )}
+      )} */}
     </>
   )
 }
 
 export const HUD = () => {
-  // useTicker("update", () => {
-  //   const move = controller.controls.move.value
-
-  //   if (move.y != 0) {
-  //     console.log("w00t")
-
-  //     /* Get a list of all elements that can receive focus */
-  //     const focusableElements = [
-  //       ...document.querySelectorAll(
-  //         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-  //       )
-  //     ]
-
-  //     const focusedElement = document.querySelector(":focus")!
-  //     const pos = focusableElements.indexOf(focusedElement)
-
-  //     if (pos >= 0) {
-  //       console.log(pos)
-
-  //       const nextElement =
-  //         focusableElements[(pos + 1) % focusableElements.length]
-
-  //       nextElement.focus()
-  //     } else {
-  //       focusableElements[0]?.focus()
-  //     }
-  //   }
-  // })
-
   return (
-    <UI.Canvas className={theme.theme}>
+    <UI.Canvas>
       <GameFSM.Match state="menu">
         <Menu />
       </GameFSM.Match>
+
+      {/*
 
       <GameFSM.Match state="gameover">
         <UI.Text anchor="bottom" style={{ marginBottom: "min(50px, 4vw)" }}>
@@ -135,7 +105,7 @@ export const HUD = () => {
 
       <GameFSM.Match state={["gameplay", "gameover"]}>
         <ScoreDisplay />
-      </GameFSM.Match>
+      </GameFSM.Match> */}
     </UI.Canvas>
   )
 }

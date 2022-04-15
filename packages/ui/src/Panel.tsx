@@ -1,6 +1,5 @@
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
-import { debugStyles } from "./styles"
 
 type AnchorProps = {
   left?: string | number | boolean
@@ -54,8 +53,6 @@ const panelDefaults = css({
 
 type PanelProps = AnchorProps
 
-export const Panel = styled.div<PanelProps>(
-  panelDefaults,
-  (props) => anchorStyles(props),
-  debugStyles()
+export const Panel = styled.div<PanelProps>(panelDefaults, (props) =>
+  anchorStyles(props)
 )

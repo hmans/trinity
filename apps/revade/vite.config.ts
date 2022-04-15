@@ -12,7 +12,8 @@ export default defineConfig({
       "react-trinity",
       "@react-trinity/ticker",
       "@hmans/controlfreak",
-      "@hmans/signal"
+      "@hmans/signal",
+      "@hmans/ui"
     ],
     include: ["react/jsx-runtime"]
   },
