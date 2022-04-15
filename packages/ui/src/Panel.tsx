@@ -9,6 +9,7 @@ type AnchorProps = {
   bottom?: string | number | boolean
   center?: boolean
   middle?: boolean
+  anchor?: [number, number]
 }
 
 const anchorPointStyles = (x: number | string, y: number | string) =>
@@ -24,7 +25,7 @@ const centerStyles = ({ center, middle }: AnchorProps) =>
       left: center ? "50%" : undefined,
       top: middle ? "50%" : undefined
     },
-    anchorPointStyles(center ? 0.5 : 0, middle ? 1 : 0)
+    anchorPointStyles(center ? 0.5 : 0, middle ? 0.5 : 0)
   )
 
 const anchorStyles = ({
@@ -33,14 +34,19 @@ const anchorStyles = ({
   top,
   bottom,
   center,
-  middle
+  middle,
+  anchor
 }: AnchorProps) =>
-  css(centerStyles({ center, middle }), {
-    left: typeof left === "boolean" ? "0" : left,
-    right: typeof right === "boolean" ? "0" : right,
-    bottom: typeof bottom === "boolean" ? "0" : bottom,
-    top: typeof top === "boolean" ? "0" : top
-  })
+  css(
+    centerStyles({ center, middle }),
+    {
+      left: typeof left === "boolean" ? "0" : left,
+      right: typeof right === "boolean" ? "0" : right,
+      bottom: typeof bottom === "boolean" ? "0" : bottom,
+      top: typeof top === "boolean" ? "0" : top
+    },
+    anchor && anchorPointStyles(...anchor)
+  )
 
 const panelDefaults = css({
   position: "absolute"
