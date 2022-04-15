@@ -9,10 +9,15 @@ const fullScreen = css({
   height: "100vh"
 })
 
+const defaults = css({
+  font: "18px/1 'Helvetica Neue'",
+  fontWeight: "bold"
+})
+
 const noPointerEvents = css({
   pointerEvents: "none"
 })
 
-export const Canvas = styled.div(fullScreen, noPointerEvents, {
+export const Canvas = styled.div(fullScreen, defaults, noPointerEvents, {
   zIndex: 100
 })
