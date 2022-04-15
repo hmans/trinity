@@ -5,9 +5,21 @@ const panelDefaults = css({
   position: "absolute"
 })
 
-export const Panel = styled.div<{ foo?: boolean }>(
-  panelDefaults,
-  ({ foo }) => ({
-    backgroundColor: foo ? "green" : "red"
+type AlignmentProps = {
+  left?: string | number | boolean
+  right?: string | number | boolean
+  top?: string | number | boolean
+  bottom?: string | number | boolean
+}
+
+const alignemnt = ({ left, right, top, bottom }: AlignmentProps) =>
+  css({
+    left: typeof left === "boolean" ? "0" : left,
+    right: typeof right === "boolean" ? "0" : right,
+    bottom: typeof bottom === "boolean" ? "0" : bottom,
+    top: typeof top === "boolean" ? "0" : top
   })
+
+export const Panel = styled.div<AlignmentProps>(panelDefaults, (props) =>
+  alignemnt(props)
 )
