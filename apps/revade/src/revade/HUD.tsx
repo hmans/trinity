@@ -57,10 +57,9 @@ const Menu = () => {
 
   return (
     <>
-      <UI.Panel center top>
+      <UI.Panel center top="min(50px, 5vw)">
         <UI.Text
           style={{
-            marginTop: "5vmin",
             fontSize: "25vmin",
             fontWeight: 800,
             color: "#fa3",
@@ -94,13 +93,11 @@ export const HUD = () => {
         <Menu />
       </GameFSM.Match>
 
-      {/*
-
       <GameFSM.Match state="gameover">
-        <UI.Text anchor="bottom" style={{ marginBottom: "min(50px, 4vw)" }}>
-          ~ HIT SPACE TO CONTINUE ~
-        </UI.Text>
-      </GameFSM.Match> */}
+        <UI.Panel center bottom="min(50px, 4vw)">
+          <UI.Text>~ HIT SPACE TO CONTINUE ~</UI.Text>
+        </UI.Panel>
+      </GameFSM.Match>
 
       <GameFSM.Match state={["gameplay", "gameover"]}>
         <ScoreDisplay />
