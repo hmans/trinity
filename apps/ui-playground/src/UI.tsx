@@ -1,3 +1,7 @@
-import { Canvas } from "@hmans/ui"
+import { Canvas, Panel } from "@hmans/ui"
 
-export const UI = () => <Canvas>GAME TITLE</Canvas>
+export const UI = () => (
+  <Canvas>
+    <Panel foo>I'm a panel</Panel>
+  </Canvas>
+)
