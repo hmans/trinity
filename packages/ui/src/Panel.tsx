@@ -7,10 +7,29 @@ type AnchorProps = {
   right?: string | number | boolean
   top?: string | number | boolean
   bottom?: string | number | boolean
+  center?: boolean
+  middle?: boolean
 }
 
-const anchorStyles = ({ left, right, top, bottom }: AnchorProps) =>
+const centerStyles = ({ center, middle }: AnchorProps) =>
   css({
+    left: center ? "50%" : undefined,
+    top: middle ? "50%" : undefined,
+    transform: [
+      center && "translateX(-50%)",
+      middle && "translateY(-50%)"
+    ].join(" ")
+  })
+
+const anchorStyles = ({
+  left,
+  right,
+  top,
+  bottom,
+  center,
+  middle
+}: AnchorProps) =>
+  css(centerStyles({ center, middle }), {
     left: typeof left === "boolean" ? "0" : left,
     right: typeof right === "boolean" ? "0" : right,
     bottom: typeof bottom === "boolean" ? "0" : bottom,
