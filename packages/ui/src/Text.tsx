@@ -1,3 +1,5 @@
 import styled from "@emotion/styled"
 
-export const Text = styled.div()
+type TextProps = {}
+
+export const Text = styled.div<TextProps>()
