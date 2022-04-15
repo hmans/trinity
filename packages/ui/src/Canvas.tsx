@@ -13,7 +13,11 @@ const fullScreen = css({
 
 const defaultTheme = css({
   font: "3vmin/1 'Helvetica Neue'",
-  fontWeight: "bold"
+  fontWeight: "bold",
+  button: {
+    font: "inherit",
+    border: "none"
+  }
 })
 
 export const Canvas = styled.div<{ theme?: SerializedStyles }>(

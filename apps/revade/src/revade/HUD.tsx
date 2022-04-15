@@ -72,18 +72,17 @@ const Menu = () => {
         </UI.Text>
       </UI.Panel>
 
-      {/* {ready && (
-        <UI.VerticalGroup
-          anchor="bottom"
-          style={{ marginBottom: 50, gap: "1rem" }}
-        >
-          <UI.Button onClick={startGame} autoFocus>
-            START
-          </UI.Button>
-          <UI.Button>OPTIONS</UI.Button>
-          <UI.Button>CREDITS</UI.Button>
-        </UI.VerticalGroup>
-      )} */}
+      {ready && (
+        <UI.Panel bottom={30} center>
+          <UI.Group vertical spacing={20}>
+            <UI.Button onClick={startGame} autoFocus>
+              START
+            </UI.Button>
+            <UI.Button>OPTIONS</UI.Button>
+            <UI.Button>CREDITS</UI.Button>
+          </UI.Group>
+        </UI.Panel>
+      )}
     </>
   )
 }
