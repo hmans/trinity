@@ -1,5 +1,5 @@
 import { css } from "@emotion/react"
-import { Canvas, Panel, Text } from "@hmans/ui"
+import { Canvas, Panel } from "@hmans/ui"
 
 export const UI = () => (
   <Canvas theme={css({ fontFamily: "Georgia" })}>
