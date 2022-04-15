@@ -6,37 +6,36 @@ import { GameFSM } from "./GameFSM"
 import { store } from "./state"
 import theme from "./ui-theme.module.css"
 
-// const ScoreDisplay = () => {
-//   const { score, multiplier } = useStore(store)
+const ScoreDisplay = () => {
+  const { score, multiplier } = useStore(store)
 
-//   const scoreString = score.toLocaleString("de-DE", {
-//     maximumFractionDigits: 0
-//   })
+  const scoreString = score.toLocaleString("de-DE", {
+    maximumFractionDigits: 0
+  })
 
-//   const multiplierString = multiplier.toLocaleString("de-DE", {
-//     maximumFractionDigits: 0
-//   })
+  const multiplierString = multiplier.toLocaleString("de-DE", {
+    maximumFractionDigits: 0
+  })
 
-//   return (
-//     <UI.VerticalGroup
-//       anchor="top-left"
-//       style={{
-//         gap: 10,
-//         margin: "min(30px, 4vw)",
-//         fontSize: "60%",
-//         color: "lime",
-//         textShadow: "black 1px 1px 3px, rgba(0, 255, 0, 0.99) 0px 0px 20px"
-//       }}
-//     >
-//       <UI.Text>
-//         SCORE: <strong>{scoreString}</strong>
-//       </UI.Text>
-//       <UI.Text>
-//         MULTIPLIER: <strong>{multiplierString}x</strong>
-//       </UI.Text>
-//     </UI.VerticalGroup>
-//   )
-// }
+  return (
+    <UI.Panel top="30px" left="30px">
+      <UI.Group
+        spacing={10}
+        style={{
+          color: "lime",
+          textShadow: "black 1px 1px 3px, rgba(0, 255, 0, 0.99) 0px 0px 20px"
+        }}
+      >
+        <UI.Text>
+          SCORE: <strong>{scoreString}</strong>
+        </UI.Text>
+        <UI.Text>
+          MULTIPLIER: <strong>{multiplierString}x</strong>
+        </UI.Text>
+      </UI.Group>
+    </UI.Panel>
+  )
+}
 
 const Menu = () => {
   const [ready, setReady] = useState(false)
@@ -100,11 +99,11 @@ export const HUD = () => {
         <UI.Text anchor="bottom" style={{ marginBottom: "min(50px, 4vw)" }}>
           ~ HIT SPACE TO CONTINUE ~
         </UI.Text>
-      </GameFSM.Match>
+      </GameFSM.Match> */}
 
       <GameFSM.Match state={["gameplay", "gameover"]}>
         <ScoreDisplay />
-      </GameFSM.Match> */}
+      </GameFSM.Match>
     </UI.Canvas>
   )
 }
