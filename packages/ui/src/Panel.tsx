@@ -1,29 +1,15 @@
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
+import { AnchorProps, anchorStyles, debugStyles } from "./styles"
 
 const panelDefaults = css({
   position: "absolute"
 })
 
-type AnchorProps = {
-  left?: string | number | boolean
-  right?: string | number | boolean
-  top?: string | number | boolean
-  bottom?: string | number | boolean
-}
+type PanelProps = AnchorProps
 
-const anchorStyles = ({ left, right, top, bottom }: AnchorProps) =>
-  css({
-    left: typeof left === "boolean" ? "0" : left,
-    right: typeof right === "boolean" ? "0" : right,
-    bottom: typeof bottom === "boolean" ? "0" : bottom,
-    top: typeof top === "boolean" ? "0" : top
-  })
-
-const debugStyles = css({ backgroundColor: "green" })
-
-export const Panel = styled.div<AnchorProps>(
+export const Panel = styled.div<PanelProps>(
   panelDefaults,
   (props) => anchorStyles(props),
-  debugStyles
+  debugStyles()
 )
