@@ -1,5 +1,6 @@
 import { css, SerializedStyles } from "@emotion/react"
 import styled from "@emotion/styled"
+import { defaultTheme } from "./theme"
 
 const fullScreen = css({
   position: "fixed",
@@ -9,15 +10,6 @@ const fullScreen = css({
   height: "100vh",
   pointerEvents: "none",
   zIndex: 100
-})
-
-const defaultTheme = css({
-  font: "3vmin/1 'Helvetica Neue'",
-  fontWeight: "bold",
-  button: {
-    font: "inherit",
-    border: "none"
-  }
 })
 
 export const Canvas = styled.div<{ theme?: SerializedStyles }>(
