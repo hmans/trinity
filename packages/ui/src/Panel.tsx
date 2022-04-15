@@ -12,7 +12,7 @@ type AlignmentProps = {
   bottom?: string | number | boolean
 }
 
-const alignemnt = ({ left, right, top, bottom }: AlignmentProps) =>
+const alignmentStyles = ({ left, right, top, bottom }: AlignmentProps) =>
   css({
     left: typeof left === "boolean" ? "0" : left,
     right: typeof right === "boolean" ? "0" : right,
@@ -21,5 +21,5 @@ const alignemnt = ({ left, right, top, bottom }: AlignmentProps) =>
   })
 
 export const Panel = styled.div<AlignmentProps>(panelDefaults, (props) =>
-  alignemnt(props)
+  alignmentStyles(props)
 )
