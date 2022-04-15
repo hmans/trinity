@@ -1,7 +1,7 @@
 import { css } from "@emotion/react"
 
 export const defaultTheme = css({
-  font: "max(3vmax, 16px)/1 'Helvetica Neue'",
+  // font: "max(3vmax, 16px)/1 'Helvetica Neue'",
   button: {
     font: "inherit",
     fontWeight: "bold",
