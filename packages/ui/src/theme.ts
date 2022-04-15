@@ -5,7 +5,14 @@ export const defaultTheme = css({
   fontWeight: "bold",
   button: {
     font: "inherit",
-    border: "none",
-    padding: "1vmin 2vmin"
+    backgroundColor: "#eee",
+    border: "0.5vmin solid #888",
+    padding: "1vmin 2vmin",
+    borderRadius: "0.5vmin",
+    cursor: "pointer",
+    outline: "none",
+    ":focus": {
+      borderColor: "orange"
+    }
   }
 })
