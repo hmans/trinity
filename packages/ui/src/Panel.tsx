@@ -5,14 +5,14 @@ const panelDefaults = css({
   position: "absolute"
 })
 
-type AlignmentProps = {
+type AnchorProps = {
   left?: string | number | boolean
   right?: string | number | boolean
   top?: string | number | boolean
   bottom?: string | number | boolean
 }
 
-const alignmentStyles = ({ left, right, top, bottom }: AlignmentProps) =>
+const anchorStyles = ({ left, right, top, bottom }: AnchorProps) =>
   css({
     left: typeof left === "boolean" ? "0" : left,
     right: typeof right === "boolean" ? "0" : right,
@@ -20,6 +20,6 @@ const alignmentStyles = ({ left, right, top, bottom }: AlignmentProps) =>
     top: typeof top === "boolean" ? "0" : top
   })
 
-export const Panel = styled.div<AlignmentProps>(panelDefaults, (props) =>
-  alignmentStyles(props)
+export const Panel = styled.div<AnchorProps>(panelDefaults, (props) =>
+  anchorStyles(props)
 )
