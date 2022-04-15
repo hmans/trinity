@@ -1,7 +1,8 @@
+import { css } from "@emotion/react"
 import { Canvas, Panel, Text } from "@hmans/ui"
 
 export const UI = () => (
-  <Canvas>
+  <Canvas theme={css({ fontFamily: "Georgia" })}>
     <Panel middle center>
       middle center
     </Panel>

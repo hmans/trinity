@@ -1,4 +1,4 @@
-import { css } from "@emotion/react"
+import { css, SerializedStyles } from "@emotion/react"
 import styled from "@emotion/styled"
 
 const fullScreen = css({
@@ -6,18 +6,18 @@ const fullScreen = css({
   left: 0,
   top: 0,
   width: "100vw",
-  height: "100vh"
+  height: "100vh",
+  pointerEvents: "none",
+  zIndex: 100
 })
 
-const defaults = css({
-  font: "18px/1 'Helvetica Neue'",
+const defaultTheme = css({
+  font: "3vmin/1 'Helvetica Neue'",
   fontWeight: "bold"
 })
 
-const noPointerEvents = css({
-  pointerEvents: "none"
-})
-
-export const Canvas = styled.div(fullScreen, defaults, noPointerEvents, {
-  zIndex: 100
-})
+export const Canvas = styled.div<{ theme?: SerializedStyles }>(
+  fullScreen,
+  defaultTheme,
+  ({ theme }) => theme
+)
