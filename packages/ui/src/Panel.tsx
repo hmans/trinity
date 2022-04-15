@@ -20,6 +20,10 @@ const anchorStyles = ({ left, right, top, bottom }: AnchorProps) =>
     top: typeof top === "boolean" ? "0" : top
   })
 
-export const Panel = styled.div<AnchorProps>(panelDefaults, (props) =>
-  anchorStyles(props)
+const debugStyles = css({ backgroundColor: "green" })
+
+export const Panel = styled.div<AnchorProps>(
+  panelDefaults,
+  (props) => anchorStyles(props),
+  debugStyles
 )
