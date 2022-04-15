@@ -11,7 +11,7 @@ type AnchorProps = {
   middle?: boolean
 }
 
-const anchor = (x: number | string, y: number | string) =>
+const anchorPointStyles = (x: number | string, y: number | string) =>
   css({
     transform: `translateX(-${
       typeof x === "number" ? `${x * 100}%` : x
@@ -24,7 +24,7 @@ const centerStyles = ({ center, middle }: AnchorProps) =>
       left: center ? "50%" : undefined,
       top: middle ? "50%" : undefined
     },
-    anchor(center ? 0.5 : 0, middle ? 1 : 0)
+    anchorPointStyles(center ? 0.5 : 0, middle ? 1 : 0)
   )
 
 const anchorStyles = ({
