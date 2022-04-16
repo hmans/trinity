@@ -1,23 +1,37 @@
 import {
   BooleanControl,
-  clampVector,
-  compositeKeyboardVector,
   Controller,
-  gamepadAxisVector,
-  VectorControl,
-  whenButtonPressed,
-  whenKeyPressed
+  GamepadDevice,
+  KeyboardDevice,
+  processors,
+  VectorControl
 } from "@hmans/controlfreak"
+import { touchDevice } from "./TouchController"
 
 export const controller = new Controller()
 
+const keyboard = new KeyboardDevice()
+const gamepad = new GamepadDevice()
+
+controller.addDevice(keyboard)
+controller.addDevice(gamepad)
+controller.addDevice(touchDevice)
+
 controller
   .addControl("move", VectorControl)
-  .addStep(compositeKeyboardVector("w", "s", "a", "d"))
-  .addStep(gamepadAxisVector(0, 1))
-  .addStep(clampVector(1))
+  .addStep(
+    keyboard.compositeVector(
+      ["KeyW", "ArrowUp"],
+      ["KeyS", "ArrowDown"],
+      ["KeyA", "ArrowLeft"],
+      ["KeyD", "ArrowRight"]
+    )
+  )
+  .addStep(gamepad.axisVector(0, 1))
+  .addStep(touchDevice.applyVirtualStickVector)
+  .addStep(processors.clampVector(1))
 
 controller
   .addControl("fire", BooleanControl)
-  .addStep(whenKeyPressed(" "))
-  .addStep(whenButtonPressed(0))
+  .addStep(keyboard.whenKeyPressed(["Space", "Enter"]))
+  .addStep(gamepad.whenButtonPressed(0))

@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@hmans/controlfreak": "^0.1.8",
+    "@hmans/controlfreak": "^0.2.0",
     "@hmans/react-toolbox": "^0.1.4",
     "@hmans/signal": "^0.1.0",
     "@hmans/ui": "^0.0.2",

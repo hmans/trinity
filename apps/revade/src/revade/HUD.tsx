@@ -4,6 +4,7 @@ import { useStore } from "statery"
 import { filter } from "./audio"
 import { GameFSM } from "./GameFSM"
 import { store } from "./state"
+import { TouchController } from "./TouchController"
 import theme from "./ui-theme.module.css"
 
 const ScoreDisplay = () => {
@@ -97,6 +98,10 @@ export const HUD = () => {
         <UI.Panel center bottom="min(50px, 4vw)">
           <UI.Text>~ HIT SPACE TO CONTINUE ~</UI.Text>
         </UI.Panel>
+      </GameFSM.Match>
+
+      <GameFSM.Match state="gameplay">
+        <TouchController />
       </GameFSM.Match>
 
       <GameFSM.Match state={["gameplay", "gameover"]}>

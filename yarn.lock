@@ -1324,10 +1324,12 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@hmans/controlfreak@^0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@hmans/controlfreak/-/controlfreak-0.1.8.tgz#231f9f81adb2a9d2c4edfabef2514ffb6c959042"
-  integrity sha512-klmqgFu3901IIDCSwXeTNpZXCkn1oWv3f8ifHOLv4lg978aqlcfFJ3LYxHGc0K0ZznW8NkqVhB38yNi9S1REeA==
+"@hmans/controlfreak@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@hmans/controlfreak/-/controlfreak-0.2.0.tgz#a1009d36612bf86e85316f049e82be25ff3606c1"
+  integrity sha512-+Hk1rZZTiAXkL49goKLaDjX77ZHwACjeZTHny3bSvo+4ooj1XBMijb/kdr+UeToZ7DTr3yj/F+wXipdpduNdNw==
+  dependencies:
+    "@hmans/signal" "^0.1.8"
 
 "@hmans/react-toolbox@^0.1.4":
   version "0.1.4"
@@ -1338,6 +1340,11 @@
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/@hmans/signal/-/signal-0.1.7.tgz#48fdc6df8e1735f790438bf8c92be907d4f24713"
   integrity sha512-YTmJcMIiSGRvDj474p5iBO/4K0XnCNT1ew9kgwgkNsXITNhmWDjuMGkHnGCo0ITgTx8xmiELqOZ9sDaBIAAROQ==
+
+"@hmans/signal@^0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@hmans/signal/-/signal-0.1.8.tgz#46788033db3a24206ff91962aa44097dd274390b"
+  integrity sha512-jhTe89A0Fzp0aRcQdB1F9Z1gDqFNFS5kZohbk/EiQqvcVJqfJ5XG0IsSEZiyAT7RuiLXupwbAn7MxXVL+iZZIA==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"

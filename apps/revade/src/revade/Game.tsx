@@ -1,8 +1,10 @@
+import { Device } from "@hmans/controlfreak"
 import T from "@react-trinity/reactor"
-import React from "react"
+import React, { useEffect } from "react"
 import { Renderer, Ticker, View } from "react-trinity"
 import { PhysicsWorld } from "../lib/physics2d"
 import { Music } from "./audio"
+import { controller } from "./controller"
 import { Camera } from "./entities/Camera"
 import { GameFSM } from "./GameFSM"
 import { GameOver } from "./GameOver"
@@ -12,33 +14,47 @@ import { Level } from "./Level"
 import { Menu } from "./Menu"
 import Systems from "./systems"
 
-export const Game = () => (
-  <Ticker>
-    <HUD />
-    <Renderer>
-      <View>
-        <PhysicsWorld gravity={[0, 0]}>
-          <T.AmbientLight intensity={0.3} />
-          <T.DirectionalLight intensity={0.2} position={[10, 10, 10]} />
+export const Game = () => {
+  useEffect(() => {
+    controller.start()
+    return () => controller.stop()
+  }, [])
 
-          <Music />
-          <Systems />
-          <Camera />
-          <Level />
+  useEffect(() => {
+    const handleDeviceChange = (d: Device) => console.log("Device change:", d)
 
-          <GameFSM.Match state="menu">
-            <Menu />
-          </GameFSM.Match>
+    controller.onDeviceChange.add(handleDeviceChange)
+    return () => controller.onDeviceChange.remove(handleDeviceChange)
+  }, [])
 
-          <GameFSM.Match state={["gameplay", "gameover"]}>
-            <Gameplay />
+  return (
+    <Ticker>
+      <HUD />
+      <Renderer>
+        <View>
+          <PhysicsWorld gravity={[0, 0]}>
+            <T.AmbientLight intensity={0.3} />
+            <T.DirectionalLight intensity={0.2} position={[10, 10, 10]} />
 
-            <GameFSM.Match state="gameover">
-              <GameOver />
+            <Music />
+            <Systems />
+            <Camera />
+            <Level />
+
+            <GameFSM.Match state="menu">
+              <Menu />
             </GameFSM.Match>
-          </GameFSM.Match>
-        </PhysicsWorld>
-      </View>
-    </Renderer>
-  </Ticker>
-)
+
+            <GameFSM.Match state={["gameplay", "gameover"]}>
+              <Gameplay />
+
+              <GameFSM.Match state="gameover">
+                <GameOver />
+              </GameFSM.Match>
+            </GameFSM.Match>
+          </PhysicsWorld>
+        </View>
+      </Renderer>
+    </Ticker>
+  )
+}
