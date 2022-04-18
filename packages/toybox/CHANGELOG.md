@@ -1,5 +1,11 @@
 # @react-trinity/toybox
 
+## 0.4.0
+
+### Minor Changes
+
+- 09a3024: `makeInstanceComponents` has been integrated into the main package as part of the new `react-trinity/instancing` entrypoint.
+
 ## 0.3.1
 
 ### Patch Changes
