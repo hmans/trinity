@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useMemo } from "react"
-import { useLoader } from "react-trinity"
+import { useLoader } from "react-trinity/loaders"
 import { Loader } from "three"
 import {
   Compressor,

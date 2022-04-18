@@ -22,7 +22,7 @@ import { useConst } from "@hmans/react-toolbox"
 import { useRenderer } from "./Renderer"
 import { useTicker } from "@react-trinity/ticker"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
-import { LensDirtShader } from "../shaders/LensDirtShader"
+import { LensDirtShader } from "../experiments/LensDirtShader"
 import { ParentContext } from "@react-trinity/reactor"
 
 type ViewAPI = {

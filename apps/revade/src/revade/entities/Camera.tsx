@@ -1,4 +1,4 @@
-import { useCamera } from "react-trinity"
+import { useCamera } from "react-trinity/experiments"
 import { FC } from "react"
 import { PerspectiveCamera } from "three"
 import { ECS } from "../state"

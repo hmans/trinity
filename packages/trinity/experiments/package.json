@@ -1,0 +1,4 @@
+{
+  "main": "dist/react-trinity-experiments.cjs.js",
+  "module": "dist/react-trinity-experiments.esm.js"
+}
