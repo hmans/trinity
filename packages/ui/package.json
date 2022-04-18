@@ -1,7 +1,7 @@
 {
   "name": "@hmans/ui",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Game UI.",
   "main": "dist/hmans-ui.cjs.js",
   "module": "dist/hmans-ui.esm.js",

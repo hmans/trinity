@@ -1,7 +1,7 @@
 {
   "name": "ui-playground",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -10,7 +10,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@hmans/ui": "^0.0.2",
+    "@hmans/ui": "^0.1.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },

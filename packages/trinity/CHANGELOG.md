@@ -1,5 +1,15 @@
 # react-trinity
 
+## 0.4.0
+
+### Minor Changes
+
+- 154b93c: Introduced new `instancing`, `loaders` and `experiments` entrypoints.
+- 55640c6: The Reactor has been moved into the main package's new `reactor` entrypoint.
+- d0fc318: Integrate ticker into the main package's new `ticker` entrypoint.
+- b9d76cf: No longer export `Engine`. We'll find a nicer top-level abstraction of the important engine bits at some point, but this is not it.
+- 09a3024: `makeInstanceComponents` has been integrated into the main package as part of the new `react-trinity/instancing` entrypoint.
+
 ## 0.3.3
 
 ### Patch Changes

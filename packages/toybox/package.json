@@ -1,7 +1,7 @@
 {
   "name": "@react-trinity/toybox",
   "private": false,
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Trinity Toybox.",
   "main": "dist/react-trinity-toybox.cjs.js",
   "typedocMain": "src/index.ts",
@@ -26,7 +26,7 @@
     "@types/three": "^0.139.0",
     "jest": "^27.5.1",
     "react": "^18.0.0",
-    "react-trinity": "^0.3.3",
+    "react-trinity": "^0.4.0",
     "three": "^0.139.2",
     "ts-jest": "^27.1.4"
   },
