@@ -1,9 +1,9 @@
-import type { StringIndexable } from "../types"
+import type { IStringIndexable } from "../types"
 
 /**
  * Convenience method for setting (potentially nested) properties on an object.
  */
-export const applyProps = (object: StringIndexable, props: StringIndexable) => {
+export const applyProps = (object: IStringIndexable, props: IStringIndexable) => {
   for (const key in props) {
     const value = props[key]
 

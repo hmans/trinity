@@ -11,7 +11,7 @@ import type {
   Constructor,
   ReactorComponent,
   ReactorComponentProps,
-  StringIndexable
+  IStringIndexable
 } from "./types"
 import { useManagedThreeObject } from "./useManagedThreeObject"
 
@@ -30,7 +30,7 @@ export const makeComponent = <
   const Component = forwardRef<TInstance, ReactorComponentProps<TConstructor>>(
     ({ object: propObject, children, attach, args, ...props }, ref) => {
       /* Get the current parent. */
-      const parent = useParent() as StringIndexable
+      const parent = useParent() as IStringIndexable
 
       /* Create the instance of our THREE object. */
       const instance = useManagedThreeObject(

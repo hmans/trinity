@@ -4,7 +4,7 @@ export interface Constructor<Instance = any> {
   new (...args: any[]): Instance
 }
 
-export type StringIndexable = {
+export interface IStringIndexable {
   [key: string]: any
 }
 
