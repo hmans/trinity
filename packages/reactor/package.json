@@ -4,6 +4,7 @@
   "version": "0.3.2",
   "description": "Trinity Reactor.",
   "main": "dist/react-trinity-reactor.cjs.js",
+  "typedocMain": "src/index.ts",
   "module": "dist/react-trinity-reactor.esm.js",
   "types": "dist/react-trinity-reactor.cjs.d.ts",
   "license": "MIT",

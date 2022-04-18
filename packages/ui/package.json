@@ -5,6 +5,7 @@
   "description": "Game UI.",
   "main": "dist/hmans-ui.cjs.js",
   "module": "dist/hmans-ui.esm.js",
+  "typedocMain": "src/index.ts",
   "license": "MIT",
   "sideEffects": false,
   "scripts": {

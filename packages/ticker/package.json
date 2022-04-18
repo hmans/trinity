@@ -4,6 +4,7 @@
   "version": "0.3.2",
   "description": "Trinity Ticker.",
   "main": "dist/react-trinity-ticker.cjs.js",
+  "typedocMain": "src/index.ts",
   "module": "dist/react-trinity-ticker.esm.js",
   "types": "dist/react-trinity-ticker.cjs.d.ts",
   "license": "MIT",
