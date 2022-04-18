@@ -11,7 +11,7 @@ export function makeFSM<
   state: State
   transitions?: Record<Transition, { from: State | State[]; to: State }>
 }) {
-  const onStateChange = Signal<State>()
+  const onStateChange = new Signal<State>()
 
   /* <Match> */
   function Match({
@@ -25,7 +25,7 @@ export function makeFSM<
 
     useEffect(() => {
       onStateChange.add(rerender)
-      return () => onStateChange.remove(rerender)
+      return () => void onStateChange.remove(rerender)
     }, [state])
 
     const isActive =
