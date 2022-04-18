@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react"
-import { Callback, Ticker } from "../src"
+import { Callback, Ticker } from "."
 import React from "react"
 
 describe("<Callback>", () => {
