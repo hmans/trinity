@@ -1,4 +1,4 @@
-import { Callback, TickerStage } from "@react-trinity/ticker"
+import { Callback, TickerStage } from "react-trinity/ticker"
 import { EntityWith, Query } from "miniplex"
 import { ECS, Entity } from "../revade/state"
 

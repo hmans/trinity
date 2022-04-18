@@ -1,7 +1,7 @@
 import { Device } from "@hmans/controlfreak"
 import T from "react-trinity/reactor"
 import React, { useEffect } from "react"
-import { Renderer, Ticker, View } from "react-trinity"
+import { Renderer, View } from "react-trinity"
 import { PhysicsWorld } from "../lib/physics2d"
 import { Music } from "./audio"
 import { controller } from "./controller"
@@ -13,6 +13,7 @@ import { HUD } from "./HUD"
 import { Level } from "./Level"
 import { Menu } from "./Menu"
 import Systems from "./systems"
+import { Ticker } from "react-trinity/ticker"
 
 export const Game = () => {
   useEffect(() => {

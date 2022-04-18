@@ -1,4 +1,4 @@
-import { useTicker } from "@react-trinity/ticker"
+import { useTicker } from "react-trinity/ticker"
 import { Text } from "@react-trinity/toybox"
 import { useEffect } from "react"
 import { filter } from "./audio"

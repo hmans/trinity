@@ -1,4 +1,4 @@
-import { Callback, TickerStage } from "@react-trinity/ticker"
+import { Callback, TickerStage } from "react-trinity/ticker"
 
 const System = ({
   stage = "update",

@@ -20,7 +20,6 @@
     ]
   },
   "devDependencies": {
-    "@react-trinity/ticker": "*",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@types/react": "^18.0.2",
@@ -39,7 +38,6 @@
     "troika-three-text": "^0.46.3"
   },
   "peerDependencies": {
-    "@react-trinity/ticker": ">=0.2.1",
     "react": ">=18.0.0",
     "react-trinity": ">=0.3.3",
     "three": ">=0.139.0"
