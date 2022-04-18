@@ -10,7 +10,7 @@
   "dependencies": {
     "@hmans/controlfreak": "^0.2.0",
     "@hmans/react-toolbox": "^0.1.4",
-    "@hmans/signal": "^0.1.0",
+    "@hmans/signal": "^0.2.2",
     "@hmans/ui": "^0.0.2",
     "@react-trinity/reactor": "^0.3.2",
     "@react-trinity/ticker": "^0.3.2",
