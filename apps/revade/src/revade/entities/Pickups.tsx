@@ -1,5 +1,5 @@
 import T from "@react-trinity/reactor"
-import { makeInstanceComponents } from "@react-trinity/toybox"
+import { makeInstanceComponents } from "react-trinity/instancing"
 import { insideCircle, number } from "randomish"
 import { useEffect } from "react"
 import { PhysicsBody } from "../../lib/physics2d/PhsyicsBody"

@@ -11,6 +11,12 @@
   "scripts": {
     "build": "preconstruct build"
   },
+  "preconstruct": {
+    "entrypoints": [
+      "index.ts",
+      "instancing/index.ts"
+    ]
+  },
   "babel": {
     "presets": [
       "@babel/preset-env",

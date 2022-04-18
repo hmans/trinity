@@ -5,7 +5,7 @@ import { BodyThiefHack } from "../BodyThiefHack"
 import { PhysicsBody } from "../../lib/physics2d/PhsyicsBody"
 import { CircleShape } from "../../lib/physics2d/Shape"
 import { ECS, Layers } from "../state"
-import { makeInstanceComponents } from "@react-trinity/toybox"
+import { makeInstanceComponents } from "react-trinity/instancing"
 
 const Splosion = makeInstanceComponents()
 

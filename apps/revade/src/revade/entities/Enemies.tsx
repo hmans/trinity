@@ -1,4 +1,4 @@
-import { makeInstanceComponents } from "@react-trinity/toybox"
+import { makeInstanceComponents } from "react-trinity/instancing"
 import { easeOut } from "popmotion"
 import { explodePlayer } from "../actions/explodePlayer"
 import { BodyThiefHack } from "../BodyThiefHack"
