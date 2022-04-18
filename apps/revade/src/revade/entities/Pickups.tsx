@@ -1,4 +1,4 @@
-import T from "@react-trinity/reactor"
+import T from "react-trinity/reactor"
 import { makeInstanceComponents } from "react-trinity/instancing"
 import { insideCircle, number } from "randomish"
 import { useEffect } from "react"

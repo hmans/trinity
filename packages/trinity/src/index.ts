@@ -3,9 +3,8 @@ export { Renderer } from "./engine/Renderer"
 export { View } from "./engine/View"
 
 /* Sub packages */
-export * from "@react-trinity/reactor"
 export * from "@react-trinity/ticker"
 
 /* Default export */
-import T from "@react-trinity/reactor"
+import T from "./reactor"
 export default T

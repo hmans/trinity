@@ -1,4 +1,4 @@
-import T, { ReactorComponentProps } from "@react-trinity/reactor"
+import T, { ReactorComponentProps } from "react-trinity/reactor"
 import p2 from "p2-es"
 import { forwardRef, useLayoutEffect, useRef, useState } from "react"
 import mergeRefs from "react-merge-refs"

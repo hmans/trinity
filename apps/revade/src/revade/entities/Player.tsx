@@ -1,4 +1,4 @@
-import T from "@react-trinity/reactor"
+import T from "react-trinity/reactor"
 import { PhysicsBody } from "../../lib/physics2d/PhsyicsBody"
 import { CircleShape } from "../../lib/physics2d/Shape"
 import { increaseMultiplier } from "../actions/increaseMultiplier"

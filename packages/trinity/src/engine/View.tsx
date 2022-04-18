@@ -23,7 +23,7 @@ import { useRenderer } from "./Renderer"
 import { useTicker } from "@react-trinity/ticker"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
 import { LensDirtShader } from "../experiments/LensDirtShader"
-import { ParentContext } from "@react-trinity/reactor"
+import { ParentContext } from "../reactor"
 
 type ViewAPI = {
   setCamera: (camera: Camera) => void

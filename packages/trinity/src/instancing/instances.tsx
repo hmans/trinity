@@ -1,4 +1,4 @@
-import { makeReactor, ReactorComponentProps } from "@react-trinity/reactor"
+import { makeReactor, ReactorComponentProps } from "../reactor"
 import { useTicker } from "@react-trinity/ticker"
 import { IEntity } from "miniplex"
 import { createECS } from "miniplex-react"

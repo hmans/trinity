@@ -1,4 +1,4 @@
-import T from "@react-trinity/reactor"
+import T from "react-trinity"
 import { animate, easeIn, easeOut } from "popmotion"
 import { useEffect } from "react"
 import { BodyThiefHack } from "../BodyThiefHack"

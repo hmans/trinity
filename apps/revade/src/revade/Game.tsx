@@ -1,5 +1,5 @@
 import { Device } from "@hmans/controlfreak"
-import T from "@react-trinity/reactor"
+import T from "react-trinity/reactor"
 import React, { useEffect } from "react"
 import { Renderer, Ticker, View } from "react-trinity"
 import { PhysicsWorld } from "../lib/physics2d"

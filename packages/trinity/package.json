@@ -14,9 +14,10 @@
   "preconstruct": {
     "entrypoints": [
       "index.ts",
+      "experiments/index.ts",
       "instancing/index.ts",
       "loaders/index.ts",
-      "experiments/index.ts"
+      "reactor/index.ts"
     ]
   },
   "babel": {
@@ -36,7 +37,6 @@
   },
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4",
-    "@react-trinity/reactor": "^0.3.2",
     "@react-trinity/ticker": "^0.3.1",
     "miniplex-react": "^0.2.1",
     "react-merge-refs": "^1.1.0"
