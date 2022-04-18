@@ -1,5 +1,4 @@
 ---
-"revade": minor
 "react-trinity": minor
 ---
 
