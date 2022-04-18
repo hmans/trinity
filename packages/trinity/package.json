@@ -17,7 +17,8 @@
       "experiments/index.ts",
       "instancing/index.ts",
       "loaders/index.ts",
-      "reactor/index.ts"
+      "reactor/index.ts",
+      "ticker/index.ts"
     ]
   },
   "babel": {
@@ -37,7 +38,6 @@
   },
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4",
-    "@react-trinity/ticker": "^0.3.1",
     "miniplex-react": "^0.2.1",
     "react-merge-refs": "^1.1.0"
   },
