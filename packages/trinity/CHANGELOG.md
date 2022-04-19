@@ -1,5 +1,11 @@
 # react-trinity
 
+## 0.4.2
+
+### Patch Changes
+
+- 66f09ee: Test patch bump to see if we can get the CD action to work again
+
 ## 0.4.1
 
 ### Patch Changes
