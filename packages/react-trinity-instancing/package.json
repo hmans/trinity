@@ -1,0 +1,42 @@
+{
+  "name": "@react-trinity/instancing",
+  "private": false,
+  "version": "0.0.2",
+  "description": "Trinity Instancing.",
+  "main": "dist/react-trinity-instancing.cjs.js",
+  "module": "dist/react-trinity-instancing.esm.js",
+  "types": "dist/react-trinity-instancing.cjs.d.ts",
+  "typedocMain": "src/index.ts",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "preconstruct build"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+    ]
+  },
+  "devDependencies": {
+    "@react-trinity/reactor": "*",
+    "@react-trinity/ticker": "*",
+    "@types/react": "^18.0.2",
+    "@types/three": "^0.139.0",
+    "react": "^18.0.0",
+    "three": "^0.139.2"
+  },
+  "dependencies": {
+    "@hmans/react-toolbox": "^0.1.4",
+    "miniplex": "^0.9.0",
+    "miniplex-react": "^0.2.1",
+    "react-merge-refs": "^1.1.0"
+  },
+  "peerDependencies": {
+    "@react-trinity/reactor": ">=0.2.1",
+    "@react-trinity/ticker": ">=0.2.1",
+    "react": ">=18.0.0",
+    "three": ">=0.139.0"
+  }
+}

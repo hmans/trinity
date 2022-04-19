@@ -1,0 +1,1 @@
+export { makeInstanceComponents } from "./instances"
