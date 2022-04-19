@@ -1,7 +1,7 @@
 {
   "name": "react-trinity",
   "private": false,
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Trinity.",
   "main": "dist/react-trinity.cjs.js",
   "typedocMain": "src/index.ts",

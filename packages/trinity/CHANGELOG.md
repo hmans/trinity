@@ -1,5 +1,11 @@
 # react-trinity
 
+## 0.5.0
+
+### Minor Changes
+
+- 2a2f79b: Another minor bump, because I messed up publishing.
+
 ## 0.4.0
 
 ### Minor Changes
