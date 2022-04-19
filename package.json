@@ -10,6 +10,7 @@
   "scripts": {
     "postinstall": "preconstruct dev && manypkg check",
     "dev": "preconstruct dev",
+    "docs": "typedoc --entryPointStrategy packages packages/* --out docs",
     "build": "preconstruct build",
     "test": "jest",
     "ci": "preconstruct validate && manypkg check && yarn build && yarn test",
@@ -39,6 +40,7 @@
     "@types/react": "^18.0.2",
     "@types/three": "^0.139.0",
     "jest": "^27.5.1",
-    "ts-jest": "^27.1.4"
+    "ts-jest": "^27.1.4",
+    "typedoc": "^0.23.0-beta.0"
   }
 }
