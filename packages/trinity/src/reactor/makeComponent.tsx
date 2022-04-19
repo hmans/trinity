@@ -1,23 +1,15 @@
-import React, {
-  createContext,
-  forwardRef,
-  useContext,
-  useImperativeHandle,
-  useLayoutEffect
-} from "react"
+import React, { forwardRef, useImperativeHandle, useLayoutEffect } from "react"
 import { BufferGeometry, Fog, Material, Object3D } from "three"
 import { applyProps } from "./lib/applyProps"
-import type {
+import { ParentContext } from "./ParentContext"
+import { useParent } from "./useParent"
+import {
   Constructor,
+  IStringIndexable,
   ReactorComponent,
-  ReactorComponentProps,
-  IStringIndexable
+  ReactorComponentProps
 } from "./types"
 import { useManagedThreeObject } from "./useManagedThreeObject"
-
-export const ParentContext = createContext<THREE.Object3D>(null!)
-
-export const useParent = () => useContext(ParentContext)
 
 export const makeComponent = <
   TConstructor extends Constructor<any>,
