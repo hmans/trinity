@@ -21,7 +21,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-merge-refs": "^1.1.0",
-    "react-trinity": "^0.4.0",
+    "react-trinity": "^0.4.1",
     "statery": "^0.5.4",
     "three": "^0.139.2",
     "tone": "^14.8.38"
