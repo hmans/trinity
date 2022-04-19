@@ -1,9 +1,10 @@
 import T, { Renderer, View } from "react-trinity"
 import { Ticker } from "react-trinity/ticker"
 import { useCamera } from "react-trinity/experiments"
+import { PerspectiveCamera } from "three"
 
 const Camera = () => {
-  const camera = useCamera()
+  const camera = useCamera<PerspectiveCamera>()
 
   return <T.PerspectiveCamera position={[0, 0, -10]} ref={camera} />
 }
