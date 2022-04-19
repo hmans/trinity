@@ -9,19 +9,8 @@
   "typedocMain": "src/index.ts",
   "license": "MIT",
   "sideEffects": false,
-  "type": "module",
   "scripts": {
     "build": "preconstruct build"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/react-trinity.esm.js",
-      "require": "./dist/react-trinity.cjs.js"
-    },
-    "./experiments": {
-      "import": "./experiments/dist/react-trinity-experiments.esm.js",
-      "require": "./experiments/dist/react-trinity-experiments.cjs.js"
-    }
   },
   "preconstruct": {
     "entrypoints": [
