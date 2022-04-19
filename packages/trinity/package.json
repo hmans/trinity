@@ -4,8 +4,9 @@
   "version": "0.4.2",
   "description": "Trinity.",
   "main": "dist/react-trinity.cjs.js",
-  "typedocMain": "src/index.ts",
   "module": "dist/react-trinity.esm.js",
+  "types": "dist/react-trinity.cjs.d.ts",
+  "typedocMain": "src/index.ts",
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
