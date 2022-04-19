@@ -1,6 +1,6 @@
-import { useTicker } from "react-trinity/ticker"
-import { Text } from "@react-trinity/toybox"
 import { useEffect } from "react"
+import { Text } from "react-trinity/text"
+import { useTicker } from "react-trinity/ticker"
 import { filter } from "./audio"
 import { controller } from "./controller"
 import { GameFSM } from "./GameFSM"
