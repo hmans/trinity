@@ -1,5 +1,11 @@
 # react-trinity
 
+## 0.4.1
+
+### Patch Changes
+
+- b183bd6: Integrate Text component into main Trinity package.
+
 ## 0.4.0
 
 ### Minor Changes
