@@ -18,6 +18,7 @@
       "instancing/index.ts",
       "loaders/index.ts",
       "reactor/index.ts",
+      "text/index.ts",
       "ticker/index.ts"
     ]
   },
@@ -39,7 +40,8 @@
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4",
     "miniplex-react": "^0.2.1",
-    "react-merge-refs": "^1.1.0"
+    "react-merge-refs": "^1.1.0",
+    "troika-three-text": "^0.46.4"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

@@ -5,7 +5,7 @@
 */
 
 import { useConst } from "@hmans/react-toolbox"
-import { Primitive, ReactorComponentProps } from "react-trinity/reactor"
+import { Primitive, ReactorComponentProps } from "../reactor"
 import React, { FC, useLayoutEffect } from "react"
 import type { ColorRepresentation, Mesh } from "three"
 import { Text as TroikaText } from "troika-three-text"
