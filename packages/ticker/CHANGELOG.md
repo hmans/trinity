@@ -1,5 +1,11 @@
 # @react-trinity/reactor
 
+## 0.4.0
+
+### Minor Changes
+
+- f02c7da: `useAnimationFrame` is no longer exported from this package.
+
 ## 0.3.2
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # react-trinity
 
+## 0.4.0
+
+### Minor Changes
+
+- b9d76cf: No longer export `Engine`. We'll find a nicer top-level abstraction of the important engine bits at some point, but this is not it.
+
+### Patch Changes
+
+- Updated dependencies [f02c7da]
+  - @react-trinity/ticker@0.4.0
+
 ## 0.3.3
 
 ### Patch Changes
