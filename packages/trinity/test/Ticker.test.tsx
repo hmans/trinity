@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react"
-import { Ticker } from "./Ticker"
+import { Ticker } from "../src/ticker/Ticker"
 import React from "react"
 
 describe("<Ticker>", () => {
