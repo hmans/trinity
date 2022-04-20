@@ -1,8 +1,11 @@
-import { useEffect, useRef, useState } from "react"
+import { FC, forwardRef, useEffect, useRef, useState } from "react"
 import T from "react-trinity"
 import { useWindowResizeHandler } from "react-trinity/src/engine/useWindowResizeHandler"
+import { ReactorComponentProps, useParent } from "react-trinity/src/reactor"
+import { ThreeObject } from "react-trinity/src/reactor/useManagedThreeObject"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
+import { Event } from "three"
 
 const AutoRotate = ({ speed = 1 }) => (
   <Update>
@@ -18,6 +21,42 @@ const Thingy = () => (
   </T.Mesh>
 )
 
+const OnWindowResize = <
+  T extends THREE.Object3D<THREE.Event> = THREE.Object3D<THREE.Event>
+>({
+  children
+}: {
+  children: (parent: T) => void
+}) => {
+  const parent = useParent()
+
+  useWindowResizeHandler(() => children(parent as T), [parent])
+
+  return null
+}
+
+const Camera = forwardRef<
+  THREE.PerspectiveCamera,
+  ReactorComponentProps<typeof THREE.PerspectiveCamera>
+>((props, ref) => {
+  const camera = useRef<THREE.PerspectiveCamera>(null!)
+  useWindowResizeHandler(() => {}, [])
+
+  return (
+    <T.PerspectiveCamera {...props} ref={ref}>
+      <OnWindowResize>
+        {(camera: THREE.PerspectiveCamera) => {
+          const width = window.innerWidth
+          const height = window.innerHeight
+
+          camera.aspect = width / height
+          camera.updateProjectionMatrix()
+        }}
+      </OnWindowResize>
+    </T.PerspectiveCamera>
+  )
+})
+
 const App = () => {
   const camera = useRef<THREE.PerspectiveCamera>(null!)
   const scene = useRef<THREE.Scene>(null!)
@@ -25,22 +64,16 @@ const App = () => {
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
 
   const updateRendererSize = () => {
-    const width = window.innerWidth
-    const height = window.innerHeight
-
     if (renderer.current) {
+      const width = window.innerWidth
+      const height = window.innerHeight
       renderer.current.setSize(width, height)
-    }
-
-    if (camera.current) {
-      camera.current.aspect = width / height
-      camera.current.updateProjectionMatrix()
     }
   }
 
   useEffect(updateRendererSize)
 
-  useWindowResizeHandler(updateRendererSize, [renderer, camera])
+  useWindowResizeHandler(updateRendererSize, [renderer])
 
   return (
     <Ticker>
@@ -52,7 +85,7 @@ const App = () => {
       </Update>
 
       <T.Scene ref={scene}>
-        <T.PerspectiveCamera position={[0, 0, 10]} ref={camera} />
+        <Camera position={[0, 0, 10]} ref={camera} />
         <T.AmbientLight intensity={0.2} />
         <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
 
