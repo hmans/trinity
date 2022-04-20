@@ -22,13 +22,14 @@ const App = () => {
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
 
   const updateRendererSize = () => {
-    if (!renderer.current) return
-
     const width = window.innerWidth
     const height = window.innerHeight
-    renderer.current.setSize(width, height)
 
-    if (camera.current instanceof THREE.PerspectiveCamera) {
+    if (renderer.current) {
+      renderer.current.setSize(width, height)
+    }
+
+    if (camera.current) {
       camera.current.aspect = width / height
       camera.current.updateProjectionMatrix()
     }
