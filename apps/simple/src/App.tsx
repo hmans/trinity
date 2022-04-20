@@ -1,7 +1,10 @@
 import { useState } from "react"
 import T, { Renderer, View } from "react-trinity"
+import { EffectPass } from "react-trinity/src/engine/View"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
 
 const AutoRotate = ({ speed = 1 }) => (
   <Update>
@@ -17,7 +20,15 @@ const App = () => {
     <Ticker>
       <Renderer>
         {/* The view actually takes care of rendering, event handling, etc. */}
-        {scene && camera && <View scene={scene} camera={camera}></View>}
+        {scene && camera && (
+          <View scene={scene} camera={camera}>
+            <EffectPass pass={RenderPass} args={[scene, camera]} />
+            <EffectPass
+              pass={UnrealBloomPass}
+              args={[new THREE.Vector2(256, 256), 1.5, 0.8, 0.3]}
+            />
+          </View>
+        )}
 
         {/* The scene, with some objects, and a camera */}
         <T.Scene ref={setScene}>

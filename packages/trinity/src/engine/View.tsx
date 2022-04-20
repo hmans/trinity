@@ -33,10 +33,12 @@ export const EffectPass = <Pass extends any>(props: {
   useEffect(() => {
     console.log("creating effect pass:", props)
 
-    const pass = new props.pass(props.args)
+    const pass = new props.pass(...props.args)
     composer.addPass(pass)
     return () => composer.removePass(pass)
   }, [composer, props.pass])
+
+  return null
 }
 
 export const View: FC<{
