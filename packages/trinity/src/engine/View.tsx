@@ -17,6 +17,7 @@ import { VignetteShader } from "three/examples/jsm/shaders/VignetteShader"
 import { LensDirtShader } from "../experiments/LensDirtShader"
 import { Constructor } from "../reactor"
 import { Update } from "../ticker"
+import { EffectPass } from "./EffectPass"
 import { EventHandling } from "./EventHandling"
 import { OnWindowResize } from "./OnWindowResize"
 import { useRenderer } from "./Renderer"
@@ -24,23 +25,6 @@ import { useRenderer } from "./Renderer"
 const ViewContext = createContext<{ composer: EffectComposer }>(null!)
 
 export const useView = () => useContext(ViewContext)
-
-export const EffectPass = <PassConstructor extends Constructor>(props: {
-  pass: PassConstructor
-  args: ConstructorParameters<PassConstructor>
-}) => {
-  const { composer } = useView()
-
-  useEffect(() => {
-    console.log("creating effect pass:", props)
-
-    const pass = new props.pass(...props.args)
-    composer.addPass(pass)
-    return () => composer.removePass(pass)
-  }, [composer, props.pass])
-
-  return null
-}
 
 export const View: FC<{
   scene: Scene
