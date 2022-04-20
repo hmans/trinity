@@ -31,23 +31,6 @@ const OnWindowResize = <
   return null
 }
 
-const Camera = forwardRef<
-  THREE.PerspectiveCamera,
-  ReactorComponentProps<typeof THREE.PerspectiveCamera>
->((props, ref) => (
-  <T.PerspectiveCamera {...props} ref={ref}>
-    <OnWindowResize>
-      {(camera: THREE.PerspectiveCamera) => {
-        const width = window.innerWidth
-        const height = window.innerHeight
-
-        camera.aspect = width / height
-        camera.updateProjectionMatrix()
-      }}
-    </OnWindowResize>
-  </T.PerspectiveCamera>
-))
-
 const App = () => {
   const camera = useRef<THREE.PerspectiveCamera>(null!)
   const scene = useRef<THREE.Scene>(null!)
@@ -76,7 +59,18 @@ const App = () => {
       </Update>
 
       <T.Scene ref={scene}>
-        <Camera position={[0, 0, 10]} ref={camera} />
+        <T.PerspectiveCamera position={[0, 0, 10]} ref={camera}>
+          <OnWindowResize>
+            {(camera: THREE.PerspectiveCamera) => {
+              const width = window.innerWidth
+              const height = window.innerHeight
+
+              camera.aspect = width / height
+              camera.updateProjectionMatrix()
+            }}
+          </OnWindowResize>
+        </T.PerspectiveCamera>
+
         <T.AmbientLight intensity={0.2} />
         <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
 
