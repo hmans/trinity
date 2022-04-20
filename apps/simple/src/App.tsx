@@ -1,5 +1,6 @@
-import { useRef, useState } from "react"
+import { EffectCallback, useCallback, useEffect, useRef, useState } from "react"
 import T, { Renderer } from "react-trinity"
+import { useRenderer } from "react-trinity/src/engine/Renderer"
 import { useWindowResizeHandler } from "react-trinity/src/engine/useWindowResizeHandler"
 import { useParent } from "react-trinity/src/reactor"
 import { Ticker, Update } from "react-trinity/ticker"
@@ -27,6 +28,23 @@ const OnWindowResize = <T extends any = any>(props: {
   return null
 }
 
+const EventHandling = () => {
+  const camera = useParent<THREE.PerspectiveCamera>()
+  const renderer = useRenderer()
+
+  useEffect(() => {
+    const handleClick = () => {
+      console.log("CLICK", camera)
+    }
+
+    renderer.domElement.addEventListener("pointerdown", handleClick)
+    return () =>
+      renderer.domElement.removeEventListener("pointerdown", handleClick)
+  })
+
+  return null
+}
+
 const App = () => {
   const scene = useRef<THREE.Scene>(null!)
 
@@ -36,6 +54,8 @@ const App = () => {
         {/* The scene, with some objects, and a camera */}
         <T.Scene ref={scene}>
           <T.PerspectiveCamera position={[0, 0, 10]}>
+            <EventHandling />
+
             {/* Handle window resizing */}
             <OnWindowResize>
               {(camera: THREE.PerspectiveCamera) => {

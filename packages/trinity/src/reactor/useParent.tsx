@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { Object3D } from "three"
 import { ParentContext } from "./ParentContext"
 
 /**
@@ -8,4 +9,5 @@ import { ParentContext } from "./ParentContext"
  * @returns The current parent.
  */
 
-export const useParent = () => useContext(ParentContext)
+export const useParent = <T extends any = Object3D>() =>
+  useContext(ParentContext) as T
