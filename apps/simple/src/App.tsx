@@ -33,14 +33,24 @@ const EventHandling = () => {
   const renderer = useRenderer()
 
   useEffect(() => {
-    const handleClick = () => {
-      console.log("CLICK", camera)
+    const scene = camera.parent!
+
+    const handleClick = (e: PointerEvent) => {
+      const pointer = new THREE.Vector2(
+        (e.clientX / window.innerWidth) * 2 - 1,
+        -(e.clientY / window.innerHeight) * 2 + 1
+      )
+
+      const raycaster = new THREE.Raycaster()
+      raycaster.setFromCamera(pointer, camera)
+      const intersects = raycaster.intersectObject(scene)
+      console.log(intersects)
     }
 
     renderer.domElement.addEventListener("pointerdown", handleClick)
     return () =>
       renderer.domElement.removeEventListener("pointerdown", handleClick)
-  })
+  }, [camera])
 
   return null
 }
