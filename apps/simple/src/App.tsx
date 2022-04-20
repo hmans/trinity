@@ -1,6 +1,5 @@
 import { FC, MutableRefObject, useEffect, useMemo, useRef } from "react"
-import T, { Renderer } from "react-trinity"
-import { useRenderer } from "react-trinity/src/engine/Renderer"
+import T, { Renderer, useRenderer } from "react-trinity"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
 
