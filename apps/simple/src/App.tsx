@@ -1,5 +1,5 @@
-import { FC, MutableRefObject, useEffect, useMemo, useRef } from "react"
-import T, { Renderer, useRenderer } from "react-trinity"
+import { FC, MutableRefObject, useRef } from "react"
+import T, { EventHandling, OnWindowResize, Renderer } from "react-trinity"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
 
@@ -8,67 +8,6 @@ const AutoRotate = ({ speed = 1 }) => (
     {(dt, { parent }) => (parent.rotation.x = parent.rotation.y += speed * dt)}
   </Update>
 )
-
-const EventHandling: FC<{
-  camera: MutableRefObject<THREE.Camera>
-  scene: MutableRefObject<THREE.Scene>
-}> = ({ camera, scene }) => {
-  const renderer = useRenderer()
-  const pointer = useMemo(() => new THREE.Vector2(), [])
-  const raycaster = useMemo(() => new THREE.Raycaster(), [])
-  const intersects = new Array<THREE.Intersection<THREE.Object3D<Event>>>()
-
-  useEffect(() => {
-    const handleMove = (e: PointerEvent) => {
-      /* Get normalized pointer position */
-      pointer.x = (e.clientX / window.innerWidth) * 2 - 1
-      pointer.y = -(e.clientY / window.innerHeight) * 2 + 1
-
-      /* Prepare raycaster */
-      raycaster.setFromCamera(pointer, camera.current)
-
-      /* Find intersects */
-      intersects.length = 0
-      raycaster.intersectObject(scene.current, true, intersects)
-    }
-
-    const handleClick = (e: PointerEvent) => {
-      console.log(intersects[0])
-    }
-
-    /* Register/unregister event handlers */
-    renderer.domElement.addEventListener("pointermove", handleMove)
-    renderer.domElement.addEventListener("pointerdown", handleClick)
-
-    return () => {
-      renderer.domElement.removeEventListener("pointermove", handleMove)
-      renderer.domElement.removeEventListener("pointerdown", handleClick)
-    }
-  }, [renderer, camera, scene])
-
-  return null
-}
-
-const On: FC<{ event: string; target?: any; children: Function }> = ({
-  target = window,
-  event,
-  children
-}) => {
-  useEffect(() => {
-    target.addEventListener(event, children)
-    return () => target.removeEventListener(event, children)
-  }, [event, target, children])
-
-  return null
-}
-
-const OnWindowResize: FC<{ children: Function }> = ({ children }) => {
-  /* Invoke the function at least once */
-  useEffect(() => children(), [])
-
-  /* Bind it to the window's resize event */
-  return <On event="resize" target={window} children={children} />
-}
 
 const View: FC<{
   scene: MutableRefObject<THREE.Scene>
