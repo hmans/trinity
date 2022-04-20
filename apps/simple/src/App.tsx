@@ -30,21 +30,18 @@ const OnWindowResize = <T extends any = any>(props: {
   return null
 }
 
-const Renderer = forwardRef<
-  THREE.WebGLRenderer,
-  ReactorComponentProps<typeof THREE.WebGLRenderer>
->((props, ref) => {
-  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
+const App = () => {
+  const camera = useRef<THREE.PerspectiveCamera>(null!)
+  const scene = useRef<THREE.Scene>(null!)
   const renderer = useRef<THREE.WebGLRenderer>(null!)
+  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
 
   return (
-    <canvas ref={setCanvas}>
+    <Ticker>
+      <canvas ref={setCanvas} />
+
       {canvas && (
-        <T.WebGLRenderer
-          {...props}
-          ref={mergeRefs([ref, renderer])}
-          args={[{ canvas }]}
-        >
+        <T.WebGLRenderer ref={renderer} args={[{ canvas }]}>
           <OnWindowResize>
             {(renderer: THREE.WebGLRenderer) => {
               const width = window.innerWidth
@@ -54,18 +51,6 @@ const Renderer = forwardRef<
           </OnWindowResize>
         </T.WebGLRenderer>
       )}
-    </canvas>
-  )
-})
-
-const App = () => {
-  const camera = useRef<THREE.PerspectiveCamera>(null!)
-  const scene = useRef<THREE.Scene>(null!)
-  const renderer = useRef<THREE.WebGLRenderer>(null!)
-
-  return (
-    <Ticker>
-      <Renderer ref={renderer} />
 
       <Update stage="render">
         {() => renderer.current.render(scene.current, camera.current)}
