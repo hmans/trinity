@@ -21,13 +21,13 @@ const Thingy = () => (
 )
 
 const OnWindowResize = <
-  T extends THREE.Object3D<THREE.Event> = THREE.Object3D<THREE.Event>
+  T = any
 >(props: {
   children: (parent: T) => void
 }) => {
   const parent = useParent()
 
-  useWindowResizeHandler(() => props.children(parent as T), [parent])
+  useWindowResizeHandler(() => props.children(parent as any), [parent])
 
   return null
 }
@@ -39,23 +39,25 @@ const Renderer = forwardRef<
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
   const renderer = useRef<THREE.WebGLRenderer>(null!)
 
-  useWindowResizeHandler(() => {
-    if (renderer.current) {
-      const width = window.innerWidth
-      const height = window.innerHeight
-      renderer.current.setSize(width, height)
-    }
-  }, [renderer.current])
-
   return (
     <>
       <canvas ref={setCanvas} />
+
       {canvas && (
         <T.WebGLRenderer
           {...props}
           ref={mergeRefs([ref, renderer])}
           args={[{ canvas }]}
-        />
+        >
+          <OnWindowResize>
+            {(renderer: THREE.WebGLRenderer) => {
+              console.log(renderer)
+              const width = window.innerWidth
+              const height = window.innerHeight
+              renderer.setSize(width, height)
+            }}
+          </OnWindowResize>
+        </T.WebGLRenderer>
       )}
     </>
   )
