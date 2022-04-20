@@ -1,20 +1,19 @@
 import React, {
   createContext,
-  FC,
   forwardRef,
   ReactNode,
   useContext,
   useEffect,
   useImperativeHandle,
-  useRef,
   useState
 } from "react"
 import { sRGBEncoding, WebGLRenderer } from "three"
+import { ReactorComponentProps } from "../reactor"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
 
 const RendererContext = createContext<THREE.WebGLRenderer>(null!)
 
-type RendererProps = { children?: ReactNode }
+type RendererProps = ReactorComponentProps<typeof WebGLRenderer>
 
 export const Renderer = forwardRef<WebGLRenderer, RendererProps>(
   ({ children }, ref) => {
@@ -62,7 +61,7 @@ export const Renderer = forwardRef<WebGLRenderer, RendererProps>(
       <canvas ref={setCanvas}>
         {renderer && (
           <RendererContext.Provider value={renderer}>
-            {children}
+            {typeof children === "function" ? children() : children}
           </RendererContext.Provider>
         )}
       </canvas>
