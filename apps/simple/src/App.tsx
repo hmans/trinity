@@ -45,9 +45,10 @@ const View: FC<{
   /* Event handling */
   const pointer = useMemo(() => new THREE.Vector2(), [])
   const raycaster = useMemo(() => new THREE.Raycaster(), [])
+  const intersects = new Array<THREE.Intersection<THREE.Object3D<Event>>>()
 
   useEffect(() => {
-    const handleClick = (e: PointerEvent) => {
+    const handleMove = (e: PointerEvent) => {
       /* Get normalized pointer position */
       pointer.x = (e.clientX / window.innerWidth) * 2 - 1
       pointer.y = -(e.clientY / window.innerHeight) * 2 + 1
@@ -56,14 +57,22 @@ const View: FC<{
       raycaster.setFromCamera(pointer, camera.current)
 
       /* Find intersects */
-      const intersects = raycaster.intersectObject(scene.current)
-      console.log(intersects)
+      intersects.length = 0
+      raycaster.intersectObject(scene.current, true, intersects)
+    }
+
+    const handleClick = (e: PointerEvent) => {
+      console.log(intersects[0])
     }
 
     /* Register/unregister event handlers */
+    renderer.domElement.addEventListener("pointermove", handleMove)
     renderer.domElement.addEventListener("pointerdown", handleClick)
-    return () =>
+
+    return () => {
+      renderer.domElement.removeEventListener("pointermove", handleMove)
       renderer.domElement.removeEventListener("pointerdown", handleClick)
+    }
   }, [renderer, camera, scene])
 
   return null
