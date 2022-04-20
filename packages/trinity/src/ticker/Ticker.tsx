@@ -55,7 +55,7 @@ class TickerImpl {
 
     const dtScaled = dt * this.timeScale
 
-    /* Run the normale update callbacks. */
+    /* Run early callbacks. */
     this.execute("early", dtScaled)
     this.execute("physics", dtScaled)
 
@@ -67,8 +67,11 @@ class TickerImpl {
       this.execute("lateFixed", this.fixedStep)
     }
 
+    /* Continue with normal updates */
     this.execute("update", dtScaled)
     this.execute("lateUpdate", dtScaled)
+
+    /* And finally, execute render callbacks */
     this.execute("render", dtScaled)
   }
 
