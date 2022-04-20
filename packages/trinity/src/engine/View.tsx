@@ -51,7 +51,7 @@ export const View: FC<{
 
   useEffect(() => {
     if (!camera || !scene) return
-    composer.addPass(new RenderPass(scene, camera))
+    // composer.addPass(new RenderPass(scene, camera))
     // composer.addPass(new UnrealBloomPass(new Vector2(256, 256), 1.5, 0.8, 0.3))
     // const dirt = new ShaderPass(LensDirtShader)
     // dirt.uniforms["tDirt"].value = new TextureLoader().load(
@@ -84,7 +84,11 @@ export const View: FC<{
         }}
       </OnWindowResize>
 
-      {children}
+      {children ? (
+        children
+      ) : (
+        <EffectPass pass={RenderPass} args={[scene, camera]} />
+      )}
     </ViewContext.Provider>
   )
 }
