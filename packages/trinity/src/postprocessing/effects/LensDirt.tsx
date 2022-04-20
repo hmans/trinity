@@ -1,29 +1,19 @@
-import { FC, useEffect, useMemo } from "react"
+import { FC, useMemo } from "react"
 import { TextureLoader } from "three"
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
-import { useView } from "../../engine/View"
 import { LensDirtShader } from "../shaders/LensDirtShader"
+import { useEffectPass } from "../useEffectPass"
+import { useShaderUniforms } from "../useShaderUniforms"
 
 export const LensDirt: FC<{ texture: string; strength?: number }> = ({
   texture,
   strength = 1
 }) => {
-  const { composer } = useView()
-
-  /* Create pass */
   const pass = useMemo(() => new ShaderPass(LensDirtShader), [])
+  const tDirt = useMemo(() => new TextureLoader().load(texture), [texture])
 
-  /* Apply uniforms */
-  useEffect(() => {
-    pass.uniforms["tDirt"].value = new TextureLoader().load(texture)
-    pass.uniforms["strength"].value = strength
-  }, [pass, texture, strength])
-
-  /* Inject into composer */
-  useEffect(() => {
-    composer.addPass(pass)
-    return () => composer.removePass(pass)
-  }, [composer, pass])
+  useShaderUniforms(pass, { tDirt, strength })
+  useEffectPass(pass)
 
   return null
 }
