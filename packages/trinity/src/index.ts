@@ -1,4 +1,5 @@
 /* Components */
+export { Application } from "./Application"
 export { Renderer } from "./engine/Renderer"
 export { View } from "./engine/View"
 

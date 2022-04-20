@@ -1,8 +1,8 @@
-import T, { Renderer, View } from "react-trinity"
-import { Ticker, useTicker } from "react-trinity/ticker"
-import { useCamera } from "react-trinity/experiments"
-import { Mesh, PerspectiveCamera } from "three"
 import { useRef } from "react"
+import T, { Application, View } from "react-trinity"
+import { useCamera } from "react-trinity/experiments"
+import { useTicker } from "react-trinity/ticker"
+import { Mesh, PerspectiveCamera } from "three"
 
 const Camera = () => {
   const camera = useCamera<PerspectiveCamera>()
@@ -27,15 +27,13 @@ const Thingy = ({ speed = 0.5 }) => {
 
 function App() {
   return (
-    <Ticker>
-      <Renderer>
-        <View>
-          <Camera />
-          <T.AmbientLight intensity={1} />
-          <Thingy />
-        </View>
-      </Renderer>
-    </Ticker>
+    <Application>
+      <View>
+        <Camera />
+        <T.AmbientLight intensity={1} />
+        <Thingy />
+      </View>
+    </Application>
   )
 }
 
