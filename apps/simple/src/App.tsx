@@ -1,7 +1,7 @@
-import { forwardRef, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import T from "react-trinity"
 import { useWindowResizeHandler } from "react-trinity/src/engine/useWindowResizeHandler"
-import { ReactorComponentProps, useParent } from "react-trinity/src/reactor"
+import { useParent } from "react-trinity/src/reactor"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
 
