@@ -29,7 +29,6 @@ export const Renderer: FC<{ children?: ReactNode }> = ({ children }) => {
       })
 
       renderer.autoClear = false
-      renderer.setClearColor("#222")
       renderer.setPixelRatio(1)
       renderer.outputEncoding = sRGBEncoding
       // renderer.toneMapping = THREE.ACESFilmicToneMapping

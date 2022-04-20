@@ -1,31 +1,43 @@
-import T, { Scene } from "react-trinity"
-import { useCamera } from "react-trinity/experiments"
+import { useRef } from "react"
+import T, { Renderer, Scene } from "react-trinity"
 import { Ticker, Update } from "react-trinity/ticker"
 import { PerspectiveCamera } from "three"
-
-const AutoRotate = ({ speed = 1 }) => (
-  <Update>
-    {(dt, mesh) => (mesh.rotation.x = mesh.rotation.y += speed * dt)}
-  </Update>
-)
 
 const Thingy = ({ speed = 0.5 }) => (
   <T.Mesh>
     <T.DodecahedronGeometry />
     <T.MeshStandardMaterial color="hotpink" />
 
-    <AutoRotate speed={speed} />
+    <Update>
+      {(dt, { parent }) =>
+        (parent.rotation.x = parent.rotation.y += speed * dt)
+      }
+    </Update>
   </T.Mesh>
 )
 
-const App = () => (
-  <Ticker>
-    <Scene>
-      <T.PerspectiveCamera position={[0, 0, -10]} />
-      <T.AmbientLight intensity={1} />
-      <Thingy />
-    </Scene>
-  </Ticker>
-)
+const App = () => {
+  const camera = useRef<PerspectiveCamera>(null!)
+
+  return (
+    <Ticker>
+      <Renderer>
+        <Scene>
+          <Update stage="render">
+            {(_, { scene, renderer }) => {
+              renderer.clear()
+              renderer.render(scene, camera.current)
+            }}
+          </Update>
+
+          <T.Color attach="background" args={["#ccc"]} />
+          <T.PerspectiveCamera position={[0, 0, -10]} ref={camera} />
+          <T.AmbientLight intensity={1} />
+          <Thingy />
+        </Scene>
+      </Renderer>
+    </Ticker>
+  )
+}
 
 export default App

@@ -1,15 +1,19 @@
-import React, { FC, ReactNode } from "react"
+import React, { createContext, FC, ReactNode, useContext } from "react"
 import * as THREE from "three"
-import { ParentContext, useManagedThreeObject } from "../reactor"
+import T, { ReactorComponentProps, useManagedThreeObject } from "../reactor"
 
-type SceneProps = {
-  children?: ReactNode
-}
+type SceneProps = ReactorComponentProps<typeof THREE.Scene>
 
-export const Scene: FC<SceneProps> = ({ children }) => {
+const SceneContext = createContext<THREE.Scene>(null!)
+
+export const Scene: FC<SceneProps> = (sceneProps) => {
   const scene = useManagedThreeObject(() => new THREE.Scene())
 
   return (
-    <ParentContext.Provider value={scene}>{children}</ParentContext.Provider>
+    <SceneContext.Provider value={scene}>
+      <T.Scene object={scene} {...sceneProps} />
+    </SceneContext.Provider>
   )
 }
+
+export const useScene = () => useContext(SceneContext)
