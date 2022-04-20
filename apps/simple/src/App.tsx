@@ -1,8 +1,7 @@
 import { FC, MutableRefObject, useEffect, useMemo, useRef } from "react"
 import T, { Renderer } from "react-trinity"
 import { useRenderer } from "react-trinity/src/engine/Renderer"
-import { useWindowResizeHandler } from "react-trinity/src/engine/useWindowResizeHandler"
-import { Ticker, Update, useTicker } from "react-trinity/ticker"
+import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
 
 const AutoRotate = ({ speed = 1 }) => (
