@@ -1,4 +1,4 @@
-import { Callback, TickerStage } from "react-trinity/ticker"
+import { Update, TickerStage } from "react-trinity/ticker"
 import { EntityWith, Query } from "miniplex"
 import { ECS, Entity } from "../revade/state"
 
@@ -13,9 +13,7 @@ const ArchetypeSystem = <Q extends Query<Entity>>({
 }) => {
   const { entities } = ECS.world.archetype(...archetype)
 
-  return (
-    <Callback stage={stage}>{(dt: number) => children(entities, dt)}</Callback>
-  )
+  return <Update stage={stage}>{(dt: number) => children(entities, dt)}</Update>
 }
 
 export default ArchetypeSystem

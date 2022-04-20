@@ -1,4 +1,4 @@
-import { Callback, TickerStage } from "react-trinity/ticker"
+import { Update, TickerStage } from "react-trinity/ticker"
 
 const System = ({
   stage = "update",
@@ -6,6 +6,6 @@ const System = ({
 }: {
   stage?: TickerStage
   children: (dt: number) => void
-}) => <Callback stage={stage}>{children}</Callback>
+}) => <Update stage={stage}>{children}</Update>
 
 export default System
