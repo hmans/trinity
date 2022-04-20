@@ -1,12 +1,15 @@
 import { useEffect } from "react"
 
-export const useWindowResizeHandler = (fun: Function, deps: any[]) => {
+export const useWindowResizeHandler = (
+  fun: (ev?: UIEvent) => void,
+  deps: any[] = []
+) => {
   useEffect(() => {
-    const handler = () => fun()
+    /* Invoke once */
+    fun()
 
-    window.addEventListener("resize", handler, false)
-    return () => void window.removeEventListener("resize", handler)
-  }, deps)
-
-  fun()
+    /* Invoke every time the window is resized */
+    window.addEventListener("resize", fun, false)
+    return () => void window.removeEventListener("resize", fun)
+  }, [fun, ...deps])
 }

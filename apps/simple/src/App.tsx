@@ -37,17 +37,13 @@ const App = () => {
   const renderer = useRef<THREE.WebGLRenderer>(null!)
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
 
-  const updateRendererSize = () => {
+  useWindowResizeHandler(() => {
     if (renderer.current) {
       const width = window.innerWidth
       const height = window.innerHeight
       renderer.current.setSize(width, height)
     }
-  }
-
-  useEffect(updateRendererSize)
-
-  useWindowResizeHandler(updateRendererSize, [renderer])
+  }, [renderer])
 
   return (
     <Ticker>
