@@ -1,7 +1,9 @@
 import { useRef } from "react"
 import T, { Renderer, View } from "react-trinity"
+import { EffectPass } from "react-trinity/src/engine/View"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
 
 const AutoRotate = ({ speed = 1 }) => (
   <Update>
@@ -17,7 +19,7 @@ const App = () => {
     <Ticker>
       <Renderer>
         {/* The view actually takes care of rendering, event handling, etc. */}
-        <View scene={scene} camera={camera} />
+        <View scene={scene} camera={camera}></View>
 
         {/* The scene, with some objects, and a camera */}
         <T.Scene ref={scene}>
