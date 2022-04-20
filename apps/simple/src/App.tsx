@@ -51,43 +51,51 @@ const EventHandling: FC<{
   return null
 }
 
+const On: FC<{ event: string; target?: any; children: Function }> = ({
+  target = window,
+  event,
+  children
+}) => {
+  useEffect(() => {
+    target.addEventListener(event, children)
+    return () => target.removeEventListener(event, children)
+  }, [event, target, children])
+
+  return null
+}
+
+const OnWindowResize: FC<{ children: Function }> = ({ children }) => {
+  /* Invoke the function at least once */
+  useEffect(() => children(), [])
+
+  /* Bind it to the window's resize event */
+  return <On event="resize" target={window} children={children} />
+}
+
 const View: FC<{
   scene: MutableRefObject<THREE.Scene>
   camera: MutableRefObject<THREE.Camera>
-  render?: (state: {
-    scene: THREE.Scene
-    camera: THREE.Camera
-    renderer: THREE.WebGLRenderer
-  }) => void
-}> = ({ scene, camera, render }) => {
-  const renderer = useRenderer()
+}> = ({ scene, camera }) => (
+  <>
+    <Update stage="render">
+      {(_, { renderer }) => renderer.render(scene.current, camera.current)}
+    </Update>
 
-  /* Rendering */
-  useTicker("render", () => {
-    render
-      ? render({ renderer, scene: scene.current, camera: camera.current })
-      : renderer.render(scene.current, camera.current)
-  })
+    <EventHandling scene={scene} camera={camera} />
 
-  /* Adjust to window being resized */
-  useWindowResizeHandler(() => {
-    if (!camera.current) return
+    <OnWindowResize>
+      {() => {
+        const width = window.innerWidth
+        const height = window.innerHeight
 
-    const width = window.innerWidth
-    const height = window.innerHeight
-
-    if (camera.current instanceof THREE.PerspectiveCamera) {
-      camera.current.aspect = width / height
-      camera.current.updateProjectionMatrix()
-    }
-  })
-
-  return (
-    <>
-      <EventHandling scene={scene} camera={camera} />
-    </>
-  )
-}
+        if (camera.current instanceof THREE.PerspectiveCamera) {
+          camera.current.aspect = width / height
+          camera.current.updateProjectionMatrix()
+        }
+      }}
+    </OnWindowResize>
+  </>
+)
 
 const App = () => {
   const scene = useRef<THREE.Scene>(null!)
@@ -97,15 +105,7 @@ const App = () => {
     <Ticker>
       <Renderer>
         {/* The view actually takes care of rendering, event handling, etc. */}
-
-        <View
-          scene={scene}
-          camera={camera}
-          render={({ renderer, scene, camera }) => {
-            renderer.render(scene, camera)
-            /* Or alternatively, go crazy with an effects composer here */
-          }}
-        />
+        <View scene={scene} camera={camera} />
 
         {/* The scene, with some objects, and a camera */}
         <T.Scene ref={scene}>
