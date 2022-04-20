@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import T, { Renderer, Scene } from "react-trinity"
+import T, { Renderer } from "react-trinity"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
 
@@ -9,9 +9,7 @@ const Thingy = ({ speed = 0.5 }) => (
     <T.MeshStandardMaterial color="hotpink" />
 
     <Update>
-      {(dt, { parent }) =>
-        (parent.rotation.x = parent.rotation.y += speed * dt)
-      }
+      {(dt, mesh) => (mesh.rotation.x = mesh.rotation.y += speed * dt)}
     </Update>
   </T.Mesh>
 )
@@ -19,23 +17,23 @@ const Thingy = ({ speed = 0.5 }) => (
 const App = () => {
   const camera = useRef<THREE.PerspectiveCamera>(null!)
   const scene = useRef<THREE.Scene>(null!)
+  const renderer = useRef<THREE.WebGLRenderer>(null!)
 
   return (
     <Ticker>
-      <Renderer>
+      <Renderer ref={renderer}>
         <Update stage="render">
-          {(_, { renderer }) => {
-            renderer.render(scene.current, camera.current)
-          }}
+          {() => renderer.current.render(scene.current, camera.current)}
         </Update>
 
-        <Scene ref={scene}>
+        <T.Scene ref={scene}>
           <T.Color attach="background" args={["#ccc"]} />
           <T.PerspectiveCamera position={[0, 0, 10]} ref={camera} />
           <T.AmbientLight intensity={0.2} />
           <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
+
           <Thingy />
-        </Scene>
+        </T.Scene>
       </Renderer>
     </Ticker>
   )
