@@ -11,38 +11,11 @@ const AutoRotate = ({ speed = 1 }) => (
   </Update>
 )
 
-const View: FC<{
-  scene: MutableRefObject<THREE.Scene>
+const EventHandling: FC<{
   camera: MutableRefObject<THREE.Camera>
-  render?: (state: {
-    scene: THREE.Scene
-    camera: THREE.Camera
-    renderer: THREE.WebGLRenderer
-  }) => void
-}> = ({ scene, camera, render }) => {
+  scene: MutableRefObject<THREE.Scene>
+}> = ({ camera, scene }) => {
   const renderer = useRenderer()
-
-  /* Rendering */
-  useTicker("render", () => {
-    render
-      ? render({ renderer, scene: scene.current, camera: camera.current })
-      : renderer.render(scene.current, camera.current)
-  })
-
-  /* Adjust to window being resized */
-  useWindowResizeHandler(() => {
-    if (!camera.current) return
-
-    const width = window.innerWidth
-    const height = window.innerHeight
-
-    if (camera.current instanceof THREE.PerspectiveCamera) {
-      camera.current.aspect = width / height
-      camera.current.updateProjectionMatrix()
-    }
-  })
-
-  /* Event handling */
   const pointer = useMemo(() => new THREE.Vector2(), [])
   const raycaster = useMemo(() => new THREE.Raycaster(), [])
   const intersects = new Array<THREE.Intersection<THREE.Object3D<Event>>>()
@@ -76,6 +49,44 @@ const View: FC<{
   }, [renderer, camera, scene])
 
   return null
+}
+
+const View: FC<{
+  scene: MutableRefObject<THREE.Scene>
+  camera: MutableRefObject<THREE.Camera>
+  render?: (state: {
+    scene: THREE.Scene
+    camera: THREE.Camera
+    renderer: THREE.WebGLRenderer
+  }) => void
+}> = ({ scene, camera, render }) => {
+  const renderer = useRenderer()
+
+  /* Rendering */
+  useTicker("render", () => {
+    render
+      ? render({ renderer, scene: scene.current, camera: camera.current })
+      : renderer.render(scene.current, camera.current)
+  })
+
+  /* Adjust to window being resized */
+  useWindowResizeHandler(() => {
+    if (!camera.current) return
+
+    const width = window.innerWidth
+    const height = window.innerHeight
+
+    if (camera.current instanceof THREE.PerspectiveCamera) {
+      camera.current.aspect = width / height
+      camera.current.updateProjectionMatrix()
+    }
+  })
+
+  return (
+    <>
+      <EventHandling scene={scene} camera={camera} />
+    </>
+  )
 }
 
 const App = () => {
