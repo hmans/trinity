@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react"
 import { Pass } from "three/examples/jsm/postprocessing/Pass"
+import { useView } from "../engine/View"
 import { Constructor } from "../reactor"
-import { useView } from "./View"
 
 export const EffectPass = <PassConstructor extends Constructor<Pass>>(props: {
   pass: PassConstructor

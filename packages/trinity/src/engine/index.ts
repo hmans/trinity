@@ -1,4 +1,3 @@
-export { EffectPass } from "./EffectPass"
 export { EventHandling } from "./EventHandling"
 export { On } from "./On"
 export { OnWindowResize } from "./OnWindowResize"

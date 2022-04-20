@@ -1,0 +1,4 @@
+{
+  "main": "dist/react-trinity-postprocessing.cjs.js",
+  "module": "dist/react-trinity-postprocessing.esm.js"
+}

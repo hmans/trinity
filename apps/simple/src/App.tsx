@@ -1,5 +1,6 @@
 import { useState } from "react"
-import T, { EffectPass, Renderer, View } from "react-trinity"
+import T, { Renderer, View } from "react-trinity"
+import { EffectPass } from "react-trinity/postprocessing"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
