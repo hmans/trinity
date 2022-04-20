@@ -28,20 +28,15 @@ const OnWindowResize = <T extends any = any>(props: {
 }
 
 const App = () => {
-  const camera = useRef<THREE.PerspectiveCamera>(null!)
   const scene = useRef<THREE.Scene>(null!)
 
   return (
     <Ticker>
       <Renderer>
-        {/* Our actual rendering code */}
-        <Update stage="render">
-          {(_, { renderer }) => renderer.render(scene.current, camera.current)}
-        </Update>
-
         {/* The scene, with some objects, and a camera */}
         <T.Scene ref={scene}>
-          <T.PerspectiveCamera position={[0, 0, 10]} ref={camera}>
+          <T.PerspectiveCamera position={[0, 0, 10]}>
+            {/* Handle window resizing */}
             <OnWindowResize>
               {(camera: THREE.PerspectiveCamera) => {
                 const width = window.innerWidth
@@ -51,6 +46,16 @@ const App = () => {
                 camera.updateProjectionMatrix()
               }}
             </OnWindowResize>
+
+            {/* Our actual rendering code */}
+            <Update stage="render">
+              {(_, { parent: camera, renderer }) =>
+                renderer.render(
+                  scene.current,
+                  camera as THREE.PerspectiveCamera
+                )
+              }
+            </Update>
           </T.PerspectiveCamera>
 
           <T.AmbientLight intensity={0.2} />
