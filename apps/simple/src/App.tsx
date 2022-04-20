@@ -1,14 +1,7 @@
-import { useRef } from "react"
-import T, { Application, View } from "react-trinity"
+import T, { Scene } from "react-trinity"
 import { useCamera } from "react-trinity/experiments"
-import { Update, useTicker } from "react-trinity/ticker"
-import { Mesh, PerspectiveCamera } from "three"
-
-const Camera = () => {
-  const camera = useCamera<PerspectiveCamera>()
-
-  return <T.PerspectiveCamera position={[0, 0, -10]} ref={camera} />
-}
+import { Ticker, Update } from "react-trinity/ticker"
+import { PerspectiveCamera } from "three"
 
 const AutoRotate = ({ speed = 1 }) => (
   <Update>
@@ -26,13 +19,13 @@ const Thingy = ({ speed = 0.5 }) => (
 )
 
 const App = () => (
-  <Application>
-    <View>
-      <Camera />
+  <Ticker>
+    <Scene>
+      <T.PerspectiveCamera position={[0, 0, -10]} />
       <T.AmbientLight intensity={1} />
       <Thingy />
-    </View>
-  </Application>
+    </Scene>
+  </Ticker>
 )
 
 export default App
