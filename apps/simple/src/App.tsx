@@ -1,17 +1,20 @@
 import { useEffect, useRef, useState } from "react"
-import T, { Renderer } from "react-trinity"
+import T from "react-trinity"
 import { useWindowResizeHandler } from "react-trinity/src/engine/useWindowResizeHandler"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
 
-const Thingy = ({ speed = 0.5 }) => (
+const AutoRotate = ({ speed = 1 }) => (
+  <Update>
+    {(dt, mesh) => (mesh.rotation.x = mesh.rotation.y += speed * dt)}
+  </Update>
+)
+
+const Thingy = () => (
   <T.Mesh>
     <T.DodecahedronGeometry />
     <T.MeshStandardMaterial color="hotpink" />
-
-    <Update>
-      {(dt, mesh) => (mesh.rotation.x = mesh.rotation.y += speed * dt)}
-    </Update>
+    <AutoRotate speed={1.5} />
   </T.Mesh>
 )
 
@@ -49,7 +52,6 @@ const App = () => {
       </Update>
 
       <T.Scene ref={scene}>
-        <T.Color attach="background" args={["#ccc"]} />
         <T.PerspectiveCamera position={[0, 0, 10]} ref={camera} />
         <T.AmbientLight intensity={0.2} />
         <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
