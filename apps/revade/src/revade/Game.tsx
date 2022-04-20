@@ -1,6 +1,6 @@
 import { Device } from "@hmans/controlfreak"
 import T from "react-trinity/reactor"
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Renderer, View } from "react-trinity"
 import { PhysicsWorld } from "../lib/physics2d"
 import { Music } from "./audio"
@@ -14,11 +14,14 @@ import { Level } from "./Level"
 import { Menu } from "./Menu"
 import Systems from "./systems"
 import { Ticker } from "react-trinity/ticker"
-import { PerspectiveCamera, Scene } from "three"
+import { PerspectiveCamera, Scene, Vector2 } from "three"
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
+import { EffectPass, LensDirt } from "react-trinity/postprocessing"
 
 export const Game = () => {
-  const camera = useRef<PerspectiveCamera>(null!)
-  const scene = useRef<Scene>(null!)
+  const [camera, setCamera] = useState<PerspectiveCamera | null>(null!)
+  const [scene, setScene] = useState<Scene | null>(null!)
 
   useEffect(() => {
     controller.start()
@@ -36,16 +39,25 @@ export const Game = () => {
     <Ticker>
       <HUD />
       <Renderer>
-        <View camera={camera} scene={scene} />
+        {camera && scene && (
+          <View camera={camera} scene={scene}>
+            <EffectPass pass={RenderPass} args={[scene, camera]} />
+            <EffectPass
+              pass={UnrealBloomPass}
+              args={[new Vector2(256, 256), 1.5, 0.8, 0.3]}
+            />
+            <LensDirt texture="/textures/dirt01.png" strength={0.5} />
+          </View>
+        )}
 
         <PhysicsWorld gravity={[0, 0]}>
-          <T.Scene ref={scene}>
+          <T.Scene ref={setScene}>
             <T.AmbientLight intensity={0.3} />
             <T.DirectionalLight intensity={0.2} position={[10, 10, 10]} />
 
             <Music />
             <Systems />
-            <Camera ref={camera} />
+            <Camera ref={setCamera} />
             <Level />
 
             <GameFSM.Match state="menu">

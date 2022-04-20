@@ -1,1 +1,1 @@
-export * from "./LensDirtShader"
+export const foo = "bar"
