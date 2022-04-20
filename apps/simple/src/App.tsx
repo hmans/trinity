@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react"
+import { forwardRef, useEffect, useRef, useState } from "react"
 import T from "react-trinity"
 import { useWindowResizeHandler } from "react-trinity/src/engine/useWindowResizeHandler"
-import { useParent } from "react-trinity/src/reactor"
+import { ReactorComponentProps, useParent } from "react-trinity/src/reactor"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
 
@@ -31,11 +31,24 @@ const OnWindowResize = <
   return null
 }
 
+const Renderer = forwardRef<
+  THREE.WebGLRenderer,
+  ReactorComponentProps<typeof THREE.WebGLRenderer>
+>((props, ref) => {
+  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
+
+  return (
+    <>
+      <canvas ref={setCanvas} />
+      {canvas && <T.WebGLRenderer ref={ref} args={[{ canvas }]} {...props} />}
+    </>
+  )
+})
+
 const App = () => {
   const camera = useRef<THREE.PerspectiveCamera>(null!)
   const scene = useRef<THREE.Scene>(null!)
   const renderer = useRef<THREE.WebGLRenderer>(null!)
-  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
 
   useWindowResizeHandler(() => {
     if (renderer.current) {
@@ -47,8 +60,7 @@ const App = () => {
 
   return (
     <Ticker>
-      <canvas ref={setCanvas} />
-      {canvas && <T.WebGLRenderer ref={renderer} args={[{ canvas }]} />}
+      <Renderer ref={renderer} />
 
       <Update stage="render">
         {() => renderer.current.render(scene.current, camera.current)}
