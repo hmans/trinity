@@ -1,5 +1,6 @@
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import T, { Renderer } from "react-trinity"
+import { useWindowResizeHandler } from "react-trinity/src/engine/useWindowResizeHandler"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
 
@@ -18,13 +19,32 @@ const App = () => {
   const camera = useRef<THREE.PerspectiveCamera>(null!)
   const scene = useRef<THREE.Scene>(null!)
   const renderer = useRef<THREE.WebGLRenderer>(null!)
+  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
+
+  const updateRendererSize = () => {
+    if (!renderer.current) return
+
+    const width = window.innerWidth
+    const height = window.innerHeight
+    renderer.current.setSize(width, height)
+
+    if (camera.current instanceof THREE.PerspectiveCamera) {
+      camera.current.aspect = width / height
+      camera.current.updateProjectionMatrix()
+    }
+  }
+
+  useEffect(updateRendererSize)
+
+  useWindowResizeHandler(updateRendererSize, [renderer, camera])
 
   return (
     <Ticker>
-      <Renderer ref={renderer} />
+      <canvas ref={setCanvas} />
+      {canvas && <T.WebGLRenderer ref={renderer} args={[{ canvas }]} />}
 
       <Update stage="render">
-        {() => renderer.current?.render(scene.current, camera.current)}
+        {() => renderer.current.render(scene.current, camera.current)}
       </Update>
 
       <T.Scene ref={scene}>

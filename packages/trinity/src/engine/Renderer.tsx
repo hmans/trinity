@@ -18,15 +18,15 @@ type RendererProps = { children?: ReactNode }
 
 export const Renderer = forwardRef<WebGLRenderer, RendererProps>(
   ({ children }, ref) => {
-    const canvas = useRef<HTMLCanvasElement>(null!)
-    const [renderer, setRenderer] = useState<THREE.WebGLRenderer>()
+    const [canvas, setCanvas] = useState<HTMLCanvasElement | null>()
+    const [renderer, setRenderer] = useState<THREE.WebGLRenderer | null>()
 
     useEffect(() => {
-      if (!canvas.current) return
+      if (!canvas) return
 
       setRenderer(() => {
         const renderer = new WebGLRenderer({
-          canvas: canvas.current,
+          canvas: canvas,
           powerPreference: "high-performance",
           antialias: false,
           alpha: false,
@@ -40,18 +40,15 @@ export const Renderer = forwardRef<WebGLRenderer, RendererProps>(
         // renderer.toneMapping = THREE.ReinhardToneMapping
         // renderer.toneMappingExposure = 1.25
 
-        renderer.setSize(
-          canvas.current.clientWidth,
-          canvas.current.clientHeight
-        )
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight)
 
         return renderer
       })
 
       return () => void setRenderer(undefined)
-    }, [canvas.current])
+    }, [canvas])
 
-    useImperativeHandle(ref, () => renderer, [renderer])
+    useImperativeHandle(ref, () => renderer!, [renderer])
 
     useWindowResizeHandler(() => {
       if (!renderer) return
@@ -62,7 +59,7 @@ export const Renderer = forwardRef<WebGLRenderer, RendererProps>(
     }, [renderer])
 
     return (
-      <canvas ref={canvas}>
+      <canvas ref={setCanvas}>
         {renderer && (
           <RendererContext.Provider value={renderer}>
             {children}
