@@ -1,16 +1,7 @@
-import {
-  EffectCallback,
-  FC,
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState
-} from "react"
+import { FC, MutableRefObject, useEffect, useMemo, useRef } from "react"
 import T, { Renderer } from "react-trinity"
 import { useRenderer } from "react-trinity/src/engine/Renderer"
 import { useWindowResizeHandler } from "react-trinity/src/engine/useWindowResizeHandler"
-import { useParent } from "react-trinity/src/reactor"
 import { Ticker, Update, useTicker } from "react-trinity/ticker"
 import * as THREE from "three"
 
@@ -52,15 +43,19 @@ const View: FC<{
   })
 
   /* Event handling */
+  const pointer = useMemo(() => new THREE.Vector2(), [])
+  const raycaster = useMemo(() => new THREE.Raycaster(), [])
+
   useEffect(() => {
     const handleClick = (e: PointerEvent) => {
-      const pointer = new THREE.Vector2(
-        (e.clientX / window.innerWidth) * 2 - 1,
-        -(e.clientY / window.innerHeight) * 2 + 1
-      )
+      /* Get normalized pointer position */
+      pointer.x = (e.clientX / window.innerWidth) * 2 - 1
+      pointer.y = -(e.clientY / window.innerHeight) * 2 + 1
 
-      const raycaster = new THREE.Raycaster()
+      /* Prepare raycaster */
       raycaster.setFromCamera(pointer, camera.current)
+
+      /* Find intersects */
       const intersects = raycaster.intersectObject(scene.current)
       console.log(intersects)
     }
