@@ -1,5 +1,5 @@
-import { FC, MutableRefObject, useRef } from "react"
-import T, { EventHandling, OnWindowResize, Renderer } from "react-trinity"
+import { useRef } from "react"
+import T, { Renderer, View } from "react-trinity"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
 
@@ -7,31 +7,6 @@ const AutoRotate = ({ speed = 1 }) => (
   <Update>
     {(dt, { parent }) => (parent.rotation.x = parent.rotation.y += speed * dt)}
   </Update>
-)
-
-const View: FC<{
-  scene: MutableRefObject<THREE.Scene>
-  camera: MutableRefObject<THREE.Camera>
-}> = ({ scene, camera }) => (
-  <>
-    <Update stage="render">
-      {(_, { renderer }) => renderer.render(scene.current, camera.current)}
-    </Update>
-
-    <EventHandling scene={scene} camera={camera} />
-
-    <OnWindowResize>
-      {() => {
-        const width = window.innerWidth
-        const height = window.innerHeight
-
-        if (camera.current instanceof THREE.PerspectiveCamera) {
-          camera.current.aspect = width / height
-          camera.current.updateProjectionMatrix()
-        }
-      }}
-    </OnWindowResize>
-  </>
 )
 
 const App = () => {

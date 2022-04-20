@@ -1,6 +1,7 @@
 import React, {
   createContext,
   FC,
+  MutableRefObject,
   ReactNode,
   useContext,
   useEffect,
@@ -20,82 +21,109 @@ import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
 import { VignetteShader } from "three/examples/jsm/shaders/VignetteShader"
 import { useConst } from "@hmans/react-toolbox"
 import { useRenderer } from "./Renderer"
-import { useTicker } from "../ticker"
+import { Update, useTicker } from "../ticker"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
 import { LensDirtShader } from "../experiments/LensDirtShader"
 import { ParentContext } from "../reactor"
-
-type ViewAPI = {
-  setCamera: (camera: Camera) => void
-}
-
-const ViewContext = createContext<ViewAPI>(null!)
+import { EventHandling } from "./EventHandling"
+import { OnWindowResize } from "./OnWindowResize"
 
 export const View: FC<{
-  children?: ReactNode
-  clearColor?: boolean
-  clearDepth?: boolean
-  clearStencil?: boolean
-}> = ({ children, clearColor, clearDepth, clearStencil }) => {
-  const renderer = useRenderer()
-  const composer = useMemo(() => new EffectComposer(renderer), [renderer])
-  const scene = useConst(() => new Scene())
-  const [camera, setCamera] = useState<Camera>()
+  scene: MutableRefObject<Scene>
+  camera: MutableRefObject<Camera>
+}> = ({ scene, camera }) => (
+  <>
+    <Update stage="render">
+      {(_, { renderer }) => renderer.render(scene.current, camera.current)}
+    </Update>
 
-  useEffect(() => {
-    if (!renderer || !camera) return
+    <EventHandling scene={scene} camera={camera} />
 
-    /* Render */
-    composer.addPass(new RenderPass(scene, camera))
+    <OnWindowResize>
+      {() => {
+        const width = window.innerWidth
+        const height = window.innerHeight
 
-    /* Bloom */
-    composer.addPass(new UnrealBloomPass(new Vector2(256, 256), 1.5, 0.8, 0.3))
+        if (camera.current instanceof PerspectiveCamera) {
+          camera.current.aspect = width / height
+          camera.current.updateProjectionMatrix()
+        }
+      }}
+    </OnWindowResize>
+  </>
+)
 
-    // composer.addPass(new ShaderPass(LuminosityShader))
-    const dirt = new ShaderPass(LensDirtShader)
-    dirt.uniforms["tDirt"].value = new TextureLoader().load(
-      "/textures/dirt01.png"
-    )
-    dirt.uniforms["strength"].value = 0.5
-    composer.addPass(dirt)
+// type ViewAPI = {
+//   setCamera: (camera: Camera) => void
+// }
 
-    /* Vignette */
-    const vignette = new ShaderPass(VignetteShader)
-    vignette.uniforms["offset"].value = 0.5
-    vignette.uniforms["darkness"].value = 2
-    composer.addPass(vignette)
-  }, [composer])
+// const ViewContext = createContext<ViewAPI>(null!)
 
-  useTicker("render", () => {
-    clearColor && renderer.clearColor()
-    clearDepth && renderer.clearDepth()
-    clearStencil && renderer.clearStencil()
+// export const View: FC<{
+//   children?: ReactNode
+//   clearColor?: boolean
+//   clearDepth?: boolean
+//   clearStencil?: boolean
+// }> = ({ children, clearColor, clearDepth, clearStencil }) => {
+//   const renderer = useRenderer()
+//   const composer = useMemo(() => new EffectComposer(renderer), [renderer])
+//   const scene = useConst(() => new Scene())
+//   const [camera, setCamera] = useState<Camera>()
 
-    composer.render()
-  })
+//   useEffect(() => {
+//     if (!renderer || !camera) return
 
-  const api = useMemo(
-    () => ({
-      setCamera
-    }),
-    []
-  )
+//     /* Render */
+//     composer.addPass(new RenderPass(scene, camera))
 
-  useWindowResizeHandler(() => {
-    const width = window.innerWidth
-    const height = window.innerHeight
+//     /* Bloom */
+//     composer.addPass(new UnrealBloomPass(new Vector2(256, 256), 1.5, 0.8, 0.3))
 
-    if (camera instanceof PerspectiveCamera) {
-      camera.aspect = width / height
-      camera.updateProjectionMatrix()
-    }
-  }, [camera])
+//     // composer.addPass(new ShaderPass(LuminosityShader))
+//     const dirt = new ShaderPass(LensDirtShader)
+//     dirt.uniforms["tDirt"].value = new TextureLoader().load(
+//       "/textures/dirt01.png"
+//     )
+//     dirt.uniforms["strength"].value = 0.5
+//     composer.addPass(dirt)
 
-  return (
-    <ViewContext.Provider value={api}>
-      <ParentContext.Provider value={scene}>{children}</ParentContext.Provider>
-    </ViewContext.Provider>
-  )
-}
+//     /* Vignette */
+//     const vignette = new ShaderPass(VignetteShader)
+//     vignette.uniforms["offset"].value = 0.5
+//     vignette.uniforms["darkness"].value = 2
+//     composer.addPass(vignette)
+//   }, [composer])
 
-export const useView = () => useContext(ViewContext)
+//   useTicker("render", () => {
+//     clearColor && renderer.clearColor()
+//     clearDepth && renderer.clearDepth()
+//     clearStencil && renderer.clearStencil()
+
+//     composer.render()
+//   })
+
+//   const api = useMemo(
+//     () => ({
+//       setCamera
+//     }),
+//     []
+//   )
+
+//   useWindowResizeHandler(() => {
+//     const width = window.innerWidth
+//     const height = window.innerHeight
+
+//     if (camera instanceof PerspectiveCamera) {
+//       camera.aspect = width / height
+//       camera.updateProjectionMatrix()
+//     }
+//   }, [camera])
+
+//   return (
+//     <ViewContext.Provider value={api}>
+//       <ParentContext.Provider value={scene}>{children}</ParentContext.Provider>
+//     </ViewContext.Provider>
+//   )
+// }
+
+// export const useView = () => useContext(ViewContext)
