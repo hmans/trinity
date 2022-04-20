@@ -10,14 +10,18 @@ const Camera = () => {
   return <T.PerspectiveCamera position={[0, 0, -10]} ref={camera} />
 }
 
+const AutoRotate = ({ speed = 1 }) => (
+  <Update>
+    {(dt, mesh) => (mesh.rotation.x = mesh.rotation.y += speed * dt)}
+  </Update>
+)
+
 const Thingy = ({ speed = 0.5 }) => (
   <T.Mesh>
     <T.DodecahedronGeometry />
     <T.MeshStandardMaterial color="hotpink" />
 
-    <Update>
-      {(dt, mesh) => (mesh.rotation.x = mesh.rotation.y += speed * dt)}
-    </Update>
+    <AutoRotate speed={speed} />
   </T.Mesh>
 )
 
