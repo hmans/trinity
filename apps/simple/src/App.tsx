@@ -25,16 +25,14 @@ const Thingy = ({ speed = 0.5 }) => (
   </T.Mesh>
 )
 
-function App() {
-  return (
-    <Application>
-      <View>
-        <Camera />
-        <T.AmbientLight intensity={1} />
-        <Thingy />
-      </View>
-    </Application>
-  )
-}
+const App = () => (
+  <Application>
+    <View>
+      <Camera />
+      <T.AmbientLight intensity={1} />
+      <Thingy />
+    </View>
+  </Application>
+)
 
 export default App
