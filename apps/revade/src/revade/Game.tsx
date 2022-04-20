@@ -17,7 +17,7 @@ import { Ticker } from "react-trinity/ticker"
 import { PerspectiveCamera, Scene, Vector2 } from "three"
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
-import { EffectPass, LensDirt } from "react-trinity/postprocessing"
+import { EffectPass, LensDirt, Vignette } from "react-trinity/postprocessing"
 
 export const Game = () => {
   const [camera, setCamera] = useState<PerspectiveCamera | null>(null!)
@@ -47,6 +47,7 @@ export const Game = () => {
               args={[new Vector2(256, 256), 1.5, 0.8, 0.3]}
             />
             <LensDirt texture="/textures/dirt01.png" strength={0.5} />
+            <Vignette offset={0.5} darkness={2} />
           </View>
         )}
 
