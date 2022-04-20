@@ -40,15 +40,16 @@ export const EffectPass = <Pass extends any>(props: {
 }
 
 export const View: FC<{
-  scene: MutableRefObject<Scene>
-  camera: MutableRefObject<Camera>
+  scene: Scene
+  camera: Camera
   children?: ReactNode
 }> = ({ scene, camera, children }) => {
   const renderer = useRenderer()
   const composer = useConst(() => new EffectComposer(renderer))
 
   useEffect(() => {
-    composer.addPass(new RenderPass(scene.current, camera.current))
+    if (!camera || !scene) return
+    composer.addPass(new RenderPass(scene, camera))
     // composer.addPass(new UnrealBloomPass(new Vector2(256, 256), 1.5, 0.8, 0.3))
     // const dirt = new ShaderPass(LensDirtShader)
     // dirt.uniforms["tDirt"].value = new TextureLoader().load(
@@ -61,7 +62,7 @@ export const View: FC<{
     // vignette.uniforms["offset"].value = 0.5
     // vignette.uniforms["darkness"].value = 2
     // composer.addPass(vignette)
-  }, [composer])
+  }, [composer, scene, camera])
 
   return (
     <ViewContext.Provider value={{ composer }}>
@@ -74,9 +75,9 @@ export const View: FC<{
           const width = window.innerWidth
           const height = window.innerHeight
 
-          if (camera.current instanceof PerspectiveCamera) {
-            camera.current.aspect = width / height
-            camera.current.updateProjectionMatrix()
+          if (camera instanceof PerspectiveCamera) {
+            camera.aspect = width / height
+            camera.updateProjectionMatrix()
           }
         }}
       </OnWindowResize>

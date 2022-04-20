@@ -11,8 +11,8 @@ import { On } from "./On"
 import { useRenderer } from "./Renderer"
 
 export const EventHandling: FC<{
-  camera: MutableRefObject<Camera>
-  scene: MutableRefObject<Scene>
+  camera: Camera
+  scene: Scene
 }> = ({ camera, scene }) => {
   const renderer = useRenderer()
   const pointer = useMemo(() => new Vector2(), [])
@@ -29,13 +29,13 @@ export const EventHandling: FC<{
             pointer.y = -(e.clientY / window.innerHeight) * 2 + 1
 
             /* Prepare raycaster */
-            raycaster.setFromCamera(pointer, camera.current)
+            raycaster.setFromCamera(pointer, camera)
 
             /* Find intersects */
             intersects.length = 0
-            raycaster.intersectObject(scene.current, true, intersects)
+            raycaster.intersectObject(scene, true, intersects)
           },
-          [renderer, raycaster]
+          [renderer, raycaster, camera, scene]
         )}
       </On>
 
@@ -44,7 +44,7 @@ export const EventHandling: FC<{
           (e: PointerEvent) => {
             console.log(intersects[0])
           },
-          [renderer, raycaster]
+          [renderer, raycaster, camera, scene]
         )}
       </On>
     </>

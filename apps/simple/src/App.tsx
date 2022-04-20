@@ -1,9 +1,7 @@
-import { useRef } from "react"
+import { useState } from "react"
 import T, { Renderer, View } from "react-trinity"
-import { EffectPass } from "react-trinity/src/engine/View"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
-import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
 
 const AutoRotate = ({ speed = 1 }) => (
   <Update>
@@ -12,18 +10,18 @@ const AutoRotate = ({ speed = 1 }) => (
 )
 
 const App = () => {
-  const scene = useRef<THREE.Scene>(null!)
-  const camera = useRef<THREE.PerspectiveCamera>(null!)
+  const [scene, setScene] = useState<THREE.Scene | null>()
+  const [camera, setCamera] = useState<THREE.PerspectiveCamera | null>()
 
   return (
     <Ticker>
       <Renderer>
         {/* The view actually takes care of rendering, event handling, etc. */}
-        <View scene={scene} camera={camera}></View>
+        {scene && camera && <View scene={scene} camera={camera}></View>}
 
         {/* The scene, with some objects, and a camera */}
-        <T.Scene ref={scene}>
-          <T.PerspectiveCamera position={[0, 0, 10]} ref={camera} />
+        <T.Scene ref={setScene}>
+          <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
 
           <T.AmbientLight intensity={0.2} />
           <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
