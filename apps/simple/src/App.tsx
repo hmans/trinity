@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import T, { Renderer, Scene } from "react-trinity"
 import { Ticker, Update } from "react-trinity/ticker"
-import { PerspectiveCamera } from "three"
+import * as THREE from "three"
 
 const Thingy = ({ speed = 0.5 }) => (
   <T.Mesh>
@@ -17,19 +17,20 @@ const Thingy = ({ speed = 0.5 }) => (
 )
 
 const App = () => {
-  const camera = useRef<PerspectiveCamera>(null!)
+  const camera = useRef<THREE.PerspectiveCamera>(null!)
+  const scene = useRef<THREE.Scene>(null!)
 
   return (
     <Ticker>
       <Renderer>
-        <Scene>
-          <Update stage="render">
-            {(_, { scene, renderer }) => {
-              renderer.clear()
-              renderer.render(scene, camera.current)
-            }}
-          </Update>
+        <Update stage="render">
+          {(_, { renderer }) => {
+            renderer.clear()
+            renderer.render(scene.current, camera.current)
+          }}
+        </Update>
 
+        <Scene ref={scene}>
           <T.Color attach="background" args={["#ccc"]} />
           <T.PerspectiveCamera position={[0, 0, -10]} ref={camera} />
           <T.AmbientLight intensity={1} />
