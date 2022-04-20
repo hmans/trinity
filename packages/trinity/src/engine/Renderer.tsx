@@ -33,7 +33,7 @@ export const Renderer: FC<{ children?: ReactNode }> = ({ children }) => {
       renderer.outputEncoding = sRGBEncoding
       // renderer.toneMapping = THREE.ACESFilmicToneMapping
       // renderer.toneMapping = THREE.ReinhardToneMapping
-      renderer.toneMappingExposure = 1.25
+      // renderer.toneMappingExposure = 1.25
 
       renderer.setSize(canvas.current.clientWidth, canvas.current.clientHeight)
 
@@ -45,6 +45,7 @@ export const Renderer: FC<{ children?: ReactNode }> = ({ children }) => {
 
   useWindowResizeHandler(() => {
     if (!renderer) return
+
     const width = window.innerWidth
     const height = window.innerHeight
     renderer.setSize(width, height)

@@ -25,15 +25,15 @@ const App = () => {
       <Renderer>
         <Update stage="render">
           {(_, { renderer }) => {
-            renderer.clear()
             renderer.render(scene.current, camera.current)
           }}
         </Update>
 
         <Scene ref={scene}>
           <T.Color attach="background" args={["#ccc"]} />
-          <T.PerspectiveCamera position={[0, 0, -10]} ref={camera} />
-          <T.AmbientLight intensity={1} />
+          <T.PerspectiveCamera position={[0, 0, 10]} ref={camera} />
+          <T.AmbientLight intensity={0.2} />
+          <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
           <Thingy />
         </Scene>
       </Renderer>
