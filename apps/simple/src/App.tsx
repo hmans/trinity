@@ -20,9 +20,7 @@ const Thingy = () => (
   </T.Mesh>
 )
 
-const OnWindowResize = <
-  T = any
->(props: {
+const OnWindowResize = <T extends any = any>(props: {
   children: (parent: T) => void
 }) => {
   const parent = useParent()
@@ -40,9 +38,7 @@ const Renderer = forwardRef<
   const renderer = useRef<THREE.WebGLRenderer>(null!)
 
   return (
-    <>
-      <canvas ref={setCanvas} />
-
+    <canvas ref={setCanvas}>
       {canvas && (
         <T.WebGLRenderer
           {...props}
@@ -59,7 +55,7 @@ const Renderer = forwardRef<
           </OnWindowResize>
         </T.WebGLRenderer>
       )}
-    </>
+    </canvas>
   )
 })
 
