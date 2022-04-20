@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from "react"
+import { forwardRef, useRef, useState } from "react"
 import mergeRefs from "react-merge-refs"
 import T from "react-trinity"
 import { useWindowResizeHandler } from "react-trinity/src/engine/useWindowResizeHandler"
