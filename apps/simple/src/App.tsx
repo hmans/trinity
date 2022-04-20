@@ -21,20 +21,20 @@ const App = () => {
 
   return (
     <Ticker>
-      <Renderer ref={renderer}>
-        <Update stage="render">
-          {() => renderer.current.render(scene.current, camera.current)}
-        </Update>
+      <Renderer ref={renderer} />
 
-        <T.Scene ref={scene}>
-          <T.Color attach="background" args={["#ccc"]} />
-          <T.PerspectiveCamera position={[0, 0, 10]} ref={camera} />
-          <T.AmbientLight intensity={0.2} />
-          <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
+      <Update stage="render">
+        {() => renderer.current?.render(scene.current, camera.current)}
+      </Update>
 
-          <Thingy />
-        </T.Scene>
-      </Renderer>
+      <T.Scene ref={scene}>
+        <T.Color attach="background" args={["#ccc"]} />
+        <T.PerspectiveCamera position={[0, 0, 10]} ref={camera} />
+        <T.AmbientLight intensity={0.2} />
+        <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
+
+        <Thingy />
+      </T.Scene>
     </Ticker>
   )
 }
