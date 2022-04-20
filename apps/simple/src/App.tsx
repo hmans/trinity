@@ -20,41 +20,6 @@ const AutoRotate = ({ speed = 1 }) => (
   </Update>
 )
 
-const OnWindowResize = <T extends any = any>(props: {
-  children: (parent: T) => void
-}) => {
-  const parent = useParent()
-  useWindowResizeHandler(() => props.children(parent as any), [parent])
-  return null
-}
-
-const EventHandling = () => {
-  const camera = useParent<THREE.PerspectiveCamera>()
-  const renderer = useRenderer()
-
-  useEffect(() => {
-    const scene = camera.parent!
-
-    const handleClick = (e: PointerEvent) => {
-      const pointer = new THREE.Vector2(
-        (e.clientX / window.innerWidth) * 2 - 1,
-        -(e.clientY / window.innerHeight) * 2 + 1
-      )
-
-      const raycaster = new THREE.Raycaster()
-      raycaster.setFromCamera(pointer, camera)
-      const intersects = raycaster.intersectObject(scene)
-      console.log(intersects)
-    }
-
-    renderer.domElement.addEventListener("pointerdown", handleClick)
-    return () =>
-      renderer.domElement.removeEventListener("pointerdown", handleClick)
-  }, [camera])
-
-  return null
-}
-
 const View: FC<{
   scene: MutableRefObject<THREE.Scene>
   camera: MutableRefObject<THREE.Camera>
@@ -66,12 +31,14 @@ const View: FC<{
 }> = ({ scene, camera, render }) => {
   const renderer = useRenderer()
 
+  /* Rendering */
   useTicker("render", () => {
     render
       ? render({ renderer, scene: scene.current, camera: camera.current })
       : renderer.render(scene.current, camera.current)
   })
 
+  /* Adjust to window being resized */
   useWindowResizeHandler(() => {
     if (!camera.current) return
 
@@ -83,6 +50,26 @@ const View: FC<{
       camera.current.updateProjectionMatrix()
     }
   })
+
+  /* Event handling */
+  useEffect(() => {
+    const handleClick = (e: PointerEvent) => {
+      const pointer = new THREE.Vector2(
+        (e.clientX / window.innerWidth) * 2 - 1,
+        -(e.clientY / window.innerHeight) * 2 + 1
+      )
+
+      const raycaster = new THREE.Raycaster()
+      raycaster.setFromCamera(pointer, camera.current)
+      const intersects = raycaster.intersectObject(scene.current)
+      console.log(intersects)
+    }
+
+    /* Register/unregister event handlers */
+    renderer.domElement.addEventListener("pointerdown", handleClick)
+    return () =>
+      renderer.domElement.removeEventListener("pointerdown", handleClick)
+  }, [renderer, camera, scene])
 
   return null
 }
