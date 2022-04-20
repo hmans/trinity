@@ -68,8 +68,6 @@ export const View: FC<{
 
   return (
     <ViewContext.Provider value={{ composer }}>
-      <Update stage="render">{() => composer.render()}</Update>
-
       <EventHandling scene={scene} camera={camera} />
 
       <OnWindowResize>
@@ -84,11 +82,9 @@ export const View: FC<{
         }}
       </OnWindowResize>
 
-      {children ? (
-        children
-      ) : (
-        <EffectPass pass={RenderPass} args={[scene, camera]} />
-      )}
+      {children ?? <EffectPass pass={RenderPass} args={[scene, camera]} />}
+
+      <Update stage="render">{() => composer.render()}</Update>
     </ViewContext.Provider>
   )
 }
