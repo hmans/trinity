@@ -38,8 +38,10 @@ const App = () => {
 
   return (
     <Ticker>
+      {/* A canvas to drawn on */}
       <canvas ref={setCanvas} />
 
+      {/* A renderer to do some rendering */}
       {canvas && (
         <T.WebGLRenderer ref={renderer} args={[{ canvas }]}>
           <OnWindowResize>
@@ -52,10 +54,12 @@ const App = () => {
         </T.WebGLRenderer>
       )}
 
+      {/* Our actual rendering code, using the above */}
       <Update stage="render">
         {() => renderer.current.render(scene.current, camera.current)}
       </Update>
 
+      {/* The scene, with some objects, and a camera */}
       <T.Scene ref={scene}>
         <T.PerspectiveCamera position={[0, 0, 10]} ref={camera}>
           <OnWindowResize>
