@@ -47,7 +47,6 @@ const Renderer = forwardRef<
         >
           <OnWindowResize>
             {(renderer: THREE.WebGLRenderer) => {
-              console.log(renderer)
               const width = window.innerWidth
               const height = window.innerHeight
               renderer.setSize(width, height)
