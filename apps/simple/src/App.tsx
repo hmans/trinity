@@ -21,14 +21,12 @@ const Thingy = () => (
 
 const OnWindowResize = <
   T extends THREE.Object3D<THREE.Event> = THREE.Object3D<THREE.Event>
->({
-  children
-}: {
+>(props: {
   children: (parent: T) => void
 }) => {
   const parent = useParent()
 
-  useWindowResizeHandler(() => children(parent as T), [parent])
+  useWindowResizeHandler(() => props.children(parent as T), [parent])
 
   return null
 }
