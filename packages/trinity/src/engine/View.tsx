@@ -15,6 +15,7 @@ import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass"
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
 import { VignetteShader } from "three/examples/jsm/shaders/VignetteShader"
 import { LensDirtShader } from "../experiments/LensDirtShader"
+import { Constructor } from "../reactor"
 import { Update } from "../ticker"
 import { EventHandling } from "./EventHandling"
 import { OnWindowResize } from "./OnWindowResize"
@@ -24,9 +25,9 @@ const ViewContext = createContext<{ composer: EffectComposer }>(null!)
 
 export const useView = () => useContext(ViewContext)
 
-export const EffectPass = <Pass extends any>(props: {
-  pass: Pass
-  args: any[]
+export const EffectPass = <PassConstructor extends Constructor>(props: {
+  pass: PassConstructor
+  args: ConstructorParameters<PassConstructor>
 }) => {
   const { composer } = useView()
 
