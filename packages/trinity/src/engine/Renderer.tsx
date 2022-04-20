@@ -51,7 +51,7 @@ export const Renderer = forwardRef<WebGLRenderer, RendererProps>(
       return () => void setRenderer(undefined)
     }, [canvas.current])
 
-    useImperativeHandle(ref, () => renderer)
+    useImperativeHandle(ref, () => renderer, [renderer])
 
     useWindowResizeHandler(() => {
       if (!renderer) return
