@@ -1,11 +1,9 @@
-import { FC, forwardRef, useEffect, useRef, useState } from "react"
+import { forwardRef, useEffect, useRef, useState } from "react"
 import T from "react-trinity"
 import { useWindowResizeHandler } from "react-trinity/src/engine/useWindowResizeHandler"
 import { ReactorComponentProps, useParent } from "react-trinity/src/reactor"
-import { ThreeObject } from "react-trinity/src/reactor/useManagedThreeObject"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
-import { Event } from "three"
 
 const AutoRotate = ({ speed = 1 }) => (
   <Update>
