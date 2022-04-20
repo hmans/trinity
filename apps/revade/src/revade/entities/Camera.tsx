@@ -1,4 +1,4 @@
-import { forwardRef, memo } from "react"
+import { forwardRef } from "react"
 import T from "react-trinity"
 import { PerspectiveCamera } from "three"
 import { ECS } from "../state"
