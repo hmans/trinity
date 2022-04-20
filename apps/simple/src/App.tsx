@@ -43,7 +43,7 @@ const App = () => {
       const height = window.innerHeight
       renderer.current.setSize(width, height)
     }
-  }, [renderer])
+  }, [renderer.current])
 
   return (
     <Ticker>
