@@ -23,9 +23,7 @@ const OnWindowResize = <T extends any = any>(props: {
   children: (parent: T) => void
 }) => {
   const parent = useParent()
-
   useWindowResizeHandler(() => props.children(parent as any), [parent])
-
   return null
 }
 
