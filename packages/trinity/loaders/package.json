@@ -1,4 +1,0 @@
-{
-  "main": "dist/react-trinity-loaders.cjs.js",
-  "module": "dist/react-trinity-loaders.esm.js"
-}
