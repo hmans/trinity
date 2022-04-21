@@ -6241,9 +6241,9 @@ typedarray-to-buffer@^3.1.5:
     is-typedarray "^1.0.0"
 
 typedoc@^0.23.0-beta.0:
-  version "0.23.0-beta.0"
-  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.23.0-beta.0.tgz#64ecf2dc86b87392cae40733ad54e6320b3ad89a"
-  integrity sha512-iFtd0+PSLXGEcYA96lU0mCxjab7mE20g7a/iMozQWpZHL5hP3LqaCY66ZO0sHUog/Qb3g2Fg7rjgHMUvXECV6w==
+  version "0.23.0-beta.1"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.23.0-beta.1.tgz#118b48d49a8d1a60056526bcca83b422219f6825"
+  integrity sha512-jnMlqEYb9DgLgfzQk4peuWyWywAqG7LBECD4W0PHTdzWdbMhlk3GjVu9bPz+MyDwrCaNFlml5AB/Qd34iHZoZA==
   dependencies:
     lunr "^2.3.9"
     marked "^4.0.12"
@@ -6251,9 +6251,9 @@ typedoc@^0.23.0-beta.0:
     shiki "^0.10.1"
 
 typescript@^4.7.0-beta:
-  version "4.7.0-beta"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.0-beta.tgz#15952f24d4177479ca3d19f09436ad8c69a30563"
-  integrity sha512-m+CNL8lzHyHDxYYDTI+pm5hw5/bufYVGan2bokPyJY/y9C/4W/PCWMtYZ0vV9fLXbEL57elMeoaz9Evxs8UQ+A==
+  version "4.7.0-dev.20220421"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.0-dev.20220421.tgz#34d0a3d3aab6e6394d75e5806d80ff85846110fa"
+  integrity sha512-SWMETCW3SwzpCE0eyfqqUDeiKV9hJIs/g4eT5eQU8qv32lk9QNrH7+4n68GTZNiX3bBfHfEUcuh/04afMDi3Kw==
 
 unicode-canonical-property-names-ecmascript@^2.0.0:
   version "2.0.0"
