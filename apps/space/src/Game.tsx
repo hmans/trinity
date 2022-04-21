@@ -6,7 +6,7 @@ import T, {
   Renderer,
   Ticker
 } from "react-trinity"
-import { RenderPass, UnrealBloomPass } from "react-trinity/postprocessing"
+import { RenderPass } from "react-trinity/postprocessing"
 import * as THREE from "three"
 
 export const Game = () => {
@@ -20,7 +20,6 @@ export const Game = () => {
         {scene && camera && (
           <Composer>
             <RenderPass scene={scene} camera={camera} />
-            <UnrealBloomPass />
           </Composer>
         )}
         {/* Event handling */}
