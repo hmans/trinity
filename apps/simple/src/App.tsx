@@ -29,21 +29,23 @@ const App = () => {
             <UnrealBloomPass />
           </Composer>
         )}
-
         {/* Event handling */}
         {scene && camera && <EventHandling scene={scene} camera={camera} />}
 
-        <OnWindowResize>
-          {() => {
-            const width = window.innerWidth
-            const height = window.innerHeight
+        {/* Camera resizing */}
+        {camera && (
+          <OnWindowResize>
+            {() => {
+              const width = window.innerWidth
+              const height = window.innerHeight
 
-            if (camera instanceof THREE.PerspectiveCamera) {
-              camera.aspect = width / height
-              camera.updateProjectionMatrix()
-            }
-          }}
-        </OnWindowResize>
+              if (camera instanceof THREE.PerspectiveCamera) {
+                camera.aspect = width / height
+                camera.updateProjectionMatrix()
+              }
+            }}
+          </OnWindowResize>
+        )}
 
         {/* The scene, with some objects, and a camera */}
         <T.Scene ref={setScene}>
