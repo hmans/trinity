@@ -8,8 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/three": "^0.139.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-trinity": "^0.4.2",
+    "three": "^0.139.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
