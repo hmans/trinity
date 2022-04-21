@@ -23,8 +23,10 @@ export const View: FC<{
 
   return (
     <ViewContext.Provider value={{ composer }}>
+      {/* We definitely want some event handling. */}
       <EventHandling scene={scene} camera={camera} />
 
+      {/* When the window is being resized, we need to adjust the active camera. */}
       <OnWindowResize>
         {() => {
           const width = window.innerWidth
@@ -37,11 +39,14 @@ export const View: FC<{
         }}
       </OnWindowResize>
 
+      {/* Mount the render update function. */}
+      <Update stage="render">{() => composer.render()}</Update>
+
+      {/* If the `render` prop is true, run a default Render Pass. */}
       {render && <RenderPass scene={scene} camera={camera} />}
 
+      {/* Mount children (possibly additional effect passes) */}
       {children}
-
-      <Update stage="render">{() => composer.render()}</Update>
     </ViewContext.Provider>
   )
 }
