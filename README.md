@@ -1,4 +1,4 @@
-[![Tests](https://github.com/hmans/react-trinity/actions/workflows/tests.yml/badge.svg)](https://github.com/hmans/react-trinity/actions/workflows/tests.yml)
+[![Tests](https://github.com/hmans/trinity/actions/workflows/tests.yml/badge.svg)](https://github.com/hmans/trinity/actions/workflows/tests.yml)
 
 # TRINITY
 
