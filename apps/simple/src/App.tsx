@@ -1,10 +1,6 @@
 import { useState } from "react"
 import T, { Renderer, View } from "react-trinity"
-import {
-  EffectPass,
-  RenderPass,
-  UnrealBloomPass
-} from "react-trinity/postprocessing"
+import { UnrealBloomPass } from "react-trinity/postprocessing"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
 
