@@ -1,14 +1,12 @@
-import { FC, useEffect } from "react"
+import { FC } from "react"
+import { useEventListener } from "./useEventListener"
 
-export const On: FC<{ event: string; target?: any; children: Function }> = ({
-  target = window,
-  event,
-  children
-}) => {
-  useEffect(() => {
-    target.addEventListener(event, children)
-    return () => target.removeEventListener(event, children)
-  }, [event, target, children])
+export const On: FC<{
+  event: keyof HTMLElementEventMap
+  target?: any
+  children: Function
+}> = ({ target = window, event, children }) => {
+  useEventListener(target, event, children as any)
 
   return null
 }

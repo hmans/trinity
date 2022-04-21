@@ -1,5 +1,7 @@
+export { Composer, useComposer } from "./Composer"
 export { EventHandling } from "./EventHandling"
 export { On } from "./On"
 export { OnWindowResize } from "./OnWindowResize"
 export { Renderer, useRenderer } from "./Renderer"
-export { Composer, useComposer } from "./Composer"
+export { useEventListener } from "./useEventListener"
+export { useWindowResizeHandler } from "./useWindowResizeHandler"
