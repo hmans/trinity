@@ -1329,12 +1329,7 @@
   resolved "https://registry.yarnpkg.com/@hmans/react-toolbox/-/react-toolbox-0.1.4.tgz#295f47976565fcd043ed0bc4078c382e411dc082"
   integrity sha512-PmhaalZ70hSfIX7AUgWO9gVhKkWH8cbZXxGzmjgJ+46sw6cJUlnawkc/WlIxtUro+TTW61YG1i+18QD0zsvF+Q==
 
-"@hmans/signal@^0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@hmans/signal/-/signal-0.1.7.tgz#48fdc6df8e1735f790438bf8c92be907d4f24713"
-  integrity sha512-YTmJcMIiSGRvDj474p5iBO/4K0XnCNT1ew9kgwgkNsXITNhmWDjuMGkHnGCo0ITgTx8xmiELqOZ9sDaBIAAROQ==
-
-"@hmans/signal@^0.1.8":
+"@hmans/signal@^0.1.7", "@hmans/signal@^0.1.8":
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/@hmans/signal/-/signal-0.1.8.tgz#46788033db3a24206ff91962aa44097dd274390b"
   integrity sha512-jhTe89A0Fzp0aRcQdB1F9Z1gDqFNFS5kZohbk/EiQqvcVJqfJ5XG0IsSEZiyAT7RuiLXupwbAn7MxXVL+iZZIA==
@@ -4845,16 +4840,16 @@ minimist@^1.2.0:
   integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
 
 miniplex-react@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/miniplex-react/-/miniplex-react-0.2.1.tgz#79c9781a70160579923f84058825f316b4b7f60b"
-  integrity sha512-tOkmtVOPu/Xl7mFHjnl6gTzrozp4SLo3lNebKd/d/CMcuR4EToIKlXArQRKqJdO06pqvtVdj9urJWZX2E6wf2Q==
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/miniplex-react/-/miniplex-react-0.2.3.tgz#729d8672fc8c10daec7ec59cbd36baf27c1bf01f"
+  integrity sha512-MBYv8defis892FqY0rFtXA/fBnfytDxzzvEYdKKoRJaBg0PqYMf2h6+vMt3XXXlGRGGAc46r78+Sby5dORcmiw==
   dependencies:
     "@hmans/react-toolbox" "^0.1.4"
 
 miniplex@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.9.0.tgz#e7ce7a7a7a36c62adaff7b6568082d2a8c0dcde7"
-  integrity sha512-mBmESBX2ZsuKo6DFxjw2OINRqEMKt1KtMr67Rb8QE0kFJbkuhbzkcjfdTqH2sDdOWvSs7vcmAsTfWOhdair/gQ==
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/miniplex/-/miniplex-0.9.1.tgz#73a1d21fb63f765adc6f107768315e58eeaaf6ad"
+  integrity sha512-ivHUvcVdnTSJbVWmbi2plyH4GZM7ezSxEJfVwS5NAMmU8uk8XnTJ9LkDe9WSe8t52BJ1jHHe5P8q/6YDmtDNLg==
   dependencies:
     "@hmans/signal" "^0.1.7"
 

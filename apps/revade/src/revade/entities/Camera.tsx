@@ -1,23 +1,22 @@
-import { useCamera } from "react-trinity/experiments"
-import { FC } from "react"
+import { forwardRef } from "react"
+import T from "react-trinity"
 import { PerspectiveCamera } from "three"
 import { ECS } from "../state"
-import T from "react-trinity"
 
-export const Camera: FC<{ offset?: [number, number, number] }> = ({
-  offset = [0, 0, 75]
-}) => {
-  const camera = useCamera<PerspectiveCamera>()
+type CameraProps = { offset?: [number, number, number] }
 
-  return (
-    <ECS.Entity>
-      <ECS.Component name="camera" data={{ offset }} />
+export const Camera = forwardRef<PerspectiveCamera, CameraProps>(
+  ({ offset = [0, 0, 75] }, ref) => {
+    return (
+      <ECS.Entity>
+        <ECS.Component name="camera" data={{ offset }} />
 
-      <ECS.Component name="transform">
-        <T.Group position={offset}>
-          <T.PerspectiveCamera ref={camera} />
-        </T.Group>
-      </ECS.Component>
-    </ECS.Entity>
-  )
-}
+        <ECS.Component name="transform">
+          <T.Group position={offset}>
+            <T.PerspectiveCamera ref={ref} />
+          </T.Group>
+        </ECS.Component>
+      </ECS.Entity>
+    )
+  }
+)

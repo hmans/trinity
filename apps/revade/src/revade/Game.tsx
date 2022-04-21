@@ -1,7 +1,14 @@
 import { Device } from "@hmans/controlfreak"
-import T from "react-trinity/reactor"
-import React, { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Renderer, View } from "react-trinity"
+import {
+  LensDirt,
+  UnrealBloomPass,
+  Vignette
+} from "react-trinity/postprocessing"
+import T from "react-trinity/reactor"
+import { Ticker } from "react-trinity/ticker"
+import { PerspectiveCamera, Scene } from "three"
 import { PhysicsWorld } from "../lib/physics2d"
 import { Music } from "./audio"
 import { controller } from "./controller"
@@ -13,9 +20,11 @@ import { HUD } from "./HUD"
 import { Level } from "./Level"
 import { Menu } from "./Menu"
 import Systems from "./systems"
-import { Ticker } from "react-trinity/ticker"
 
 export const Game = () => {
+  const [camera, setCamera] = useState<PerspectiveCamera | null>(null!)
+  const [scene, setScene] = useState<Scene | null>(null!)
+
   useEffect(() => {
     controller.start()
     return () => controller.stop()
@@ -32,14 +41,22 @@ export const Game = () => {
     <Ticker>
       <HUD />
       <Renderer>
-        <View>
-          <PhysicsWorld gravity={[0, 0]}>
+        {camera && scene && (
+          <View camera={camera} scene={scene}>
+            <UnrealBloomPass />
+            <LensDirt texture="/textures/dirt01.png" strength={0.5} />
+            <Vignette offset={0.5} darkness={2} />
+          </View>
+        )}
+
+        <PhysicsWorld gravity={[0, 0]}>
+          <T.Scene ref={setScene}>
             <T.AmbientLight intensity={0.3} />
             <T.DirectionalLight intensity={0.2} position={[10, 10, 10]} />
 
             <Music />
             <Systems />
-            <Camera />
+            <Camera ref={setCamera} />
             <Level />
 
             <GameFSM.Match state="menu">
@@ -53,8 +70,8 @@ export const Game = () => {
                 <GameOver />
               </GameFSM.Match>
             </GameFSM.Match>
-          </PhysicsWorld>
-        </View>
+          </T.Scene>
+        </PhysicsWorld>
       </Renderer>
     </Ticker>
   )

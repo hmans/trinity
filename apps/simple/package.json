@@ -11,6 +11,7 @@
     "@types/three": "^0.139.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-merge-refs": "^1.1.0",
     "react-trinity": "^0.4.1",
     "three": "^0.139.2"
   },

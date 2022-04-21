@@ -1,65 +1,72 @@
 import React, {
   createContext,
-  FC,
+  forwardRef,
   ReactNode,
   useContext,
   useEffect,
-  useRef,
+  useImperativeHandle,
   useState
 } from "react"
 import { sRGBEncoding, WebGLRenderer } from "three"
+import { ReactorComponentProps } from "../reactor"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
 
 const RendererContext = createContext<THREE.WebGLRenderer>(null!)
 
-export const Renderer: FC<{ children?: ReactNode }> = ({ children }) => {
-  const canvas = useRef<HTMLCanvasElement>(null!)
-  const [renderer, setRenderer] = useState<THREE.WebGLRenderer>()
+type RendererProps = ReactorComponentProps<typeof WebGLRenderer>
 
-  useEffect(() => {
-    if (!canvas.current) return
+export const Renderer = forwardRef<WebGLRenderer, RendererProps>(
+  ({ children }, ref) => {
+    const [canvas, setCanvas] = useState<HTMLCanvasElement | null>()
+    const [renderer, setRenderer] = useState<THREE.WebGLRenderer | null>()
 
-    setRenderer(() => {
-      const renderer = new WebGLRenderer({
-        canvas: canvas.current,
-        powerPreference: "high-performance",
-        antialias: false,
-        alpha: false,
-        stencil: false
+    useEffect(() => {
+      if (!canvas) return
+
+      setRenderer(() => {
+        const renderer = new WebGLRenderer({
+          canvas: canvas,
+          powerPreference: "high-performance",
+          antialias: false,
+          alpha: false,
+          stencil: false
+        })
+
+        renderer.autoClear = false
+        renderer.setPixelRatio(1)
+        renderer.outputEncoding = sRGBEncoding
+        // renderer.toneMapping = THREE.ACESFilmicToneMapping
+        // renderer.toneMapping = THREE.ReinhardToneMapping
+        // renderer.toneMappingExposure = 1.25
+
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight)
+
+        return renderer
       })
 
-      renderer.autoClear = false
-      renderer.setClearColor("#222")
-      renderer.setPixelRatio(1)
-      renderer.outputEncoding = sRGBEncoding
-      // renderer.toneMapping = THREE.ACESFilmicToneMapping
-      // renderer.toneMapping = THREE.ReinhardToneMapping
-      renderer.toneMappingExposure = 1.25
+      return () => void setRenderer(undefined)
+    }, [canvas])
 
-      renderer.setSize(canvas.current.clientWidth, canvas.current.clientHeight)
+    useImperativeHandle(ref, () => renderer!, [renderer])
 
-      return renderer
-    })
+    useWindowResizeHandler(() => {
+      if (!renderer) return
 
-    return () => void setRenderer(undefined)
-  }, [canvas.current])
+      const width = window.innerWidth
+      const height = window.innerHeight
+      renderer.setSize(width, height)
+    }, [renderer])
 
-  useWindowResizeHandler(() => {
-    if (!renderer) return
-    const width = window.innerWidth
-    const height = window.innerHeight
-    renderer.setSize(width, height)
-  }, [renderer])
-
-  return (
-    <canvas ref={canvas}>
-      {renderer && (
-        <RendererContext.Provider value={renderer}>
-          {children}
-        </RendererContext.Provider>
-      )}
-    </canvas>
-  )
-}
+    return (
+      <canvas ref={setCanvas}>
+        {renderer && (
+          <RendererContext.Provider value={renderer}>
+            {typeof children === "function" ? children() : children}
+          </RendererContext.Provider>
+        )}
+      </canvas>
+    )
+  }
+)
 
 export const useRenderer = () => useContext(RendererContext)

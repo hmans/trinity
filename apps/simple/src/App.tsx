@@ -1,38 +1,45 @@
-import { useRef } from "react"
-import T, { Application, View } from "react-trinity"
-import { useCamera } from "react-trinity/experiments"
-import { Update, useTicker } from "react-trinity/ticker"
-import { Mesh, PerspectiveCamera } from "three"
-
-const Camera = () => {
-  const camera = useCamera<PerspectiveCamera>()
-
-  return <T.PerspectiveCamera position={[0, 0, -10]} ref={camera} />
-}
+import { useState } from "react"
+import T, { Renderer, View } from "react-trinity"
+import { UnrealBloomPass } from "react-trinity/postprocessing"
+import { Ticker, Update } from "react-trinity/ticker"
+import * as THREE from "three"
 
 const AutoRotate = ({ speed = 1 }) => (
   <Update>
-    {(dt, mesh) => (mesh.rotation.x = mesh.rotation.y += speed * dt)}
+    {(dt, { parent }) => (parent.rotation.x = parent.rotation.y += speed * dt)}
   </Update>
 )
 
-const Thingy = ({ speed = 0.5 }) => (
-  <T.Mesh>
-    <T.DodecahedronGeometry />
-    <T.MeshStandardMaterial color="hotpink" />
+const App = () => {
+  const [scene, setScene] = useState<THREE.Scene | null>()
+  const [camera, setCamera] = useState<THREE.PerspectiveCamera | null>()
 
-    <AutoRotate speed={speed} />
-  </T.Mesh>
-)
+  return (
+    <Ticker>
+      <Renderer>
+        {/* The view actually takes care of rendering, event handling, etc. */}
+        {scene && camera && (
+          <View scene={scene} camera={camera}>
+            <UnrealBloomPass />
+          </View>
+        )}
 
-const App = () => (
-  <Application>
-    <View>
-      <Camera />
-      <T.AmbientLight intensity={1} />
-      <Thingy />
-    </View>
-  </Application>
-)
+        {/* The scene, with some objects, and a camera */}
+        <T.Scene ref={setScene}>
+          <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
+
+          <T.AmbientLight intensity={0.2} />
+          <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
+
+          <T.Mesh>
+            <T.DodecahedronGeometry />
+            <T.MeshStandardMaterial color="hotpink" />
+            <AutoRotate speed={1.5} />
+          </T.Mesh>
+        </T.Scene>
+      </Renderer>
+    </Ticker>
+  )
+}
 
 export default App

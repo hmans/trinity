@@ -1,1 +1,1 @@
-export * from "./useCamera"
+export const foo = "bar"
