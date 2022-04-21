@@ -10,30 +10,24 @@ const AutoRotate = ({ speed = 1 }) => (
   </Update>
 )
 
-const useWire = <T extends any = any>(initialValue?: T) => {
-  const [value, setValue] = useState<T | null>(initialValue ?? null)
-
-  return {
-    get: value,
-    set: setValue
-  }
-}
+const useWire = <T extends any = any>(initialValue?: T) =>
+  useState<T | null>(initialValue ?? null)
 
 const App = () => {
-  const scene = useWire<THREE.Scene>()
-  const camera = useWire<THREE.Camera>()
+  const [scene, setScene] = useWire<THREE.Scene>()
+  const [camera, setCamera] = useWire<THREE.PerspectiveCamera>()
 
   return (
     <Ticker>
       <Renderer>
         {/* The view actually takes care of rendering, event handling, etc. */}
-        <View scene={scene.get!} camera={camera.get!}>
+        <View scene={scene} camera={camera}>
           <UnrealBloomPass />
         </View>
 
         {/* The scene, with some objects, and a camera */}
-        <T.Scene ref={scene.set}>
-          <T.PerspectiveCamera position={[0, 0, 10]} ref={camera.set} />
+        <T.Scene ref={setScene}>
+          <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
 
           <T.AmbientLight intensity={0.2} />
           <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
