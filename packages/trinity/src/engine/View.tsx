@@ -9,8 +9,6 @@ import { OnWindowResize } from "./OnWindowResize"
 
 const ViewContext = createContext<{ composer: EffectComposer }>(null!)
 
-export const useView = () => useContext(ViewContext)
-
 export const View: FC<{
   scene?: Scene | null
   camera?: Camera | null

@@ -1,5 +1,6 @@
 import React, { createContext, FC, ReactNode, useContext, useMemo } from "react"
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
+import { Update } from "../ticker"
 import { useRenderer } from "./Renderer"
 
 const ComposerContext = createContext<EffectComposer>(null!)
@@ -10,6 +11,8 @@ export const Composer: FC<{ children?: ReactNode }> = ({ children }) => {
 
   return (
     <ComposerContext.Provider value={composer}>
+      <Update stage="render">{() => composer.render()}</Update>
+
       {children}
     </ComposerContext.Provider>
   )

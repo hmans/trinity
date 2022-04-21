@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import { Pass } from "three/examples/jsm/postprocessing/Pass"
-import { useView } from "../engine/View"
+import { useComposer } from "../engine"
 
 export const useEffectPass = (pass: Pass) => {
-  const { composer } = useView()
+  const composer = useComposer()
 
   useEffect(() => {
     composer.addPass(pass)

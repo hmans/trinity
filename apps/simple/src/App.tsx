@@ -1,6 +1,6 @@
-import { useRef, useState } from "react"
-import T, { Composer, Renderer, View } from "react-trinity"
-import { UnrealBloomPass } from "react-trinity/postprocessing"
+import { useState } from "react"
+import T, { Composer, EventHandling, Renderer } from "react-trinity"
+import { RenderPass, UnrealBloomPass } from "react-trinity/postprocessing"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
 
@@ -10,36 +10,37 @@ const AutoRotate = ({ speed = 1 }) => (
   </Update>
 )
 
-const useWire = <T extends any = any>(initialValue?: T) =>
-  useState<T | null>(initialValue ?? null)
-
 const App = () => {
-  const [scene, setScene] = useWire<THREE.Scene>()
-  const [camera, setCamera] = useWire<THREE.PerspectiveCamera>()
+  const [scene, setScene] = useState<THREE.Scene | null>()
+  const [camera, setCamera] = useState<THREE.PerspectiveCamera | null>()
 
   return (
     <Ticker>
       <Renderer>
-        <Composer>
-          {/* The view actually takes care of rendering, event handling, etc. */}
-          <View scene={scene} camera={camera}>
+        {/* Rendering */}
+        {scene && camera && (
+          <Composer>
+            <RenderPass scene={scene} camera={camera} />
             <UnrealBloomPass />
-          </View>
+          </Composer>
+        )}
 
-          {/* The scene, with some objects, and a camera */}
-          <T.Scene ref={setScene}>
-            <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
+        {/* Event handling */}
+        {scene && camera && <EventHandling scene={scene} camera={camera} />}
 
-            <T.AmbientLight intensity={0.2} />
-            <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
+        {/* The scene, with some objects, and a camera */}
+        <T.Scene ref={setScene}>
+          <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
 
-            <T.Mesh>
-              <T.DodecahedronGeometry />
-              <T.MeshStandardMaterial color="hotpink" />
-              <AutoRotate speed={1.5} />
-            </T.Mesh>
-          </T.Scene>
-        </Composer>
+          <T.AmbientLight intensity={0.2} />
+          <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
+
+          <T.Mesh>
+            <T.DodecahedronGeometry />
+            <T.MeshStandardMaterial color="hotpink" />
+            <AutoRotate speed={1.5} />
+          </T.Mesh>
+        </T.Scene>
       </Renderer>
     </Ticker>
   )
