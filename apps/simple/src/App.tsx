@@ -1,9 +1,12 @@
 import { useState } from "react"
 import T, { Renderer, View } from "react-trinity"
-import { EffectPass, RenderPass } from "react-trinity/postprocessing"
+import {
+  EffectPass,
+  RenderPass,
+  UnrealBloomPass
+} from "react-trinity/postprocessing"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
-import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
 
 const AutoRotate = ({ speed = 1 }) => (
   <Update>
@@ -22,10 +25,7 @@ const App = () => {
         {scene && camera && (
           <View scene={scene} camera={camera}>
             <RenderPass scene={scene} camera={camera} />
-            <EffectPass
-              pass={UnrealBloomPass}
-              args={[new THREE.Vector2(256, 256), 1.5, 0.8, 0.3]}
-            />
+            <UnrealBloomPass />
           </View>
         )}
 
