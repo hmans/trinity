@@ -22,31 +22,34 @@ export const View: FC<{
   const composer = useConst(() => new EffectComposer(renderer))
 
   return (
-    <ViewContext.Provider value={{ composer }}>
-      {/* We definitely want some event handling. */}
-      <EventHandling scene={scene} camera={camera} />
+    scene &&
+    camera && (
+      <ViewContext.Provider value={{ composer }}>
+        {/* We definitely want some event handling. */}
+        <EventHandling scene={scene} camera={camera} />
 
-      {/* When the window is being resized, we need to adjust the active camera. */}
-      <OnWindowResize>
-        {() => {
-          const width = window.innerWidth
-          const height = window.innerHeight
+        {/* When the window is being resized, we need to adjust the active camera. */}
+        <OnWindowResize>
+          {() => {
+            const width = window.innerWidth
+            const height = window.innerHeight
 
-          if (camera instanceof PerspectiveCamera) {
-            camera.aspect = width / height
-            camera.updateProjectionMatrix()
-          }
-        }}
-      </OnWindowResize>
+            if (camera instanceof PerspectiveCamera) {
+              camera.aspect = width / height
+              camera.updateProjectionMatrix()
+            }
+          }}
+        </OnWindowResize>
 
-      {/* Mount the render update function. */}
-      <Update stage="render">{() => composer.render()}</Update>
+        {/* Mount the render update function. */}
+        <Update stage="render">{() => composer.render()}</Update>
 
-      {/* If the `render` prop is true, run a default Render Pass. */}
-      {render && <RenderPass scene={scene} camera={camera} />}
+        {/* If the `render` prop is true, run a default Render Pass. */}
+        {render && <RenderPass scene={scene} camera={camera} />}
 
-      {/* Mount children (possibly additional effect passes) */}
-      {children}
-    </ViewContext.Provider>
+        {/* Mount children (possibly additional effect passes) */}
+        {children}
+      </ViewContext.Provider>
+    )
   )
 }
