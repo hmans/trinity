@@ -1,8 +1,9 @@
 import { Device } from "@hmans/controlfreak"
 import { useEffect, useState } from "react"
-import { Renderer, View } from "react-trinity"
+import { Composer, OnWindowResize, Renderer } from "react-trinity"
 import {
   LensDirt,
+  RenderPass,
   UnrealBloomPass,
   Vignette
 } from "react-trinity/postprocessing"
@@ -42,11 +43,25 @@ export const Game = () => {
       <HUD />
       <Renderer>
         {camera && scene && (
-          <View camera={camera} scene={scene}>
+          <Composer>
+            <RenderPass camera={camera} scene={scene} />
             <UnrealBloomPass />
             <LensDirt texture="/textures/dirt01.png" strength={0.5} />
             <Vignette offset={0.5} darkness={2} />
-          </View>
+
+            {/* TODO: encapsulate this away... somewhere */}
+            <OnWindowResize>
+              {() => {
+                const width = window.innerWidth
+                const height = window.innerHeight
+
+                if (camera instanceof PerspectiveCamera) {
+                  camera.aspect = width / height
+                  camera.updateProjectionMatrix()
+                }
+              }}
+            </OnWindowResize>
+          </Composer>
         )}
 
         <PhysicsWorld gravity={[0, 0]}>
