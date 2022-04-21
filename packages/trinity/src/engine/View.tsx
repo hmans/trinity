@@ -1,12 +1,11 @@
-import { useConst } from "@hmans/react-toolbox"
 import React, { createContext, FC, ReactNode, useContext } from "react"
 import { Camera, PerspectiveCamera, Scene } from "three"
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
 import { RenderPass } from "../postprocessing"
 import { Update } from "../ticker"
+import { useComposer } from "./Composer"
 import { EventHandling } from "./EventHandling"
 import { OnWindowResize } from "./OnWindowResize"
-import { useRenderer } from "./Renderer"
 
 const ViewContext = createContext<{ composer: EffectComposer }>(null!)
 
@@ -18,8 +17,7 @@ export const View: FC<{
   render?: boolean
   children?: ReactNode
 }> = ({ scene, camera, children, render = true }) => {
-  const renderer = useRenderer()
-  const composer = useConst(() => new EffectComposer(renderer))
+  const composer = useComposer()
 
   if (!scene || !camera) return null
 

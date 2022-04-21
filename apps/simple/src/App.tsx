@@ -1,5 +1,5 @@
 import { useRef, useState } from "react"
-import T, { Renderer, View } from "react-trinity"
+import T, { Composer, Renderer, View } from "react-trinity"
 import { UnrealBloomPass } from "react-trinity/postprocessing"
 import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
@@ -20,24 +20,26 @@ const App = () => {
   return (
     <Ticker>
       <Renderer>
-        {/* The view actually takes care of rendering, event handling, etc. */}
-        <View scene={scene} camera={camera}>
-          <UnrealBloomPass />
-        </View>
+        <Composer>
+          {/* The view actually takes care of rendering, event handling, etc. */}
+          <View scene={scene} camera={camera}>
+            <UnrealBloomPass />
+          </View>
 
-        {/* The scene, with some objects, and a camera */}
-        <T.Scene ref={setScene}>
-          <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
+          {/* The scene, with some objects, and a camera */}
+          <T.Scene ref={setScene}>
+            <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
 
-          <T.AmbientLight intensity={0.2} />
-          <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
+            <T.AmbientLight intensity={0.2} />
+            <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
 
-          <T.Mesh>
-            <T.DodecahedronGeometry />
-            <T.MeshStandardMaterial color="hotpink" />
-            <AutoRotate speed={1.5} />
-          </T.Mesh>
-        </T.Scene>
+            <T.Mesh>
+              <T.DodecahedronGeometry />
+              <T.MeshStandardMaterial color="hotpink" />
+              <AutoRotate speed={1.5} />
+            </T.Mesh>
+          </T.Scene>
+        </Composer>
       </Renderer>
     </Ticker>
   )
