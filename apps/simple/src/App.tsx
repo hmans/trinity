@@ -24,7 +24,6 @@ const App = () => {
         {/* The view actually takes care of rendering, event handling, etc. */}
         {scene && camera && (
           <View scene={scene} camera={camera}>
-            <RenderPass scene={scene} camera={camera} />
             <UnrealBloomPass />
           </View>
         )}

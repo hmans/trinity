@@ -2,8 +2,7 @@ import { useConst } from "@hmans/react-toolbox"
 import React, { createContext, FC, ReactNode, useContext } from "react"
 import { Camera, PerspectiveCamera, Scene } from "three"
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
-import { EffectPass } from "../postprocessing"
+import { RenderPass } from "../postprocessing"
 import { Update } from "../ticker"
 import { EventHandling } from "./EventHandling"
 import { OnWindowResize } from "./OnWindowResize"
@@ -16,8 +15,9 @@ export const useView = () => useContext(ViewContext)
 export const View: FC<{
   scene: Scene
   camera: Camera
+  render?: boolean
   children?: ReactNode
-}> = ({ scene, camera, children }) => {
+}> = ({ scene, camera, children, render = true }) => {
   const renderer = useRenderer()
   const composer = useConst(() => new EffectComposer(renderer))
 
@@ -37,7 +37,9 @@ export const View: FC<{
         }}
       </OnWindowResize>
 
-      {children ?? <EffectPass pass={RenderPass} args={[scene, camera]} />}
+      {render && <RenderPass scene={scene} camera={camera} />}
+
+      {children}
 
       <Update stage="render">{() => composer.render()}</Update>
     </ViewContext.Provider>
