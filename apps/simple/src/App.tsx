@@ -3,10 +3,11 @@ import T, {
   Composer,
   EventHandling,
   OnWindowResize,
-  Renderer
+  Renderer,
+  Ticker,
+  Update
 } from "react-trinity"
 import { RenderPass, UnrealBloomPass } from "react-trinity/postprocessing"
-import { Ticker, Update } from "react-trinity/ticker"
 import * as THREE from "three"
 
 const AutoRotate = ({ speed = 1 }) => (
