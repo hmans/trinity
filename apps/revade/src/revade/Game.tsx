@@ -1,7 +1,14 @@
 import { Device } from "@hmans/controlfreak"
-import T from "react-trinity/reactor"
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { Renderer, View } from "react-trinity"
+import {
+  LensDirt,
+  UnrealBloomPass,
+  Vignette
+} from "react-trinity/postprocessing"
+import T from "react-trinity/reactor"
+import { Ticker } from "react-trinity/ticker"
+import { PerspectiveCamera, Scene } from "three"
 import { PhysicsWorld } from "../lib/physics2d"
 import { Music } from "./audio"
 import { controller } from "./controller"
@@ -13,11 +20,6 @@ import { HUD } from "./HUD"
 import { Level } from "./Level"
 import { Menu } from "./Menu"
 import Systems from "./systems"
-import { Ticker } from "react-trinity/ticker"
-import { PerspectiveCamera, Scene, Vector2 } from "three"
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
-import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
-import { EffectPass, LensDirt, Vignette } from "react-trinity/postprocessing"
 
 export const Game = () => {
   const [camera, setCamera] = useState<PerspectiveCamera | null>(null!)
@@ -41,11 +43,7 @@ export const Game = () => {
       <Renderer>
         {camera && scene && (
           <View camera={camera} scene={scene}>
-            <EffectPass pass={RenderPass} args={[scene, camera]} />
-            <EffectPass
-              pass={UnrealBloomPass}
-              args={[new Vector2(256, 256), 1.5, 0.8, 0.3]}
-            />
+            <UnrealBloomPass />
             <LensDirt texture="/textures/dirt01.png" strength={0.5} />
             <Vignette offset={0.5} darkness={2} />
           </View>
