@@ -1,5 +1,0 @@
-{
-  "main": "dist/react-trinity-ticker.cjs.js",
-  "module": "dist/react-trinity-ticker.esm.js",
-  "types": "dist/react-trinity-ticker.cjs.d.ts"
-}

@@ -1,7 +1,7 @@
 import React, { createContext, FC, ReactNode, useContext, useMemo } from "react"
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
-import { Update } from "../ticker"
 import { useRenderer } from "./Renderer"
+import { Update } from "./Update"
 
 const ComposerContext = createContext<EffectComposer>(null!)
 

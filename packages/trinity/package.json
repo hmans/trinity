@@ -20,8 +20,7 @@
       "loaders/index.ts",
       "postprocessing/index.ts",
       "reactor/index.ts",
-      "text/index.ts",
-      "ticker/index.ts"
+      "text/index.ts"
     ]
   },
   "babel": {

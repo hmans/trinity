@@ -1,13 +1,12 @@
-import {
-  Renderer,
+import { useState } from "react"
+import T, {
   Composer,
   EventHandling,
-  OnWindowResize
+  OnWindowResize,
+  Renderer,
+  Ticker
 } from "react-trinity"
 import { RenderPass, UnrealBloomPass } from "react-trinity/postprocessing"
-import { Ticker } from "react-trinity/ticker"
-import T from "react-trinity/reactor"
-import { useState } from "react"
 import * as THREE from "three"
 
 export const Game = () => {

@@ -1,6 +1,5 @@
 import React, { FC, ReactNode } from "react"
-import { Renderer } from "./engine/Renderer"
-import { Ticker } from "./ticker"
+import { Renderer, Ticker } from "./engine"
 
 type ApplicationProps = {
   children?: ReactNode

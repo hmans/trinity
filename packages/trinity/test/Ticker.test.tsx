@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react"
-import { Ticker } from "../src/ticker/Ticker"
 import React from "react"
+import { Ticker } from "../src/engine/Ticker"
 
 describe("<Ticker>", () => {
   it("does not end the world", () => {
