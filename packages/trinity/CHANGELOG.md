@@ -1,5 +1,11 @@
 # react-trinity
 
+## 0.5.3
+
+### Patch Changes
+
+- 7fd7ed7: Test changeset for seeing if the changesets GitHub Action works again.
+
 ## 0.5.0
 
 ### Minor Changes
