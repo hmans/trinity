@@ -37,9 +37,9 @@ const App = () => {
           </Composer>
         )}
         {/* Event handling */}
-        {/* {scene.get && camera.get && (
-          <EventHandling scene={scene.get} camera={camera.get} />
-        )} */}
+        {scene.out && camera.out && (
+          <EventHandling scene={scene.out} camera={camera.out} />
+        )}
 
         {/* Camera resizing */}
         {camera.out && (
