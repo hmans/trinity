@@ -18,9 +18,8 @@ const AutoRotate = ({ speed = 1 }) => (
 )
 
 function useWire<T>(initial?: T | (() => T)) {
-  const [get, set] = useState<T | null>(initial!)
-
-  return { get, set }
+  const [getter, setter] = useState<T | null>(initial!)
+  return { out: getter, in: setter }
 }
 
 const App = () => {
@@ -31,9 +30,9 @@ const App = () => {
     <Ticker>
       <Renderer>
         {/* Rendering */}
-        {scene.get && camera.get && (
+        {scene.out && camera.out && (
           <Composer>
-            <RenderPass scene={scene.get} camera={camera.get} />
+            <RenderPass scene={scene.out} camera={camera.out} />
             <UnrealBloomPass />
           </Composer>
         )}
@@ -43,23 +42,23 @@ const App = () => {
         )} */}
 
         {/* Camera resizing */}
-        {camera.get && (
+        {camera.out && (
           <OnWindowResize>
             {() => {
               const width = window.innerWidth
               const height = window.innerHeight
 
-              if (camera.get instanceof THREE.PerspectiveCamera) {
-                camera.get.aspect = width / height
-                camera.get.updateProjectionMatrix()
+              if (camera.out instanceof THREE.PerspectiveCamera) {
+                camera.out.aspect = width / height
+                camera.out.updateProjectionMatrix()
               }
             }}
           </OnWindowResize>
         )}
 
         {/* The scene, with some objects, and a camera */}
-        <T.Scene ref={scene.set}>
-          <T.PerspectiveCamera position={[0, 0, 10]} ref={camera.set} />
+        <T.Scene ref={scene.in}>
+          <T.PerspectiveCamera position={[0, 0, 10]} ref={camera.in} />
 
           <T.AmbientLight intensity={0.2} />
           <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
