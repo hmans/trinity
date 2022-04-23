@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, ReactNode, useState } from "react"
 import T, {
   Composer,
   EventHandling,
@@ -43,7 +43,14 @@ function useNullableState<T>(initial?: T | (() => T)) {
   return useState<T | null>(initial!)
 }
 
-const App = () => {
+type SimpleApplicationApi = {
+  setScene: (scene: THREE.Scene) => void
+  setCamera: (camera: THREE.PerspectiveCamera) => void
+}
+
+const SimpleApplication: FC<{
+  children: (api: SimpleApplicationApi) => ReactNode
+}> = ({ children }) => {
   const [scene, setScene] = useNullableState<THREE.Scene>()
   const [camera, setCamera] = useNullableState<THREE.PerspectiveCamera>()
 
@@ -53,22 +60,29 @@ const App = () => {
         {scene && camera && <RenderPipeline scene={scene} camera={camera} />}
         {scene && camera && <EventHandling scene={scene} camera={camera} />}
 
-        {/* The scene, with some objects, and a camera */}
-        <T.Scene ref={setScene}>
-          <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
-
-          <T.AmbientLight intensity={0.2} />
-          <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
-
-          <T.Mesh>
-            <T.DodecahedronGeometry />
-            <T.MeshStandardMaterial color="hotpink" />
-            <AutoRotate speed={1.5} />
-          </T.Mesh>
-        </T.Scene>
+        <T.Scene ref={setScene}>{children({ setScene, setCamera })}</T.Scene>
       </Renderer>
     </Ticker>
   )
 }
+
+const App = () => (
+  <SimpleApplication>
+    {({ setCamera }) => (
+      <>
+        <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
+
+        <T.AmbientLight intensity={0.2} />
+        <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
+
+        <T.Mesh>
+          <T.DodecahedronGeometry />
+          <T.MeshStandardMaterial color="hotpink" />
+          <AutoRotate speed={1.5} />
+        </T.Mesh>
+      </>
+    )}
+  </SimpleApplication>
+)
 
 export default App
