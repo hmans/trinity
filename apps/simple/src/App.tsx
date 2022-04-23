@@ -1,4 +1,11 @@
-import { FC, ReactNode, useState } from "react"
+import {
+  createContext,
+  FC,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState
+} from "react"
 import T, {
   Composer,
   EventHandling,
@@ -9,6 +16,7 @@ import T, {
   UnrealBloomPass,
   Update
 } from "react-trinity"
+import { useParent } from "react-trinity/src/reactor"
 import * as THREE from "three"
 
 const AutoRotate = ({ speed = 1 }) => (
@@ -48,8 +56,12 @@ type SimpleApplicationApi = {
   setCamera: (camera: THREE.PerspectiveCamera) => void
 }
 
+const SimpleApplicationContext = createContext<SimpleApplicationApi>(null!)
+
+const useSimpleApplication = () => useContext(SimpleApplicationContext)
+
 const SimpleApplication: FC<{
-  children: (api: SimpleApplicationApi) => ReactNode
+  children: ReactNode | ((api: SimpleApplicationApi) => ReactNode)
 }> = ({ children }) => {
   const [scene, setScene] = useNullableState<THREE.Scene>()
   const [camera, setCamera] = useNullableState<THREE.PerspectiveCamera>()
@@ -60,28 +72,40 @@ const SimpleApplication: FC<{
         {scene && camera && <RenderPipeline scene={scene} camera={camera} />}
         {scene && camera && <EventHandling scene={scene} camera={camera} />}
 
-        <T.Scene ref={setScene}>{children({ setScene, setCamera })}</T.Scene>
+        <T.Scene ref={setScene}>
+          <SimpleApplicationContext.Provider value={{ setCamera, setScene }}>
+            {children instanceof Function
+              ? children({ setScene, setCamera })
+              : children}
+          </SimpleApplicationContext.Provider>
+        </T.Scene>
       </Renderer>
     </Ticker>
   )
 }
 
+const WTF: FC<{ children: Function }> = ({ children }) => children()
+
 const App = () => (
   <SimpleApplication>
-    {({ setCamera }) => (
-      <>
-        <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
+    <T.PerspectiveCamera position={[0, 0, 10]}>
+      <WTF>
+        {() => {
+          const { setCamera } = useSimpleApplication()
+          const parent = useParent<THREE.PerspectiveCamera>()
+          useEffect(() => setCamera(parent))
+        }}
+      </WTF>
+    </T.PerspectiveCamera>
 
-        <T.AmbientLight intensity={0.2} />
-        <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
+    <T.AmbientLight intensity={0.2} />
+    <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
 
-        <T.Mesh>
-          <T.DodecahedronGeometry />
-          <T.MeshStandardMaterial color="hotpink" />
-          <AutoRotate speed={1.5} />
-        </T.Mesh>
-      </>
-    )}
+    <T.Mesh>
+      <T.DodecahedronGeometry />
+      <T.MeshStandardMaterial color="hotpink" />
+      <AutoRotate speed={1.5} />
+    </T.Mesh>
   </SimpleApplication>
 )
 
