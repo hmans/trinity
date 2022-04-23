@@ -1,5 +1,11 @@
 # react-trinity
 
+## 0.5.5
+
+### Patch Changes
+
+- 364011b: Disable event handling in <Application>... until it's ready. :)
+
 ## 0.5.3
 
 ### Patch Changes
