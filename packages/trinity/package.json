@@ -6,7 +6,6 @@
   "main": "dist/react-trinity.cjs.js",
   "module": "dist/react-trinity.esm.js",
   "types": "dist/react-trinity.cjs.d.ts",
-  "typedocMain": "src/index.ts",
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
