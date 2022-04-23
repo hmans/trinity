@@ -24,6 +24,18 @@ const RenderPipeline: FC<{
   <Composer>
     <RenderPass scene={scene} camera={camera} />
     <UnrealBloomPass />
+
+    <OnWindowResize>
+      {() => {
+        const width = window.innerWidth
+        const height = window.innerHeight
+
+        if (camera instanceof THREE.PerspectiveCamera) {
+          camera.aspect = width / height
+          camera.updateProjectionMatrix()
+        }
+      }}
+    </OnWindowResize>
   </Composer>
 )
 
@@ -40,21 +52,6 @@ const App = () => {
       <Renderer>
         {scene && camera && <RenderPipeline scene={scene} camera={camera} />}
         {scene && camera && <EventHandling scene={scene} camera={camera} />}
-
-        {/* Camera resizing */}
-        {camera && (
-          <OnWindowResize>
-            {() => {
-              const width = window.innerWidth
-              const height = window.innerHeight
-
-              if (camera instanceof THREE.PerspectiveCamera) {
-                camera.aspect = width / height
-                camera.updateProjectionMatrix()
-              }
-            }}
-          </OnWindowResize>
-        )}
 
         {/* The scene, with some objects, and a camera */}
         <T.Scene ref={setScene}>
