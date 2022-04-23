@@ -1,25 +1,66 @@
-import T, { Application, Update } from "react-trinity"
+import { Tag } from "miniplex"
+import { createECS } from "miniplex-react"
+import { useEffect } from "react"
+import T, {
+  Application,
+  makeInstanceComponents,
+  useTicker
+} from "react-trinity"
+import { Object3D } from "three"
 
-const AutoRotate = ({ speed = 1 }) => (
-  <Update>
-    {(dt, { parent }) => (parent.rotation.x = parent.rotation.y += speed * dt)}
-  </Update>
-)
+const Thingy = makeInstanceComponents()
+
+type Entity = {
+  thingy: Tag
+  transform: Object3D
+}
+
+const ecs = createECS<Entity>()
+
+const RotationSystem = () => {
+  const { entities } = ecs.useArchetype("transform")
+
+  useTicker("update", (dt) => {
+    for (const { transform } of entities) {
+      // console.log(entity)
+      if (transform) transform.rotation.x = transform.rotation.y += 2 * dt
+    }
+  })
+
+  return null
+}
 
 const App = () => (
   <Application>
     {({ setCamera }) => (
       <>
-        <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
+        <T.PerspectiveCamera position={[0, 0, 50]} ref={setCamera} />
 
         <T.AmbientLight intensity={0.2} />
         <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
 
-        <T.Mesh>
+        <Thingy.Root countStep={6000}>
           <T.DodecahedronGeometry />
           <T.MeshStandardMaterial color="hotpink" />
-          <AutoRotate speed={1.5} />
-        </T.Mesh>
+        </Thingy.Root>
+
+        <ecs.Collection tag="thingy" initial={1000}>
+          {(entity) => (
+            <ecs.Entity entity={entity}>
+              <ecs.Component name="transform">
+                <Thingy.Instance
+                  position={[
+                    Math.random() * 50 - 25,
+                    Math.random() * 50 - 25,
+                    Math.random() * 50 - 25
+                  ]}
+                />
+              </ecs.Component>
+            </ecs.Entity>
+          )}
+        </ecs.Collection>
+
+        <RotationSystem />
       </>
     )}
   </Application>
