@@ -17,58 +17,54 @@ const AutoRotate = ({ speed = 1 }) => (
   </Update>
 )
 
-function useWire<T>(initial?: T | (() => T)) {
-  const [getter, setter] = useState<T | null>(initial!)
-  return { out: getter, in: setter }
-}
-
 const App = () => {
-  const scene = useWire<THREE.Scene>()
-  const camera = useWire<THREE.PerspectiveCamera>()
+  const [scene, setScene] = useState<THREE.Scene | null>()
+  const [camera, setCamera] = useState<THREE.PerspectiveCamera | null>()
 
   return (
     <Ticker>
       <Renderer>
-        {/* Rendering */}
-        {scene.out && camera.out && (
-          <Composer>
-            <RenderPass scene={scene.out} camera={camera.out} />
-            <UnrealBloomPass />
-          </Composer>
-        )}
-        {/* Event handling */}
-        {scene.out && camera.out && (
-          <EventHandling scene={scene.out} camera={camera.out} />
-        )}
+        <Composer>
+          {/* Rendering */}
+          {scene && camera && (
+            <>
+              <RenderPass scene={scene} camera={camera} />
+              <UnrealBloomPass />
+            </>
+          )}
 
-        {/* Camera resizing */}
-        {camera.out && (
-          <OnWindowResize>
-            {() => {
-              const width = window.innerWidth
-              const height = window.innerHeight
+          {/* Event handling */}
+          {scene && camera && <EventHandling scene={scene} camera={camera} />}
 
-              if (camera.out instanceof THREE.PerspectiveCamera) {
-                camera.out.aspect = width / height
-                camera.out.updateProjectionMatrix()
-              }
-            }}
-          </OnWindowResize>
-        )}
+          {/* Camera resizing */}
+          {camera && (
+            <OnWindowResize>
+              {() => {
+                const width = window.innerWidth
+                const height = window.innerHeight
 
-        {/* The scene, with some objects, and a camera */}
-        <T.Scene ref={scene.in}>
-          <T.PerspectiveCamera position={[0, 0, 10]} ref={camera.in} />
+                if (camera instanceof THREE.PerspectiveCamera) {
+                  camera.aspect = width / height
+                  camera.updateProjectionMatrix()
+                }
+              }}
+            </OnWindowResize>
+          )}
 
-          <T.AmbientLight intensity={0.2} />
-          <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
+          {/* The scene, with some objects, and a camera */}
+          <T.Scene ref={setScene}>
+            <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
 
-          <T.Mesh>
-            <T.DodecahedronGeometry />
-            <T.MeshStandardMaterial color="hotpink" />
-            <AutoRotate speed={1.5} />
-          </T.Mesh>
-        </T.Scene>
+            <T.AmbientLight intensity={0.2} />
+            <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
+
+            <T.Mesh>
+              <T.DodecahedronGeometry />
+              <T.MeshStandardMaterial color="hotpink" />
+              <AutoRotate speed={1.5} />
+            </T.Mesh>
+          </T.Scene>
+        </Composer>
       </Renderer>
     </Ticker>
   )
