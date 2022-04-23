@@ -20,12 +20,13 @@ const ecs = createECS<Entity>()
 const RotationSystem = () => {
   const { entities } = ecs.useArchetype("transform")
 
-  useTicker("update", (dt) => {
+  function animateInstances(dt: number) {
     for (const { transform } of entities) {
-      // console.log(entity)
       if (transform) transform.rotation.x = transform.rotation.y += 2 * dt
     }
-  })
+  }
+
+  useTicker("update", animateInstances)
 
   return null
 }
