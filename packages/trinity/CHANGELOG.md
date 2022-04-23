@@ -1,5 +1,33 @@
 # react-trinity
 
+## 0.5.0
+
+### Minor Changes
+
+- 3229464: Moved `Ticker`, `useTicker` and `useAnimationFrame` into the main package, and removed the `ticker` entrypoint.
+- 954e436: Big refactoring to separate scene contents from user-facing concerns like rendering, event handling etc.
+- 3229464: The library now provides an optional `<Application>` component that provides some scaffolding for simple applications, with a default render pipeline.
+
+  ```tsx
+  const App = () => (
+    <Application>
+      {({ setCamera }) => (
+        <>
+          <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
+
+          <T.AmbientLight intensity={0.2} />
+          <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
+
+          <T.Mesh>
+            <T.DodecahedronGeometry />
+            <T.MeshStandardMaterial color="hotpink" />
+          </T.Mesh>
+        </>
+      )}
+    </Application>
+  )
+  ```
+
 ## 0.4.2
 
 ### Patch Changes
