@@ -1,4 +1,0 @@
-{
-  "main": "dist/react-trinity-text.cjs.js",
-  "module": "dist/react-trinity-text.esm.js"
-}

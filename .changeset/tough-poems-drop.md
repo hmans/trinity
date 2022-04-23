@@ -1,11 +1,10 @@
-import T, { Application, Update } from "react-trinity"
+---
+"react-trinity": minor
+---
 
-const AutoRotate = ({ speed = 1 }) => (
-  <Update>
-    {(dt, { parent }) => (parent.rotation.x = parent.rotation.y += speed * dt)}
-  </Update>
-)
+The library now provides an optional `<Application>` component that provides some scaffolding for simple applications, with a default render pipeline.
 
+```tsx
 const App = () => (
   <Application>
     {({ setCamera }) => (
@@ -18,11 +17,9 @@ const App = () => (
         <T.Mesh>
           <T.DodecahedronGeometry />
           <T.MeshStandardMaterial color="hotpink" />
-          <AutoRotate speed={1.5} />
         </T.Mesh>
       </>
     )}
   </Application>
 )
-
-export default App
+```

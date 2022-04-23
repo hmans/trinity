@@ -3,8 +3,8 @@ import { createECS } from "miniplex-react"
 import React, { FC, forwardRef, useLayoutEffect, useRef } from "react"
 import mergeRefs from "react-merge-refs"
 import { Group, InstancedMesh, Object3D } from "three"
+import { useTicker } from "../engine"
 import { makeReactor, ReactorComponentProps } from "../reactor"
-import { useTicker } from "../ticker"
 
 /* Create a local reactor with the Three.js classes we need */
 const T = makeReactor({ Group, InstancedMesh, Object3D })

@@ -2,7 +2,6 @@ import React, {
   createContext,
   FC,
   ReactNode,
-  useContext,
   useLayoutEffect,
   useState
 } from "react"
@@ -17,7 +16,7 @@ export type TickerStage =
   | "lateUpdate"
   | "render"
 
-const TickerContext = createContext<TickerImpl>(null!)
+export const TickerContext = createContext<TickerImpl>(null!)
 
 export type TickerCallback = (dt: number) => void
 
@@ -99,13 +98,4 @@ export const Ticker: FC<{ children?: ReactNode; timeScale?: number }> = ({
   return (
     <TickerContext.Provider value={ticker}>{children}</TickerContext.Provider>
   )
-}
-
-export const useTicker = (stage: TickerStage, callback: TickerCallback) => {
-  const ticker = useContext(TickerContext)
-
-  useLayoutEffect(() => {
-    ticker.on(stage, callback)
-    return () => ticker.off(stage, callback)
-  })
 }

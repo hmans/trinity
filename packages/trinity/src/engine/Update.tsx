@@ -1,8 +1,9 @@
 import { FC } from "react"
 import { Object3D, WebGLRenderer } from "three"
-import { useRenderer } from "../engine/Renderer"
 import { useParent } from "../reactor"
-import { TickerStage, useTicker } from "./Ticker"
+import { useRenderer } from "./Renderer"
+import { TickerStage } from "./Ticker"
+import { useTicker } from "./useTicker"
 
 type UpdateFunction = (
   dt: number,

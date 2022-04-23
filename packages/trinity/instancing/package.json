@@ -1,4 +1,0 @@
-{
-  "main": "dist/react-trinity-instancing.cjs.js",
-  "module": "dist/react-trinity-instancing.esm.js"
-}
