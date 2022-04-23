@@ -13,7 +13,7 @@
     "@hmans/signal": "^0.2.2",
     "@hmans/ui": "^0.1.0",
     "@types/three": "^0.139.0",
-    "miniplex": "^0.9.0",
+    "miniplex": "^0.9.1",
     "miniplex-react": "^0.2.1",
     "p2-es": "^0.7.3",
     "popmotion": "^11.0.3",
