@@ -27,9 +27,13 @@ const RenderPipeline: FC<{
   </Composer>
 )
 
+function useNullableState<T>(initial?: T | (() => T)) {
+  return useState<T | null>(initial!)
+}
+
 const App = () => {
-  const [scene, setScene] = useState<THREE.Scene | null>()
-  const [camera, setCamera] = useState<THREE.PerspectiveCamera | null>()
+  const [scene, setScene] = useNullableState<THREE.Scene>()
+  const [camera, setCamera] = useNullableState<THREE.PerspectiveCamera>()
 
   return (
     <Ticker>
