@@ -62,7 +62,7 @@ export const Application: FC<{
     <Ticker>
       <Renderer>
         {scene && camera && <RenderPipeline scene={scene} camera={camera} />}
-        {scene && camera && <EventHandling scene={scene} camera={camera} />}
+        {/* {scene && camera && <EventHandling scene={scene} camera={camera} />} */}
 
         <T.Scene ref={setScene}>
           <ApplicationContext.Provider value={{ setCamera, setScene }}>
