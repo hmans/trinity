@@ -1,5 +1,5 @@
 /* Components */
-export { Application } from "./Application"
+export * from "./Application"
 export * from "./engine"
 export * from "./instancing"
 export * from "./loaders"
