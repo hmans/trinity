@@ -1,24 +1,33 @@
 import { IEntity } from "miniplex"
 import { createECS } from "miniplex-react"
-import React, { FC, forwardRef, useLayoutEffect, useRef } from "react"
+import React, {
+  FC,
+  forwardRef,
+  useImperativeHandle,
+  useLayoutEffect,
+  useRef
+} from "react"
 import mergeRefs from "react-merge-refs"
 import { Group, InstancedMesh, Object3D } from "three"
 import { useTicker } from "../engine"
-import { makeReactor, ReactorComponentProps } from "../reactor"
+import {
+  makeReactor,
+  ReactorComponentProps,
+  useManagedThreeObject
+} from "../reactor"
 
 /* Create a local reactor with the Three.js classes we need */
 const T = makeReactor({ Group, InstancedMesh, Object3D })
 
 type InstanceEntity = {
-  instance: {
-    /** The Three.js scene object defining this instance's transform. */
-    sceneObject: Object3D
-  }
-} & IEntity
+  /** The Three.js scene object defining this instance's transform. */
+  transform: Object3D
+  visible: boolean
+}
 
 export const makeInstanceComponents = () => {
   /* We're using Miniplex as a state container. */
-  const ecs = createECS<InstanceEntity>()
+  const ECS = createECS<InstanceEntity>()
 
   /* This component renders the InstancedMesh itself and continuously updates it
      from the data in the ECS. */
@@ -30,28 +39,28 @@ export const makeInstanceComponents = () => {
     /* The following hook will make sure this entire component gets re-rendered when
        the number of instance entities changes. We're using this to dynamically grow
        or shrink the instance buffer. */
-    const { entities } = ecs.useArchetype("instance")
+    const { entities } = ECS.useArchetype("transform", "visible")
 
     const instanceLimit =
       Math.floor(entities.length / countStep + 1) * countStep
 
     function updateInstances() {
+      const imesh = instancedMesh.current
+
       const l = entities.length
       let count = 0
-      for (let i = 0; i < l; i++) {
-        const { instance } = entities[i]
 
-        if (instance.sceneObject.visible) {
-          instancedMesh.current!.setMatrixAt(
-            i,
-            instance.sceneObject.matrixWorld
-          )
+      for (let i = 0; i < l; i++) {
+        const { transform, visible } = entities[i]
+
+        if (visible) {
+          imesh.setMatrixAt(i, transform.matrixWorld)
           count++
         }
       }
 
-      instancedMesh.current.instanceMatrix.needsUpdate = true
-      instancedMesh.current.count = count
+      imesh.instanceMatrix.needsUpdate = true
+      imesh.count = count
     }
 
     useTicker("render", updateInstances)
@@ -71,25 +80,23 @@ export const makeInstanceComponents = () => {
      to a three.js scene object. */
   const Instance = forwardRef<Group, ReactorComponentProps<typeof Group>>(
     ({ children, ...groupProps }, ref) => {
-      const group = useRef<Group>(null!)
+      const group = useManagedThreeObject(() => new Group())
 
-      useLayoutEffect(() => {
-        const entity = ecs.world.createEntity({
-          instance: {
-            sceneObject: group.current
-          }
-        })
-
-        return () => ecs.world.destroyEntity(entity)
-      }, [])
+      useImperativeHandle(ref, () => group)
 
       return (
-        <T.Group ref={mergeRefs([ref, group])} {...groupProps}>
-          {children}
-        </T.Group>
+        <ECS.Entity>
+          <ECS.Component name="transform">
+            <T.Group object={group} {...groupProps}>
+              {children}
+            </T.Group>
+          </ECS.Component>
+
+          <ECS.Component name="visible" data={true} />
+        </ECS.Entity>
       )
     }
   )
 
-  return { world: ecs.world, useArchetype: ecs.useArchetype, Root, Instance }
+  return { world: ECS.world, useArchetype: ECS.useArchetype, Root, Instance }
 }
