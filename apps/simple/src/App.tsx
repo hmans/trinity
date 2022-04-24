@@ -22,7 +22,7 @@ const RotationSystem = () => {
 
   function animateInstances(dt: number) {
     for (const { transform } of entities) {
-      if (transform) transform.rotation.x = transform.rotation.y += 2 * dt
+      transform.rotation.x = transform.rotation.y += 2 * dt
     }
   }
 

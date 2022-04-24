@@ -1,13 +1,5 @@
-import { IEntity } from "miniplex"
 import { createECS } from "miniplex-react"
-import React, {
-  FC,
-  forwardRef,
-  useImperativeHandle,
-  useLayoutEffect,
-  useRef
-} from "react"
-import mergeRefs from "react-merge-refs"
+import React, { FC, forwardRef, useImperativeHandle, useRef } from "react"
 import { Group, InstancedMesh, Object3D } from "three"
 import { useTicker } from "../engine"
 import {
@@ -79,17 +71,17 @@ export const makeInstanceComponents = () => {
   /* The Instance component will create a new ECS entity storing a reference
      to a three.js scene object. */
   const Instance = forwardRef<Group, ReactorComponentProps<typeof Group>>(
-    ({ children, ...groupProps }, ref) => {
+    (props, ref) => {
       const group = useManagedThreeObject(() => new Group())
-
+      // group.matrixAutoUpdate = false
       useImperativeHandle(ref, () => group)
+
+      /* TODO: put a ref on the Group and figure out how the cloneElement trick in miniplex-react can assign to multipe refs */
 
       return (
         <ECS.Entity>
           <ECS.Component name="transform">
-            <T.Group object={group} {...groupProps}>
-              {children}
-            </T.Group>
+            <T.Group object={group} {...props} />
           </ECS.Component>
 
           <ECS.Component name="visible" data={true} />
