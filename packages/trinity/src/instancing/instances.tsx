@@ -37,17 +37,14 @@ export const makeInstanceComponents = (
   /* This component renders the InstancedMesh itself and continuously updates it
      from the data in the ECS. */
   const Root: FC<ReactorComponentProps<typeof InstancedMesh> & {
-    countStep?: number
-  }> = ({ children, countStep = 1000, ...props }) => {
+    instanceLimit?: number
+  }> = ({ children, instanceLimit = 10000, ...props }) => {
     const instancedMesh = useRef<InstancedMesh>(null!)
 
     /* The following hook will make sure this entire component gets re-rendered when
        the number of instance entities changes. We're using this to dynamically grow
        or shrink the instance buffer. */
-    const { entities } = ECS.useArchetype("instance")
-
-    const instanceLimit =
-      (Math.floor(entities.length / countStep) + 1) * countStep
+    const { entities } = ECS.world
 
     function updateInstances() {
       const imesh = instancedMesh.current

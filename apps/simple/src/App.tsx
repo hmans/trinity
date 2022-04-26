@@ -14,7 +14,7 @@ const Thingy = makeInstanceComponents((world) => {
 
       transform.position.set(
         (Math.cos(i + t * 0.002) + Math.cos(i + t / 1000)) *
-          (10 + 15 * Math.cos(i / 3 + t * 0.001)),
+          (15 + 10 * Math.cos(i / 3 + t * 0.001)),
         Math.sin(i * 10 + t * 0.001) * (10 + 15 * Math.cos(i / 5 + t * 0.002)),
         Math.cos(i * 50 + t * 0.003) * (10 + 25 * Math.sin(i / 8 + t * 0.008))
       )
@@ -22,6 +22,8 @@ const Thingy = makeInstanceComponents((world) => {
     }
   }
 })
+
+const instanceCount = 1000
 
 const App = () => (
   <Application>
@@ -34,13 +36,13 @@ const App = () => (
         <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
 
         {/* Mount the root instancedmesh. The instances don't have to be children of this. */}
-        <Thingy.Root countStep={51000}>
+        <Thingy.Root instanceLimit={instanceCount}>
           <T.DodecahedronGeometry />
           <T.MeshStandardMaterial color="orange" />
         </Thingy.Root>
 
         {/* Spawn a (high) number of instances */}
-        <Thingy.ThinInstance count={500} />
+        <Thingy.ThinInstance count={instanceCount} />
       </>
     )}
   </Application>
