@@ -48,7 +48,8 @@ const App = () => (
         <ecs.Collection tag="thingy" initial={1000}>
           {() => (
             <>
-              <ecs.Component name="transform">
+              <Thingy.ThinInstance />
+              {/* <ecs.Component name="transform">
                 <Thingy.Instance
                   position={[
                     Math.random() * 50 - 25,
@@ -56,7 +57,7 @@ const App = () => (
                     Math.random() * 50 - 25
                   ]}
                 />
-              </ecs.Component>
+              </ecs.Component> */}
             </>
           )}
         </ecs.Collection>

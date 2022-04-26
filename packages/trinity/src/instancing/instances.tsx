@@ -1,3 +1,4 @@
+import { Tag } from "miniplex"
 import { createECS } from "miniplex-react"
 import React, { FC, forwardRef, useImperativeHandle, useRef } from "react"
 import { Group, InstancedMesh, Object3D } from "three"
@@ -12,8 +13,8 @@ import {
 const T = makeReactor({ Group, InstancedMesh, Object3D })
 
 type InstanceEntity = {
-  /** The Three.js scene object defining this instance's transform. */
-  transform: Object3D
+  instance: Tag
+  transform?: Object3D
   visible: boolean
 }
 
@@ -31,7 +32,7 @@ export const makeInstanceComponents = () => {
     /* The following hook will make sure this entire component gets re-rendered when
        the number of instance entities changes. We're using this to dynamically grow
        or shrink the instance buffer. */
-    const { entities } = ECS.useArchetype("transform", "visible")
+    const { entities } = ECS.world
 
     const instanceLimit =
       Math.floor(entities.length / countStep + 1) * countStep
@@ -45,7 +46,7 @@ export const makeInstanceComponents = () => {
       for (let i = 0; i < l; i++) {
         const { transform, visible } = entities[i]
 
-        if (visible) {
+        if (visible && transform) {
           imesh.setMatrixAt(i, transform.matrixWorld)
           count++
         }
@@ -90,5 +91,19 @@ export const makeInstanceComponents = () => {
     }
   )
 
-  return { world: ECS.world, useArchetype: ECS.useArchetype, Root, Instance }
+  const ThinInstance = () => {
+    return (
+      <ECS.Entity>
+        <ECS.Component name="instance" data={Tag} />
+      </ECS.Entity>
+    )
+  }
+
+  return {
+    world: ECS.world,
+    useArchetype: ECS.useArchetype,
+    Root,
+    Instance,
+    ThinInstance
+  }
 }
