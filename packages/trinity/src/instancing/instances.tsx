@@ -45,7 +45,7 @@ export const makeInstanceComponents = (
         const { transform, visible } = entities[i]
 
         if (visible) {
-          imesh.setMatrixAt(i, transform.matrix)
+          imesh.setMatrixAt(i, transform.matrixWorld)
           count++
         }
       }

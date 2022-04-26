@@ -14,11 +14,11 @@ const Thingy = makeInstanceComponents((world) => {
 
       transform.position.set(
         (Math.cos(i + t * 0.002) + Math.cos(i + t / 1000)) *
-          (15 + 10 * Math.cos(i / 3 + t * 0.001)),
+          (15 + 10 * Math.cos(i / 3 + t * 0.0008)),
         Math.sin(i * 10 + t * 0.001) * (10 + 15 * Math.cos(i / 5 + t * 0.002)),
         Math.cos(i * 50 + t * 0.003) * (10 + 25 * Math.sin(i / 8 + t * 0.008))
       )
-      transform.updateMatrix()
+      transform.updateMatrixWorld()
     }
   }
 })
