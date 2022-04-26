@@ -3,7 +3,7 @@ import T, { Application, makeInstanceComponents } from "react-trinity"
 /* Create components for an instanced mesh. We can pass a factory function
    returning an extra system that will get invoked every frame. */
 const Thingy = makeInstanceComponents((world) => {
-  const { entities } = world
+  const { entities } = world.archetype("transform")
 
   return () => {
     const l = entities.length
@@ -43,6 +43,8 @@ const App = () => (
 
         {/* Spawn a (high) number of instances */}
         <Thingy.ThinInstance count={instanceCount} />
+
+        {/* <Thingy.Instance /> */}
       </>
     )}
   </Application>

@@ -1,12 +1,7 @@
 import { Tag, World } from "miniplex"
 import { createECS } from "miniplex-react"
-import React, {
-  FC,
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef
-} from "react"
+import React, { FC, forwardRef, useEffect, useRef } from "react"
+import mergeRefs from "react-merge-refs"
 import { Group, InstancedMesh, Object3D } from "three"
 import { useTicker } from "../engine"
 import {
@@ -14,7 +9,6 @@ import {
   ReactorComponentProps,
   useManagedThreeObject
 } from "../reactor"
-import { applyProps } from "../reactor/lib/applyProps"
 
 /* Create a local reactor with the Three.js classes we need */
 const T = makeReactor({ Group, InstancedMesh, Object3D })
@@ -38,7 +32,7 @@ export const makeInstanceComponents = (
      from the data in the ECS. */
   const Root: FC<ReactorComponentProps<typeof InstancedMesh> & {
     instanceLimit?: number
-  }> = ({ children, instanceLimit = 10000, ...props }) => {
+  }> = ({ instanceLimit = 10000, ...props }) => {
     const instancedMesh = useRef<InstancedMesh>(null!)
 
     /* The following hook will make sure this entire component gets re-rendered when
@@ -56,10 +50,7 @@ export const makeInstanceComponents = (
         const { transform, visible } = entities[i]
 
         if (visible) {
-          if (transform) {
-            imesh.setMatrixAt(i, transform.matrix)
-          }
-
+          imesh.setMatrixAt(i, transform.matrix)
           count++
         }
       }
@@ -75,37 +66,33 @@ export const makeInstanceComponents = (
 
     return (
       <T.InstancedMesh
-        ref={instancedMesh}
         {...props}
+        ref={instancedMesh}
         args={[null!, null!, instanceLimit]}
-      >
-        {children}
-      </T.InstancedMesh>
+      />
     )
+  }
+
+  const useInstance = () => {
+    const group = useManagedThreeObject(() => new Group())
+
+    useEffect(() => {
+      const entity = ECS.world.createEntity({
+        instance: Tag,
+        transform: group,
+        visible: true
+      })
+
+      return () => ECS.world.destroyEntity(entity)
+    }, [])
+
+    return group
   }
 
   /* The Instance component will create a new ECS entity storing a reference
      to a three.js scene object. */
   const Instance = forwardRef<Group, ReactorComponentProps<typeof Group>>(
-    (props, ref) => {
-      const group = useManagedThreeObject(() => new Group())
-      applyProps(group, props)
-
-      /* TODO: parent?! */
-
-      useImperativeHandle(ref, () => group)
-
-      useEffect(() => {
-        const entity = ECS.world.createEntity({
-          instance: Tag,
-          transform: group,
-          visible: true
-        })
-        return () => ECS.world.destroyEntity(entity)
-      }, [])
-
-      return null
-    }
+    (props, ref) => <T.Group {...props} object={useInstance()} ref={ref} />
   )
 
   const useThinInstance = (count = 1) =>
