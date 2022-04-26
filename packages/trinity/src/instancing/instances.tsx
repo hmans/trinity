@@ -35,9 +35,6 @@ export const makeInstanceComponents = (
   }> = ({ instanceLimit = 10000, ...props }) => {
     const instancedMesh = useRef<InstancedMesh>(null!)
 
-    /* The following hook will make sure this entire component gets re-rendered when
-       the number of instance entities changes. We're using this to dynamically grow
-       or shrink the instance buffer. */
     const { entities } = ECS.world
 
     function updateInstances() {
