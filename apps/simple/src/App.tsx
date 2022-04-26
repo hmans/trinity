@@ -13,7 +13,8 @@ const Thingy = makeInstanceComponents((world) => {
       const { transform } = entities[i]
 
       transform.position.set(
-        Math.cos(i + t * 0.002) * (10 + 15 * Math.cos(i / 3 + t * 0.002)),
+        (Math.cos(i + t * 0.002) + Math.cos(i + t / 1000)) *
+          (10 + 15 * Math.cos(i / 3 + t * 0.001)),
         Math.sin(i * 10 + t * 0.001) * (10 + 15 * Math.cos(i / 5 + t * 0.002)),
         Math.cos(i * 50 + t * 0.003) * (10 + 25 * Math.sin(i / 8 + t * 0.008))
       )
@@ -26,6 +27,7 @@ const App = () => (
   <Application>
     {({ setCamera }) => (
       <>
+        <T.Fog args={["#000", 64, 128]} />
         <T.PerspectiveCamera position={[0, 0, 100]} ref={setCamera} />
 
         <T.AmbientLight intensity={0.2} />
@@ -38,7 +40,7 @@ const App = () => (
         </Thingy.Root>
 
         {/* Spawn a (high) number of instances */}
-        <Thingy.ThinInstance count={10000} />
+        <Thingy.ThinInstance count={500} />
       </>
     )}
   </Application>
