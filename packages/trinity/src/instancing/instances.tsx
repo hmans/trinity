@@ -44,10 +44,10 @@ export const makeInstanceComponents = (
     /* The following hook will make sure this entire component gets re-rendered when
        the number of instance entities changes. We're using this to dynamically grow
        or shrink the instance buffer. */
-    const { entities } = ECS.world
+    const { entities } = ECS.useArchetype("instance")
 
     const instanceLimit =
-      Math.floor(entities.length / countStep + 1) * countStep
+      (Math.floor(entities.length / countStep) + 1) * countStep
 
     function updateInstances() {
       const imesh = instancedMesh.current
