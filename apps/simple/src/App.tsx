@@ -1,14 +1,7 @@
 import { Tag } from "miniplex"
 import { createECS } from "miniplex-react"
-import { useEffect } from "react"
-import T, {
-  Application,
-  makeInstanceComponents,
-  useTicker
-} from "react-trinity"
+import T, { Application, makeInstanceComponents } from "react-trinity"
 import { Object3D } from "three"
-
-const Thingy = makeInstanceComponents()
 
 type Entity = {
   thingy: Tag
@@ -17,22 +10,23 @@ type Entity = {
 
 const ecs = createECS<Entity>()
 
-const RotationSystem = () => {
-  const { entities } = ecs.world.archetype("transform")
+const Thingy = makeInstanceComponents((world) => {
+  const { entities } = world
 
-  function animateInstances(dt: number) {
+  return () => {
     for (const { transform } of entities) {
-      transform.rotation.x = transform.rotation.y += 2 * dt
+      transform.position.set(
+        Math.random() * 50 - 25,
+        Math.random() * 50 - 25,
+        Math.random() * 50 - 25
+      )
+      transform.updateMatrix()
     }
   }
-
-  useTicker("update", animateInstances)
-
-  return null
-}
+})
 
 const ThingyInstances = () => {
-  Thingy.useThinInstance(100000)
+  Thingy.useThinInstance(5000)
   return null
 }
 
@@ -69,8 +63,6 @@ const App = () => (
             </>
           )}
         </ecs.Collection> */}
-
-        <RotationSystem />
       </>
     )}
   </Application>

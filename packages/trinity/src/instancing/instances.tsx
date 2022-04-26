@@ -1,4 +1,4 @@
-import { Tag } from "miniplex"
+import { Tag, World } from "miniplex"
 import { createECS } from "miniplex-react"
 import React, {
   FC,
@@ -20,13 +20,18 @@ const T = makeReactor({ Group, InstancedMesh, Object3D })
 
 type InstanceEntity = {
   instance: Tag
-  transform?: Object3D
+  transform: Object3D
   visible: boolean
 }
 
-export const makeInstanceComponents = () => {
+export const makeInstanceComponents = (
+  systemFactory?: (world: World<InstanceEntity>) => () => void
+) => {
   /* We're using Miniplex as a state container. */
   const ECS = createECS<InstanceEntity>()
+
+  /* If a system factory has been passed, prepare the custom system. */
+  const system = systemFactory && systemFactory(ECS.world)
 
   /* This component renders the InstancedMesh itself and continuously updates it
      from the data in the ECS. */
@@ -43,8 +48,6 @@ export const makeInstanceComponents = () => {
     const instanceLimit =
       Math.floor(entities.length / countStep + 1) * countStep
 
-    const dummy = new Object3D()
-
     function updateInstances() {
       const imesh = instancedMesh.current
 
@@ -57,15 +60,8 @@ export const makeInstanceComponents = () => {
         if (visible) {
           if (transform) {
             imesh.setMatrixAt(i, transform.matrix)
-          } else {
-            dummy.position.set(
-              Math.random() * 50 - 25,
-              Math.random() * 50 - 25,
-              Math.random() * 50 - 25
-            )
-            dummy.updateMatrix()
-            imesh.setMatrixAt(i, dummy.matrix)
           }
+
           count++
         }
       }
@@ -74,7 +70,10 @@ export const makeInstanceComponents = () => {
       imesh.count = count
     }
 
-    useTicker("render", updateInstances)
+    useTicker("render", () => {
+      system?.()
+      updateInstances()
+    })
 
     return (
       <T.InstancedMesh
@@ -117,6 +116,7 @@ export const makeInstanceComponents = () => {
         entities.push(
           ECS.world.createEntity({
             instance: Tag,
+            transform: new Object3D(),
             visible: true
           })
         )
