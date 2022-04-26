@@ -4810,13 +4810,6 @@ minimist@^1.2.0:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
   integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
 
-miniplex-react@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/miniplex-react/-/miniplex-react-0.2.3.tgz#729d8672fc8c10daec7ec59cbd36baf27c1bf01f"
-  integrity sha512-MBYv8defis892FqY0rFtXA/fBnfytDxzzvEYdKKoRJaBg0PqYMf2h6+vMt3XXXlGRGGAc46r78+Sby5dORcmiw==
-  dependencies:
-    "@hmans/react-toolbox" "^0.1.4"
-
 miniplex-react@^0.2.4:
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/miniplex-react/-/miniplex-react-0.2.4.tgz#f83de63681ce28f7fc4bbbab31403c97aaef0d7f"
