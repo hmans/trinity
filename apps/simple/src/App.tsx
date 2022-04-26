@@ -31,6 +31,11 @@ const RotationSystem = () => {
   return null
 }
 
+const ThingyInstances = () => {
+  Thingy.useThinInstance(100000)
+  return null
+}
+
 const App = () => (
   <Application>
     {({ setCamera }) => (
@@ -40,16 +45,19 @@ const App = () => (
         <T.AmbientLight intensity={0.2} />
         <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
 
-        <Thingy.Root countStep={6000}>
+        <Thingy.Root countStep={110000}>
           <T.DodecahedronGeometry />
           <T.MeshStandardMaterial color="hotpink" />
         </Thingy.Root>
 
-        <ecs.Collection tag="thingy" initial={1000}>
+        <ThingyInstances />
+
+        {/* <ecs.Collection tag="thingy" initial={10000}>
           {() => (
             <>
               <Thingy.ThinInstance />
-              {/* <ecs.Component name="transform">
+
+               <ecs.Component name="transform">
                 <Thingy.Instance
                   position={[
                     Math.random() * 50 - 25,
@@ -57,10 +65,10 @@ const App = () => (
                     Math.random() * 50 - 25
                   ]}
                 />
-              </ecs.Component> */}
+              </ecs.Component>
             </>
           )}
-        </ecs.Collection>
+        </ecs.Collection> */}
 
         <RotationSystem />
       </>

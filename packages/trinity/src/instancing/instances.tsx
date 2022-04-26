@@ -1,6 +1,12 @@
 import { Tag } from "miniplex"
 import { createECS } from "miniplex-react"
-import React, { FC, forwardRef, useImperativeHandle, useRef } from "react"
+import React, {
+  FC,
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef
+} from "react"
 import { Group, InstancedMesh, Object3D } from "three"
 import { useTicker } from "../engine"
 import {
@@ -37,6 +43,8 @@ export const makeInstanceComponents = () => {
     const instanceLimit =
       Math.floor(entities.length / countStep + 1) * countStep
 
+    const dummy = new Object3D()
+
     function updateInstances() {
       const imesh = instancedMesh.current
 
@@ -46,8 +54,18 @@ export const makeInstanceComponents = () => {
       for (let i = 0; i < l; i++) {
         const { transform, visible } = entities[i]
 
-        if (visible && transform) {
-          imesh.setMatrixAt(i, transform.matrixWorld)
+        if (visible) {
+          if (transform) {
+            imesh.setMatrixAt(i, transform.matrix)
+          } else {
+            dummy.position.set(
+              Math.random() * 50 - 25,
+              Math.random() * 50 - 25,
+              Math.random() * 50 - 25
+            )
+            dummy.updateMatrix()
+            imesh.setMatrixAt(i, dummy.matrix)
+          }
           count++
         }
       }
@@ -91,17 +109,36 @@ export const makeInstanceComponents = () => {
     }
   )
 
+  const useThinInstance = (count = 1) =>
+    useEffect(() => {
+      const entities = new Array<InstanceEntity>()
+
+      for (let i = 0; i < count; i++) {
+        entities.push(
+          ECS.world.createEntity({
+            instance: Tag,
+            visible: true
+          })
+        )
+      }
+
+      return () => {
+        for (let i = 0; i < count; i++) {
+          ECS.world.destroyEntity(entities[i])
+        }
+      }
+    }, [])
+
   const ThinInstance = () => {
-    return (
-      <ECS.Entity>
-        <ECS.Component name="instance" data={Tag} />
-      </ECS.Entity>
-    )
+    useThinInstance()
+
+    return null
   }
 
   return {
     world: ECS.world,
     useArchetype: ECS.useArchetype,
+    useThinInstance,
     Root,
     Instance,
     ThinInstance
