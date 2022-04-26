@@ -132,9 +132,8 @@ export const makeInstanceComponents = (
       }
     }, [])
 
-  const ThinInstance = () => {
-    useThinInstance()
-
+  const ThinInstance: FC<{ count?: number }> = ({ count = 1 }) => {
+    useThinInstance(count)
     return null
   }
 
