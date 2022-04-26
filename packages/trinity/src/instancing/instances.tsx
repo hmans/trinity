@@ -14,6 +14,7 @@ import {
   ReactorComponentProps,
   useManagedThreeObject
 } from "../reactor"
+import { applyProps } from "../reactor/lib/applyProps"
 
 /* Create a local reactor with the Three.js classes we need */
 const T = makeReactor({ Group, InstancedMesh, Object3D })
@@ -91,20 +92,22 @@ export const makeInstanceComponents = (
   const Instance = forwardRef<Group, ReactorComponentProps<typeof Group>>(
     (props, ref) => {
       const group = useManagedThreeObject(() => new Group())
-      // group.matrixAutoUpdate = false
+      applyProps(group, props)
+
+      /* TODO: parent?! */
+
       useImperativeHandle(ref, () => group)
 
-      /* TODO: put a ref on the Group and figure out how the cloneElement trick in miniplex-react can assign to multipe refs */
+      useEffect(() => {
+        const entity = ECS.world.createEntity({
+          instance: Tag,
+          transform: group,
+          visible: true
+        })
+        return () => ECS.world.destroyEntity(entity)
+      }, [])
 
-      return (
-        <ECS.Entity>
-          <ECS.Component name="transform">
-            <T.Group object={group} {...props} />
-          </ECS.Component>
-
-          <ECS.Component name="visible" data={true} />
-        </ECS.Entity>
-      )
+      return null
     }
   )
 

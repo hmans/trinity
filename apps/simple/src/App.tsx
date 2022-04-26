@@ -1,14 +1,4 @@
-import { Tag } from "miniplex"
-import { createECS } from "miniplex-react"
 import T, { Application, makeInstanceComponents } from "react-trinity"
-import { Object3D } from "three"
-
-type Entity = {
-  thingy: Tag
-  transform: Object3D
-}
-
-const ecs = createECS<Entity>()
 
 const Thingy = makeInstanceComponents((world) => {
   const { entities } = world
@@ -26,7 +16,7 @@ const Thingy = makeInstanceComponents((world) => {
 })
 
 const ThingyInstances = () => {
-  Thingy.useThinInstance(5000)
+  Thingy.useThinInstance(10000)
   return null
 }
 
@@ -45,24 +35,6 @@ const App = () => (
         </Thingy.Root>
 
         <ThingyInstances />
-
-        {/* <ecs.Collection tag="thingy" initial={10000}>
-          {() => (
-            <>
-              <Thingy.ThinInstance />
-
-               <ecs.Component name="transform">
-                <Thingy.Instance
-                  position={[
-                    Math.random() * 50 - 25,
-                    Math.random() * 50 - 25,
-                    Math.random() * 50 - 25
-                  ]}
-                />
-              </ecs.Component>
-            </>
-          )}
-        </ecs.Collection> */}
       </>
     )}
   </Application>
