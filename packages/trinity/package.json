@@ -34,7 +34,7 @@
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4",
     "miniplex": "^0.9.2",
-    "miniplex-react": "^0.2.3",
+    "miniplex-react": "^0.2.4",
     "react-merge-refs": "^1.1.0",
     "troika-three-text": "^0.46.4"
   },

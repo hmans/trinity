@@ -18,7 +18,7 @@ type Entity = {
 const ecs = createECS<Entity>()
 
 const RotationSystem = () => {
-  const { entities } = ecs.useArchetype("transform")
+  const { entities } = ecs.world.archetype("transform")
 
   function animateInstances(dt: number) {
     for (const { transform } of entities) {
@@ -46,8 +46,8 @@ const App = () => (
         </Thingy.Root>
 
         <ecs.Collection tag="thingy" initial={1000}>
-          {(entity) => (
-            <ecs.Entity entity={entity}>
+          {() => (
+            <>
               <ecs.Component name="transform">
                 <Thingy.Instance
                   position={[
@@ -57,7 +57,7 @@ const App = () => (
                   ]}
                 />
               </ecs.Component>
-            </ecs.Entity>
+            </>
           )}
         </ecs.Collection>
 
