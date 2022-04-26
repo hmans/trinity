@@ -29,7 +29,7 @@ const App = () => (
         <T.AmbientLight intensity={0.2} />
         <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
 
-        <Thingy.Root countStep={110000}>
+        <Thingy.Root countStep={11000}>
           <T.DodecahedronGeometry />
           <T.MeshStandardMaterial color="hotpink" />
         </Thingy.Root>
