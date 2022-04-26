@@ -37,7 +37,7 @@ export const makeInstanceComponents = (
 
     const { entities } = ECS.world
 
-    function updateInstances() {
+    function updateInstanceMatrix() {
       const imesh = instancedMesh.current
 
       const l = entities.length
@@ -58,7 +58,7 @@ export const makeInstanceComponents = (
 
     useTicker("render", () => {
       system?.()
-      updateInstances()
+      updateInstanceMatrix()
     })
 
     return (
