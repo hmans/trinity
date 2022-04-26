@@ -1,7 +1,6 @@
 import { Tag, World } from "miniplex"
 import { createECS } from "miniplex-react"
 import React, { FC, forwardRef, useEffect, useRef } from "react"
-import mergeRefs from "react-merge-refs"
 import { Group, InstancedMesh, Object3D } from "three"
 import { useTicker } from "../engine"
 import {
@@ -39,7 +38,6 @@ export const makeInstanceComponents = (
 
     function updateInstanceMatrix() {
       const imesh = instancedMesh.current
-
       const l = entities.length
       let count = 0
 
