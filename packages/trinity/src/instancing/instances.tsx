@@ -18,9 +18,11 @@ export type InstanceEntity<CustomComponents = IEntity> = CustomComponents &
   InstanceComponents
 
 export const makeInstanceComponents = <Custom extends IEntity = IEntity>({
-  systemFactory
+  systemFactory,
+  entityFactory
 }: {
-  systemFactory?: (world: World<InstanceEntity<Custom>>) => () => void
+  entityFactory?: () => Custom
+  systemFactory?: (world: World<InstanceEntity<Custom>>) => (dt: number) => void
 }) => {
   /* We're using Miniplex as a state container. */
   const ECS = createECS<InstanceEntity<Custom>>()
@@ -55,8 +57,8 @@ export const makeInstanceComponents = <Custom extends IEntity = IEntity>({
       imesh.count = count
     }
 
-    useTicker("render", () => {
-      system?.()
+    useTicker("render", (dt) => {
+      system?.(dt)
       updateInstanceMatrix()
     })
 
@@ -77,6 +79,7 @@ export const makeInstanceComponents = <Custom extends IEntity = IEntity>({
 
   const useInstances = (count = 1) =>
     ECS.useEntities(count, () => ({
+      ...(entityFactory ? entityFactory() : {}),
       instance: Tag,
       transform: new Object3D(),
       visible: true

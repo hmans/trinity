@@ -15,29 +15,53 @@ const Thingy = makeInstanceComponents<{
     my: number
   }
 }>({
+  entityFactory: () => ({
+    particle: {
+      t: Math.random() * 100,
+      factor: 20 + Math.random() * 100,
+      speed: 0.01 + Math.random() * 2,
+      xFactor: -20 + Math.random() * 40,
+      yFactor: -20 + Math.random() * 40,
+      zFactor: -20 + Math.random() * 40,
+      mx: 0,
+      my: 0
+    }
+  }),
+
   systemFactory: (world) => {
     const { entities } = world.archetype("transform")
 
-    const origin = new Vector3()
-    const local = new Vector3()
-
-    return () => {
+    return (dt) => {
       const l = entities.length
       const t = performance.now() / 1000
 
-      /* Calculate origin */
-      origin.set(Math.cos(t) * 20, Math.sin(t) * 20, Math.cos(t) * 20)
-
       for (let i = 0; i < l; i++) {
-        const { transform } = entities[i]
+        const { particle, transform } = entities[i]
+        let { t, factor, speed, xFactor, yFactor, zFactor } = particle
 
-        local.set(
-          Math.cos(t * 2 + i * 1) * 3,
-          Math.sin(t * 1.5 + i * 2) * 3,
-          Math.cos(t * 0.8 + i * 10) * 3
+        t = particle.t += (dt * speed) / 2
+
+        const a = Math.cos(t) + Math.sin(t) * 0.1
+        const b = Math.sin(t) + Math.cos(t * 2) * 0.1
+        const s = Math.max(1.5, Math.cos(t) * 5)
+
+        transform.position.set(
+          (particle.mx / 10) * a +
+            xFactor +
+            Math.cos((t / 10) * factor) +
+            (Math.sin(t * 1) * factor) / 10,
+          (particle.my / 10) * b +
+            yFactor +
+            Math.sin((t / 10) * factor) +
+            (Math.cos(t * 2) * factor) / 10,
+          (particle.my / 10) * b +
+            zFactor +
+            Math.cos((t / 10) * factor) +
+            (Math.sin(t * 3) * factor) / 10
         )
 
-        transform.position.copy(origin).add(local)
+        transform.scale.setScalar(s)
+
         transform.updateMatrixWorld()
       }
     }
