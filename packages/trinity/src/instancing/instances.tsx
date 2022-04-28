@@ -69,21 +69,8 @@ export const makeInstanceComponents = (
     )
   }
 
-  /* Future miniplex-react glue */
-  const useEntity = (entityFn: () => InstanceEntity) => {
-    const entity = useConst<InstanceEntity>(entityFn)
-
-    useEffect(() => {
-      ECS.world.createEntity(entity)
-      return () => ECS.world.destroyEntity(entity)
-    }, [])
-
-    return entity
-  }
-
-  /* Using it in my instanced mesh API */
   const useInstance = () =>
-    useEntity(() => ({
+    ECS.useEntity(() => ({
       instance: Tag,
       transform: new Object3D(),
       visible: true
