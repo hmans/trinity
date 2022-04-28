@@ -1,4 +1,4 @@
-import { Tag, World } from "miniplex"
+import { IEntity, Tag, World } from "miniplex"
 import { createECS } from "miniplex-react"
 import React, { FC, forwardRef, useRef } from "react"
 import { Group, InstancedMesh, Object3D } from "three"
@@ -8,17 +8,22 @@ import { makeReactor, ReactorComponentProps } from "../reactor"
 /* Create a local reactor with the Three.js classes we need */
 const T = makeReactor({ Group, InstancedMesh, Object3D })
 
-type InstanceEntity = {
+export type InstanceComponents = {
   instance: Tag
   transform: Object3D
   visible: boolean
 }
 
-export const makeInstanceComponents = (
-  systemFactory?: (world: World<InstanceEntity>) => () => void
-) => {
+export type InstanceEntity<CustomComponents = IEntity> = CustomComponents &
+  InstanceComponents
+
+export const makeInstanceComponents = <Custom extends IEntity = IEntity>({
+  systemFactory
+}: {
+  systemFactory?: (world: World<InstanceEntity<Custom>>) => () => void
+}) => {
   /* We're using Miniplex as a state container. */
-  const ECS = createECS<InstanceEntity>()
+  const ECS = createECS<InstanceEntity<Custom>>()
 
   /* If a system factory has been passed, prepare the custom system. */
   const system = systemFactory && systemFactory(ECS.world)
