@@ -1,7 +1,6 @@
 import React, {
   createContext,
   forwardRef,
-  ReactNode,
   useContext,
   useEffect,
   useImperativeHandle,
@@ -35,9 +34,6 @@ export const Renderer = forwardRef<WebGLRenderer, RendererProps>(
         renderer.autoClear = false
         renderer.setPixelRatio(1)
         renderer.outputEncoding = sRGBEncoding
-        // renderer.toneMapping = THREE.ACESFilmicToneMapping
-        // renderer.toneMapping = THREE.ReinhardToneMapping
-        // renderer.toneMappingExposure = 1.25
 
         renderer.setSize(canvas.clientWidth, canvas.clientHeight)
 
