@@ -69,49 +69,28 @@ export const makeInstanceComponents = (
     )
   }
 
-  const useInstance = () =>
-    ECS.useEntity(() => ({
+  const Instance = forwardRef<Group, ReactorComponentProps<typeof Group>>(
+    (props, ref) => (
+      <T.Object3D {...props} object={useInstances(1)[0].transform} ref={ref} />
+    )
+  )
+
+  const useInstances = (count = 1) =>
+    ECS.useEntities(count, () => ({
       instance: Tag,
       transform: new Object3D(),
       visible: true
     }))
 
-  const Instance = forwardRef<Group, ReactorComponentProps<typeof Group>>(
-    (props, ref) => (
-      <T.Object3D {...props} object={useInstance().transform} ref={ref} />
-    )
-  )
-
-  const useThinInstance = (count = 1) =>
-    useEffect(() => {
-      const entities = new Array<InstanceEntity>()
-
-      for (let i = 0; i < count; i++) {
-        entities.push(
-          ECS.world.createEntity({
-            instance: Tag,
-            transform: new Object3D(),
-            visible: true
-          })
-        )
-      }
-
-      return () => {
-        for (let i = 0; i < count; i++) {
-          ECS.world.destroyEntity(entities[i])
-        }
-      }
-    }, [])
-
   const ThinInstance: FC<{ count?: number }> = ({ count = 1 }) => {
-    useThinInstance(count)
+    useInstances(count)
     return null
   }
 
   return {
     world: ECS.world,
     useArchetype: ECS.useArchetype,
-    useThinInstance,
+    useInstances,
     Root,
     Instance,
     ThinInstance
