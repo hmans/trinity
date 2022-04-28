@@ -61,7 +61,9 @@ export const Application: FC<{
   return (
     <Ticker>
       <Renderer>
-        {scene && camera && <RenderPipeline scene={scene} camera={camera} />}
+        {scene && camera && (
+          <RenderPipeline scene={scene} camera={camera} bloom />
+        )}
         {/* {scene && camera && <EventHandling scene={scene} camera={camera} />} */}
 
         <T.Scene ref={setScene}>
