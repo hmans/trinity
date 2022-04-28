@@ -1,3 +1,4 @@
+import { useConst } from "@hmans/react-toolbox"
 import { Tag, World } from "miniplex"
 import { createECS } from "miniplex-react"
 import React, { FC, forwardRef, useEffect, useRef } from "react"
@@ -68,26 +69,30 @@ export const makeInstanceComponents = (
     )
   }
 
-  const useInstance = () => {
-    const group = useManagedThreeObject(() => new Group())
+  /* Future miniplex-react glue */
+  const useEntity = (entityFn: () => InstanceEntity) => {
+    const entity = useConst<InstanceEntity>(entityFn)
 
     useEffect(() => {
-      const entity = ECS.world.createEntity({
-        instance: Tag,
-        transform: group,
-        visible: true
-      })
-
+      ECS.world.createEntity(entity)
       return () => ECS.world.destroyEntity(entity)
     }, [])
 
-    return group
+    return entity
   }
 
-  /* The Instance component will create a new ECS entity storing a reference
-     to a three.js scene object. */
+  /* Using it in my instanced mesh API */
+  const useInstance = () =>
+    useEntity(() => ({
+      instance: Tag,
+      transform: new Object3D(),
+      visible: true
+    }))
+
   const Instance = forwardRef<Group, ReactorComponentProps<typeof Group>>(
-    (props, ref) => <T.Group {...props} object={useInstance()} ref={ref} />
+    (props, ref) => (
+      <T.Object3D {...props} object={useInstance().transform} ref={ref} />
+    )
   )
 
   const useThinInstance = (count = 1) =>
