@@ -1,14 +1,9 @@
-import { useConst } from "@hmans/react-toolbox"
 import { Tag, World } from "miniplex"
 import { createECS } from "miniplex-react"
-import React, { FC, forwardRef, useEffect, useRef } from "react"
+import React, { FC, forwardRef, useRef } from "react"
 import { Group, InstancedMesh, Object3D } from "three"
 import { useTicker } from "../engine"
-import {
-  makeReactor,
-  ReactorComponentProps,
-  useManagedThreeObject
-} from "../reactor"
+import { makeReactor, ReactorComponentProps } from "../reactor"
 
 /* Create a local reactor with the Three.js classes we need */
 const T = makeReactor({ Group, InstancedMesh, Object3D })
