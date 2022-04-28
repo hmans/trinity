@@ -1,8 +1,5 @@
-import T, { Application, makeInstanceComponents } from "react-trinity"
-import { Vector3 } from "three"
+import T, { Application, makeInstanceComponents, Update } from "react-trinity"
 
-/* Create components for an instanced mesh. We can pass a factory function
-   returning an extra system that will get invoked every frame. */
 const Thingy = makeInstanceComponents<{
   particle: {
     t: number
@@ -32,18 +29,14 @@ const Thingy = makeInstanceComponents<{
     const { entities } = world.archetype("transform")
 
     return (dt) => {
-      const l = entities.length
-      const t = performance.now() / 1000
-
-      for (let i = 0; i < l; i++) {
-        const { particle, transform } = entities[i]
+      for (const { particle, transform } of entities) {
         let { t, factor, speed, xFactor, yFactor, zFactor } = particle
 
         t = particle.t += (dt * speed) / 2
 
         const a = Math.cos(t) + Math.sin(t) * 0.1
         const b = Math.sin(t) + Math.cos(t * 2) * 0.1
-        const s = Math.max(1.5, Math.cos(t) * 5)
+        const s = Math.max(1, Math.cos(t) * 3)
 
         transform.position.set(
           (particle.mx / 10) * a +
@@ -68,7 +61,7 @@ const Thingy = makeInstanceComponents<{
   }
 })
 
-const instanceCount = 1000
+const instanceCount = 2000
 
 const App = () => (
   <Application>
@@ -77,19 +70,51 @@ const App = () => (
         <T.Fog args={["#000", 64, 128]} />
         <T.PerspectiveCamera position={[0, 0, 100]} ref={setCamera} />
 
-        <T.AmbientLight intensity={0.2} />
-        <T.DirectionalLight intensity={0.7} position={[10, 10, 10]} />
+        <T.AmbientLight intensity={0.1} />
+
+        <T.DirectionalLight
+          intensity={1}
+          position={[10, 30, 10]}
+          castShadow
+          shadow-mapSize-width={512}
+          shadow-mapSize-height={512}
+          shadow-camera-near={0.5}
+          shadow-camera-far={1500}
+          shadow-camera-left={-100}
+          shadow-camera-right={100}
+          shadow-camera-top={100}
+          shadow-camera-bottom={-100}
+        />
+
+        <T.DirectionalLight
+          intensity={1}
+          position={[-10, -10, -10]}
+          color="orange"
+        />
 
         {/* Mount the root instancedmesh. The instances don't have to be children of this. */}
-        <Thingy.Root instanceLimit={instanceCount}>
-          <T.DodecahedronGeometry />
-          <T.MeshStandardMaterial color="orange" />
+        <Thingy.Root
+          instanceLimit={instanceCount + 100}
+          castShadow
+          receiveShadow
+        >
+          <T.SphereGeometry />
+          <T.MeshStandardMaterial color="#444" />
+
+          <Update stage="update">
+            {(dt, { parent }) => {
+              parent.rotation.x = parent.rotation.y += 0.2 * dt
+            }}
+          </Update>
         </Thingy.Root>
 
         {/* Spawn a (high) number of instances */}
         <Thingy.ThinInstance count={instanceCount} />
 
-        {/* <Thingy.Instance /> */}
+        <T.Mesh position={[0, 1, 0]} rotation-x={Math.PI}>
+          <T.PlaneGeometry args={[1000, 1000]} />
+          <T.MeshStandardMaterial color="hotpink" />
+        </T.Mesh>
       </>
     )}
   </Application>

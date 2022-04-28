@@ -71,12 +71,6 @@ export const makeInstanceComponents = <Custom extends IEntity = IEntity>({
     )
   }
 
-  const Instance = forwardRef<Group, ReactorComponentProps<typeof Group>>(
-    (props, ref) => (
-      <T.Object3D {...props} object={useInstances(1)[0].transform} ref={ref} />
-    )
-  )
-
   const useInstances = (count = 1) =>
     ECS.useEntities(count, () => ({
       ...(entityFactory ? entityFactory() : {}),
@@ -84,6 +78,12 @@ export const makeInstanceComponents = <Custom extends IEntity = IEntity>({
       transform: new Object3D(),
       visible: true
     }))
+
+  const Instance = forwardRef<Group, ReactorComponentProps<typeof Group>>(
+    (props, ref) => (
+      <T.Object3D {...props} object={useInstances(1)[0].transform} ref={ref} />
+    )
+  )
 
   const ThinInstance: FC<{ count?: number }> = ({ count = 1 }) => {
     useInstances(count)
