@@ -74,12 +74,12 @@ const App = () => (
 
         <T.DirectionalLight
           intensity={1.3}
-          position={[10, 30, 10]}
+          position={[100, 300, 100]}
           castShadow
           shadow-mapSize-width={512}
           shadow-mapSize-height={512}
           shadow-camera-near={0.5}
-          shadow-camera-far={1500}
+          shadow-camera-far={500}
           shadow-camera-left={-100}
           shadow-camera-right={100}
           shadow-camera-top={100}
