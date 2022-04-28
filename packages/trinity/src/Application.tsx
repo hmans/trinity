@@ -8,7 +8,8 @@ import React, {
 import * as THREE from "three"
 import T from "."
 import { Composer, OnWindowResize, Renderer, Ticker } from "./engine"
-import { RenderPass, UnrealBloomPass } from "./postprocessing"
+import { EffectPass, RenderPass, UnrealBloomPass } from "./postprocessing"
+import { AdaptiveToneMappingPass } from "three/examples/jsm/postprocessing/AdaptiveToneMappingPass.js"
 
 const RenderPipeline: FC<{
   scene: THREE.Scene
@@ -18,6 +19,7 @@ const RenderPipeline: FC<{
   <Composer>
     <RenderPass scene={scene} camera={camera} />
     {bloom && <UnrealBloomPass />}
+    <EffectPass pass={AdaptiveToneMappingPass} args={[true, 256]} />
 
     <OnWindowResize>
       {() => {
