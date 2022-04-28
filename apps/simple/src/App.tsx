@@ -1,23 +1,31 @@
 import T, { Application, makeInstanceComponents } from "react-trinity"
+import { Vector3 } from "three"
 
 /* Create components for an instanced mesh. We can pass a factory function
    returning an extra system that will get invoked every frame. */
 const Thingy = makeInstanceComponents((world) => {
   const { entities } = world.archetype("transform")
 
+  const origin = new Vector3()
+  const local = new Vector3()
+
   return () => {
     const l = entities.length
-    const t = performance.now()
+    const t = performance.now() / 1000
+
+    /* Calculate origin */
+    origin.set(Math.cos(t) * 20, Math.sin(t) * 20, Math.cos(t) * 20)
 
     for (let i = 0; i < l; i++) {
       const { transform } = entities[i]
 
-      transform.position.set(
-        (Math.cos(i + t * 0.002) + Math.cos(i + t / 1000)) *
-          (15 + 10 * Math.cos(i / 3 + t * 0.0008)),
-        Math.sin(i * 10 + t * 0.001) * (10 + 15 * Math.cos(i / 5 + t * 0.002)),
-        Math.cos(i * 50 + t * 0.003) * (10 + 25 * Math.sin(i / 8 + t * 0.008))
+      local.set(
+        Math.cos(t * 2 + i * 1) * 3,
+        Math.sin(t * 1.5 + i * 2) * 3,
+        Math.cos(t * 0.8 + i * 10) * 3
       )
+
+      transform.position.copy(origin).add(local)
       transform.updateMatrixWorld()
     }
   }
