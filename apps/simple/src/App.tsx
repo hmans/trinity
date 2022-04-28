@@ -66,6 +66,7 @@ const App = () => (
   <Application>
     {({ setCamera }) => (
       <>
+        <T.Color args={["#333"]} attach="background" />
         <T.Fog args={["#000", 64, 128]} />
         <T.PerspectiveCamera position={[0, 0, 100]} ref={setCamera} />
 
