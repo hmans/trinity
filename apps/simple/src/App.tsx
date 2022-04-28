@@ -60,7 +60,7 @@ const Thingy = makeInstanceComponents<{
   }
 })
 
-const instanceCount = 2000
+const instanceCount = 1000
 
 const App = () => (
   <Application>

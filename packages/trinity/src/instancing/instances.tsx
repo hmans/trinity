@@ -1,7 +1,7 @@
 import { IEntity, Tag, World } from "miniplex"
 import { createECS } from "miniplex-react"
-import React, { FC, forwardRef, useRef } from "react"
-import { Group, InstancedMesh, Object3D } from "three"
+import React, { FC, forwardRef, useEffect, useRef } from "react"
+import { DynamicDrawUsage, Group, InstancedMesh, Object3D, Usage } from "three"
 import { useTicker } from "../engine"
 import { makeReactor, ReactorComponentProps } from "../reactor"
 
@@ -19,10 +19,12 @@ export type InstanceEntity<CustomComponents = IEntity> = CustomComponents &
 
 export const makeInstanceComponents = <Custom extends IEntity = IEntity>({
   systemFactory,
-  entityFactory
+  entityFactory,
+  usage = DynamicDrawUsage
 }: {
   entityFactory?: () => Custom
   systemFactory?: (world: World<InstanceEntity<Custom>>) => (dt: number) => void
+  usage?: Usage
 }) => {
   /* We're using Miniplex as a state container. */
   const ECS = createECS<InstanceEntity<Custom>>()
@@ -36,6 +38,10 @@ export const makeInstanceComponents = <Custom extends IEntity = IEntity>({
     instanceLimit?: number
   }> = ({ instanceLimit = 10000, ...props }) => {
     const instancedMesh = useRef<InstancedMesh>(null!)
+
+    useEffect(() => {
+      instancedMesh.current.instanceMatrix.setUsage(usage)
+    }, [])
 
     const { entities } = ECS.world
 
