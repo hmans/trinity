@@ -54,7 +54,6 @@ const Thingy = makeInstanceComponents<{
         )
 
         transform.scale.setScalar(s)
-
         transform.updateMatrixWorld()
       }
     }
