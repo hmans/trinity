@@ -69,10 +69,10 @@ const App = () => (
         <T.Fog args={["#000", 64, 128]} />
         <T.PerspectiveCamera position={[0, 0, 100]} ref={setCamera} />
 
-        <T.AmbientLight intensity={0.1} />
+        <T.AmbientLight intensity={0.3} />
 
         <T.DirectionalLight
-          intensity={1}
+          intensity={1.3}
           position={[10, 30, 10]}
           castShadow
           shadow-mapSize-width={512}
