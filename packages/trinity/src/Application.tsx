@@ -5,16 +5,10 @@ import React, {
   useContext,
   useState
 } from "react"
-import T from "."
-import {
-  Composer,
-  EventHandling,
-  OnWindowResize,
-  Renderer,
-  Ticker
-} from "./engine"
-import { RenderPass, UnrealBloomPass } from "./postprocessing"
 import * as THREE from "three"
+import T from "."
+import { Composer, OnWindowResize, Renderer, Ticker } from "./engine"
+import { RenderPass, UnrealBloomPass } from "./postprocessing"
 
 const RenderPipeline: FC<{
   scene: THREE.Scene
