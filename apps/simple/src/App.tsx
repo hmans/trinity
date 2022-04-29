@@ -1,15 +1,23 @@
 import T, { Application, FancyRenderPipeline } from "react-trinity"
+import { Color } from "three"
 
 const ShadyBall = () => {
   const vertexShader = `
+    varying vec3 vNormal;
+
     void main(){
-      gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0);
+      vec3 scale = vec3(1., 1., 1.);
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position * scale, 1.);
+      vNormal = normal;
     }
   `
 
   const fragmentShader = `
+    uniform vec3 uColor;
+    varying vec3 vNormal;
+
     void main(){
-      gl_FragColor = vec4(1, 0, 0, 1);
+      gl_FragColor = vec4(uColor * vNormal, 1);
     }
   `
 
@@ -17,6 +25,7 @@ const ShadyBall = () => {
     <T.Mesh>
       <T.SphereGeometry />
       <T.ShaderMaterial
+        uniforms={{ uColor: { value: new Color("white") } }}
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
       />
