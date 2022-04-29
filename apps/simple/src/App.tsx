@@ -5,7 +5,7 @@ import T, {
   Update
 } from "react-trinity"
 
-const Thingy = makeInstanceComponents({
+const Blob = makeInstanceComponents({
   entityFactory: () => ({
     particle: {
       t: Math.random() * 100,
@@ -20,7 +20,7 @@ const Thingy = makeInstanceComponents({
   }),
 
   systemFactory: (world) => {
-    const { entities } = world.archetype("transform")
+    const { entities } = world.archetype("particle", "transform")
 
     return (dt) => {
       for (const { particle, transform } of entities) {
@@ -87,23 +87,25 @@ const App = () => (
         />
 
         {/* Mount the root instancedmesh. The instances don't have to be children of this. */}
-        <Thingy.Root
-          instanceLimit={instanceCount + 100}
-          castShadow
-          receiveShadow
-        >
+        <Blob.Root instanceLimit={instanceCount + 100} castShadow receiveShadow>
           <T.SphereGeometry />
           <T.MeshStandardMaterial color="#444" />
 
+          {/* Let's rotate the whole thing over time. */}
           <Update stage="update">
             {(dt, { parent }) => {
               parent.rotation.x = parent.rotation.y += 0.2 * dt
             }}
           </Update>
-        </Thingy.Root>
+        </Blob.Root>
 
-        {/* Spawn a (high) number of instances */}
-        <Thingy.ThinInstance count={instanceCount} />
+        {/* We can use the Instance component to make instances part of the scene graph just like any other
+        primitive created through JSX. It can even have children! */}
+        <Blob.Instance scale={2} />
+
+        {/* Spawn a (high) number of instances. We're using the ThinInstance API here because we don't need to
+        nest these under any parent transforms. */}
+        <Blob.ThinInstance count={instanceCount} />
 
         <T.Mesh position={[0, 1, 0]} rotation-x={Math.PI}>
           <T.PlaneGeometry args={[1000, 1000]} />
