@@ -1,7 +1,6 @@
 import React, { createContext, FC, ReactNode, useContext, useMemo } from "react"
 import { HalfFloatType, LinearEncoding, WebGLRenderTarget } from "three"
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
-import { LinearToSRGB } from "three/src/math/ColorManagement"
 import { useRenderer } from "./Renderer"
 import { Update } from "./Update"
 
