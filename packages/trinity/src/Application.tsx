@@ -9,7 +9,7 @@ import * as THREE from "three"
 import { AdaptiveToneMappingPass } from "three/examples/jsm/postprocessing/AdaptiveToneMappingPass.js"
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
 import T from "."
-import { Composer, OnWindowResize, Renderer, Ticker } from "./engine"
+import { Composer, Renderer, Ticker, useWindowResizeHandler } from "./engine"
 import { EffectPass, RenderPass, Vignette } from "./postprocessing"
 
 const RenderPipeline: FC<{
@@ -20,18 +20,6 @@ const RenderPipeline: FC<{
   <Composer>
     <RenderPass scene={scene} camera={camera} />
     {children}
-
-    <OnWindowResize>
-      {() => {
-        const width = window.innerWidth
-        const height = window.innerHeight
-
-        if (camera instanceof THREE.PerspectiveCamera) {
-          camera.aspect = width / height
-          camera.updateProjectionMatrix()
-        }
-      }}
-    </OnWindowResize>
   </Composer>
 )
 
@@ -54,6 +42,18 @@ export const Application: FC<{
 }> = ({ children, fancy }) => {
   const [scene, setScene] = useNullableState<THREE.Scene>()
   const [camera, setCamera] = useNullableState<THREE.Camera>()
+
+  useWindowResizeHandler(() => {
+    if (camera) {
+      const width = window.innerWidth
+      const height = window.innerHeight
+
+      if (camera instanceof THREE.PerspectiveCamera) {
+        camera.aspect = width / height
+        camera.updateProjectionMatrix()
+      }
+    }
+  }, [camera])
 
   return (
     <Ticker>
