@@ -1,17 +1,6 @@
 import T, { Application, makeInstanceComponents, Update } from "react-trinity"
 
-const Thingy = makeInstanceComponents<{
-  particle: {
-    t: number
-    factor: number
-    speed: number
-    xFactor: number
-    yFactor: number
-    zFactor: number
-    mx: number
-    my: number
-  }
-}>({
+const Thingy = makeInstanceComponents({
   entityFactory: () => ({
     particle: {
       t: Math.random() * 100,
@@ -66,7 +55,7 @@ const App = () => (
   <Application>
     {({ setCamera }) => (
       <>
-        <T.Color args={["#333"]} attach="background" />
+        <T.Color args={[0.2, 0.2, 0.2]} attach="background" />
         <T.Fog args={["#000", 64, 128]} />
         <T.PerspectiveCamera position={[0, 0, 100]} ref={setCamera} />
 
