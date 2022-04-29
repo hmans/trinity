@@ -6,10 +6,11 @@ import React, {
   useState
 } from "react"
 import * as THREE from "three"
+import { AdaptiveToneMappingPass } from "three/examples/jsm/postprocessing/AdaptiveToneMappingPass.js"
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
 import T from "."
 import { Composer, OnWindowResize, Renderer, Ticker } from "./engine"
-import { EffectPass, RenderPass, UnrealBloomPass } from "./postprocessing"
-import { AdaptiveToneMappingPass } from "three/examples/jsm/postprocessing/AdaptiveToneMappingPass.js"
+import { EffectPass, RenderPass, Vignette } from "./postprocessing"
 
 const RenderPipeline: FC<{
   scene: THREE.Scene
@@ -18,8 +19,12 @@ const RenderPipeline: FC<{
 }> = ({ scene, camera, bloom }) => (
   <Composer>
     <RenderPass scene={scene} camera={camera} />
-    {bloom && <UnrealBloomPass />}
+    <EffectPass
+      pass={UnrealBloomPass}
+      args={[new THREE.Vector2(256, 256), 1.5, 0.8, 0.3]}
+    />
     <EffectPass pass={AdaptiveToneMappingPass} args={[true, 256]} />
+    <Vignette />
 
     <OnWindowResize>
       {() => {
