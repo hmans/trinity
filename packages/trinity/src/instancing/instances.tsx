@@ -43,7 +43,7 @@ export const makeInstanceComponents = <Custom extends IEntity = IEntity>({
       instancedMesh.current.instanceMatrix.setUsage(usage)
     }, [])
 
-    const { entities } = ECS.world
+    const { entities } = ECS.useArchetype("transform", "visible")
 
     function updateInstanceMatrix() {
       const imesh = instancedMesh.current
