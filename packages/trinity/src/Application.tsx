@@ -7,10 +7,14 @@ import React, {
 } from "react"
 import * as THREE from "three"
 import { AdaptiveToneMappingPass } from "three/examples/jsm/postprocessing/AdaptiveToneMappingPass.js"
-import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
 import T from "."
 import { Composer, Renderer, Ticker, useWindowResizeHandler } from "./engine"
-import { EffectPass, RenderPass, Vignette } from "./postprocessing"
+import {
+  EffectPass,
+  RenderPass,
+  UnrealBloomPass,
+  Vignette
+} from "./postprocessing"
 
 type RenderPipelineComponent = FC<{
   scene: THREE.Scene
@@ -34,10 +38,7 @@ export const FancyRenderPipeline: RenderPipelineComponent = ({
   ...props
 }) => (
   <BasicRenderPipeline {...props}>
-    <EffectPass
-      pass={UnrealBloomPass}
-      args={[new THREE.Vector2(256, 256), 1.5, 0.8, 0.3]}
-    />
+    <UnrealBloomPass />
     <EffectPass pass={AdaptiveToneMappingPass} args={[true, 256]} />
     <Vignette />
 
