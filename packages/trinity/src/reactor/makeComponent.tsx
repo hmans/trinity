@@ -1,8 +1,7 @@
-import React, { forwardRef, useImperativeHandle, useLayoutEffect } from "react"
+import React, { forwardRef, useEffect, useImperativeHandle } from "react"
 import { BufferGeometry, Fog, Material, Object3D } from "three"
 import { applyProps } from "./lib/applyProps"
 import { ParentContext } from "./ParentContext"
-import { useParent } from "./useParent"
 import {
   Constructor,
   IStringIndexable,
@@ -10,6 +9,7 @@ import {
   ReactorComponentProps
 } from "./types"
 import { useManagedThreeObject } from "./useManagedThreeObject"
+import { useParent } from "./useParent"
 
 export const makeComponent = <
   TConstructor extends Constructor<any>,
@@ -38,14 +38,14 @@ export const makeComponent = <
       if (props) applyProps(instance, props)
 
       /* Mount scene object to parent */
-      useLayoutEffect(() => {
+      useEffect(() => {
         if (!parent || !(instance instanceof Object3D)) return
         parent.add(instance)
         return () => void parent.remove(instance)
       }, [parent, instance])
 
       /* Attach to parent attributes */
-      useLayoutEffect(() => {
+      useEffect(() => {
         if (!parent || !instance) return
 
         /* For specific types, set a default attach property */
