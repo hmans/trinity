@@ -1,5 +1,11 @@
 # react-trinity
 
+## 0.5.6
+
+### Patch Changes
+
+- 3bfb5cb: Upgraded `makeInstanceComponents` with `ThinInstance` API, and ability to accept custom entity components and systems.
+
 ## 0.5.5
 
 ### Patch Changes
