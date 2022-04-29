@@ -6083,10 +6083,10 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
 
-tone@^14.8.38:
-  version "14.8.38"
-  resolved "https://registry.yarnpkg.com/tone/-/tone-14.8.38.tgz#10a5c9389fc592b2a34a70ad85c5bd5a97f8ae00"
-  integrity sha512-6u1xI/dMirxhFmCQYboEymz4A3dCZIMqj1a15cqVSFq1Q78/sV12emM/rY5LkK1u3VMnzT+9iX/hVMkJzNtrpA==
+tone@^14.8.39:
+  version "14.8.39"
+  resolved "https://registry.yarnpkg.com/tone/-/tone-14.8.39.tgz#1b3990f54891f12e4d6e05fd2717ddf7babb823e"
+  integrity sha512-LIpX6AuuzY0HYV1WsdtYoTY0vN9c51znm6RF97ezy59J6l16Baechy83WM3vXbavs+1CYWmyOWKtiFm8pi+azg==
   dependencies:
     standardized-audio-context "^25.3.16"
     tslib "^2.3.1"
