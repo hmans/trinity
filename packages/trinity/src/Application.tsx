@@ -15,16 +15,11 @@ import { EffectPass, RenderPass, Vignette } from "./postprocessing"
 const RenderPipeline: FC<{
   scene: THREE.Scene
   camera: THREE.Camera
-  bloom?: boolean
-}> = ({ scene, camera, bloom }) => (
+  children?: ReactNode
+}> = ({ scene, camera, children }) => (
   <Composer>
     <RenderPass scene={scene} camera={camera} />
-    <EffectPass
-      pass={UnrealBloomPass}
-      args={[new THREE.Vector2(256, 256), 1.5, 0.8, 0.3]}
-    />
-    <EffectPass pass={AdaptiveToneMappingPass} args={[true, 256]} />
-    <Vignette />
+    {children}
 
     <OnWindowResize>
       {() => {
@@ -55,7 +50,8 @@ export const useApplication = () => useContext(ApplicationContext)
 
 export const Application: FC<{
   children: ReactNode | ((api: ApplicationApi) => ReactNode)
-}> = ({ children }) => {
+  fancy?: boolean
+}> = ({ children, fancy }) => {
   const [scene, setScene] = useNullableState<THREE.Scene>()
   const [camera, setCamera] = useNullableState<THREE.Camera>()
 
@@ -63,7 +59,18 @@ export const Application: FC<{
     <Ticker>
       <Renderer>
         {scene && camera && (
-          <RenderPipeline scene={scene} camera={camera} bloom />
+          <RenderPipeline scene={scene} camera={camera}>
+            {fancy && (
+              <>
+                <EffectPass
+                  pass={UnrealBloomPass}
+                  args={[new THREE.Vector2(256, 256), 1.5, 0.8, 0.3]}
+                />
+                <EffectPass pass={AdaptiveToneMappingPass} args={[true, 256]} />
+                <Vignette />
+              </>
+            )}
+          </RenderPipeline>
         )}
         {/* {scene && camera && <EventHandling scene={scene} camera={camera} />} */}
 

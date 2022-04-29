@@ -52,7 +52,7 @@ const Thingy = makeInstanceComponents({
 const instanceCount = 1000
 
 const App = () => (
-  <Application>
+  <Application fancy>
     {({ setCamera }) => (
       <>
         <T.Color args={[0.2, 0.2, 0.2]} attach="background" />
