@@ -5,8 +5,8 @@ export const useAnimationFrame = (fn: Function) =>
     let looping = true
 
     const tick = (time: DOMHighResTimeStamp) => {
-      fn(time)
       if (looping) requestAnimationFrame(tick)
+      fn(time)
     }
 
     requestAnimationFrame(tick)

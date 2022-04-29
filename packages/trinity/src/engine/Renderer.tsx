@@ -1,13 +1,12 @@
 import React, {
   createContext,
   forwardRef,
-  ReactNode,
   useContext,
   useEffect,
   useImperativeHandle,
   useState
 } from "react"
-import { sRGBEncoding, WebGLRenderer } from "three"
+import { PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from "three"
 import { ReactorComponentProps } from "../reactor"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
 
@@ -29,15 +28,16 @@ export const Renderer = forwardRef<WebGLRenderer, RendererProps>(
           powerPreference: "high-performance",
           antialias: false,
           alpha: false,
-          stencil: false
+          stencil: false,
+          logarithmicDepthBuffer: true
         })
 
         renderer.autoClear = false
         renderer.setPixelRatio(1)
         renderer.outputEncoding = sRGBEncoding
-        // renderer.toneMapping = THREE.ACESFilmicToneMapping
-        // renderer.toneMapping = THREE.ReinhardToneMapping
-        // renderer.toneMappingExposure = 1.25
+
+        renderer.shadowMap.enabled = true
+        renderer.shadowMap.type = PCFSoftShadowMap
 
         renderer.setSize(canvas.clientWidth, canvas.clientHeight)
 

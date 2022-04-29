@@ -5,38 +5,45 @@ import React, {
   useContext,
   useState
 } from "react"
-import T from "."
-import {
-  Composer,
-  EventHandling,
-  OnWindowResize,
-  Renderer,
-  Ticker
-} from "./engine"
-import { RenderPass, UnrealBloomPass } from "./postprocessing"
 import * as THREE from "three"
+import { AdaptiveToneMappingPass } from "three/examples/jsm/postprocessing/AdaptiveToneMappingPass.js"
+import T from "."
+import { Composer, Renderer, Ticker, useWindowResizeHandler } from "./engine"
+import {
+  EffectPass,
+  RenderPass,
+  UnrealBloomPass,
+  Vignette
+} from "./postprocessing"
 
-const RenderPipeline: FC<{
+type RenderPipelineComponent = FC<{
   scene: THREE.Scene
   camera: THREE.Camera
-  bloom?: boolean
-}> = ({ scene, camera, bloom }) => (
+  children?: ReactNode
+}>
+
+export const BasicRenderPipeline: RenderPipelineComponent = ({
+  scene,
+  camera,
+  children
+}) => (
   <Composer>
     <RenderPass scene={scene} camera={camera} />
-    {bloom && <UnrealBloomPass />}
-
-    <OnWindowResize>
-      {() => {
-        const width = window.innerWidth
-        const height = window.innerHeight
-
-        if (camera instanceof THREE.PerspectiveCamera) {
-          camera.aspect = width / height
-          camera.updateProjectionMatrix()
-        }
-      }}
-    </OnWindowResize>
+    {children}
   </Composer>
+)
+
+export const FancyRenderPipeline: RenderPipelineComponent = ({
+  children,
+  ...props
+}) => (
+  <BasicRenderPipeline {...props}>
+    <UnrealBloomPass strength={1.5} radius={0.8} threshold={0.3} />
+    <EffectPass pass={AdaptiveToneMappingPass} args={[true, 256]} />
+    <Vignette />
+
+    {children}
+  </BasicRenderPipeline>
 )
 
 function useNullableState<T>(initial?: T | (() => T)) {
@@ -54,9 +61,22 @@ export const useApplication = () => useContext(ApplicationContext)
 
 export const Application: FC<{
   children: ReactNode | ((api: ApplicationApi) => ReactNode)
-}> = ({ children }) => {
+  renderPipeline?: RenderPipelineComponent
+}> = ({ children, renderPipeline: RenderPipeline = BasicRenderPipeline }) => {
   const [scene, setScene] = useNullableState<THREE.Scene>()
   const [camera, setCamera] = useNullableState<THREE.Camera>()
+
+  useWindowResizeHandler(() => {
+    if (camera) {
+      const width = window.innerWidth
+      const height = window.innerHeight
+
+      if (camera instanceof THREE.PerspectiveCamera) {
+        camera.aspect = width / height
+        camera.updateProjectionMatrix()
+      }
+    }
+  }, [camera])
 
   return (
     <Ticker>

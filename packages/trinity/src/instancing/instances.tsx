@@ -1,44 +1,52 @@
+import { IEntity, Tag, World } from "miniplex"
 import { createECS } from "miniplex-react"
-import React, { FC, forwardRef, useImperativeHandle, useRef } from "react"
-import { Group, InstancedMesh, Object3D } from "three"
+import React, { FC, forwardRef, useEffect, useRef } from "react"
+import { DynamicDrawUsage, Group, InstancedMesh, Object3D, Usage } from "three"
 import { useTicker } from "../engine"
-import {
-  makeReactor,
-  ReactorComponentProps,
-  useManagedThreeObject
-} from "../reactor"
+import { makeReactor, ReactorComponentProps } from "../reactor"
 
 /* Create a local reactor with the Three.js classes we need */
 const T = makeReactor({ Group, InstancedMesh, Object3D })
 
-type InstanceEntity = {
-  /** The Three.js scene object defining this instance's transform. */
+export type InstanceComponents = {
+  instance: Tag
   transform: Object3D
   visible: boolean
 }
 
-export const makeInstanceComponents = () => {
+export type InstanceEntity<CustomComponents = IEntity> = CustomComponents &
+  InstanceComponents
+
+export const makeInstanceComponents = <Custom extends IEntity = IEntity>({
+  systemFactory,
+  entityFactory,
+  usage = DynamicDrawUsage
+}: {
+  entityFactory?: () => Custom
+  systemFactory?: (world: World<InstanceEntity<Custom>>) => (dt: number) => void
+  usage?: Usage
+}) => {
   /* We're using Miniplex as a state container. */
-  const ECS = createECS<InstanceEntity>()
+  const ECS = createECS<InstanceEntity<Custom>>()
+
+  /* If a system factory has been passed, prepare the custom system. */
+  const system = systemFactory && systemFactory(ECS.world)
 
   /* This component renders the InstancedMesh itself and continuously updates it
      from the data in the ECS. */
   const Root: FC<ReactorComponentProps<typeof InstancedMesh> & {
-    countStep?: number
-  }> = ({ children, countStep = 1000, ...props }) => {
+    instanceLimit?: number
+  }> = ({ instanceLimit = 10000, ...props }) => {
     const instancedMesh = useRef<InstancedMesh>(null!)
 
-    /* The following hook will make sure this entire component gets re-rendered when
-       the number of instance entities changes. We're using this to dynamically grow
-       or shrink the instance buffer. */
+    useEffect(() => {
+      instancedMesh.current.instanceMatrix.setUsage(usage)
+    }, [])
+
     const { entities } = ECS.useArchetype("transform", "visible")
 
-    const instanceLimit =
-      Math.floor(entities.length / countStep + 1) * countStep
-
-    function updateInstances() {
+    function updateInstanceMatrix() {
       const imesh = instancedMesh.current
-
       const l = entities.length
       let count = 0
 
@@ -55,40 +63,45 @@ export const makeInstanceComponents = () => {
       imesh.count = count
     }
 
-    useTicker("render", updateInstances)
+    useTicker("render", (dt) => {
+      system?.(dt)
+      updateInstanceMatrix()
+    })
 
     return (
       <T.InstancedMesh
-        ref={instancedMesh}
         {...props}
+        ref={instancedMesh}
         args={[null!, null!, instanceLimit]}
-      >
-        {children}
-      </T.InstancedMesh>
+      />
     )
   }
 
-  /* The Instance component will create a new ECS entity storing a reference
-     to a three.js scene object. */
+  const useInstances = (count = 1) =>
+    ECS.useEntities(count, () => ({
+      ...(entityFactory ? entityFactory() : ({} as Custom)),
+      instance: Tag,
+      transform: new Object3D(),
+      visible: true
+    }))
+
   const Instance = forwardRef<Group, ReactorComponentProps<typeof Group>>(
-    (props, ref) => {
-      const group = useManagedThreeObject(() => new Group())
-      // group.matrixAutoUpdate = false
-      useImperativeHandle(ref, () => group)
-
-      /* TODO: put a ref on the Group and figure out how the cloneElement trick in miniplex-react can assign to multipe refs */
-
-      return (
-        <ECS.Entity>
-          <ECS.Component name="transform">
-            <T.Group object={group} {...props} />
-          </ECS.Component>
-
-          <ECS.Component name="visible" data={true} />
-        </ECS.Entity>
-      )
-    }
+    (props, ref) => (
+      <T.Object3D {...props} object={useInstances(1)[0].transform} ref={ref} />
+    )
   )
 
-  return { world: ECS.world, useArchetype: ECS.useArchetype, Root, Instance }
+  const ThinInstance: FC<{ count?: number }> = ({ count = 1 }) => {
+    useInstances(count)
+    return null
+  }
+
+  return {
+    world: ECS.world,
+    useArchetype: ECS.useArchetype,
+    useInstances,
+    Root,
+    Instance,
+    ThinInstance
+  }
 }
