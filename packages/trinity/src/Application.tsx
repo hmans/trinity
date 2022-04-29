@@ -12,15 +12,37 @@ import T from "."
 import { Composer, Renderer, Ticker, useWindowResizeHandler } from "./engine"
 import { EffectPass, RenderPass, Vignette } from "./postprocessing"
 
-const RenderPipeline: FC<{
+type RenderPipelineComponent = FC<{
   scene: THREE.Scene
   camera: THREE.Camera
   children?: ReactNode
-}> = ({ scene, camera, children }) => (
+}>
+
+export const BasicRenderPipeline: RenderPipelineComponent = ({
+  scene,
+  camera,
+  children
+}) => (
   <Composer>
     <RenderPass scene={scene} camera={camera} />
     {children}
   </Composer>
+)
+
+export const FancyRenderPipeline: RenderPipelineComponent = ({
+  children,
+  ...props
+}) => (
+  <BasicRenderPipeline {...props}>
+    <EffectPass
+      pass={UnrealBloomPass}
+      args={[new THREE.Vector2(256, 256), 1.5, 0.8, 0.3]}
+    />
+    <EffectPass pass={AdaptiveToneMappingPass} args={[true, 256]} />
+    <Vignette />
+
+    {children}
+  </BasicRenderPipeline>
 )
 
 function useNullableState<T>(initial?: T | (() => T)) {
@@ -38,8 +60,8 @@ export const useApplication = () => useContext(ApplicationContext)
 
 export const Application: FC<{
   children: ReactNode | ((api: ApplicationApi) => ReactNode)
-  fancy?: boolean
-}> = ({ children, fancy }) => {
+  renderPipeline?: RenderPipelineComponent
+}> = ({ children, renderPipeline: RenderPipeline = BasicRenderPipeline }) => {
   const [scene, setScene] = useNullableState<THREE.Scene>()
   const [camera, setCamera] = useNullableState<THREE.Camera>()
 
@@ -58,20 +80,7 @@ export const Application: FC<{
   return (
     <Ticker>
       <Renderer>
-        {scene && camera && (
-          <RenderPipeline scene={scene} camera={camera}>
-            {fancy && (
-              <>
-                <EffectPass
-                  pass={UnrealBloomPass}
-                  args={[new THREE.Vector2(256, 256), 1.5, 0.8, 0.3]}
-                />
-                <EffectPass pass={AdaptiveToneMappingPass} args={[true, 256]} />
-                <Vignette />
-              </>
-            )}
-          </RenderPipeline>
-        )}
+        {scene && camera && <RenderPipeline scene={scene} camera={camera} />}
         {/* {scene && camera && <EventHandling scene={scene} camera={camera} />} */}
 
         <T.Scene ref={setScene}>

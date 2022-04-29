@@ -1,4 +1,9 @@
-import T, { Application, makeInstanceComponents, Update } from "react-trinity"
+import T, {
+  Application,
+  FancyRenderPipeline,
+  makeInstanceComponents,
+  Update
+} from "react-trinity"
 
 const Thingy = makeInstanceComponents({
   entityFactory: () => ({
@@ -52,7 +57,7 @@ const Thingy = makeInstanceComponents({
 const instanceCount = 1000
 
 const App = () => (
-  <Application fancy>
+  <Application renderPipeline={FancyRenderPipeline}>
     {({ setCamera }) => (
       <>
         <T.Color args={[0.2, 0.2, 0.2]} attach="background" />
