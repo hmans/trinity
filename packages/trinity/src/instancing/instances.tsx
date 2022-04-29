@@ -79,7 +79,7 @@ export const makeInstanceComponents = <Custom extends IEntity = IEntity>({
 
   const useInstances = (count = 1) =>
     ECS.useEntities(count, () => ({
-      ...(entityFactory ? entityFactory() : {}),
+      ...(entityFactory ? entityFactory() : ({} as Custom)),
       instance: Tag,
       transform: new Object3D(),
       visible: true
