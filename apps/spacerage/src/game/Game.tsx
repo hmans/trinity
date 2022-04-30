@@ -1,4 +1,5 @@
 import T, { Application } from "react-trinity"
+import { PhysicsWorld } from "../lib/trinity-rapier-3d"
 
 export const Game = () => (
   <Application>
@@ -11,10 +12,12 @@ export const Game = () => (
         <T.AmbientLight intensity={0.3} />
         <T.DirectionalLight position={[100, 300, 100]} intensity={0.7} />
 
-        <T.Mesh>
-          <T.DodecahedronGeometry />
-          <T.MeshNormalMaterial />
-        </T.Mesh>
+        <PhysicsWorld>
+          <T.Mesh>
+            <T.DodecahedronGeometry />
+            <T.MeshNormalMaterial />
+          </T.Mesh>
+        </PhysicsWorld>
       </>
     )}
   </Application>
