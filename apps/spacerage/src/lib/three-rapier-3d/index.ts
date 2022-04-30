@@ -1,11 +1,10 @@
 import { Object3D } from "three"
 import * as RAPIER from "@dimforge/rapier3d-compat"
 
-export const init = (fn: () => void) => {
-  import("@dimforge/rapier3d-compat").then(fn)
-}
-
 export const makePhysics = () => {
+  /**
+   * Physics World!
+   */
   class PhysicsWorld extends Object3D {
     public world: RAPIER.World
 
@@ -18,5 +17,10 @@ export const makePhysics = () => {
     }
   }
 
-  return { PhysicsWorld }
+  /**
+   * RigidBody!
+   */
+  class RigidBody extends Object3D {}
+
+  return { PhysicsWorld, RigidBody }
 }
