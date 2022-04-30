@@ -1,11 +1,23 @@
 import { Object3D } from "three"
 import * as RAPIER from "@dimforge/rapier3d-compat"
+import * as miniplex from "miniplex"
+import { RegisteredEntity } from "miniplex"
+
+export type PhysicsEntity = {
+  rigidBody: RAPIER.RigidBody
+  transform: Object3D
+}
 
 /**
  * Physics World!
  */
 export class PhysicsWorld extends Object3D {
   public world: RAPIER.World
+  public ecs = new miniplex.World<PhysicsEntity>()
+
+  private archetypes = {
+    bodies: this.ecs.archetype("transform", "rigidBody")
+  }
 
   constructor() {
     super()
@@ -23,7 +35,13 @@ export class PhysicsWorld extends Object3D {
   public update(dt: number) {
     this.world.step()
 
-    console.log(this.world.getRigidBody(0).translation())
+    for (const { rigidBody, transform } of this.archetypes.bodies.entities) {
+      const t = rigidBody.translation()
+      const q = rigidBody.rotation()
+
+      transform.position.set(t.x, t.y, t.z)
+      transform.quaternion.set(q.x, q.y, q.z, q.w)
+    }
   }
 }
 
@@ -31,8 +49,8 @@ export class PhysicsWorld extends Object3D {
  * RigidBody!
  */
 export class RigidBody extends Object3D {
-  private world!: PhysicsWorld
-  public body!: RAPIER.RigidBody
+  private world?: PhysicsWorld
+  private entity?: RegisteredEntity<PhysicsEntity>
 
   constructor() {
     super()
@@ -41,14 +59,21 @@ export class RigidBody extends Object3D {
     this.addEventListener("added", () => {
       /* Find world */
       this.traverseAncestors((o) => {
-        if (o instanceof PhysicsWorld) {
-          this.world = o
-        }
+        if (o instanceof PhysicsWorld) this.world = o
       })
 
       /* Create a body */
       let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic().setAdditionalMass(10)
-      let rigidBody = this.world.world.createRigidBody(rigidBodyDesc)
+
+      this.entity = this.world!.ecs.createEntity({
+        rigidBody: this.world!.world.createRigidBody(rigidBodyDesc),
+        transform: this
+      })
+    })
+
+    this.addEventListener("removed", () => {
+      this.world!.ecs.destroyEntity(this.entity!)
+      this.entity = undefined
     })
   }
 }
