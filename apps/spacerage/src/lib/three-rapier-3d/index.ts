@@ -66,20 +66,30 @@ export class RigidBody extends Object3D {
         if (o instanceof PhysicsWorld) this.world = o
       })
 
-      /* Create a body */
-      let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic().setAdditionalMass(
+      /* Create a body descriptor */
+      const rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic().setAdditionalMass(
         this.additionalMass
       )
 
+      /* Create the actual RigidBody. */
+      const rigidBody = this.world!.world.createRigidBody(rigidBodyDesc)
+
+      /* Register an entity with the physics world's ECS. */
       this.entity = this.world!.ecs.createEntity({
-        rigidBody: this.world!.world.createRigidBody(rigidBodyDesc),
+        rigidBody,
         transform: this
       })
     })
 
     this.addEventListener("removed", () => {
+      /* Destroy the rigidbody */
+      this.world!.world.removeRigidBody(this.entity!.rigidBody)
+
+      /* Destroy the entity */
       this.world!.ecs.destroyEntity(this.entity!)
-      this.entity = undefined
+
+      /* Forget about the world, but without the booze */
+      this.world = undefined
     })
   }
 }
