@@ -32,15 +32,23 @@ export const makePhysics = () => {
    */
   class RigidBody extends Object3D {
     private world!: PhysicsWorld
+    public body!: RAPIER.RigidBody
 
     constructor() {
       super()
 
       /* When this object is reparented, have it connect to its world. */
       this.addEventListener("added", () => {
+        /* Find world */
         this.traverseAncestors((o) => {
-          if (o instanceof PhysicsWorld) this.world = o
+          if (o instanceof PhysicsWorld) {
+            this.world = o
+          }
         })
+
+        /* Create a body */
+        let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+        let rigidBody = this.world.world.createRigidBody(rigidBodyDesc)
       })
     }
   }
