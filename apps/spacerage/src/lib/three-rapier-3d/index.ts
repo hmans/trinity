@@ -2,10 +2,10 @@ import { Object3D } from "three"
 import * as RAPIER from "@dimforge/rapier3d-compat"
 import * as miniplex from "miniplex"
 import { RegisteredEntity } from "miniplex"
-import { textChangeRangeIsUnchanged } from "typescript"
 
 export type PhysicsEntity = {
-  rigidBody: RAPIER.RigidBody
+  rigidBody?: RAPIER.RigidBody
+  collider?: RAPIER.Collider
   transform: Object3D
 }
 
@@ -17,7 +17,7 @@ export class PhysicsWorld extends Object3D {
   public ecs = new miniplex.World<PhysicsEntity>()
 
   private archetypes = {
-    bodies: this.ecs.archetype("transform", "rigidBody")
+    rigidBodies: this.ecs.archetype("transform", "rigidBody")
   }
 
   constructor() {
@@ -38,7 +38,8 @@ export class PhysicsWorld extends Object3D {
     this.world.step()
 
     /* Transfer transform data from physics simulation to Three.js scene */
-    for (const { rigidBody, transform } of this.archetypes.bodies.entities) {
+    for (const { rigidBody, transform } of this.archetypes.rigidBodies
+      .entities) {
       const t = rigidBody.translation()
       const q = rigidBody.rotation()
 
@@ -86,7 +87,7 @@ export class RigidBody extends Object3D {
 
     this.addEventListener("removed", () => {
       /* Destroy the rigidbody */
-      this.physicsWorldObject!.world.removeRigidBody(this.entity!.rigidBody)
+      this.physicsWorldObject!.world.removeRigidBody(this.entity!.rigidBody!)
 
       /* Destroy the entity */
       this.physicsWorldObject!.ecs.destroyEntity(this.entity!)
@@ -102,32 +103,57 @@ export class RigidBody extends Object3D {
  */
 export class Collider extends Object3D {
   private rigidBodyObject?: RigidBody
+  public entity?: RegisteredEntity<PhysicsEntity>
 
   constructor() {
     super()
 
     this.addEventListener("added", () => {
-      /* Find the rigidbody we're part of */
-      this.traverseAncestors((o) => {
-        if (!this.rigidBodyObject && o instanceof RigidBody)
-          this.rigidBodyObject = o
+      /* We're going to queue a microtask here to make sure the following code
+      runs after everything has been wired up. There are probably smarter ways
+      of doing all of this, but for now, this will work. */
+      queueMicrotask(() => {
+        /* Find the rigidbody we're part of */
+        this.traverseAncestors((o) => {
+          if (!this.rigidBodyObject && o instanceof RigidBody)
+            this.rigidBodyObject = o
+        })
+
+        /* Create collider descriptor */
+        const colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5)
+
+        /* Create collider */
+        const collider = this.rigidBodyObject!.physicsWorldObject!.world!.createCollider(
+          colliderDesc,
+          this.rigidBodyObject?.entity!.rigidBody!.handle
+        )
+
+        /* Create entity */
+        this.entity = this.rigidBodyObject!.physicsWorldObject!.ecs.createEntity(
+          {
+            collider,
+            transform: this
+          }
+        )
       })
-
-      /* Create collider descriptor */
-      const colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5)
-
-      /* Create collider */
-      // const collider = this.rigidBodyObject!.world!.world!.createCollider(
-      //   colliderDesc,
-      //   this.rigidBodyObject?.entity!.rigidBody.handle
-      // )
     })
 
     this.addEventListener("removed", () => {
-      /* Destroy collider */
+      queueMicrotask(() => {
+        /* Destroy collider */
+        this.rigidBodyObject!.physicsWorldObject!.world.removeCollider(
+          this.entity?.collider!,
+          true
+        )
 
-      /* Disconnect from RigidBody */
-      this.rigidBodyObject = undefined
+        /* Destroy entity */
+        this.rigidBodyObject!.physicsWorldObject!.ecs.destroyEntity(
+          this.entity!
+        )
+
+        /* Disconnect from RigidBody */
+        this.rigidBodyObject = undefined
+      })
     })
   }
 }
