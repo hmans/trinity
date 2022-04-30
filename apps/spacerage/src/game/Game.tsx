@@ -9,7 +9,7 @@ const Scene = () => {
   useTicker("physics", (dt) => world.current.update(dt))
 
   return (
-    <PhysicsWorld ref={world}>
+    <PhysicsWorld ref={world} gravity={{ x: 0, y: -1, z: 0 }}>
       <RigidBody>
         <T.Mesh>
           <T.DodecahedronGeometry />

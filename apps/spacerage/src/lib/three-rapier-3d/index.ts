@@ -54,6 +54,8 @@ export class RigidBody extends Object3D {
   private world?: PhysicsWorld
   private entity?: RegisteredEntity<PhysicsEntity>
 
+  public additionalMass: number = 0
+
   constructor() {
     super()
 
@@ -65,7 +67,9 @@ export class RigidBody extends Object3D {
       })
 
       /* Create a body */
-      let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic().setAdditionalMass(10)
+      let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic().setAdditionalMass(
+        this.additionalMass
+      )
 
       this.entity = this.world!.ecs.createEntity({
         rigidBody: this.world!.world.createRigidBody(rigidBodyDesc),
