@@ -83,3 +83,12 @@ export class RigidBody extends Object3D {
     })
   }
 }
+
+/**
+ * Collider!
+ */
+export class Collider extends Object3D {
+  constructor() {
+    super()
+  }
+}
