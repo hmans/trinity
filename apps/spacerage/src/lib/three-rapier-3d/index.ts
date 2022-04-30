@@ -33,8 +33,10 @@ export class PhysicsWorld extends Object3D {
   }
 
   public update(dt: number) {
+    /* TODO: accumulate dt here and/or change step size (Rapier can take it) */
     this.world.step()
 
+    /* Transfer transform data from physics simulation to Three.js scene */
     for (const { rigidBody, transform } of this.archetypes.bodies.entities) {
       const t = rigidBody.translation()
       const q = rigidBody.rotation()
