@@ -61,40 +61,43 @@ export class RigidBody extends Object3D {
   constructor() {
     super()
 
-    this.addEventListener("added", () => {
-      /* Find world */
-      this.traverseAncestors((o) => {
-        if (!this.physicsWorldObject && o instanceof PhysicsWorld)
-          this.physicsWorldObject = o
-      })
+    this.addEventListener("added", this.mount)
+    this.addEventListener("removed", this.unmount)
+  }
 
-      /* Create a body descriptor */
-      const rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic().setAdditionalMass(
-        this.additionalMass
-      )
-
-      /* Create the actual RigidBody. */
-      const rigidBody = this.physicsWorldObject!.world.createRigidBody(
-        rigidBodyDesc
-      )
-
-      /* Register an entity with the physics world's ECS. */
-      this.entity = this.physicsWorldObject!.ecs.createEntity({
-        rigidBody,
-        transform: this
-      })
+  private mount() {
+    /* Find world */
+    this.traverseAncestors((o) => {
+      if (!this.physicsWorldObject && o instanceof PhysicsWorld)
+        this.physicsWorldObject = o
     })
 
-    this.addEventListener("removed", () => {
-      /* Destroy the rigidbody */
-      this.physicsWorldObject!.world.removeRigidBody(this.entity!.rigidBody!)
+    /* Create a body descriptor */
+    const rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic().setAdditionalMass(
+      this.additionalMass
+    )
 
-      /* Destroy the entity */
-      this.physicsWorldObject!.ecs.destroyEntity(this.entity!)
+    /* Create the actual RigidBody. */
+    const rigidBody = this.physicsWorldObject!.world.createRigidBody(
+      rigidBodyDesc
+    )
 
-      /* Forget about the world, but without the booze */
-      this.physicsWorldObject = undefined
+    /* Register an entity with the physics world's ECS. */
+    this.entity = this.physicsWorldObject!.ecs.createEntity({
+      rigidBody,
+      transform: this
     })
+  }
+
+  private unmount() {
+    /* Destroy the rigidbody */
+    this.physicsWorldObject!.world.removeRigidBody(this.entity!.rigidBody!)
+
+    /* Destroy the entity */
+    this.physicsWorldObject!.ecs.destroyEntity(this.entity!)
+
+    /* Forget about the world, but without the booze */
+    this.physicsWorldObject = undefined
   }
 }
 
