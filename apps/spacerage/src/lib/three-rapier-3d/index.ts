@@ -9,6 +9,9 @@ export type PhysicsEntity = {
   transform: Object3D
 }
 
+const bodyQueue = new Array<Function>()
+const colliderQueue = new Array<Function>()
+
 /**
  * Physics World!
  */
@@ -34,6 +37,18 @@ export class PhysicsWorld extends Object3D {
   }
 
   public update(dt: number) {
+    /* Process body queue */
+    if (bodyQueue.length > 0) {
+      bodyQueue.forEach((fn) => fn())
+      bodyQueue.length = 0
+    }
+
+    /* Process collider queue */
+    if (colliderQueue.length > 0) {
+      colliderQueue.forEach((fn) => fn())
+      colliderQueue.length = 0
+    }
+
     /* TODO: accumulate dt here and/or change step size (Rapier can take it) */
     this.world.step()
 
@@ -66,35 +81,39 @@ export class RigidBody extends Object3D {
   }
 
   private mount() {
-    /* Find world */
-    this.physicsWorldObject = findAncestorOfType(this, PhysicsWorld)
+    bodyQueue.push(() => {
+      /* Find world */
+      this.physicsWorldObject = findAncestorOfType(this, PhysicsWorld)
 
-    /* Create a body descriptor */
-    const rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic().setAdditionalMass(
-      this.additionalMass
-    )
+      /* Create a body descriptor */
+      const rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic().setAdditionalMass(
+        this.additionalMass
+      )
 
-    /* Create the actual RigidBody. */
-    const rigidBody = this.physicsWorldObject!.world.createRigidBody(
-      rigidBodyDesc
-    )
+      /* Create the actual RigidBody. */
+      const rigidBody = this.physicsWorldObject!.world.createRigidBody(
+        rigidBodyDesc
+      )
 
-    /* Register an entity with the physics world's ECS. */
-    this.entity = this.physicsWorldObject!.ecs.createEntity({
-      rigidBody,
-      transform: this
+      /* Register an entity with the physics world's ECS. */
+      this.entity = this.physicsWorldObject!.ecs.createEntity({
+        rigidBody,
+        transform: this
+      })
     })
   }
 
   private unmount() {
-    /* Destroy the rigidbody */
-    this.physicsWorldObject!.world.removeRigidBody(this.entity!.rigidBody!)
+    bodyQueue.push(() => {
+      /* Destroy the rigidbody */
+      this.physicsWorldObject!.world.removeRigidBody(this.entity!.rigidBody!)
 
-    /* Destroy the entity */
-    this.physicsWorldObject!.ecs.destroyEntity(this.entity!)
+      /* Destroy the entity */
+      this.physicsWorldObject!.ecs.destroyEntity(this.entity!)
 
-    /* Forget about the world, but without the booze */
-    this.physicsWorldObject = undefined
+      /* Forget about the world, but without the booze */
+      this.physicsWorldObject = undefined
+    })
   }
 }
 
@@ -112,10 +131,7 @@ export class Collider extends Object3D {
   }
 
   private mount() {
-    /* We're going to queue a microtask here to make sure the following code
-      runs after everything has been wired up. There are probably smarter ways
-      of doing all of this, but for now, this will work. */
-    queueMicrotask(() => {
+    colliderQueue.push(() => {
       /* Find the rigidbody we're part of */
       this.rigidBodyObject = findAncestorOfType(this, RigidBody)
 
@@ -137,7 +153,7 @@ export class Collider extends Object3D {
   }
 
   private unmount() {
-    queueMicrotask(() => {
+    colliderQueue.push(() => {
       /* Destroy collider */
       this.rigidBodyObject!.physicsWorldObject!.world.removeCollider(
         this.entity?.collider!,
