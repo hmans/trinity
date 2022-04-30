@@ -22,6 +22,8 @@ export class PhysicsWorld extends Object3D {
 
   public update(dt: number) {
     this.world.step()
+
+    console.log(this.world.getRigidBody(0).translation())
   }
 }
 
@@ -45,7 +47,7 @@ export class RigidBody extends Object3D {
       })
 
       /* Create a body */
-      let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+      let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic().setAdditionalMass(10)
       let rigidBody = this.world.world.createRigidBody(rigidBodyDesc)
     })
   }
