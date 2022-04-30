@@ -2,6 +2,7 @@ import { Object3D } from "three"
 import * as RAPIER from "@dimforge/rapier3d-compat"
 import * as miniplex from "miniplex"
 import { RegisteredEntity } from "miniplex"
+import { textChangeRangeIsUnchanged } from "typescript"
 
 export type PhysicsEntity = {
   rigidBody: RAPIER.RigidBody
@@ -51,8 +52,8 @@ export class PhysicsWorld extends Object3D {
  * RigidBody!
  */
 export class RigidBody extends Object3D {
-  private world?: PhysicsWorld
-  private entity?: RegisteredEntity<PhysicsEntity>
+  public physicsWorldObject?: PhysicsWorld
+  public entity?: RegisteredEntity<PhysicsEntity>
 
   public additionalMass: number = 0
 
@@ -62,7 +63,8 @@ export class RigidBody extends Object3D {
     this.addEventListener("added", () => {
       /* Find world */
       this.traverseAncestors((o) => {
-        if (o instanceof PhysicsWorld) this.world ||= o
+        if (!this.physicsWorldObject && o instanceof PhysicsWorld)
+          this.physicsWorldObject = o
       })
 
       /* Create a body descriptor */
@@ -71,10 +73,12 @@ export class RigidBody extends Object3D {
       )
 
       /* Create the actual RigidBody. */
-      const rigidBody = this.world!.world.createRigidBody(rigidBodyDesc)
+      const rigidBody = this.physicsWorldObject!.world.createRigidBody(
+        rigidBodyDesc
+      )
 
       /* Register an entity with the physics world's ECS. */
-      this.entity = this.world!.ecs.createEntity({
+      this.entity = this.physicsWorldObject!.ecs.createEntity({
         rigidBody,
         transform: this
       })
@@ -82,13 +86,13 @@ export class RigidBody extends Object3D {
 
     this.addEventListener("removed", () => {
       /* Destroy the rigidbody */
-      this.world!.world.removeRigidBody(this.entity!.rigidBody)
+      this.physicsWorldObject!.world.removeRigidBody(this.entity!.rigidBody)
 
       /* Destroy the entity */
-      this.world!.ecs.destroyEntity(this.entity!)
+      this.physicsWorldObject!.ecs.destroyEntity(this.entity!)
 
       /* Forget about the world, but without the booze */
-      this.world = undefined
+      this.physicsWorldObject = undefined
     })
   }
 }
@@ -104,10 +108,26 @@ export class Collider extends Object3D {
 
     this.addEventListener("added", () => {
       /* Find the rigidbody we're part of */
-      this.traverseAncestors(o => {
-        if (o instanceof RigidBody) this.rigidBodyObject ||= o
+      this.traverseAncestors((o) => {
+        if (!this.rigidBodyObject && o instanceof RigidBody)
+          this.rigidBodyObject = o
       })
+
+      /* Create collider descriptor */
+      const colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5)
+
+      /* Create collider */
+      // const collider = this.rigidBodyObject!.world!.world!.createCollider(
+      //   colliderDesc,
+      //   this.rigidBodyObject?.entity!.rigidBody.handle
+      // )
     })
 
+    this.addEventListener("removed", () => {
+      /* Destroy collider */
+
+      /* Disconnect from RigidBody */
+      this.rigidBodyObject = undefined
+    })
   }
 }
