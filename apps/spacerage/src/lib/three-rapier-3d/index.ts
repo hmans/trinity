@@ -1,6 +1,11 @@
 import { Object3D } from "three"
 import * as RAPIER from "@dimforge/rapier3d-compat"
 
+/*
+We're going to do a funky HOF thing, and yes, there's a reason
+for this. Let's go!
+*/
+
 export const makePhysics = () => {
   /**
    * Physics World!
@@ -10,10 +15,15 @@ export const makePhysics = () => {
 
     constructor() {
       super()
+      this.world = new RAPIER.World({ x: 0, y: -9.81, z: 0 })
+    }
 
-      /* Create world */
-      const gravity = { x: 0, y: -9.81, z: 0 }
-      this.world = new RAPIER.World(gravity)
+    public get gravity() {
+      return this.world.gravity
+    }
+
+    public set gravity(v: RAPIER.Vector) {
+      this.world.gravity = v
     }
   }
 
@@ -22,5 +32,6 @@ export const makePhysics = () => {
    */
   class RigidBody extends Object3D {}
 
+  /* We're done. Let's go. */
   return { PhysicsWorld, RigidBody }
 }
