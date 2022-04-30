@@ -1,7 +1,7 @@
-import { Object3D } from "three"
 import * as RAPIER from "@dimforge/rapier3d-compat"
 import * as miniplex from "miniplex"
 import { RegisteredEntity } from "miniplex"
+import { Object3D } from "three"
 
 export type PhysicsEntity = {
   rigidBody?: RAPIER.RigidBody
