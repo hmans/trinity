@@ -67,10 +67,7 @@ export class RigidBody extends Object3D {
 
   private mount() {
     /* Find world */
-    this.traverseAncestors((o) => {
-      if (!this.physicsWorldObject && o instanceof PhysicsWorld)
-        this.physicsWorldObject = o
-    })
+    this.physicsWorldObject = findAncestorOfType(this, PhysicsWorld)
 
     /* Create a body descriptor */
     const rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic().setAdditionalMass(
@@ -120,10 +117,7 @@ export class Collider extends Object3D {
       of doing all of this, but for now, this will work. */
     queueMicrotask(() => {
       /* Find the rigidbody we're part of */
-      this.traverseAncestors((o) => {
-        if (!this.rigidBodyObject && o instanceof RigidBody)
-          this.rigidBodyObject = o
-      })
+      this.rigidBodyObject = findAncestorOfType(this, RigidBody)
 
       /* Create collider descriptor */
       const colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5)
@@ -157,4 +151,17 @@ export class Collider extends Object3D {
       this.rigidBodyObject = undefined
     })
   }
+}
+
+function findAncestorOfType<T>(
+  origin: Object3D,
+  klass: { new (...args: any[]): T }
+) {
+  let r: T | undefined
+
+  origin.traverseAncestors((a) => {
+    if (!r && a instanceof klass) r = a
+  })
+
+  return r
 }
