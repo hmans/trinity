@@ -30,7 +30,20 @@ export const makePhysics = () => {
   /**
    * RigidBody!
    */
-  class RigidBody extends Object3D {}
+  class RigidBody extends Object3D {
+    private world!: PhysicsWorld
+
+    constructor() {
+      super()
+
+      /* When this object is reparented, have it connect to its world. */
+      this.addEventListener("added", () => {
+        this.traverseAncestors((o) => {
+          if (o instanceof PhysicsWorld) this.world = o
+        })
+      })
+    }
+  }
 
   /* We're done. Let's go. */
   return { PhysicsWorld, RigidBody }
