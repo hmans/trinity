@@ -20,8 +20,7 @@ export class PhysicsWorld extends Object3D {
     this.world.gravity = v
   }
 
-  public update() {
-    console.log("updating physics world")
+  public update(dt: number) {
     this.world.step()
   }
 }
