@@ -1,58 +1,53 @@
 import { Object3D } from "three"
 import * as RAPIER from "@dimforge/rapier3d-compat"
 
-/*
-We're going to do a funky HOF thing, and yes, there's a reason
-for this. Let's go!
-*/
+/**
+ * Physics World!
+ */
+export class PhysicsWorld extends Object3D {
+  public world: RAPIER.World
 
-export const makePhysics = () => {
-  /**
-   * Physics World!
-   */
-  class PhysicsWorld extends Object3D {
-    public world: RAPIER.World
-
-    constructor() {
-      super()
-      this.world = new RAPIER.World({ x: 0, y: -9.81, z: 0 })
-    }
-
-    public get gravity() {
-      return this.world.gravity
-    }
-
-    public set gravity(v: RAPIER.Vector) {
-      this.world.gravity = v
-    }
+  constructor() {
+    super()
+    this.world = new RAPIER.World({ x: 0, y: -9.81, z: 0 })
   }
 
-  /**
-   * RigidBody!
-   */
-  class RigidBody extends Object3D {
-    private world!: PhysicsWorld
-    public body!: RAPIER.RigidBody
+  public get gravity() {
+    return this.world.gravity
+  }
 
-    constructor() {
-      super()
+  public set gravity(v: RAPIER.Vector) {
+    this.world.gravity = v
+  }
 
-      /* When this object is reparented, have it connect to its world. */
-      this.addEventListener("added", () => {
-        /* Find world */
-        this.traverseAncestors((o) => {
-          if (o instanceof PhysicsWorld) {
-            this.world = o
-          }
-        })
+  public update() {
+    console.log("updating physics world")
+    this.world.step()
+  }
+}
 
-        /* Create a body */
-        let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-        let rigidBody = this.world.world.createRigidBody(rigidBodyDesc)
+/**
+ * RigidBody!
+ */
+export class RigidBody extends Object3D {
+  private world!: PhysicsWorld
+  public body!: RAPIER.RigidBody
+
+  constructor() {
+    super()
+
+    /* When this object is reparented, have it connect to its world. */
+    this.addEventListener("added", () => {
+      /* Find world */
+      this.traverseAncestors((o) => {
+        if (o instanceof PhysicsWorld) {
+          this.world = o
+        }
       })
-    }
-  }
 
-  /* We're done. Let's go. */
-  return { PhysicsWorld, RigidBody }
+      /* Create a body */
+      let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+      let rigidBody = this.world.world.createRigidBody(rigidBodyDesc)
+    })
+  }
 }

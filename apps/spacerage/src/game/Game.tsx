@@ -1,4 +1,4 @@
-import T, { Application } from "react-trinity"
+import T, { Application, Update } from "react-trinity"
 import { PhysicsWorld, RigidBody } from "../lib/trinity-rapier-3d"
 
 export const Game = () => (
