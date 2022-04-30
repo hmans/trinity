@@ -1,1 +1,3 @@
-export const App = () => <p>Hi</p>
+import { Game } from "./game/Game"
+
+export const App = () => <Game />

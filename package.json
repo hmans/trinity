@@ -14,6 +14,7 @@
     "test": "jest",
     "ci": "preconstruct validate && manypkg check && yarn build && yarn test",
     "revade": "yarn dev && cd apps/revade && yarn dev",
+    "spacerage": "yarn dev && cd apps/spacerage && yarn dev",
     "release": "yarn ci && yarn changeset publish"
   },
   "preconstruct": {
