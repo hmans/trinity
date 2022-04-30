@@ -110,53 +110,51 @@ export class Collider extends Object3D {
 
   constructor() {
     super()
+    this.addEventListener("added", this.mount)
+    this.addEventListener("removed", this.unmount)
+  }
 
-    this.addEventListener("added", () => {
-      /* We're going to queue a microtask here to make sure the following code
+  private mount() {
+    /* We're going to queue a microtask here to make sure the following code
       runs after everything has been wired up. There are probably smarter ways
       of doing all of this, but for now, this will work. */
-      queueMicrotask(() => {
-        /* Find the rigidbody we're part of */
-        this.traverseAncestors((o) => {
-          if (!this.rigidBodyObject && o instanceof RigidBody)
-            this.rigidBodyObject = o
-        })
+    queueMicrotask(() => {
+      /* Find the rigidbody we're part of */
+      this.traverseAncestors((o) => {
+        if (!this.rigidBodyObject && o instanceof RigidBody)
+          this.rigidBodyObject = o
+      })
 
-        /* Create collider descriptor */
-        const colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5)
+      /* Create collider descriptor */
+      const colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5)
 
-        /* Create collider */
-        const collider = this.rigidBodyObject!.physicsWorldObject!.world!.createCollider(
-          colliderDesc,
-          this.rigidBodyObject?.entity!.rigidBody!.handle
-        )
+      /* Create collider */
+      const collider = this.rigidBodyObject!.physicsWorldObject!.world!.createCollider(
+        colliderDesc,
+        this.rigidBodyObject?.entity!.rigidBody!.handle
+      )
 
-        /* Create entity */
-        this.entity = this.rigidBodyObject!.physicsWorldObject!.ecs.createEntity(
-          {
-            collider,
-            transform: this
-          }
-        )
+      /* Create entity */
+      this.entity = this.rigidBodyObject!.physicsWorldObject!.ecs.createEntity({
+        collider,
+        transform: this
       })
     })
+  }
 
-    this.addEventListener("removed", () => {
-      queueMicrotask(() => {
-        /* Destroy collider */
-        this.rigidBodyObject!.physicsWorldObject!.world.removeCollider(
-          this.entity?.collider!,
-          true
-        )
+  private unmount() {
+    queueMicrotask(() => {
+      /* Destroy collider */
+      this.rigidBodyObject!.physicsWorldObject!.world.removeCollider(
+        this.entity?.collider!,
+        true
+      )
 
-        /* Destroy entity */
-        this.rigidBodyObject!.physicsWorldObject!.ecs.destroyEntity(
-          this.entity!
-        )
+      /* Destroy entity */
+      this.rigidBodyObject!.physicsWorldObject!.ecs.destroyEntity(this.entity!)
 
-        /* Disconnect from RigidBody */
-        this.rigidBodyObject = undefined
-      })
+      /* Disconnect from RigidBody */
+      this.rigidBodyObject = undefined
     })
   }
 }
