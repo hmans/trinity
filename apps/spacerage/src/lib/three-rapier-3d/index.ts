@@ -59,11 +59,10 @@ export class RigidBody extends Object3D {
   constructor() {
     super()
 
-    /* When this object is reparented, have it connect to its world. */
     this.addEventListener("added", () => {
       /* Find world */
       this.traverseAncestors((o) => {
-        if (o instanceof PhysicsWorld) this.world = o
+        if (o instanceof PhysicsWorld) this.world ||= o
       })
 
       /* Create a body descriptor */
@@ -98,7 +97,17 @@ export class RigidBody extends Object3D {
  * Collider!
  */
 export class Collider extends Object3D {
+  private rigidBodyObject?: RigidBody
+
   constructor() {
     super()
+
+    this.addEventListener("added", () => {
+      /* Find the rigidbody we're part of */
+      this.traverseAncestors(o => {
+        if (o instanceof RigidBody) this.rigidBodyObject ||= o
+      })
+    })
+
   }
 }

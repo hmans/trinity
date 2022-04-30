@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import T, { Application, useTicker } from "react-trinity"
 import { PhysicsWorld as PhysicsWorldImpl } from "../lib/three-rapier-3d"
-import { PhysicsWorld, RigidBody } from "../lib/trinity-rapier-3d"
+import { PhysicsWorld, RigidBody, Collider } from "../lib/trinity-rapier-3d"
 
 const Scene = () => {
   const world = useRef<PhysicsWorldImpl>(null!)
@@ -11,10 +11,12 @@ const Scene = () => {
   return (
     <PhysicsWorld ref={world} gravity={{ x: 0, y: -1, z: 0 }}>
       <RigidBody>
-        <T.Mesh>
-          <T.DodecahedronGeometry />
-          <T.MeshNormalMaterial />
-        </T.Mesh>
+        <Collider>
+          <T.Mesh>
+            <T.DodecahedronGeometry />
+            <T.MeshNormalMaterial />
+          </T.Mesh>
+        </Collider>
       </RigidBody>
     </PhysicsWorld>
   )
