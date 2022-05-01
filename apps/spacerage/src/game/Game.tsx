@@ -12,7 +12,7 @@ export const Game = () => (
         <T.AmbientLight intensity={0.3} />
         <T.DirectionalLight position={[100, 300, 100]} intensity={0.7} />
 
-        <PhysicsWorld>
+        <PhysicsWorld gravity={[0, 0, 0]}>
           <RigidBody>
             <Collider>
               <T.Mesh>

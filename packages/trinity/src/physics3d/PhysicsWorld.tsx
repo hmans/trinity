@@ -1,15 +1,17 @@
 import * as RAPIER from "@dimforge/rapier3d-compat"
 import * as miniplex from "miniplex"
+import { World } from "miniplex"
 import React, {
   createContext,
   FC,
   ReactNode,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState
 } from "react"
-import { Object3D } from "three"
+import { Object3D, Vector3 } from "three"
 import T, { useTicker } from ".."
 
 export type PhysicsState = {
@@ -24,19 +26,29 @@ export type PhysicsEntity = {
 
 type PhysicsWorldProps = {
   children?: ReactNode
+  gravity?: [number, number, number]
 }
 
 export const PhysicsWorldContext = createContext<PhysicsState>(null!)
 
 export const usePhysics = () => useContext(PhysicsWorldContext)
 
-export const PhysicsWorld: FC<PhysicsWorldProps> = ({ children }) => {
+export const PhysicsWorld: FC<PhysicsWorldProps> = ({ children, gravity }) => {
   const group = useRef<Object3D>(null!)
 
   const [state] = useState<PhysicsState>(() => ({
-    world: new RAPIER.World({ x: 0, y: -9.81, z: 0 }),
+    world: new RAPIER.World(new RAPIER.Vector3(0, -9.81, 0)),
     ecs: new miniplex.World<PhysicsEntity>()
   }))
+
+  /* Apply updated props */
+  useEffect(() => {
+    if (gravity) {
+      state.world.gravity.x = gravity[0]
+      state.world.gravity.y = gravity[1]
+      state.world.gravity.z = gravity[2]
+    }
+  })
 
   const archetypes = useMemo(
     () => ({
