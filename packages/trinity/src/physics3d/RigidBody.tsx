@@ -52,6 +52,9 @@ export const RigidBody = forwardRef<Object3D, RigidBodyProps>(
       desc.setRotation(quat)
 
       desc.setLinearDamping(2)
+      desc.setAngularDamping(800)
+
+      desc.setCanSleep(false)
 
       /* Create RigidBody */
       const rigidBody = world.createRigidBody(desc)

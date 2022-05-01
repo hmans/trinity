@@ -1,23 +1,12 @@
-import RAPIER from "@dimforge/rapier3d-compat"
 import { Tag } from "miniplex"
 import { createECS } from "miniplex-react"
 import { insideSphere } from "randomish"
-import { Suspense, useEffect } from "react"
-import T, {
-  Application,
-  FancyRenderPipeline,
-  GLTFAsset,
-  useTicker
-} from "react-trinity"
-import {
-  Collider,
-  PhysicsWorld,
-  RigidBody,
-  useRigidBody
-} from "react-trinity/physics3d"
+import { Suspense } from "react"
+import T, { Application, FancyRenderPipeline, GLTFAsset } from "react-trinity"
+import { Collider, PhysicsWorld, RigidBody } from "react-trinity/physics3d"
 import { Quaternion } from "three"
 import { LoadingProgress } from "../lib/LoadingProgress"
-import { controller } from "./controller"
+import { PlayerController } from "./PlayerController"
 import { Skybox } from "./Skybox"
 
 type Entity = {
@@ -25,24 +14,6 @@ type Entity = {
 }
 
 const ECS = createECS<Entity>()
-
-const PlayerController = () => {
-  const { rigidBody } = useRigidBody()
-
-  useEffect(() => {
-    controller.start()
-    return () => controller.stop()
-  }, [])
-
-  useTicker("early", () => controller.update())
-
-  useTicker("fixed", () => {
-    const move = controller.controls.move.value
-    rigidBody.addForce(new RAPIER.Vector3(move.x * 3, move.y * 3, 0), true)
-  })
-
-  return null
-}
 
 export const Game = () => (
   <Suspense fallback={<p>LOADING...</p>}>
