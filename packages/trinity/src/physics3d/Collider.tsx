@@ -17,7 +17,7 @@ export const Collider = forwardRef<
   const { rigidBody } = useRigidBody()
 
   useEffect(() => {
-    const desc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5)
+    const desc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5).setDensity(10)
     const collider = world.createCollider(desc, rigidBody.handle)
 
     return () => {

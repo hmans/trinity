@@ -2,7 +2,7 @@ import RAPIER from "@dimforge/rapier3d-compat"
 import { Tag } from "miniplex"
 import { createECS } from "miniplex-react"
 import { insideSphere } from "randomish"
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 import T, {
   Application,
   FancyRenderPipeline,
@@ -29,14 +29,16 @@ const ECS = createECS<Entity>()
 const PlayerController = () => {
   const { rigidBody } = useRigidBody()
 
+  useEffect(() => {
+    controller.start()
+    return () => controller.stop()
+  }, [])
+
   useTicker("early", () => controller.update())
 
   useTicker("fixed", () => {
-    controller.update()
     const move = controller.controls.move.value
-    // console.log(move)
-    // rigidBody.addForce(new RAPIER.Vector3(move.x * 100, move.y * 100, -2), true)
-    rigidBody.setLinvel(new RAPIER.Vector3(0, 0, -3), true)
+    rigidBody.addForce(new RAPIER.Vector3(move.x * 3, move.y * 3, 0), true)
   })
 
   return null

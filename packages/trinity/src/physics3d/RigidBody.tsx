@@ -51,6 +51,8 @@ export const RigidBody = forwardRef<Object3D, RigidBodyProps>(
       o3d.current.getWorldQuaternion(quat)
       desc.setRotation(quat)
 
+      desc.setLinearDamping(2)
+
       /* Create RigidBody */
       const rigidBody = world.createRigidBody(desc)
 
