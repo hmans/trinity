@@ -1,8 +1,14 @@
 import RAPIER from "@dimforge/rapier3d-compat"
+import { createContext } from "react"
+import { useContext } from "react"
 import { forwardRef, ReactNode, useEffect, useState } from "react"
 import T from "react-trinity"
 import { Object3D } from "three"
 import { usePhysics } from "./PhysicsWorld"
+
+const RigidBodyContext = createContext<{ body: RAPIER.RigidBody }>(null!)
+
+export const useRigidBody = () => useContext(RigidBodyContext)
 
 type RigidBodyAttributes = {
   additionalMass?: number
@@ -14,12 +20,21 @@ type RigidBodyProps = {
 
 export const RigidBody = forwardRef<Object3D, RigidBodyProps>(
   ({ children, additionalMass, ...props }, ref) => {
-    const body = useRigidBody({ additionalMass })
-    return <T.Object3D {...props}>{children}</T.Object3D>
+    const body = createRigidBody({ additionalMass })
+
+    return (
+      <T.Object3D {...props}>
+        {body && (
+          <RigidBodyContext.Provider value={{ body }}>
+            {children}
+          </RigidBodyContext.Provider>
+        )}
+      </T.Object3D>
+    )
   }
 )
 
-const useRigidBody = (attrs: RigidBodyAttributes) => {
+const createRigidBody = (attrs: RigidBodyAttributes) => {
   const { world } = usePhysics()
   const [body, setBody] = useState<RAPIER.RigidBody>()
 
