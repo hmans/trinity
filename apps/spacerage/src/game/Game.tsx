@@ -1,7 +1,6 @@
 import { FC, Suspense, useEffect } from "react"
 import T, {
   Application,
-  FancyRenderPipeline,
   GLTFAsset,
   useCubeTexture,
   useParent
