@@ -1,9 +1,8 @@
-import { Suspense } from "react"
-import { FC, useEffect } from "react"
+import { FC, Suspense, useEffect } from "react"
 import T, {
   Application,
+  GLTFAsset,
   useCubeTexture,
-  useGLTF,
   useParent
 } from "react-trinity"
 import { Collider, PhysicsWorld, RigidBody } from "react-trinity/physics3d"
@@ -29,10 +28,7 @@ const Skybox = () => {
   return null
 }
 
-const Asteroid: FC = () => {
-  const gltf = useGLTF("/models/asteroid03.gltf")
-  return gltf ? <T.Object3D object={gltf.scene} /> : null
-}
+const Asteroid: FC = () => <GLTFAsset url="/models/asteroid03.gltf" />
 
 export const Game = () => (
   <Suspense fallback={<p>LOADING...</p>}>
