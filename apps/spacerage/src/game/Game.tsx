@@ -1,18 +1,44 @@
+import RAPIER from "@dimforge/rapier3d-compat"
 import { Tag } from "miniplex"
 import { createECS } from "miniplex-react"
-import { Suspense } from "react"
-import T, { Application, FancyRenderPipeline, GLTFAsset } from "react-trinity"
-import { Collider, PhysicsWorld, RigidBody } from "react-trinity/physics3d"
-import { LoadingProgress } from "../lib/LoadingProgress"
-import { Skybox } from "./Skybox"
 import { insideSphere } from "randomish"
+import { Suspense } from "react"
+import T, {
+  Application,
+  FancyRenderPipeline,
+  GLTFAsset,
+  useTicker
+} from "react-trinity"
+import {
+  Collider,
+  PhysicsWorld,
+  RigidBody,
+  useRigidBody
+} from "react-trinity/physics3d"
 import { Quaternion } from "three"
+import { LoadingProgress } from "../lib/LoadingProgress"
+import { controller } from "./controller"
+import { Skybox } from "./Skybox"
 
 type Entity = {
   isAsteroid: Tag
 }
 
 const ECS = createECS<Entity>()
+
+const PlayerController = () => {
+  const { rigidBody } = useRigidBody()
+
+  useTicker("early", () => controller.update())
+
+  useTicker("fixed", () => {
+    const move = controller.controls.move.value
+    console.log(move)
+    rigidBody.addForce(new RAPIER.Vector3(move.x, move.y, 0), true)
+  })
+
+  return null
+}
 
 export const Game = () => (
   <Suspense fallback={<p>LOADING...</p>}>
@@ -47,6 +73,7 @@ export const Game = () => (
               </ECS.Collection>
 
               <RigidBody position={[0, 0, 30]}>
+                <PlayerController />
                 <T.PerspectiveCamera position={[0, 2, 10]} ref={setCamera} />
                 <Collider rotation-x={-Math.PI / 2}>
                   <GLTFAsset url="/models/spaceship25.gltf" />
