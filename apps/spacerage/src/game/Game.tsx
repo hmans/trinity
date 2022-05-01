@@ -1,6 +1,7 @@
-import { FC, Suspense, useEffect } from "react"
+import { Suspense, useEffect } from "react"
 import T, {
   Application,
+  FancyRenderPipeline,
   GLTFAsset,
   useCubeTexture,
   useParent
@@ -31,7 +32,7 @@ const Skybox = () => {
 export const Game = () => (
   <Suspense fallback={<p>LOADING...</p>}>
     <LoadingProgress>
-      <Application>
+      <Application renderPipeline={FancyRenderPipeline}>
         {({ setCamera }) => (
           <>
             <T.Fog args={["#000", 64, 128]} />
