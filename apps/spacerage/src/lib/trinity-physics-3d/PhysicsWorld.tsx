@@ -16,12 +16,7 @@ type PhysicsWorldProps = {
 
 export const PhysicsWorld: FC<PhysicsWorldProps> = ({ children }) => {
   const group = useRef<Group>(null!)
-  const [world, setWorld] = useState<RAPIER.World>()
-
-  useEffect(() => {
-    setWorld(new RAPIER.World({ x: 0, y: -9.81, z: 0 }))
-    return () => setWorld(undefined)
-  }, [])
+  const world = createWorld()
 
   return (
     <T.Group ref={group}>
@@ -32,4 +27,15 @@ export const PhysicsWorld: FC<PhysicsWorldProps> = ({ children }) => {
       )}
     </T.Group>
   )
+}
+
+const createWorld = () => {
+  const [world, setWorld] = useState<RAPIER.World>()
+
+  useEffect(() => {
+    setWorld(new RAPIER.World({ x: 0, y: -9.81, z: 0 }))
+    return () => setWorld(undefined)
+  }, [])
+
+  return world
 }
