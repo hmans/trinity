@@ -14,10 +14,12 @@ import * as miniplex from "miniplex"
 import { World } from "miniplex"
 import { useMemo } from "react"
 
-export const PhysicsWorldContext = createContext<{
+export type PhysicsState = {
   world: RAPIER.World
   ecs: miniplex.World<PhysicsEntity>
-}>(null!)
+}
+
+export const PhysicsWorldContext = createContext<PhysicsState>(null!)
 
 export const usePhysics = () => useContext(PhysicsWorldContext)
 
@@ -32,21 +34,21 @@ type PhysicsWorldProps = {
 
 export const PhysicsWorld: FC<PhysicsWorldProps> = ({ children }) => {
   const group = useRef<Object3D>(null!)
-  const world = createWorld()
-  const ecs = createECS()
+
+  const [state] = useState<PhysicsState>(() => ({
+    world: new RAPIER.World({ x: 0, y: -9.81, z: 0 }),
+    ecs: new miniplex.World<PhysicsEntity>()
+  }))
 
   const archetypes = useMemo(
-    () =>
-      ecs && {
-        bodies: ecs.archetype("transform", "rigidBody")
-      },
-    [ecs]
+    () => ({
+      bodies: state.ecs.archetype("transform", "rigidBody")
+    }),
+    [state.ecs]
   )
 
   useTicker("physics", () => {
-    if (!world || !archetypes) return
-
-    world?.step()
+    state.world.step()
 
     /* Transfer transform data from physics world to scene */
     for (const { rigidBody, transform } of archetypes!.bodies.entities) {
@@ -60,37 +62,11 @@ export const PhysicsWorld: FC<PhysicsWorldProps> = ({ children }) => {
 
   return (
     <T.Object3D ref={group}>
-      {world && ecs && (
-        <PhysicsWorldContext.Provider value={{ world, ecs }}>
+      {state && (
+        <PhysicsWorldContext.Provider value={state}>
           {children}
         </PhysicsWorldContext.Provider>
       )}
     </T.Object3D>
   )
-}
-
-const createWorld = () => {
-  const [world, setWorld] = useState<RAPIER.World>()
-
-  useEffect(() => {
-    setWorld(new RAPIER.World({ x: 0, y: -9.81, z: 0 }))
-    return () => setWorld(undefined)
-  }, [])
-
-  return world
-}
-
-const createECS = () => {
-  const [ecs, setECS] = useState<miniplex.World<PhysicsEntity>>()
-
-  useEffect(() => {
-    setECS(() => new miniplex.World<PhysicsEntity>())
-
-    return () => {
-      if (ecs) ecs.clear()
-      setECS(undefined)
-    }
-  }, [])
-
-  return ecs
 }

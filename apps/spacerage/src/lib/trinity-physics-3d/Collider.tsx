@@ -1,12 +1,9 @@
-import { ReactNode } from "react"
-import { useContext } from "react"
-import { useEffect } from "react"
-import { forwardRef } from "react"
+import * as RAPIER from "@dimforge/rapier3d-compat"
+import { forwardRef, ReactNode, useEffect } from "react"
 import T, { ReactorComponentProps } from "react-trinity"
 import { Object3D } from "three"
-import { useRigidBody } from "./RigidBody"
-import * as RAPIER from "@dimforge/rapier3d-compat"
 import { usePhysics } from "./PhysicsWorld"
+import { useRigidBody } from "./RigidBody"
 
 type ColliderProps = {
   children?: ReactNode
