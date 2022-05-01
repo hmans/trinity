@@ -35,7 +35,6 @@ export const Game = () => (
         {({ setCamera }) => (
           <>
             <T.Fog args={["#000", 64, 128]} />
-            <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
 
             <T.AmbientLight intensity={0.4} />
             <T.DirectionalLight position={[100, 300, 100]} intensity={1} />
@@ -49,8 +48,9 @@ export const Game = () => (
                 </Collider>
               </RigidBody>
 
-              <RigidBody position={[0, -2, 0]}>
-                <Collider>
+              <RigidBody position={[0, 0, 30]}>
+                <T.PerspectiveCamera position={[0, 2, 10]} ref={setCamera} />
+                <Collider rotation-x={-Math.PI / 2}>
                   <GLTFAsset url="/models/spaceship25.gltf" />
                 </Collider>
               </RigidBody>

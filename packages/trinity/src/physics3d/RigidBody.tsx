@@ -9,7 +9,8 @@ import React, {
   useState
 } from "react"
 import mergeRefs from "react-merge-refs"
-import { Object3D } from "three"
+import { Object3D, Quaternion, Vector3 } from "three"
+import { transform } from "typescript"
 import T from ".."
 import { ReactorComponentProps } from "../reactor"
 import { PhysicsEntity, usePhysics } from "./PhysicsWorld"
@@ -42,8 +43,18 @@ export const RigidBody = forwardRef<Object3D, RigidBodyProps>(
     useEffect(() => {
       const desc = RAPIER.RigidBodyDesc.dynamic()
 
+      /* Inherit existing transform */
+      const pos = new Vector3()
+      const quat = new Quaternion()
+      o3d.current.getWorldPosition(pos)
+      desc.setTranslation(pos.x, pos.y, pos.z)
+      o3d.current.getWorldQuaternion(quat)
+      desc.setRotation(quat)
+
+      /* Create RigidBody */
       const rigidBody = world.createRigidBody(desc)
 
+      /* Register entity */
       const entity = ecs.createEntity({ transform: o3d.current, rigidBody })
 
       setState({ rigidBody, entity })
