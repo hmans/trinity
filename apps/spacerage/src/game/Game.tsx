@@ -15,6 +15,26 @@ type Entity = {
 
 const ECS = createECS<Entity>()
 
+const Asteroids = () => (
+  <ECS.Collection tag="isAsteroid" initial={500}>
+    {() => {
+      const position = insideSphere(100)
+
+      return (
+        <RigidBody
+          position={[position.x, position.y, position.z]}
+          quaternion={new Quaternion().random()}
+          scale={1 + Math.pow(Math.random(), 3) * 2}
+        >
+          <Collider>
+            <GLTFAsset url="/models/asteroid03.gltf" />
+          </Collider>
+        </RigidBody>
+      )
+    }}
+  </ECS.Collection>
+)
+
 export const Game = () => (
   <Suspense fallback={<p>LOADING...</p>}>
     <LoadingProgress>
@@ -29,23 +49,7 @@ export const Game = () => (
             <Skybox />
 
             <PhysicsWorld gravity={[0, 0, 0]}>
-              <ECS.Collection tag="isAsteroid" initial={500}>
-                {() => {
-                  const position = insideSphere(100)
-
-                  return (
-                    <RigidBody
-                      position={[position.x, position.y, position.z]}
-                      quaternion={new Quaternion().random()}
-                      scale={1 + Math.pow(Math.random(), 3) * 2}
-                    >
-                      <Collider>
-                        <GLTFAsset url="/models/asteroid03.gltf" />
-                      </Collider>
-                    </RigidBody>
-                  )
-                }}
-              </ECS.Collection>
+              <Asteroids />
 
               <RigidBody position={[0, 0, 130]}>
                 <PlayerController />
