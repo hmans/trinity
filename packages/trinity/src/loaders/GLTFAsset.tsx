@@ -1,12 +1,16 @@
-import React, { forwardRef, ReactNode } from "react"
+import React, { forwardRef, ReactNode, useMemo } from "react"
 import { Object3D } from "three"
-import T from "../reactor"
+import { getAllJSDocTagsOfKind } from "typescript"
+import T, { ReactorComponentProps } from "../reactor"
 import { useGLTF } from "./useGLTF"
 
 export const GLTFAsset = forwardRef<
   Object3D,
-  { children?: ReactNode; url: string }
+  { children?: ReactNode; url: string } & ReactorComponentProps<typeof Object3D>
 >(({ url, ...props }, ref) => {
   const gltf = useGLTF(url)
-  return <T.Object3D ref={ref} object={gltf.scene} {...props} />
+
+  const clonedScene = useMemo(() => gltf.scene.clone(), [gltf])
+
+  return <T.Object3D ref={ref} object={clonedScene} {...props} />
 })

@@ -1,8 +1,18 @@
+import { Tag } from "miniplex"
+import { createECS } from "miniplex-react"
 import { Suspense } from "react"
 import T, { Application, FancyRenderPipeline, GLTFAsset } from "react-trinity"
 import { Collider, PhysicsWorld, RigidBody } from "react-trinity/physics3d"
 import { LoadingProgress } from "../lib/LoadingProgress"
 import { Skybox } from "./Skybox"
+import { insideSphere } from "randomish"
+import { Quaternion } from "three"
+
+type Entity = {
+  isAsteroid: Tag
+}
+
+const ECS = createECS<Entity>()
 
 export const Game = () => (
   <Suspense fallback={<p>LOADING...</p>}>
@@ -18,11 +28,23 @@ export const Game = () => (
             <Skybox />
 
             <PhysicsWorld gravity={[0, 0, 0]}>
-              <RigidBody>
-                <Collider>
-                  <GLTFAsset url="/models/asteroid03.gltf" />
-                </Collider>
-              </RigidBody>
+              <ECS.Collection tag="isAsteroid" initial={500}>
+                {() => {
+                  const position = insideSphere(100)
+
+                  return (
+                    <RigidBody
+                      position={[position.x, position.y, position.z]}
+                      quaternion={new Quaternion().random()}
+                      scale={1 + Math.pow(Math.random(), 3) * 2}
+                    >
+                      <Collider>
+                        <GLTFAsset url="/models/asteroid03.gltf" />
+                      </Collider>
+                    </RigidBody>
+                  )
+                }}
+              </ECS.Collection>
 
               <RigidBody position={[0, 0, 30]}>
                 <T.PerspectiveCamera position={[0, 2, 10]} ref={setCamera} />
