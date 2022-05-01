@@ -1,19 +1,38 @@
-import { useEffect, useState } from "react"
+import { useMemo } from "react"
 
-export const useLoader = <Resource extends any>(Loader: any, args: any) => {
-  const [resource, setResource] = useState<Resource>()
-  const [loading, setLoading] = useState(false)
+type LoadingState = {
+  promise: Promise<any>
+  resource?: any
+}
 
-  useEffect(() => {
-    if (!resource && !loading) {
-      setLoading(true)
+const loadingStates: Record<string, LoadingState> = {}
 
-      new Loader().load(args, (r: Resource) => {
-        setLoading(false)
-        setResource(r)
-      })
-    }
-  }, [resource, loading])
+export const useLoader = <Resource extends any>(
+  Loader: any,
+  args: any
+): Resource => {
+  /* Fetch this request's state, if there is one */
+  const id = useMemo(() => JSON.stringify(args), [])
+  const state = loadingStates[id]
 
-  return resource
+  /* If we don't have a state, we must initiate loading the requested resource. */
+  if (!state) {
+    const promise = new Promise((resolve: (data: Resource) => any) => {
+      new Loader().load(args, resolve)
+    }).then((resource) => {
+      loadingStates[id].resource = resource
+    })
+
+    loadingStates[id] = { promise }
+
+    throw promise
+  }
+
+  /* If we already have a resource, just return that. */
+  if (state.resource) {
+    return state.resource
+  }
+
+  /* Otherwise, re-throw the existing promise. */
+  throw state.promise
 }
