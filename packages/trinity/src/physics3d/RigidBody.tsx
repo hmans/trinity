@@ -11,6 +11,7 @@ import React, {
 import mergeRefs from "react-merge-refs"
 import { Object3D } from "three"
 import T from ".."
+import { ReactorComponentProps } from "../reactor"
 import { PhysicsEntity, usePhysics } from "./PhysicsWorld"
 
 type RigidBodyState = {
@@ -24,7 +25,8 @@ type RigidBodyAttributes = {
 
 type RigidBodyProps = {
   children?: ReactNode
-} & RigidBodyAttributes
+} & RigidBodyAttributes &
+  ReactorComponentProps<typeof Object3D>
 
 const RigidBodyContext = createContext<RigidBodyState>(null!)
 
@@ -38,8 +40,10 @@ export const RigidBody = forwardRef<Object3D, RigidBodyProps>(
     const [state, setState] = useState<RigidBodyState>()
 
     useEffect(() => {
-      const rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-      const rigidBody = world.createRigidBody(rigidBodyDesc)
+      const desc = RAPIER.RigidBodyDesc.dynamic()
+
+      const rigidBody = world.createRigidBody(desc)
+
       const entity = ecs.createEntity({ transform: o3d.current, rigidBody })
 
       setState({ rigidBody, entity })

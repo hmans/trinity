@@ -28,12 +28,6 @@ const Skybox = () => {
   return null
 }
 
-const Asteroid: FC = () => (
-  <Suspense>
-    <GLTFAsset url="/models/asteroid03.gltf" />
-  </Suspense>
-)
-
 export const Game = () => (
   <Suspense fallback={<p>LOADING...</p>}>
     <LoadingProgress>
@@ -51,7 +45,13 @@ export const Game = () => (
             <PhysicsWorld gravity={[0, 0, 0]}>
               <RigidBody>
                 <Collider>
-                  <Asteroid />
+                  <GLTFAsset url="/models/asteroid03.gltf" />
+                </Collider>
+              </RigidBody>
+
+              <RigidBody position={[0, -2, 0]}>
+                <Collider>
+                  <GLTFAsset url="/models/spaceship25.gltf" />
                 </Collider>
               </RigidBody>
             </PhysicsWorld>
