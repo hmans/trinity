@@ -1,26 +1,5 @@
-import { useRef } from "react"
-import T, { Application, useTicker } from "react-trinity"
-import { PhysicsWorld as PhysicsWorldImpl } from "../lib/three-rapier-3d"
-import { PhysicsWorld, RigidBody, Collider } from "../lib/trinity-rapier-3d"
-
-const Scene = () => {
-  const world = useRef<PhysicsWorldImpl>(null!)
-
-  useTicker("physics", (dt) => world.current.update(dt))
-
-  return (
-    <PhysicsWorld ref={world} gravity={{ x: 0, y: -1, z: 0 }}>
-      <RigidBody>
-        <Collider>
-          <T.Mesh>
-            <T.DodecahedronGeometry />
-            <T.MeshNormalMaterial />
-          </T.Mesh>
-        </Collider>
-      </RigidBody>
-    </PhysicsWorld>
-  )
-}
+import T, { Application } from "react-trinity"
+import { PhysicsWorld } from "../lib/trinity-physics-3d"
 
 export const Game = () => (
   <Application>
@@ -33,7 +12,12 @@ export const Game = () => (
         <T.AmbientLight intensity={0.3} />
         <T.DirectionalLight position={[100, 300, 100]} intensity={0.7} />
 
-        <Scene />
+        <PhysicsWorld>
+          <T.Mesh>
+            <T.DodecahedronGeometry />
+            <T.MeshNormalMaterial />
+          </T.Mesh>
+        </PhysicsWorld>
       </>
     )}
   </Application>
