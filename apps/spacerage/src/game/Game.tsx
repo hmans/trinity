@@ -1,5 +1,5 @@
 import T, { Application } from "react-trinity"
-import { Collider, PhysicsWorld, RigidBody } from "../lib/trinity-physics-3d"
+import { Collider, PhysicsWorld, RigidBody } from "react-trinity/physics3d"
 
 export const Game = () => (
   <Application>

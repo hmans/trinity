@@ -13,7 +13,8 @@
   },
   "preconstruct": {
     "entrypoints": [
-      "index.ts"
+      "index.ts",
+      "physics3d/index.ts"
     ]
   },
   "babel": {
@@ -39,6 +40,7 @@
     "troika-three-text": "^0.46.4"
   },
   "peerDependencies": {
+    "@dimforge/rapier3d-compat": "^0.8.0-alpha.2",
     "react": ">=18.0.0",
     "three": ">=0.139.0"
   }

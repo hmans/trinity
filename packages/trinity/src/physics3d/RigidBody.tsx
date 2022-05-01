@@ -1,13 +1,17 @@
 import RAPIER from "@dimforge/rapier3d-compat"
-import { createContext } from "react"
-import { useContext } from "react"
-import { useRef } from "react"
-import { forwardRef, ReactNode, useEffect, useState } from "react"
-import T from "react-trinity"
-import { Object3D } from "three"
-import { PhysicsEntity, usePhysics } from "./PhysicsWorld"
+import React, {
+  createContext,
+  forwardRef,
+  ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+  useState
+} from "react"
 import mergeRefs from "react-merge-refs"
-import { MutableRefObject } from "react"
+import { Object3D } from "three"
+import T from ".."
+import { PhysicsEntity, usePhysics } from "./PhysicsWorld"
 
 type RigidBodyState = {
   rigidBody: RAPIER.RigidBody

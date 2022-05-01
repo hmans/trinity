@@ -1,18 +1,16 @@
 import * as RAPIER from "@dimforge/rapier3d-compat"
-import {
+import * as miniplex from "miniplex"
+import React, {
   createContext,
   FC,
   ReactNode,
   useContext,
-  useEffect,
+  useMemo,
   useRef,
   useState
 } from "react"
-import T, { useTicker } from "react-trinity"
 import { Object3D } from "three"
-import * as miniplex from "miniplex"
-import { World } from "miniplex"
-import { useMemo } from "react"
+import T, { useTicker } from ".."
 
 export type PhysicsState = {
   world: RAPIER.World

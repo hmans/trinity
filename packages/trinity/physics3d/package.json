@@ -1,0 +1,4 @@
+{
+  "main": "dist/react-trinity-physics3d.cjs.js",
+  "module": "dist/react-trinity-physics3d.esm.js"
+}
