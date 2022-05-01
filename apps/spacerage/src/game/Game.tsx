@@ -1,5 +1,5 @@
 import T, { Application } from "react-trinity"
-import { PhysicsWorld } from "../lib/trinity-physics-3d"
+import { PhysicsWorld, RigidBody } from "../lib/trinity-physics-3d"
 
 export const Game = () => (
   <Application>
@@ -13,10 +13,12 @@ export const Game = () => (
         <T.DirectionalLight position={[100, 300, 100]} intensity={0.7} />
 
         <PhysicsWorld>
-          <T.Mesh>
-            <T.DodecahedronGeometry />
-            <T.MeshNormalMaterial />
-          </T.Mesh>
+          <RigidBody>
+            <T.Mesh>
+              <T.DodecahedronGeometry />
+              <T.MeshNormalMaterial />
+            </T.Mesh>
+          </RigidBody>
         </PhysicsWorld>
       </>
     )}
