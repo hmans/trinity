@@ -29,6 +29,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@dimforge/rapier3d-compat": "^0.8.0-alpha.2",
     "react": "^18.0.0",
     "three": "^0.139.2"
   },
