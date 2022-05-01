@@ -21,7 +21,6 @@ export const PhysicsWorld: FC<PhysicsWorldProps> = ({ children }) => {
   useTicker("physics", () => {
     if (world) {
       world.step()
-      console.log("hi")
     }
   })
 
