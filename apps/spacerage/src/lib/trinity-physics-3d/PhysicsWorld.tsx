@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useContext } from "react"
 import { createContext } from "react"
 import { FC, ReactNode, useRef, useState } from "react"
-import T from "react-trinity"
+import T, { useTicker } from "react-trinity"
 import { Group } from "three"
 
 export const PhysicsWorldContext = createContext<{ world: RAPIER.World }>(null!)
@@ -17,6 +17,13 @@ type PhysicsWorldProps = {
 export const PhysicsWorld: FC<PhysicsWorldProps> = ({ children }) => {
   const group = useRef<Group>(null!)
   const world = createWorld()
+
+  useTicker("physics", () => {
+    if (world) {
+      world.step()
+      console.log("hi")
+    }
+  })
 
   return (
     <T.Group ref={group}>

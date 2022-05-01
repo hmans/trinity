@@ -24,9 +24,10 @@ export const Collider = forwardRef<
     const collider = world.createCollider(desc, body.handle)
 
     return () => {
-      world.removeCollider(collider, true)
+      if (collider && world.colliders.contains(collider.handle))
+        world.removeCollider(collider, true)
     }
-  }, [body])
+  }, [body, world])
 
   return (
     <T.Object3D {...props} ref={ref}>
