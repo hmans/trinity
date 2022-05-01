@@ -32,9 +32,11 @@ const PlayerController = () => {
   useTicker("early", () => controller.update())
 
   useTicker("fixed", () => {
+    controller.update()
     const move = controller.controls.move.value
-    console.log(move)
-    rigidBody.addForce(new RAPIER.Vector3(move.x, move.y, 0), true)
+    // console.log(move)
+    // rigidBody.addForce(new RAPIER.Vector3(move.x * 100, move.y * 100, -2), true)
+    rigidBody.setLinvel(new RAPIER.Vector3(0, 0, -3), true)
   })
 
   return null
@@ -72,7 +74,7 @@ export const Game = () => (
                 }}
               </ECS.Collection>
 
-              <RigidBody position={[0, 0, 30]}>
+              <RigidBody position={[0, 0, 130]}>
                 <PlayerController />
                 <T.PerspectiveCamera position={[0, 2, 10]} ref={setCamera} />
                 <Collider rotation-x={-Math.PI / 2}>
