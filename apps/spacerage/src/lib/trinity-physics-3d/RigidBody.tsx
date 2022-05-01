@@ -1,10 +1,13 @@
 import RAPIER from "@dimforge/rapier3d-compat"
 import { createContext } from "react"
 import { useContext } from "react"
+import { useRef } from "react"
 import { forwardRef, ReactNode, useEffect, useState } from "react"
 import T from "react-trinity"
 import { Object3D } from "three"
-import { usePhysics } from "./PhysicsWorld"
+import { PhysicsEntity, usePhysics } from "./PhysicsWorld"
+import mergeRefs from "react-merge-refs"
+import { MutableRefObject } from "react"
 
 const RigidBodyContext = createContext<{ body: RAPIER.RigidBody }>(null!)
 
@@ -20,12 +23,30 @@ type RigidBodyProps = {
 
 export const RigidBody = forwardRef<Object3D, RigidBodyProps>(
   ({ children, additionalMass, ...props }, ref) => {
-    const body = createRigidBody({ additionalMass })
+    const o3d = useRef<Object3D>(null!)
+    const { world, ecs } = usePhysics()
+    const [rigidBody, setRigidBody] = useState<RAPIER.RigidBody>()
+    const [entity, setEntity] = useState<PhysicsEntity>()
+
+    useEffect(() => {
+      const rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+      const rigidBody = world.createRigidBody(rigidBodyDesc)
+      const entity = ecs.createEntity({ transform: o3d.current, rigidBody })
+
+      setRigidBody(rigidBody)
+      setEntity(entity)
+
+      return () => {
+        world.removeRigidBody(rigidBody)
+        setRigidBody(undefined)
+        setEntity(undefined)
+      }
+    }, [world])
 
     return (
-      <T.Object3D {...props}>
-        {body && (
-          <RigidBodyContext.Provider value={{ body }}>
+      <T.Object3D ref={mergeRefs([ref, o3d])} {...props}>
+        {rigidBody && entity && (
+          <RigidBodyContext.Provider value={{ body: rigidBody }}>
             {children}
           </RigidBodyContext.Provider>
         )}
@@ -33,22 +54,3 @@ export const RigidBody = forwardRef<Object3D, RigidBodyProps>(
     )
   }
 )
-
-const createRigidBody = (attrs: RigidBodyAttributes) => {
-  const { world } = usePhysics()
-  const [body, setBody] = useState<RAPIER.RigidBody>()
-
-  useEffect(() => {
-    setBody(() => {
-      const rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-      return world.createRigidBody(rigidBodyDesc)
-    })
-
-    return () => {
-      if (body) world.removeRigidBody(body)
-      setBody(undefined)
-    }
-  }, [world])
-
-  return body
-}
