@@ -1,7 +1,7 @@
 import * as RAPIER from "@dimforge/rapier3d-compat"
 import React, { forwardRef, ReactNode, useEffect } from "react"
-import T, { ReactorComponentProps } from ".."
 import { Object3D } from "three"
+import T, { ReactorComponentProps } from ".."
 import { usePhysics } from "./PhysicsWorld"
 import { useRigidBody } from "./RigidBody"
 

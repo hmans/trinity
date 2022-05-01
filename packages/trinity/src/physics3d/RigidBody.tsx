@@ -18,10 +18,6 @@ type RigidBodyState = {
   entity: PhysicsEntity
 }
 
-const RigidBodyContext = createContext<RigidBodyState>(null!)
-
-export const useRigidBody = () => useContext(RigidBodyContext)
-
 type RigidBodyAttributes = {
   additionalMass?: number
 }
@@ -29,6 +25,10 @@ type RigidBodyAttributes = {
 type RigidBodyProps = {
   children?: ReactNode
 } & RigidBodyAttributes
+
+const RigidBodyContext = createContext<RigidBodyState>(null!)
+
+export const useRigidBody = () => useContext(RigidBodyContext)
 
 export const RigidBody = forwardRef<Object3D, RigidBodyProps>(
   ({ children, additionalMass, ...props }, ref) => {

@@ -17,10 +17,6 @@ export type PhysicsState = {
   ecs: miniplex.World<PhysicsEntity>
 }
 
-export const PhysicsWorldContext = createContext<PhysicsState>(null!)
-
-export const usePhysics = () => useContext(PhysicsWorldContext)
-
 export type PhysicsEntity = {
   rigidBody?: RAPIER.RigidBody
   transform: Object3D
@@ -29,6 +25,10 @@ export type PhysicsEntity = {
 type PhysicsWorldProps = {
   children?: ReactNode
 }
+
+export const PhysicsWorldContext = createContext<PhysicsState>(null!)
+
+export const usePhysics = () => useContext(PhysicsWorldContext)
 
 export const PhysicsWorld: FC<PhysicsWorldProps> = ({ children }) => {
   const group = useRef<Object3D>(null!)
