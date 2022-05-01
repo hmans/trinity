@@ -1,6 +1,7 @@
 import { FC, Suspense, useEffect } from "react"
 import T, {
   Application,
+  FancyRenderPipeline,
   GLTFAsset,
   useCubeTexture,
   useParent
@@ -28,7 +29,11 @@ const Skybox = () => {
   return null
 }
 
-const Asteroid: FC = () => <GLTFAsset url="/models/asteroid03.gltf" />
+const Asteroid: FC = () => (
+  <Suspense>
+    <GLTFAsset url="/models/asteroid03.gltf" />
+  </Suspense>
+)
 
 export const Game = () => (
   <Suspense fallback={<p>LOADING...</p>}>
@@ -36,12 +41,11 @@ export const Game = () => (
       <Application>
         {({ setCamera }) => (
           <>
-            <T.Color args={[0.2, 0.2, 0.2]} attach="background" />
             <T.Fog args={["#000", 64, 128]} />
             <T.PerspectiveCamera position={[0, 0, 10]} ref={setCamera} />
 
-            <T.AmbientLight intensity={0.3} />
-            <T.DirectionalLight position={[100, 300, 100]} intensity={0.7} />
+            <T.AmbientLight intensity={0.4} />
+            <T.DirectionalLight position={[100, 300, 100]} intensity={1} />
 
             <Skybox />
 
