@@ -14,17 +14,17 @@ export const Collider = forwardRef<
   ColliderProps & ReactorComponentProps<typeof Object3D>
 >(({ children, ...props }, ref) => {
   const { world } = usePhysics()
-  const { body } = useRigidBody()
+  const { rigidBody } = useRigidBody()
 
   useEffect(() => {
     const desc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5)
-    const collider = world.createCollider(desc, body.handle)
+    const collider = world.createCollider(desc, rigidBody.handle)
 
     return () => {
       if (collider && world.colliders.contains(collider.handle))
         world.removeCollider(collider, true)
     }
-  }, [body, world])
+  }, [rigidBody, world])
 
   return (
     <T.Object3D {...props} ref={ref}>

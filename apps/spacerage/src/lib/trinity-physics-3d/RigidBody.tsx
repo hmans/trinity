@@ -9,7 +9,12 @@ import { PhysicsEntity, usePhysics } from "./PhysicsWorld"
 import mergeRefs from "react-merge-refs"
 import { MutableRefObject } from "react"
 
-const RigidBodyContext = createContext<{ body: RAPIER.RigidBody }>(null!)
+type RigidBodyState = {
+  rigidBody: RAPIER.RigidBody
+  entity: PhysicsEntity
+}
+
+const RigidBodyContext = createContext<RigidBodyState>(null!)
 
 export const useRigidBody = () => useContext(RigidBodyContext)
 
@@ -25,28 +30,26 @@ export const RigidBody = forwardRef<Object3D, RigidBodyProps>(
   ({ children, additionalMass, ...props }, ref) => {
     const o3d = useRef<Object3D>(null!)
     const { world, ecs } = usePhysics()
-    const [rigidBody, setRigidBody] = useState<RAPIER.RigidBody>()
-    const [entity, setEntity] = useState<PhysicsEntity>()
+
+    const [state, setState] = useState<RigidBodyState>()
 
     useEffect(() => {
       const rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
       const rigidBody = world.createRigidBody(rigidBodyDesc)
       const entity = ecs.createEntity({ transform: o3d.current, rigidBody })
 
-      setRigidBody(rigidBody)
-      setEntity(entity)
+      setState({ rigidBody, entity })
 
       return () => {
         world.removeRigidBody(rigidBody)
-        setRigidBody(undefined)
-        setEntity(undefined)
+        setState(undefined)
       }
     }, [world])
 
     return (
       <T.Object3D ref={mergeRefs([ref, o3d])} {...props}>
-        {rigidBody && entity && (
-          <RigidBodyContext.Provider value={{ body: rigidBody }}>
+        {state && (
+          <RigidBodyContext.Provider value={state}>
             {children}
           </RigidBodyContext.Provider>
         )}
