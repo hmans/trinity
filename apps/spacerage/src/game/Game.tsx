@@ -1,18 +1,13 @@
-import { Suspense, useEffect, useState } from "react"
-import T, { Application, useGLTF, useParent } from "react-trinity"
+import { FC, useEffect } from "react"
+import T, {
+  Application,
+  useCubeTexture,
+  useGLTF,
+  useParent
+} from "react-trinity"
 import { Collider, PhysicsWorld, RigidBody } from "react-trinity/physics3d"
-import { CubeTexture, CubeTextureLoader, Scene } from "three"
+import { Scene } from "three"
 import { LoadingProgress } from "../lib/LoadingProgress"
-
-const useCubeTexture = (urls: string[]): CubeTexture | undefined => {
-  const [texture, setTexture] = useState<CubeTexture>()
-
-  useEffect(() => {
-    if (!texture) new CubeTextureLoader().load(urls, setTexture)
-  })
-
-  return texture
-}
 
 const Skybox = () => {
   const parent = useParent() as Scene
@@ -33,9 +28,9 @@ const Skybox = () => {
   return null
 }
 
-const Asteroid = () => {
+const Asteroid: FC = () => {
   const gltf = useGLTF("/models/asteroid03.gltf")
-  return <T.Object3D object={gltf.scene} />
+  return gltf ? <T.Object3D object={gltf.scene} /> : null
 }
 
 export const Game = () => (
@@ -56,10 +51,6 @@ export const Game = () => (
             <RigidBody>
               <Collider>
                 <Asteroid />
-                <T.Mesh>
-                  <T.DodecahedronGeometry />
-                  <T.MeshNormalMaterial />
-                </T.Mesh>
               </Collider>
             </RigidBody>
           </PhysicsWorld>
