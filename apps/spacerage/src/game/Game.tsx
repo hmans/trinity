@@ -49,9 +49,15 @@ export const Game = () => (
 
               <RigidBody position={[0, 0, 130]}>
                 <PlayerController />
+                <T.PointLight
+                  intensity={0.5}
+                  decay={2}
+                  distance={20}
+                  position-y={3}
+                />
                 <T.PerspectiveCamera position={[0, 2, 10]} ref={setCamera} />
                 <Collider rotation-x={-Math.PI / 2}>
-                  <GLTFAsset url="/models/spaceship25.gltf" />
+                  <GLTFAsset url="/models/spaceship25.gltf" scale={0.5} />
                 </Collider>
               </RigidBody>
             </PhysicsWorld>
