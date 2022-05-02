@@ -10,7 +10,6 @@ import React, {
 } from "react"
 import mergeRefs from "react-merge-refs"
 import { Object3D, Quaternion, Vector3 } from "three"
-import { transform } from "typescript"
 import T from ".."
 import { ReactorComponentProps } from "../reactor"
 import { PhysicsEntity, usePhysics } from "./PhysicsWorld"
@@ -65,6 +64,7 @@ export const RigidBody = forwardRef<Object3D, RigidBodyProps>(
       setState({ rigidBody, entity })
 
       return () => {
+        ecs.destroyEntity(entity)
         world.removeRigidBody(rigidBody)
         setState(undefined)
       }

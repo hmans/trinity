@@ -17,7 +17,8 @@ const useCollider = (descFactory: () => RAPIER.ColliderDesc) => {
     const collider = world.createCollider(descFactory(), rigidBody.handle)
 
     return () => {
-      world.removeCollider(collider, true)
+      if (collider && world.colliders.contains(collider.handle))
+        world.removeCollider(collider, true)
     }
   }, [rigidBody, world])
 }
