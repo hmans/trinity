@@ -22,11 +22,24 @@ const useCollider = (descFactory: () => RAPIER.ColliderDesc) => {
   }, [rigidBody, world])
 }
 
-export const CuboidCollider = forwardRef<
+export const BoxCollider = forwardRef<
   Object3D,
   ColliderProps & ReactorComponentProps<typeof Object3D>
 >(({ children, ...props }, ref) => {
   useCollider(() => RAPIER.ColliderDesc.cuboid(2, 2, 2))
+
+  return (
+    <T.Object3D {...props} ref={ref}>
+      {children}
+    </T.Object3D>
+  )
+})
+
+export const SphereCollider = forwardRef<
+  Object3D,
+  ColliderProps & ReactorComponentProps<typeof Object3D>
+>(({ children, ...props }, ref) => {
+  useCollider(() => RAPIER.ColliderDesc.ball(0.5))
 
   return (
     <T.Object3D {...props} ref={ref}>

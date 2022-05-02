@@ -4,9 +4,10 @@ import { insideSphere } from "randomish"
 import { Suspense } from "react"
 import T, { Application, FancyRenderPipeline, GLTFAsset } from "react-trinity"
 import {
-  CuboidCollider,
+  BoxCollider,
   PhysicsWorld,
-  RigidBody
+  RigidBody,
+  SphereCollider
 } from "react-trinity/physics3d"
 import { Quaternion } from "three"
 import { LoadingProgress } from "../lib/LoadingProgress"
@@ -30,9 +31,9 @@ const Asteroids = () => (
           quaternion={new Quaternion().random()}
           scale={1 + Math.pow(Math.random(), 3) * 2}
         >
-          <CuboidCollider>
+          <SphereCollider>
             <GLTFAsset url="/models/asteroid03.gltf" />
-          </CuboidCollider>
+          </SphereCollider>
         </RigidBody>
       )
     }}
@@ -59,9 +60,9 @@ export const Game = () => (
                 <PlayerController />
                 <T.PointLight intensity={2.5} position-y={3} />
                 <T.PerspectiveCamera position={[0, 2, 10]} ref={setCamera} />
-                <CuboidCollider rotation-x={-Math.PI / 2}>
+                <BoxCollider rotation-x={-Math.PI / 2}>
                   <GLTFAsset url="/models/spaceship25.gltf" scale={0.5} />
-                </CuboidCollider>
+                </BoxCollider>
               </RigidBody>
             </PhysicsWorld>
           </>
