@@ -17,7 +17,7 @@ export type InstanceComponents = {
 export type InstanceEntity<CustomComponents = IEntity> = CustomComponents &
   InstanceComponents
 
-export const makeInstanceComponents = <Custom extends IEntity = IEntity>({
+export const makeInstancedMesh = <Custom extends IEntity = IEntity>({
   systemFactory,
   entityFactory,
   usage = DynamicDrawUsage
