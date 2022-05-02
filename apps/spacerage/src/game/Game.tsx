@@ -16,7 +16,7 @@ type Entity = {
 const ECS = createECS<Entity>()
 
 const Asteroids = () => (
-  <ECS.Collection tag="isAsteroid" initial={500}>
+  <ECS.ManagedEntities tag="isAsteroid" initial={500}>
     {() => {
       const position = insideSphere(100)
 
@@ -32,7 +32,7 @@ const Asteroids = () => (
         </RigidBody>
       )
     }}
-  </ECS.Collection>
+  </ECS.ManagedEntities>
 )
 
 export const Game = () => (
@@ -43,7 +43,7 @@ export const Game = () => (
           <>
             <T.Fog args={["#000", 64, 128]} />
 
-            <T.AmbientLight intensity={0.4} />
+            <T.AmbientLight intensity={0.8} />
             <T.DirectionalLight position={[100, 300, 100]} intensity={1} />
 
             <Skybox />
