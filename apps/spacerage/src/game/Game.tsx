@@ -81,11 +81,10 @@ const Player = () => {
         <ECS.Component name="transform">
           <RigidBody position={[0, 0, 130]} allowSleep={false}>
             <PlayerController />
-
             <T.PointLight intensity={2.5} position-y={3} />
-            <BoxCollider rotation-x={-Math.PI / 2}>
+            <ConvexHullCollider geometry={Asset.mesh.geometry}>
               <Asset.Instance scale={0.5} />
-            </BoxCollider>
+            </ConvexHullCollider>{" "}
           </RigidBody>
         </ECS.Component>
       </ECS.Entity>
