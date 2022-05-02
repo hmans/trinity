@@ -11,6 +11,7 @@ import T, {
 } from "react-trinity"
 import {
   BoxCollider,
+  ConvexHullCollider,
   PhysicsWorld,
   RigidBody,
   SphereCollider
@@ -32,7 +33,11 @@ const useInstancedMesh = (...args: Parameters<typeof makeInstancedMesh>) =>
 const useInstancedGLTF = (url: string) => {
   const gltf = useGLTF(url)
   const mesh = gltf.scene.children[0] as Mesh
-  return useInstancedMesh({ geometry: mesh.geometry, material: mesh.material })
+
+  return {
+    ...useInstancedMesh({ geometry: mesh.geometry, material: mesh.material }),
+    mesh
+  }
 }
 
 const Asteroids = () => {
@@ -50,11 +55,11 @@ const Asteroids = () => {
             <RigidBody
               position={[position.x, position.y, position.z]}
               quaternion={new Quaternion().random()}
-              scale={1 + Math.pow(Math.random(), 3) * 2}
+              // scale={1 + Math.pow(Math.random(), 3) * 2}
             >
-              <SphereCollider>
+              <ConvexHullCollider geometry={Asset.mesh.geometry}>
                 <Asset.Instance />
-              </SphereCollider>
+              </ConvexHullCollider>
             </RigidBody>
           )
         }}
