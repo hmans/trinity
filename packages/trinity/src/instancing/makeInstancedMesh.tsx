@@ -1,7 +1,15 @@
 import { IEntity, Tag, World } from "miniplex"
 import { createECS } from "miniplex-react"
 import React, { FC, forwardRef, useEffect, useRef } from "react"
-import { DynamicDrawUsage, Group, InstancedMesh, Object3D, Usage } from "three"
+import {
+  BufferGeometry,
+  DynamicDrawUsage,
+  Group,
+  InstancedMesh,
+  Material,
+  Object3D,
+  Usage
+} from "three"
 import { useTicker } from "../engine"
 import { makeReactor, ReactorComponentProps } from "../reactor"
 
@@ -20,10 +28,14 @@ export type InstanceEntity<CustomComponents = IEntity> = CustomComponents &
 export const makeInstancedMesh = <Custom extends IEntity = IEntity>({
   systemFactory,
   entityFactory,
+  material,
+  geometry,
   usage = DynamicDrawUsage
 }: {
   entityFactory?: () => Custom
   systemFactory?: (world: World<InstanceEntity<Custom>>) => (dt: number) => void
+  material?: Material
+  geometry?: BufferGeometry
   usage?: Usage
 }) => {
   /* We're using Miniplex as a state container. */
@@ -72,7 +84,7 @@ export const makeInstancedMesh = <Custom extends IEntity = IEntity>({
       <T.InstancedMesh
         {...props}
         ref={instancedMesh}
-        args={[null!, null!, instanceLimit]}
+        args={[geometry, material, instanceLimit]}
       />
     )
   }
