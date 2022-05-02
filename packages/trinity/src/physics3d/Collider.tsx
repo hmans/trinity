@@ -9,22 +9,24 @@ type ColliderProps = {
   children?: ReactNode
 }
 
-export const Collider = forwardRef<
-  Object3D,
-  ColliderProps & ReactorComponentProps<typeof Object3D>
->(({ children, ...props }, ref) => {
+const useCollider = (descFactory: () => RAPIER.ColliderDesc) => {
   const { world } = usePhysics()
   const { rigidBody } = useRigidBody()
 
   useEffect(() => {
-    const desc = RAPIER.ColliderDesc.cuboid(2, 2, 2)
-    const collider = world.createCollider(desc, rigidBody.handle)
+    const collider = world.createCollider(descFactory(), rigidBody.handle)
 
     return () => {
-      if (collider && world.colliders.contains(collider.handle))
-        world.removeCollider(collider, true)
+      world.removeCollider(collider, true)
     }
   }, [rigidBody, world])
+}
+
+export const Collider = forwardRef<
+  Object3D,
+  ColliderProps & ReactorComponentProps<typeof Object3D>
+>(({ children, ...props }, ref) => {
+  useCollider(() => RAPIER.ColliderDesc.cuboid(2, 2, 2))
 
   return (
     <T.Object3D {...props} ref={ref}>
