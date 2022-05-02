@@ -22,7 +22,7 @@ const useCollider = (descFactory: () => RAPIER.ColliderDesc) => {
   }, [rigidBody, world])
 }
 
-export const Collider = forwardRef<
+export const CuboidCollider = forwardRef<
   Object3D,
   ColliderProps & ReactorComponentProps<typeof Object3D>
 >(({ children, ...props }, ref) => {
