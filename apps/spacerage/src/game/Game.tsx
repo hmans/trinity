@@ -80,7 +80,7 @@ export const Game = () => (
             <PhysicsWorld gravity={[0, 0, 0]}>
               <Asteroids />
 
-              <RigidBody position={[0, 0, 130]}>
+              <RigidBody position={[0, 0, 130]} allowSleep={false}>
                 <PlayerController />
                 <T.PointLight intensity={2.5} position-y={3} />
                 <T.PerspectiveCamera position={[0, 2, 10]} ref={setCamera} />
