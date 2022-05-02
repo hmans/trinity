@@ -50,17 +50,19 @@ function useNullableState<T>(initial?: T | (() => T)) {
   return useState<T | null>(initial!)
 }
 
-type ApplicationApi = {
+type ApplicationState = {
   setScene: (scene: THREE.Scene | null) => void
   setCamera: (camera: THREE.Camera | null) => void
+  camera: THREE.Camera | null
+  scene: THREE.Scene | null
 }
 
-const ApplicationContext = createContext<ApplicationApi>(null!)
+const ApplicationContext = createContext<ApplicationState>(null!)
 
 export const useApplication = () => useContext(ApplicationContext)
 
 export const Application: FC<{
-  children: ReactNode | ((api: ApplicationApi) => ReactNode)
+  children: ReactNode | ((api: ApplicationState) => ReactNode)
   renderPipeline?: RenderPipelineComponent
 }> = ({ children, renderPipeline: RenderPipeline = BasicRenderPipeline }) => {
   const [scene, setScene] = useNullableState<THREE.Scene>()
@@ -85,9 +87,11 @@ export const Application: FC<{
         {/* {scene && camera && <EventHandling scene={scene} camera={camera} />} */}
 
         <T.Scene ref={setScene}>
-          <ApplicationContext.Provider value={{ setCamera, setScene }}>
+          <ApplicationContext.Provider
+            value={{ setCamera, setScene, scene, camera }}
+          >
             {children instanceof Function
-              ? children({ setScene, setCamera })
+              ? children({ setScene, setCamera, camera, scene })
               : children}
           </ApplicationContext.Provider>
         </T.Scene>

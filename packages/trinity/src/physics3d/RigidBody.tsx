@@ -34,7 +34,7 @@ const RigidBodyContext = createContext<RigidBodyState>(null!)
 export const useRigidBody = () => useContext(RigidBodyContext)
 
 export const RigidBody = forwardRef<Object3D, RigidBodyProps>(
-  ({ children, additionalMass, allowSleep = true, ...props }, ref) => {
+  ({ children, additionalMass, allowSleep = false, ...props }, ref) => {
     const o3d = useRef<Object3D>(null!)
     const { world, ecs } = usePhysics()
 
