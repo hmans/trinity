@@ -21,6 +21,7 @@ type RigidBodyState = {
 
 type RigidBodyAttributes = {
   additionalMass?: number
+  allowSleep?: boolean
 }
 
 type RigidBodyProps = {
@@ -33,14 +34,14 @@ const RigidBodyContext = createContext<RigidBodyState>(null!)
 export const useRigidBody = () => useContext(RigidBodyContext)
 
 export const RigidBody = forwardRef<Object3D, RigidBodyProps>(
-  ({ children, additionalMass, ...props }, ref) => {
+  ({ children, additionalMass, allowSleep = true, ...props }, ref) => {
     const o3d = useRef<Object3D>(null!)
     const { world, ecs } = usePhysics()
 
     const [state, setState] = useState<RigidBodyState>()
 
     useEffect(() => {
-      const desc = RAPIER.RigidBodyDesc.dynamic()
+      const desc = RAPIER.RigidBodyDesc.dynamic().setCanSleep(allowSleep)
 
       /* Inherit existing transform */
       const pos = new Vector3()
@@ -52,8 +53,6 @@ export const RigidBody = forwardRef<Object3D, RigidBodyProps>(
 
       desc.setLinearDamping(1)
       desc.setAngularDamping(1)
-
-      desc.setCanSleep(false)
 
       /* Create RigidBody */
       const rigidBody = world.createRigidBody(desc)
