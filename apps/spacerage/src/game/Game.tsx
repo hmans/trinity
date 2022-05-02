@@ -26,14 +26,13 @@ type Entity = {
 
 const ECS = createECS<Entity>()
 
+const useInstancedMesh = (...args: Parameters<typeof makeInstancedMesh>) =>
+  useMemo(() => makeInstancedMesh(...args), [])
+
 const useInstancedGLTF = (url: string) => {
   const gltf = useGLTF(url)
   const mesh = gltf.scene.children[0] as Mesh
-  return useMemo(
-    () =>
-      makeInstancedMesh({ geometry: mesh.geometry, material: mesh.material }),
-    [mesh]
-  )
+  return useInstancedMesh({ geometry: mesh.geometry, material: mesh.material })
 }
 
 const Asteroids = () => {
