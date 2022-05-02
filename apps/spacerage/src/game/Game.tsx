@@ -26,14 +26,22 @@ type Entity = {
 
 const ECS = createECS<Entity>()
 
+const useInstancedGLTF = (url: string) => {
+  const gltf = useGLTF(url)
+  const mesh = gltf.scene.children[0] as Mesh
+  return useMemo(
+    () =>
+      makeInstancedMesh({ geometry: mesh.geometry, material: mesh.material }),
+    [mesh]
+  )
+}
+
 const Asteroids = () => {
-  const gltf = useGLTF("/models/asteroid03.gltf")
-  const rock = gltf.scene.children[0] as Mesh
-  const Mesh = useMemo(() => makeInstancedMesh(), [gltf])
+  const Asset = useInstancedGLTF("/models/asteroid03.gltf")
 
   return (
     <>
-      <Mesh.Root material={rock.material} geometry={rock.geometry} />
+      <Asset.Root />
 
       <ECS.ManagedEntities tag="isAsteroid" initial={500}>
         {() => {
@@ -46,7 +54,7 @@ const Asteroids = () => {
               scale={1 + Math.pow(Math.random(), 3) * 2}
             >
               <SphereCollider>
-                <Mesh.Instance />
+                <Asset.Instance />
               </SphereCollider>
             </RigidBody>
           )
