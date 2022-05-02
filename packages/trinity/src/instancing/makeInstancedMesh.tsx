@@ -28,16 +28,12 @@ export type InstanceEntity<CustomComponents = IEntity> = CustomComponents &
 export const makeInstancedMesh = <Custom extends IEntity = IEntity>({
   systemFactory,
   entityFactory,
-  material,
-  geometry,
   usage = DynamicDrawUsage
 }: {
   entityFactory?: () => Custom
   systemFactory?: (world: World<InstanceEntity<Custom>>) => (dt: number) => void
-  material?: Material
-  geometry?: BufferGeometry
   usage?: Usage
-}) => {
+} = {}) => {
   /* We're using Miniplex as a state container. */
   const ECS = createECS<InstanceEntity<Custom>>()
 
@@ -84,7 +80,7 @@ export const makeInstancedMesh = <Custom extends IEntity = IEntity>({
       <T.InstancedMesh
         {...props}
         ref={instancedMesh}
-        args={[geometry, material, instanceLimit]}
+        args={[undefined, undefined, instanceLimit]}
       />
     )
   }

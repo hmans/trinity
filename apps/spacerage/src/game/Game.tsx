@@ -1,15 +1,21 @@
 import { Tag } from "miniplex"
 import { createECS } from "miniplex-react"
 import { insideSphere } from "randomish"
-import { Suspense } from "react"
-import T, { Application, FancyRenderPipeline, GLTFAsset } from "react-trinity"
+import { Suspense, useMemo } from "react"
+import T, {
+  Application,
+  FancyRenderPipeline,
+  GLTFAsset,
+  makeInstancedMesh,
+  useGLTF
+} from "react-trinity"
 import {
   BoxCollider,
   PhysicsWorld,
   RigidBody,
   SphereCollider
 } from "react-trinity/physics3d"
-import { Quaternion } from "three"
+import { Mesh, Quaternion } from "three"
 import { LoadingProgress } from "../lib/LoadingProgress"
 import { PlayerController } from "./PlayerController"
 import { Skybox } from "./Skybox"
@@ -20,25 +26,35 @@ type Entity = {
 
 const ECS = createECS<Entity>()
 
-const Asteroids = () => (
-  <ECS.ManagedEntities tag="isAsteroid" initial={500}>
-    {() => {
-      const position = insideSphere(100)
+const Asteroids = () => {
+  const gltf = useGLTF("/models/asteroid03.gltf")
+  const rock = gltf.scene.children[0] as Mesh
+  const Mesh = useMemo(() => makeInstancedMesh(), [gltf])
 
-      return (
-        <RigidBody
-          position={[position.x, position.y, position.z]}
-          quaternion={new Quaternion().random()}
-          scale={1 + Math.pow(Math.random(), 3) * 2}
-        >
-          <SphereCollider>
-            <GLTFAsset url="/models/asteroid03.gltf" />
-          </SphereCollider>
-        </RigidBody>
-      )
-    }}
-  </ECS.ManagedEntities>
-)
+  return (
+    <>
+      <Mesh.Root material={rock.material} geometry={rock.geometry} />
+
+      <ECS.ManagedEntities tag="isAsteroid" initial={500}>
+        {() => {
+          const position = insideSphere(100)
+
+          return (
+            <RigidBody
+              position={[position.x, position.y, position.z]}
+              quaternion={new Quaternion().random()}
+              scale={1 + Math.pow(Math.random(), 3) * 2}
+            >
+              <SphereCollider>
+                <Mesh.Instance />
+              </SphereCollider>
+            </RigidBody>
+          )
+        }}
+      </ECS.ManagedEntities>
+    </>
+  )
+}
 
 export const Game = () => (
   <Suspense fallback={<p>LOADING...</p>}>
