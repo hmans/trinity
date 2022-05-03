@@ -4,12 +4,17 @@ import React, {
   ReactNode,
   useCallback,
   useEffect,
-  useMemo,
-  useRef,
-  useState
+  useRef
 } from "react"
 import mergeRefs from "react-merge-refs"
-import { BufferGeometry, Object3D, Vector3 } from "three"
+import {
+  BufferGeometry,
+  Float32BufferAttribute,
+  Matrix4,
+  Object3D,
+  Quaternion,
+  Vector3
+} from "three"
 import T, { ReactorComponentProps } from ".."
 import { usePhysics } from "./PhysicsWorld"
 import { useRigidBody } from "./RigidBody"
@@ -77,14 +82,30 @@ export const ConvexHullCollider = forwardRef<
     ReactorComponentProps<typeof Object3D> & { geometry: BufferGeometry }
 >(({ geometry, ...props }, ref) => {
   const object = useRef<Object3D>(null!)
+  const { rigidBody, entity } = useRigidBody()
 
   const factory = useCallback(() => {
     /* Get points from mesh geometry */
     const points = geometry.attributes.position.array as Float32Array
 
+    const position = new Vector3()
+    const rotation = new Quaternion()
+    const scale = new Vector3()
+
+    /* Rah rah body matrix */
+    entity.transform.updateMatrixWorld()
+    object.current.updateMatrixWorld()
+
+    const bodyMatrix = entity.transform.matrixWorld.clone().invert()
+    const colliderMatrix = object.current.matrixWorld.clone()
+    const relativeMatrix = colliderMatrix.premultiply(bodyMatrix)
+    console.log(relativeMatrix)
+
     /* Scale points */
-    object.current.getWorldScale(tmpVector3)
-    const scaledPoints = scalePoints(points, tmpVector3)
+    const scaledPoints = multiplyByMatrix(
+      points,
+      relativeMatrix
+    ) as Float32Array
 
     /* Create convex hull */
     return RAPIER.ColliderDesc.convexHull(scaledPoints)
@@ -113,4 +134,10 @@ export const scalePoints = (
   }
 
   return scaledPoints
+}
+
+export const multiplyByMatrix = (points: Float32Array, matrix: Matrix4) => {
+  const buffer = new Float32BufferAttribute(points, 3)
+  buffer.applyMatrix4(matrix)
+  return buffer.array
 }
