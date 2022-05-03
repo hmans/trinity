@@ -52,13 +52,13 @@ const Asteroids = () => {
     <Asset.Root>
       <ECS.ManagedEntities tag="isAsteroid" initial={500}>
         {() => {
-          const position = insideSphere(100)
+          const position = insideSphere(300)
 
           return (
             <RigidBody
               position={[position.x, position.y, position.z]}
               quaternion={new Quaternion().random()}
-              // scale={1 + Math.pow(Math.random(), 3) * 2}
+              scale={1 + Math.pow(Math.random(), 4) * 10}
             >
               <ConvexHullCollider geometry={Asset.mesh.geometry}>
                 <Asset.Instance />
@@ -126,7 +126,6 @@ export const Game = () => (
 )
 
 export const Systems = () => {
-  console.log("Systems")
   const { camera } = useApplication()
 
   const archetypes = {
