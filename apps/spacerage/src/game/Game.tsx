@@ -87,6 +87,35 @@ const Player = () => {
   )
 }
 
+const Bullets = () => {
+  const Asset = useInstancedMesh()
+
+  return (
+    <Asset.Root>
+      <T.BoxGeometry args={[0.5, 0.5, 0.5]} />
+      <T.MeshBasicMaterial color="lime" />
+
+      <ECS.ManagedEntities tag="isBullet" initial={1000}>
+        {() => {
+          const position = insideSphere(300)
+
+          return (
+            <RigidBody
+              position={[position.x, position.y, position.z]}
+              quaternion={new Quaternion().random()}
+              scale={1 + Math.pow(Math.random(), 4) * 10}
+            >
+              <BoxCollider>
+                <Asset.Instance />
+              </BoxCollider>
+            </RigidBody>
+          )
+        }}
+      </ECS.ManagedEntities>
+    </Asset.Root>
+  )
+}
+
 export const Game = () => (
   <Suspense fallback={<p>LOADING...</p>}>
     <LoadingProgress>
@@ -111,6 +140,7 @@ export const Game = () => (
 
             <PhysicsWorld gravity={[0, 0, 0]}>
               <Asteroids />
+              <Bullets />
               <Player />
             </PhysicsWorld>
           </>

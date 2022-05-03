@@ -1,10 +1,12 @@
 import { createECS } from "miniplex-react"
 import { Tag } from "miniplex"
+import { Object3D } from "three"
 
 export type Entity = {
-  isAsteroid: Tag
-  isCamera: Tag
-  isPlayer: Tag
+  isAsteroid: typeof Tag
+  isCamera: typeof Tag
+  isPlayer: typeof Tag
+  isBullet: typeof Tag
   transform: Object3D
 }
 

@@ -1,9 +1,10 @@
-import RAPIER from "@dimforge/rapier3d-compat"
+import { Tag } from "miniplex"
 import { useEffect } from "react"
 import { useTicker } from "react-trinity"
 import { useRigidBody } from "react-trinity/physics3d"
 import { Vector3 } from "three"
 import { controller } from "./controller"
+import { ECS } from "./ecs"
 
 export const PlayerController = () => {
   const { rigidBody, entity } = useRigidBody()
@@ -45,7 +46,7 @@ export const PlayerController = () => {
     /* Fire bullets */
     const fire = controller.controls.fire.value
     if (fire) {
-      console.log("pewpew")
+      ECS.world.createEntity({ isBullet: Tag })
     }
   })
 
