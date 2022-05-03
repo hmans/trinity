@@ -100,6 +100,8 @@ export const ConvexHullCollider = forwardRef<
       scale
     )
 
+    /* TODO: use position to offset the collider */
+
     /* Scale points */
     const scaledPoints = multiplyByMatrix(
       points,
