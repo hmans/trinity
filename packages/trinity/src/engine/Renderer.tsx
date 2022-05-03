@@ -26,7 +26,7 @@ export const Renderer = forwardRef<WebGLRenderer, RendererProps>(
         const renderer = new WebGLRenderer({
           canvas: canvas,
           powerPreference: "high-performance",
-          antialias: false,
+          antialias: true,
           alpha: false,
           stencil: false,
           logarithmicDepthBuffer: true

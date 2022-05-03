@@ -20,7 +20,7 @@ import {
   SphereCollider,
   useRigidBody
 } from "react-trinity/physics3d"
-import { Mesh, Object3D, Quaternion, Vector3 } from "three"
+import { Color, Mesh, Object3D, Quaternion, Vector3 } from "three"
 import { LoadingProgress } from "../lib/LoadingProgress"
 import { ECS } from "./ecs"
 import { Layers } from "./Layers"
@@ -116,8 +116,8 @@ const Bullets = () => {
 
   return (
     <Asset.Root>
-      <T.BoxGeometry args={[0.5, 0.5, 0.5]} />
-      <T.MeshBasicMaterial color="lime" />
+      <T.BoxGeometry args={[0.25, 0.25, 1.75]} />
+      <T.MeshBasicMaterial color="yellow" />
 
       <ECS.ManagedEntities tag="isBullet" initial={0}>
         {(entity) => {
