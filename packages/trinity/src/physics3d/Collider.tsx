@@ -17,12 +17,13 @@ import {
 } from "three"
 import T, { ReactorComponentProps } from ".."
 import { collisions } from "./collisions"
-import { usePhysics } from "./PhysicsWorld"
+import { CollisionCallback, usePhysics } from "./PhysicsWorld"
 import { useRigidBody } from "./RigidBody"
 
 type ColliderProps = {
   children?: ReactNode
   collisionGroups?: number
+  onCollisionStart?: CollisionCallback
 }
 
 export const Collider = forwardRef<
@@ -34,10 +35,16 @@ export const Collider = forwardRef<
     }
 >(
   (
-    { factory, collisionGroups = collisions(1, 1), args = [], ...props },
+    {
+      factory,
+      collisionGroups = collisions(1, 1),
+      onCollisionStart,
+      args = [],
+      ...props
+    },
     ref
   ) => {
-    const { world } = usePhysics()
+    const { world, collisionCallbacks } = usePhysics()
     const { rigidBody } = useRigidBody()
 
     useEffect(() => {
@@ -52,9 +59,16 @@ export const Collider = forwardRef<
 
       const collider = world.createCollider(desc, rigidBody.handle)
 
+      if (onCollisionStart)
+        collisionCallbacks[collider.handle] = onCollisionStart
+
       return () => {
-        if (collider && world.colliders.contains(collider.handle))
-          world.removeCollider(collider, true)
+        if (collider) {
+          if (world.colliders.contains(collider.handle))
+            world.removeCollider(collider, true)
+
+          delete collisionCallbacks[collider.handle]
+        }
       }
     }, [rigidBody, world])
 

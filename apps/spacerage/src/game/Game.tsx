@@ -129,13 +129,14 @@ const Bullets = () => {
         {(entity) => {
           return (
             <RigidBody
-              position={entity.initialTransform.position}
-              quaternion={entity.initialTransform.quaternion}
+              position={entity.initialTransform!.position}
+              quaternion={entity.initialTransform!.quaternion}
             >
               <BulletController />
 
               <BoxCollider
                 collisionGroups={collisions(Layers.Bullets, Layers.Asteroids)}
+                onCollisionStart={() => ECS.world.destroyEntity(entity)}
               >
                 <Asset.Instance />
               </BoxCollider>

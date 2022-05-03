@@ -14,9 +14,12 @@ import React, {
 import { Object3D, Vector3 } from "three"
 import T, { useTicker } from ".."
 
+export type CollisionCallback = (other: RAPIER.ColliderHandle) => void
+
 export type PhysicsState = {
   world: RAPIER.World
   ecs: miniplex.World<PhysicsEntity>
+  collisionCallbacks: Record<number, CollisionCallback>
 }
 
 export type PhysicsEntity = {
@@ -38,7 +41,8 @@ export const PhysicsWorld: FC<PhysicsWorldProps> = ({ children, gravity }) => {
 
   const [state] = useState<PhysicsState>(() => ({
     world: new RAPIER.World(new RAPIER.Vector3(0, -9.81, 0)),
-    ecs: new miniplex.World<PhysicsEntity>()
+    ecs: new miniplex.World<PhysicsEntity>(),
+    collisionCallbacks: {}
   }))
 
   /* Apply updated props */
@@ -63,17 +67,21 @@ export const PhysicsWorld: FC<PhysicsWorldProps> = ({ children, gravity }) => {
     state.world.step(eventQueue)
 
     eventQueue.drainCollisionEvents((handle1, handle2, started) => {
-      console.log(handle1)
+      state.collisionCallbacks[handle1]?.(handle2)
+      state.collisionCallbacks[handle2]?.(handle1)
     })
 
     /* Transfer transform data from physics world to scene */
     for (const { rigidBody, transform } of archetypes!.bodies.entities) {
+      /* Skip if body is sleeping */
       if (rigidBody.isSleeping()) return
 
-      const t = rigidBody.translation(),
-        q = rigidBody.rotation()
-
+      /* Copy position */
+      const t = rigidBody.translation()
       transform.position.set(t.x, t.y, t.z)
+
+      /* Copy rotation */
+      const q = rigidBody.rotation()
       transform.quaternion.set(q.x, q.y, q.z, q.w)
     }
   })
