@@ -48,7 +48,9 @@ export const Collider = forwardRef<
       if (!desc)
         throw new Error(`Could not build a collider with descriptor: ${desc}`)
 
-      desc.setCollisionGroups(collisionGroups)
+      desc
+        .setCollisionGroups(collisionGroups)
+        .setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS)
 
       const collider = world.createCollider(desc, rigidBody.handle)
 

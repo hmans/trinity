@@ -57,8 +57,14 @@ export const PhysicsWorld: FC<PhysicsWorldProps> = ({ children, gravity }) => {
     [state.ecs]
   )
 
+  const eventQueue = useMemo(() => new RAPIER.EventQueue(true), [])
+
   useTicker("physics", () => {
-    state.world.step()
+    state.world.step(eventQueue)
+
+    eventQueue.drainCollisionEvents((handle1, handle2, started) => {
+      console.log(handle1)
+    })
 
     /* Transfer transform data from physics world to scene */
     for (const { rigidBody, transform } of archetypes!.bodies.entities) {
