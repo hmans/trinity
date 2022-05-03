@@ -83,11 +83,12 @@ const Player = () => {
             <PlayerController />
             <T.PointLight intensity={2.5} position-y={3} />
 
-            <T.Object3D rotation-x={-Math.PI / 2}>
-              <ConvexHullCollider geometry={Asset.mesh.geometry}>
-                <Asset.Instance scale={0.5} />
-              </ConvexHullCollider>
-            </T.Object3D>
+            <ConvexHullCollider
+              geometry={Asset.mesh.geometry}
+              rotation-x={-Math.PI / 2}
+            >
+              <Asset.Instance />
+            </ConvexHullCollider>
           </RigidBody>
         </ECS.Component>
       </ECS.Entity>
