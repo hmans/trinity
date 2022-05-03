@@ -1,6 +1,7 @@
+import RAPIER from "@dimforge/rapier3d-compat"
 import { Tag } from "miniplex"
 import { insideSphere } from "randomish"
-import { Suspense, useMemo } from "react"
+import { Children, FC, Suspense, useEffect, useMemo, useRef } from "react"
 import T, {
   Application,
   FancyRenderPipeline,
@@ -16,7 +17,8 @@ import {
   ConvexHullCollider,
   PhysicsWorld,
   RigidBody,
-  SphereCollider
+  SphereCollider,
+  useRigidBody
 } from "react-trinity/physics3d"
 import { Mesh, Object3D, Quaternion, Vector3 } from "three"
 import { LoadingProgress } from "../lib/LoadingProgress"
@@ -57,7 +59,7 @@ const Asteroids = () => {
                 geometry={Asset.mesh.geometry}
                 collisionGroups={collisions(
                   Layers.Asteroids,
-                  Layers.Asteroids & Layers.Bullets
+                  Layers.Asteroids | Layers.Bullets | Layers.Player
                 )}
               >
                 <Asset.Instance />
@@ -99,6 +101,19 @@ const Player = () => {
 const Bullets = () => {
   const Asset = useInstancedMesh()
 
+  const BulletController = () => {
+    const { rigidBody, entity } = useRigidBody()
+
+    useEffect(() => {
+      rigidBody.addForce(
+        new Vector3(0, 0, -2000).applyQuaternion(entity.transform.quaternion),
+        true
+      )
+    }, [])
+
+    return null
+  }
+
   return (
     <Asset.Root>
       <T.BoxGeometry args={[0.5, 0.5, 0.5]} />
@@ -111,6 +126,8 @@ const Bullets = () => {
               position={entity.initialTransform.position}
               quaternion={entity.initialTransform.quaternion}
             >
+              <BulletController />
+
               <BoxCollider
                 collisionGroups={collisions(Layers.Bullets, Layers.Asteroids)}
               >
