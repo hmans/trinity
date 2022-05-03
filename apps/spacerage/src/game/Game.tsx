@@ -1,5 +1,4 @@
 import { Tag } from "miniplex"
-import { createECS } from "miniplex-react"
 import { insideSphere } from "randomish"
 import { Suspense, useMemo } from "react"
 import T, {
@@ -20,17 +19,9 @@ import {
 } from "react-trinity/physics3d"
 import { Mesh, Object3D, Quaternion, Vector3 } from "three"
 import { LoadingProgress } from "../lib/LoadingProgress"
+import { ECS } from "./ecs"
 import { PlayerController } from "./PlayerController"
 import { Skybox } from "./Skybox"
-
-type Entity = {
-  isAsteroid: Tag
-  isCamera: Tag
-  isPlayer: Tag
-  transform: Object3D
-}
-
-const ECS = createECS<Entity>()
 
 const useInstancedMesh = (...args: Parameters<typeof makeInstancedMesh>) =>
   useMemo(() => makeInstancedMesh(...args), [])

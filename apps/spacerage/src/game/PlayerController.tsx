@@ -41,6 +41,12 @@ export const PlayerController = () => {
       new Vector3(0, 0, -300).applyQuaternion(entity.transform.quaternion),
       true
     )
+
+    /* Fire bullets */
+    const fire = controller.controls.fire.value
+    if (fire) {
+      console.log("pewpew")
+    }
   })
 
   return null
