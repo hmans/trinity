@@ -12,6 +12,7 @@ import T, {
 } from "react-trinity"
 import {
   BoxCollider,
+  collisions,
   ConvexHullCollider,
   PhysicsWorld,
   RigidBody,
@@ -20,6 +21,7 @@ import {
 import { Mesh, Object3D, Quaternion, Vector3 } from "three"
 import { LoadingProgress } from "../lib/LoadingProgress"
 import { ECS } from "./ecs"
+import { Layers } from "./Layers"
 import { PlayerController } from "./PlayerController"
 import { Skybox } from "./Skybox"
 
@@ -51,7 +53,13 @@ const Asteroids = () => {
               quaternion={new Quaternion().random()}
               scale={1 + Math.pow(Math.random(), 4) * 10}
             >
-              <ConvexHullCollider geometry={Asset.mesh.geometry}>
+              <ConvexHullCollider
+                geometry={Asset.mesh.geometry}
+                collisionGroups={collisions(
+                  Layers.Asteroids,
+                  Layers.Asteroids & Layers.Bullets
+                )}
+              >
                 <Asset.Instance />
               </ConvexHullCollider>
             </RigidBody>
@@ -75,6 +83,7 @@ const Player = () => {
             <T.PointLight intensity={2.5} position-y={3} />
 
             <ConvexHullCollider
+              collisionGroups={collisions(Layers.Player, Layers.Asteroids)}
               geometry={Asset.mesh.geometry}
               rotation-x={-Math.PI / 2}
             >
@@ -102,7 +111,9 @@ const Bullets = () => {
               position={entity.initialTransform.position}
               quaternion={entity.initialTransform.quaternion}
             >
-              <BoxCollider>
+              <BoxCollider
+                collisionGroups={collisions(Layers.Bullets, Layers.Asteroids)}
+              >
                 <Asset.Instance />
               </BoxCollider>
             </RigidBody>

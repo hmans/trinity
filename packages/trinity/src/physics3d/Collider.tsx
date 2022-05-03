@@ -16,6 +16,7 @@ import {
   Vector3
 } from "three"
 import T, { ReactorComponentProps } from ".."
+import { collisions } from "./collisions"
 import { usePhysics } from "./PhysicsWorld"
 import { useRigidBody } from "./RigidBody"
 
@@ -23,6 +24,7 @@ const tmpVector3 = new Vector3()
 
 type ColliderProps = {
   children?: ReactNode
+  collisionGroups?: number
 }
 
 export const Collider = forwardRef<
@@ -32,25 +34,33 @@ export const Collider = forwardRef<
       factory: (...args: any[]) => RAPIER.ColliderDesc | null
       args?: any[]
     }
->(({ factory, args = [], ...props }, ref) => {
-  const { world } = usePhysics()
-  const { rigidBody } = useRigidBody()
+>(
+  (
+    { factory, collisionGroups = collisions(1, 1), args = [], ...props },
+    ref
+  ) => {
+    const { world } = usePhysics()
+    const { rigidBody } = useRigidBody()
 
-  useEffect(() => {
-    const desc = factory(...args)
-    if (!desc)
-      throw new Error(`Could not build a collider with descriptor: ${desc}`)
+    useEffect(() => {
+      const desc = factory(...args)
 
-    const collider = world.createCollider(desc, rigidBody.handle)
+      if (!desc)
+        throw new Error(`Could not build a collider with descriptor: ${desc}`)
 
-    return () => {
-      if (collider && world.colliders.contains(collider.handle))
-        world.removeCollider(collider, true)
-    }
-  }, [rigidBody, world])
+      desc.setCollisionGroups(collisionGroups)
 
-  return <T.Object3D {...props} ref={ref} />
-})
+      const collider = world.createCollider(desc, rigidBody.handle)
+
+      return () => {
+        if (collider && world.colliders.contains(collider.handle))
+          world.removeCollider(collider, true)
+      }
+    }, [rigidBody, world])
+
+    return <T.Object3D {...props} ref={ref} />
+  }
+)
 
 export const BoxCollider = forwardRef<
   Object3D,
