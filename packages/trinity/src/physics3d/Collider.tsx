@@ -97,13 +97,14 @@ export const ConvexHullCollider = forwardRef<
     object.current.updateMatrixWorld()
 
     const colliderMatrix = object.current.matrixWorld.clone()
-    const invertedBodyMatrix = entity.transform.matrixWorld.clone().invert()
 
     colliderMatrix.decompose(position, rotation, scale)
 
-    const relativeMatrix = new Matrix4().compose(new Vector3(), rotation, scale)
-
-    console.log(relativeMatrix)
+    const relativeMatrix = new Matrix4().compose(
+      new Vector3(),
+      rotation.multiply(entity.transform.quaternion.clone().invert()),
+      scale
+    )
 
     /* Scale points */
     const scaledPoints = multiplyByMatrix(
