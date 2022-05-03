@@ -1,5 +1,5 @@
 import React, { createContext, FC, ReactNode, useContext, useMemo } from "react"
-import { HalfFloatType, LinearEncoding, WebGLRenderTarget } from "three"
+import { HalfFloatType, RGBAFormat, WebGLRenderTarget } from "three"
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
 import { useRenderer } from "./Renderer"
 import { Update } from "./Update"
@@ -14,7 +14,8 @@ export const Composer: FC<{ children?: ReactNode }> = ({ children }) => {
         renderer,
         new WebGLRenderTarget(window.innerWidth, window.innerHeight, {
           type: HalfFloatType,
-          encoding: LinearEncoding
+          encoding: renderer.outputEncoding,
+          format: RGBAFormat
         })
       ),
     [renderer]

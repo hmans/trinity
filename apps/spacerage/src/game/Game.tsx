@@ -1,6 +1,6 @@
 import RAPIER from "@dimforge/rapier3d-compat"
 import { Tag } from "miniplex"
-import { insideSphere } from "randomish"
+import { insideSphere, plusMinus } from "randomish"
 import { Children, FC, Suspense, useEffect, useMemo, useRef } from "react"
 import T, {
   Application,
@@ -20,7 +20,7 @@ import {
   SphereCollider,
   useRigidBody
 } from "react-trinity/physics3d"
-import { Color, Mesh, Object3D, Quaternion, Vector3 } from "three"
+import { Color, Euler, Mesh, Object3D, Quaternion, Vector3 } from "three"
 import { LoadingProgress } from "../lib/LoadingProgress"
 import { ECS } from "./ecs"
 import { Layers } from "./Layers"
@@ -103,7 +103,9 @@ const BulletController = () => {
 
   useEffect(() => {
     rigidBody.setLinvel(
-      new Vector3(0, 0, -200).applyQuaternion(entity.transform.quaternion),
+      new Vector3(plusMinus(3), plusMinus(3), -200).applyQuaternion(
+        entity.transform.quaternion
+      ),
       true
     )
   }, [rigidBody])
@@ -116,8 +118,12 @@ const Bullets = () => {
 
   return (
     <Asset.Root>
-      <T.BoxGeometry args={[0.25, 0.25, 1.75]} />
-      <T.MeshBasicMaterial color="yellow" />
+      <T.BoxGeometry args={[0.4, 0.4, 1.5]} />
+      <T.MeshStandardMaterial
+        color="yellow"
+        emissive="yellow"
+        emissiveIntensity={1}
+      />
 
       <ECS.ManagedEntities tag="isBullet" initial={0}>
         {(entity) => {

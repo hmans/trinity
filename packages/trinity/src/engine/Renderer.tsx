@@ -6,7 +6,12 @@ import React, {
   useImperativeHandle,
   useState
 } from "react"
-import { PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from "three"
+import {
+  LinearEncoding,
+  PCFSoftShadowMap,
+  sRGBEncoding,
+  WebGLRenderer
+} from "three"
 import { ReactorComponentProps } from "../reactor"
 import { useWindowResizeHandler } from "./useWindowResizeHandler"
 
@@ -34,7 +39,7 @@ export const Renderer = forwardRef<WebGLRenderer, RendererProps>(
 
         renderer.autoClear = false
         renderer.setPixelRatio(1)
-        renderer.outputEncoding = sRGBEncoding
+        renderer.outputEncoding = LinearEncoding
 
         renderer.shadowMap.enabled = true
         renderer.shadowMap.type = PCFSoftShadowMap

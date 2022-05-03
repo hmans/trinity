@@ -38,7 +38,7 @@ export const FancyRenderPipeline: RenderPipelineComponent = ({
   ...props
 }) => (
   <BasicRenderPipeline {...props}>
-    <UnrealBloomPass strength={1.5} radius={0.8} threshold={0.3} />
+    <UnrealBloomPass strength={1.5} radius={0.5} threshold={0.75} />
     <EffectPass pass={AdaptiveToneMappingPass} args={[true, 256]} />
     <Vignette darkness={1} />
 
