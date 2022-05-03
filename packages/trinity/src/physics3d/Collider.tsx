@@ -82,7 +82,7 @@ export const ConvexHullCollider = forwardRef<
     ReactorComponentProps<typeof Object3D> & { geometry: BufferGeometry }
 >(({ geometry, ...props }, ref) => {
   const object = useRef<Object3D>(null!)
-  const { rigidBody, entity } = useRigidBody()
+  const { entity } = useRigidBody()
 
   const factory = useCallback(() => {
     /* Get points from mesh geometry */
@@ -92,13 +92,7 @@ export const ConvexHullCollider = forwardRef<
     const rotation = new Quaternion()
     const scale = new Vector3()
 
-    /* Rah rah body matrix */
-    entity.transform.updateMatrixWorld()
-    object.current.updateMatrixWorld()
-
-    const colliderMatrix = object.current.matrixWorld.clone()
-
-    colliderMatrix.decompose(position, rotation, scale)
+    object.current.matrixWorld.decompose(position, rotation, scale)
 
     const relativeMatrix = new Matrix4().compose(
       new Vector3(),
