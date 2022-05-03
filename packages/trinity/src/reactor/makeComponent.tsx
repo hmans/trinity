@@ -1,4 +1,9 @@
-import React, { forwardRef, useEffect, useImperativeHandle } from "react"
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useLayoutEffect
+} from "react"
 import { BufferGeometry, Fog, Material, Object3D } from "three"
 import { applyProps } from "./lib/applyProps"
 import { ParentContext } from "./ParentContext"
@@ -38,14 +43,14 @@ export const makeComponent = <
       if (props) applyProps(instance, props)
 
       /* Mount scene object to parent */
-      useEffect(() => {
+      useLayoutEffect(() => {
         if (!parent || !(instance instanceof Object3D)) return
         parent.add(instance)
         return () => void parent.remove(instance)
       }, [parent, instance])
 
       /* Attach to parent attributes */
-      useEffect(() => {
+      useLayoutEffect(() => {
         if (!parent || !instance) return
 
         /* For specific types, set a default attach property */
