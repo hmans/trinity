@@ -2,6 +2,7 @@ import * as RAPIER from "@dimforge/rapier3d-compat"
 import React, {
   forwardRef,
   ReactNode,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -13,6 +14,8 @@ import T, { ReactorComponentProps } from ".."
 import { usePhysics } from "./PhysicsWorld"
 import { useRigidBody } from "./RigidBody"
 
+const tmpVector3 = new Vector3()
+
 type ColliderProps = {
   children?: ReactNode
 }
@@ -22,9 +25,9 @@ export const Collider = forwardRef<
   ColliderProps &
     Omit<ReactorComponentProps<typeof Object3D>, "args"> & {
       factory: (...args: any[]) => RAPIER.ColliderDesc | null
-      args: any[]
+      args?: any[]
     }
->(({ factory, args, ...props }, ref) => {
+>(({ factory, args = [], ...props }, ref) => {
   const { world } = usePhysics()
   const { rigidBody } = useRigidBody()
 
@@ -74,29 +77,26 @@ export const ConvexHullCollider = forwardRef<
     ReactorComponentProps<typeof Object3D> & { geometry: BufferGeometry }
 >(({ geometry, ...props }, ref) => {
   const object = useRef<Object3D>(null!)
-  const [scaledPoints, setScaledPoints] = useState<Float32Array>()
 
-  useEffect(() => {
-    if (!object.current) return
-
+  const factory = useCallback(() => {
+    /* Get points from mesh geometry */
     const points = geometry.attributes.position.array as Float32Array
-    const scale = new Vector3()
-    object.current.getWorldScale(scale)
 
-    setScaledPoints(scalePoints(points, scale))
+    /* Scale points */
+    object.current.getWorldScale(tmpVector3)
+    const scaledPoints = scalePoints(points, tmpVector3)
+
+    /* Create convex hull */
+    return RAPIER.ColliderDesc.convexHull(scaledPoints)
   }, [geometry])
 
   return (
-    <T.Object3D ref={object}>
-      {scaledPoints ? (
-        <Collider
-          factory={() => RAPIER.ColliderDesc.convexHull(scaledPoints!)}
-          args={[]}
-          ref={ref}
-          {...props}
-        />
-      ) : null}{" "}
-    </T.Object3D>
+    <Collider
+      factory={factory}
+      args={[]}
+      ref={mergeRefs([object, ref])}
+      {...props}
+    />
   )
 })
 
