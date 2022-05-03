@@ -7,7 +7,9 @@ export type Entity = {
   isCamera: typeof Tag
   isPlayer: typeof Tag
   isBullet: typeof Tag
+
   transform: Object3D
+  initialTransform?: Object3D
 }
 
 export const ECS = createECS<Entity>()

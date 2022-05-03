@@ -9,6 +9,9 @@ import { ECS } from "./ecs"
 export const PlayerController = () => {
   const { rigidBody, entity } = useRigidBody()
 
+  const playerArchetype = ECS.useArchetype("isPlayer")
+  const player = playerArchetype.entities[0]
+
   useEffect(() => {
     controller.start()
     return () => controller.stop()
@@ -44,9 +47,15 @@ export const PlayerController = () => {
     )
 
     /* Fire bullets */
-    const fire = controller.controls.fire.value
-    if (fire) {
-      ECS.world.createEntity({ isBullet: Tag })
+    if (player) {
+      const fire = controller.controls.fire.value
+
+      if (fire) {
+        ECS.world.createEntity({
+          isBullet: Tag,
+          initialTransform: player.transform
+        })
+      }
     }
   })
 

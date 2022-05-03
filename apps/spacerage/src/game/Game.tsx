@@ -95,15 +95,12 @@ const Bullets = () => {
       <T.BoxGeometry args={[0.5, 0.5, 0.5]} />
       <T.MeshBasicMaterial color="lime" />
 
-      <ECS.ManagedEntities tag="isBullet" initial={1000}>
-        {() => {
-          const position = insideSphere(300)
-
+      <ECS.ManagedEntities tag="isBullet" initial={0}>
+        {(entity) => {
           return (
             <RigidBody
-              position={[position.x, position.y, position.z]}
-              quaternion={new Quaternion().random()}
-              scale={1 + Math.pow(Math.random(), 4) * 10}
+              position={entity.initialTransform.position}
+              quaternion={entity.initialTransform.quaternion}
             >
               <BoxCollider>
                 <Asset.Instance />
