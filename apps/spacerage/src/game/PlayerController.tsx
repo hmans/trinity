@@ -2,9 +2,12 @@ import { Tag } from "miniplex"
 import { useEffect } from "react"
 import { useTicker } from "react-trinity"
 import { useRigidBody } from "react-trinity/physics3d"
-import { Vector3 } from "three"
+import { Object3D, Vector3 } from "three"
 import { controller } from "./controller"
 import { ECS } from "./ecs"
+
+const tmpVector3 = new Vector3()
+const tmpObject3D = new Object3D()
 
 export const PlayerController = () => {
   const { rigidBody, entity } = useRigidBody()
@@ -51,9 +54,28 @@ export const PlayerController = () => {
       const fire = controller.controls.fire.value
 
       if (fire) {
+        const left = player.transform.clone()
+        left.position.add(
+          tmpVector3
+            .set(-2.3, 0, -2)
+            .applyQuaternion(player.transform.quaternion)
+        )
+
         ECS.world.createEntity({
           isBullet: Tag,
-          initialTransform: player.transform
+          initialTransform: left
+        })
+
+        const right = player.transform.clone()
+        right.position.add(
+          tmpVector3
+            .set(+2.3, 0, -2)
+            .applyQuaternion(player.transform.quaternion)
+        )
+
+        ECS.world.createEntity({
+          isBullet: Tag,
+          initialTransform: right
         })
       }
     }

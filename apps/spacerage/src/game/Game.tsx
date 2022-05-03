@@ -98,21 +98,21 @@ const Player = () => {
   )
 }
 
+const BulletController = () => {
+  const { rigidBody, entity } = useRigidBody()
+
+  useEffect(() => {
+    rigidBody.setLinvel(
+      new Vector3(0, 0, -200).applyQuaternion(entity.transform.quaternion),
+      true
+    )
+  }, [rigidBody])
+
+  return null
+}
+
 const Bullets = () => {
   const Asset = useInstancedMesh()
-
-  const BulletController = () => {
-    const { rigidBody, entity } = useRigidBody()
-
-    useEffect(() => {
-      rigidBody.addForce(
-        new Vector3(0, 0, -2000).applyQuaternion(entity.transform.quaternion),
-        true
-      )
-    }, [])
-
-    return null
-  }
 
   return (
     <Asset.Root>
@@ -186,13 +186,13 @@ export const Systems = () => {
     /* Camera follows player */
     const player = archetypes.player.entities[0]
     if (player && camera) {
-      const targetPosition = new Vector3(0, 3, 10)
+      const targetPosition = new Vector3(0, 5, 10)
         .applyQuaternion(player.transform.quaternion)
         .add(player.transform.position)
 
-      camera.position.lerp(targetPosition, 0.02)
+      camera.position.lerp(targetPosition, 0.05)
 
-      camera.quaternion.slerp(player.transform.quaternion, 0.02)
+      camera.quaternion.slerp(player.transform.quaternion, 0.05)
     }
   })
 
