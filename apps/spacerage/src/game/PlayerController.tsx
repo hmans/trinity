@@ -28,12 +28,17 @@ export const PlayerController = () => {
       true
     )
 
-    const thrust = controller.controls.thrust.value
+    // const thrust = controller.controls.thrust.value
+
+    // rigidBody.addForce(
+    //   new Vector3(0, 0, -600 * thrust + -50).applyQuaternion(
+    //     entity.transform.quaternion
+    //   ),
+    //   true
+    // )
 
     rigidBody.addForce(
-      new Vector3(0, 0, -600 * thrust + -50).applyQuaternion(
-        entity.transform.quaternion
-      ),
+      new Vector3(0, 0, -300).applyQuaternion(entity.transform.quaternion),
       true
     )
   })

@@ -32,8 +32,13 @@ controller
   .addStep(processors.clampVector(1))
   .addStep(processors.deadzone(0.15))
 
+// controller
+//   .addControl("thrust", BooleanControl)
+//   .addStep(keyboard.whenKeyPressed("Space"))
+//   .addStep(gamepad.whenButtonPressed(0))
+
 controller
-  .addControl("thrust", BooleanControl)
+  .addControl("fire", BooleanControl)
   .addStep(keyboard.whenKeyPressed("Space"))
   .addStep(gamepad.whenButtonPressed(0))
 
