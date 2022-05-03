@@ -9,6 +9,8 @@ import { ECS } from "./ecs"
 const tmpVector3 = new Vector3()
 const tmpObject3D = new Object3D()
 
+let lastFireTime = 0
+
 export const PlayerController = () => {
   const { rigidBody, entity } = useRigidBody()
 
@@ -53,7 +55,9 @@ export const PlayerController = () => {
     if (player) {
       const fire = controller.controls.fire.value
 
-      if (fire) {
+      const t = performance.now()
+      if (fire && t >= lastFireTime + 65) {
+        lastFireTime = t
         const left = player.transform.clone()
         left.position.add(
           tmpVector3
