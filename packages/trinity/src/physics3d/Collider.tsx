@@ -20,8 +20,6 @@ import { collisions } from "./collisions"
 import { usePhysics } from "./PhysicsWorld"
 import { useRigidBody } from "./RigidBody"
 
-const tmpVector3 = new Vector3()
-
 type ColliderProps = {
   children?: ReactNode
   collisionGroups?: number
