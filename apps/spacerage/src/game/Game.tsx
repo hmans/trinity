@@ -1,11 +1,9 @@
-import RAPIER from "@dimforge/rapier3d-compat"
 import { Tag } from "miniplex"
 import { insideSphere, plusMinus } from "randomish"
-import { Children, FC, Suspense, useEffect, useMemo, useRef } from "react"
+import { Suspense, useEffect, useMemo } from "react"
 import T, {
   Application,
   FancyRenderPipeline,
-  GLTFAsset,
   makeInstancedMesh,
   useApplication,
   useGLTF,
@@ -17,10 +15,9 @@ import {
   ConvexHullCollider,
   PhysicsWorld,
   RigidBody,
-  SphereCollider,
   useRigidBody
 } from "react-trinity/physics3d"
-import { Color, Euler, Mesh, Object3D, Quaternion, Vector3 } from "three"
+import { Mesh, Quaternion, Vector3 } from "three"
 import { LoadingProgress } from "../lib/LoadingProgress"
 import { ECS } from "./ecs"
 import { Layers } from "./Layers"
