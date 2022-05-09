@@ -31,7 +31,7 @@
     "@babel/preset-typescript": "^7.16.7",
     "@dimforge/rapier3d-compat": "^0.8.0-alpha.2",
     "react": "^18.0.0",
-    "three": "^0.139.2"
+    "three": "^0.140.1"
   },
   "dependencies": {
     "@hmans/react-toolbox": "^0.1.4",
