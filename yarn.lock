@@ -6088,10 +6088,10 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
 
-tone@^14.8.38:
-  version "14.8.38"
-  resolved "https://registry.yarnpkg.com/tone/-/tone-14.8.38.tgz#10a5c9389fc592b2a34a70ad85c5bd5a97f8ae00"
-  integrity sha512-6u1xI/dMirxhFmCQYboEymz4A3dCZIMqj1a15cqVSFq1Q78/sV12emM/rY5LkK1u3VMnzT+9iX/hVMkJzNtrpA==
+tone@^14.8.40:
+  version "14.8.40"
+  resolved "https://registry.yarnpkg.com/tone/-/tone-14.8.40.tgz#6605f6c3ca2f8ff5f448d513bfe6ebbfab3ca84c"
+  integrity sha512-yy6iTBBwwjcG29qaL4381g0kqAqgD/ENLXM2p4AGr9/jjc34oNAZK9mo+GrPOmKRU4qVekc2kBFQ1JnWSmBh9g==
   dependencies:
     standardized-audio-context "^25.3.16"
     tslib "^2.3.1"
