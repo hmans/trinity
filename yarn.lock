@@ -5081,12 +5081,12 @@ p-try@^2.0.0:
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
-p2-es@^0.7.3:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/p2-es/-/p2-es-0.7.3.tgz#01ee005b94a5d391714508edfbdfbf6cab89beaa"
-  integrity sha512-7+YM2IyJbEVrjjFgik9U3ZyPWORp5JUn6tYP8d7LwBUtijXfX8uQojTl2gI+MLZrrhLuuX8NebZTyVtgL+1xYA==
+p2-es@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/p2-es/-/p2-es-1.1.6.tgz#8fc9bf52ff90242e20cf026ba09074e4fe6bdcdc"
+  integrity sha512-b90eNhMYOxW4IwwthnoA5YIYEd9XIJjjE2U0cgxvKrJnPpDYDpM4s94XdWB8Q9NmSb9pbnbQytdH3ZzjrZXl/g==
   dependencies:
-    poly-decomp "0.2.1"
+    poly-decomp-es "0.4.1"
 
 package-json@^6.5.0:
   version "6.5.0"
@@ -5209,10 +5209,10 @@ pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-poly-decomp@0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/poly-decomp/-/poly-decomp-0.2.1.tgz#a5cc4088e9e2974070fa1ee23c7e3f2fc5b516d8"
-  integrity sha1-pcxAiOnil0Bw+h7iPH4/L8W1Ftg=
+poly-decomp-es@0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/poly-decomp-es/-/poly-decomp-es-0.4.1.tgz#523e81338ab7e16b2f5648315ddb5a4370e00109"
+  integrity sha512-ClJK/YGQ3A2xCQ1YkxCM5KvHtwplZ9LHHoPlJMJ/+O3EnF7OSq9OcqsOfMilgIjZiFpccBobpb4nnDlEKdg+ig==
 
 popmotion@^11.0.3:
   version "11.0.3"
