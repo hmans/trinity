@@ -968,10 +968,17 @@
     "@babel/helper-validator-option" "^7.16.7"
     "@babel/plugin-transform-typescript" "^7.16.7"
 
-"@babel/runtime@^7.10.4", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.17.2", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.7", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.10.4", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.7", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   version "7.17.9"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.9.tgz#d19fbf802d01a8cb6cf053a64e472d42c434ba72"
   integrity sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
+"@babel/runtime@^7.19.0":
+  version "7.19.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.19.0.tgz#22b11c037b094d27a8a2504ea4dcff00f50e2259"
+  integrity sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -2176,13 +2183,13 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-automation-events@^4.0.14:
-  version "4.0.14"
-  resolved "https://registry.yarnpkg.com/automation-events/-/automation-events-4.0.14.tgz#bf2b147beaea71cce80dc913afa6e428dd4f2abf"
-  integrity sha512-CB2Me0yW8sz7gSGwMiSfgfs1Oqlgs53k+eVESN6axvRyMAD3zlSp2nqndD2TQAtW3yOtSEJWNGsw0r48+f1wtw==
+automation-events@^4.0.21:
+  version "4.0.21"
+  resolved "https://registry.yarnpkg.com/automation-events/-/automation-events-4.0.21.tgz#7dbf168a83210f1863824cd4a60644dc852f7eca"
+  integrity sha512-VJdSzclxoBVAqE4UAwmqPLHAM3EI2iYhZ2MADdQnjFlW/GE17B47aQ6y9JE9up2bf8f7I5RfqGhJM464jPMzww==
   dependencies:
-    "@babel/runtime" "^7.17.2"
-    tslib "^2.3.1"
+    "@babel/runtime" "^7.19.0"
+    tslib "^2.4.0"
 
 babel-jest@^27.5.1:
   version "27.5.1"
@@ -5855,14 +5862,14 @@ stack-utils@^2.0.3:
   dependencies:
     escape-string-regexp "^2.0.0"
 
-standardized-audio-context@^25.3.16:
-  version "25.3.21"
-  resolved "https://registry.yarnpkg.com/standardized-audio-context/-/standardized-audio-context-25.3.21.tgz#c75fb668e6a960ac7dff95d80f4b102043b07645"
-  integrity sha512-CZEnayJJjNefeU+z1QGDhaid1LAAYxWYa2ipNk75ropwec9rq6fmclyhXb1wGtDsZ402irX3HLt1U/PwP9+1fA==
+standardized-audio-context@^25.3.29:
+  version "25.3.32"
+  resolved "https://registry.yarnpkg.com/standardized-audio-context/-/standardized-audio-context-25.3.32.tgz#01f09f64b53f81e07dae9c5534a08a7d832e83c0"
+  integrity sha512-TtnRZGzHaTowIrEPo7w7WK74TrrY885NpplFpD79h85YuUAUBrUGifHlh8GK11oyZHfwDtCV29yFPfIHWotrXg==
   dependencies:
-    "@babel/runtime" "^7.17.2"
-    automation-events "^4.0.14"
-    tslib "^2.3.1"
+    "@babel/runtime" "^7.19.0"
+    automation-events "^4.0.21"
+    tslib "^2.4.0"
 
 statery@^0.5.4:
   version "0.5.4"
@@ -6088,12 +6095,12 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
 
-tone@^14.8.38:
-  version "14.8.38"
-  resolved "https://registry.yarnpkg.com/tone/-/tone-14.8.38.tgz#10a5c9389fc592b2a34a70ad85c5bd5a97f8ae00"
-  integrity sha512-6u1xI/dMirxhFmCQYboEymz4A3dCZIMqj1a15cqVSFq1Q78/sV12emM/rY5LkK1u3VMnzT+9iX/hVMkJzNtrpA==
+tone@^14.8.48:
+  version "14.8.48"
+  resolved "https://registry.yarnpkg.com/tone/-/tone-14.8.48.tgz#ae7189ae65968ad7211f1b613a27a6f68d4b4e33"
+  integrity sha512-aGcgGllDepXiNZQAtorMPb+Wlu1ZbgX8XBenzO/0068ABDkRYqswY7fNfzniLv3NFCjY3gfp4FMuLB8k4h2T6A==
   dependencies:
-    standardized-audio-context "^25.3.16"
+    standardized-audio-context "^25.3.29"
     tslib "^2.3.1"
 
 tough-cookie@^4.0.0:
@@ -6151,10 +6158,10 @@ ts-jest@^27.1.4:
     semver "7.x"
     yargs-parser "20.x"
 
-tslib@^2.1.0, tslib@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
-  integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
+tslib@^2.1.0, tslib@^2.3.1, tslib@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
+  integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
 
 tty-table@^2.8.10:
   version "2.8.13"
